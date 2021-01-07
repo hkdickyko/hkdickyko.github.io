@@ -1,3 +1,15 @@
-title: Dicky KO
+# Name of website
+title: My Website
+
+# Your name to show in the footer
+author: Dicky KO
 description: 工程编程多年 分享工程编程方法 如何運用電腦或手機幫助設計编程
+
+navbar-links:
+  About Me: "aboutme"
+  Resources:
+    - Beautiful Jekyll: "https://beautifuljekyll.com"
+    - Learn markdown: "https://www.markdowntutorial.com/"
+  Author's home: "https://deanattali.com"
+
 theme: jekyll-theme-tactile
