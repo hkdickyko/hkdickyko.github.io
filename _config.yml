@@ -8,10 +8,10 @@ kramdown:
   syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
     css_class: 'highlight'
 
-plugins:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-feed
+# plugins:
+#  - jekyll-paginate
+#  - jekyll-sitemap
+#  - jekyll-feed
 
 paginate: 7
 paginate_path: "page:num"
@@ -19,7 +19,7 @@ layout: post
 permalink: /:categories/:title
 excerpt_separator: "[-----]"
 
-url: # Required: replace this with your domain
+url: https://hkdickyko.github.io/ # Required: replace this with your domain
 name: dicky ko # Required: will be displayed on every page's header
 title: 工程编程設計 # Required: site's default title
 shout: # Required: **TWO** lines, will be displayed on page's header.
@@ -27,12 +27,12 @@ shout: # Required: **TWO** lines, will be displayed on page's header.
   - 積體電路
 description: "分享工程编程方法,如何運用電腦或手機幫助設計编程" # Required
 
-disqus:
-  comments: true # Global toggle on/off disqus comment
-  shortname: unifreak # Required if you use disqus. Repalce with your disqus shortname here
+# disqus:
+#  comments: false # Global toggle on/off disqus comment
+#  shortname: unifreak # Required if you use disqus. Repalce with your disqus shortname here
 
-google_analytics:
-  id: "" # Required if you use google analytics. Replace with your tracking id here
+# google_analytics:
+#  id: "" # Required if you use google analytics. Replace with your tracking id here
 
 collections: # Define post series here
   demo_series:
