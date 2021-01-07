@@ -1,13 +1,13 @@
 # These data will be shown in /about page and every page footer
 # Replace these with your own personal info
 
-name: "YOUR NAME"
+name: "Dicky KO"
 job: "Job Title"
 hi: "HIYA!"
 avatar_img: "/assets/img/me.png" # path to your avatar
 intro:
-  - "Some thing about yourself"
-  - "Can have multiple lines"
+  - "工程编程多年分享工程编程方法"
+  - "如何運用電腦,手機或積體電路幫助設計编程"
 skills:
   - name: "Programming"
     icon-class: "fa fa-terminal"
