@@ -12,6 +12,9 @@ skills:
   - name: "Programming"
     icon-class: "fa fa-terminal"
     list: ["Python", "Javascript", "C++", "VBA"]
+  - name: "Framework"
+    icon-class: "fa fa-th-list"
+    list: ["jQuery"]    
   - name: "Tools"
     icon-class: "fa fa-cogs"
     list: ["Linux", "Git"]
