@@ -25,7 +25,7 @@ title: 工程编程設計 # Required: site's default title
 shout: # Required: **TWO** lines, will be displayed on page's header.
    
   - 電腦,手機及積體電路
-description: "Some short description on your site" # Required
+description: "分享工程编程方法,如何運用電腦或手機幫助設計编程" # Required
 
 disqus:
   comments: true # Global toggle on/off disqus comment
