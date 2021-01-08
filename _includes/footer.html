@@ -2,21 +2,6 @@
 <footer id="l-footer">
     <div class="container">
         <div class="row">
-          <div id="social" class="col-lg-5 col-md-5 col-sm-12">
-            <h3>SOCIAL</h3>
-            <ul>
-              {% for social in my.social %}
-                <li>
-                  <i class="{{ social.icon-class }}" title="{{ social.name }}"></i>
-                  {% if social.link != "" %}
-                    <a href="{{ social.link }}">&nbsp;&nbsp;{{ social.text }}</a>
-                  {% else %}
-                    {{ social.text }}
-                  {% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
 
           <div id="contact" class="col-lg-4 col-md-4 col-sm-12">
             <h3>CONTACT</h3>
@@ -33,7 +18,7 @@
               {% endfor %}
             </ul>
           </div>
-
+		<br/>
         <p id="legal">
             Copyright (c) {{ 'now' | date: "%Y" }} {{ my.display_name }} | Powered by <a href="http://jekyllrb.com">Jekyll</a> &amp; <a href="http://github.com">GitHub</a> | designed &amp; build by <a href="http://unifreak.github.io">UniFreak</a><br />
             The blog posts on this site are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
