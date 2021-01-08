@@ -9,8 +9,8 @@ kramdown:
     css_class: 'highlight'
 
 # plugins:
-#  - jekyll-paginate
-#  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-sitemap
 #  - jekyll-feed
 
 paginate: 7
@@ -20,7 +20,7 @@ permalink: /:categories/:title
 excerpt_separator: "[-----]"
 
 url: https://hkdickyko.github.io/ # Required: replace this with your domain
-name: dicky ko # Required: will be displayed on every page's header
+name: Dicky ko # Required: will be displayed on every page's header
 title: 工程编程設計 # Required: site's default title
 shout: # Required: **TWO** lines, will be displayed on page's header.
   - 電腦,手機 
