@@ -1,6 +1,6 @@
 ---
 category: demo
-tags: [tutorial|工程|編程]
+tags: [tutorial, 工程, 編程]
 ---
 
 ## Blogging
