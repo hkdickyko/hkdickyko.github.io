@@ -1,7 +1,6 @@
----
+--- 
 layout: default
----
-
+--- 
 {% assign my = site.data.me %}
 <div class="row" id="about">
     <header id="title">
@@ -17,15 +16,15 @@ layout: default
     </section>
 
     <section id="skillsets">
-        <h2>SKILL SETS</h2>
+        <h2>掌握技能</h2>
         {% for skillset in my.skills %}
-          <div>
-            <i class="{{ skillset.icon-class }}" title=" {{ skillset.name }}"></i>
+        <div>
+            <i class="{{ skillset.icon-class }}" title=" {{ skillset.name }}"></i> 
             {% for skill in skillset.list %}
-              <span>{{ skill }}</span>
+                <span>{{ skill }}</span> 
             {% endfor %}
             <hr>
-          </div>
+        </div>
         {% endfor %}
     </section>
 
