@@ -20,7 +20,7 @@ permalink: /:categories/:title
 excerpt_separator: "[-----]"
 
 url: https://hkdickyko.github.io/ # Required: replace this with your domain
-name: dicky ko # Required: will be displayed on every page's header
+name: 工程编程設計 # Required: will be displayed on every page's header
 title: 工程编程設計 # Required: site's default title
 shout: # Required: **TWO** lines, will be displayed on page's header.
   - 工程，電腦及手機 
