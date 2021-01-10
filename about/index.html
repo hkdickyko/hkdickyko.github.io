@@ -27,12 +27,10 @@ layout: default
         </div>
         {% endfor %}
         <div>
-          <i class="{{ contact.icon-class }}" title="{{ contact.name }}"></i>
-          {% if contact.link != "" %}
-            <a href="{{ contact.link }}">&nbsp;&nbsp;{{ contact.text }}</a>
-          {% else %}
-            {{ contact.text }}
-          {% endif %}
+            <li> 
+                <i class="fa fa-envelope" title="Email"></i>
+                <a href="mailto: hkdickyko@gmail.com">&nbsp;&nbsp;hkdickyko</a>
+            </li>
         </div>
     </section>
 </div>
