@@ -26,22 +26,13 @@ layout: default
             <hr>
         </div>
         {% endfor %}
+        <div>
+          <i class="{{ contact.icon-class }}" title="{{ contact.name }}"></i>
+          {% if contact.link != "" %}
+            <a href="{{ contact.link }}">&nbsp;&nbsp;{{ contact.text }}</a>
+          {% else %}
+            {{ contact.text }}
+          {% endif %}
+        </div>
     </section>
-
-        <div id="contact" class="col-lg-4 col-md-4 col-sm-12">
-            <h3>CONTACT</h3>
-            <ul>
-              {% for contact in my.contact %}
-                <li>
-                  <i class="{{ contact.icon-class }}" title="{{ contact.name }}"></i>
-                  {% if contact.link != "" %}
-                    <a href="{{ contact.link }}">&nbsp;&nbsp;{{ contact.text }}</a>
-                  {% else %}
-                    {{ contact.text }}
-                  {% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-
 </div>
