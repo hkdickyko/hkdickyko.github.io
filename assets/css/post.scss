@@ -14,6 +14,7 @@
     line-height: 1.4em;
     font: 16px helvetica, arial, freesans, clean, sans-serif;
     color: black;
+    border-radius: 5px;
 }
 
 #markdown-container table {
@@ -249,7 +250,7 @@ h3 {
 
 @media (max-width: 768px) {
     #markdown-container {
-        margin: 1rem 0 0 0;
+        margin: 1rem 0 1rem 0;
         padding: 1.5rem;
         overflow-x: auto;
     }
