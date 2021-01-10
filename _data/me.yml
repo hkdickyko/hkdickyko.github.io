@@ -11,13 +11,13 @@ intro:
 skills:
   - name: "Programming"
     icon-class: "fa fa-terminal"
-    list: ["Python", "Javascript", "C++", "VBA"]
+    list: ["Python", "C", "C++", "VBA", "HTML / CSS", "JS / ES6"]
   - name: "Framework"
     icon-class: "fa fa-th-list"
     list: ["jQuery"]    
   - name: "Tools"
     icon-class: "fa fa-cogs"
-    list: ["Linux", "Git"]
+    list: ["Linux", "Git", "MySQL"]
 
 display_name: "Dicky KO"
 contact:
