@@ -1,10 +1,12 @@
---- --- * {
+---
+---
+* {
     margin: 0;
     padding: 0;
 }
 
 #markdown-container {
-    margin: 5rem auto 2.5rem auto;
+    margin: 1rem auto 2.5rem auto;
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px #999;
@@ -172,7 +174,7 @@ h3 {
 }
 
 #markdown-outline {
-    margin-top: 5rem;
+    margin-top: 1rem;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px #999;
     padding: 5px 10px;
