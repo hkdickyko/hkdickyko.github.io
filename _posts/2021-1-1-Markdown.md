@@ -111,6 +111,8 @@ git commit
 - [x] 選中複選框
 
 # 創建內聯鏈接
+
+## 鏈接標題
 將顯示的文字寫在方括號[]內，然後將互聯網鏈接寫在括號（）內。
 
 ```
@@ -118,6 +120,8 @@ git commit
 ```
 [GitHub Pages](https://hkdickyko.github.io)
 
+
+## 鏈接標籤
 ```
 I get 10 times more traffic from [Google][] than from
 [Yahoo][] or [MSN][].
