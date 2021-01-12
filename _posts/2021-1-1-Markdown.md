@@ -109,6 +109,6 @@ git commit
 
 
 ```
-@hkdickyko What do you think about these updates?
+@github/support What do you think about these updates?
 ```
-@hkdickyko What do you think about these updates?
+@github/support What do you think about these updates?
