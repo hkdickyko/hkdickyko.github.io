@@ -112,6 +112,14 @@ git commit
 
 # 創建內聯鏈接
 
+## 標題ID
+
+```
+### My Great Heading {#custom-id}
+```
+
+### My Great Heading {#custom-id}
+
 ## 鏈接標題
 將顯示的文字寫在方括號[]內，然後將互聯網鏈接寫在括號（）內。
 
