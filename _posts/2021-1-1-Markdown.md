@@ -170,11 +170,13 @@ pencil  :pencil:
 # 腳註
 
 ```
-Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+Here's a simple footnote,[^1] and 
 
-[^1]: This is the first footnote.
+here's a longer one.[^bignote]
 
-[^bignote]: Here's one with multiple paragraphs and code.
+[^1]: footnote 1.
+
+[^bignote]: footnote 2.
 ```
 
 Here's a simple footnote,[^1] and here's a longer one.[^bignote]
