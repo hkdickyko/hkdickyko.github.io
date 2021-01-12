@@ -137,6 +137,7 @@ memo    :pencil:
 |v|:v:|
 |computer|:computer:|
 |phone|:phone:|
+|lock|:lock:|
 |unlock|:unlock:|
 |bulb|:bulb:|
 |moneybag|:moneybag:|
@@ -152,3 +153,19 @@ memo    :pencil:
 |heavy_exclamation_mark|:heavy_exclamation_mark:|
 |heavy_check_mark|:heavy_check_mark:|
 |heavy_multiplication_x|:heavy_multiplication_x:|
+|100|:100:|
+|interrobang|:interrobang:|
+|interrobang|:interrobang:|
+|beers|:beers:|
+|trophy|:trophy:|
+|key|:key:|
+|hourglass|:hourglass:|
+|confetti_ball|:confetti_ball:|
+|star|:star:|
+|question|:question:|
+|one|:one:|two|:two:|
+|three|:three:|four|:four:|
+|five|:five:|six|:six:|
+|seven|:seven:|eight|:eight:|
+|nine|:nine:|keycap_ten|:keycap_ten:|
+|zero|:zero:|hash|:hash:|
