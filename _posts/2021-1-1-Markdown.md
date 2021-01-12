@@ -139,12 +139,14 @@ memo    :pencil:
 |u7981|:u7981:|secret|:secret:|
 |no_entry_sign|:no_entry_sign:|warning|:warning:|
 |heavy_check_mark|:heavy_check_mark:|x|:x:|
+|link|:link:|o|:o:|
+|exclamation|:exclamation:|question|:question:|
 |100|:100:|beers|:beers:|
 |trophy|:trophy:|confetti_ball|:confetti_ball:|
 |key|:key:|hourglass|:hourglass:|
-|exclamation|:exclamation:|question|:question:|
 |star|:star:|sparkles|:sparkles:|
 |hotsprings|:hotsprings:|cool|:cool:|
+|shower|:shower:|toilet|:toilet:|
 |ok|:ok:|free|:free:|
 |id|:id:|sos|:sos:|
 |one|:one:|two|:two:|
