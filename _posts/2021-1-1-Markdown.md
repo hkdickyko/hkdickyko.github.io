@@ -141,7 +141,8 @@ memo    :pencil:
 |100|:100:|beers|:beers:|
 |trophy|:trophy:|confetti_ball|:confetti_ball:|
 |key|:key:|hourglass|:hourglass:|
-|star|:star:|question|:question:|
+|exclamation|:exclamation:|question|:question:|
+|star|:star:|sparkles|:sparkles:|
 |hotsprings|:hotsprings:|cool|:cool:|
 |ok|:ok:|free|:free:|
 |one|:one:|two|:two:|
