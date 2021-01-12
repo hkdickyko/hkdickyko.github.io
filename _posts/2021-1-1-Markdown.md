@@ -121,12 +121,19 @@ git commit
 # 使用表情符號
 ```
 pushpin :pushpin:
-memo    :pencil:
+pencil  :pencil:
 ```
 
-| Name| code | Name| code |
+| 名稱| 符號 | 名稱s| 符號 |
 |:---:|:---:|:---:|:---:|
-|pushpin|:pushpin:|memo|:pencil:|
+|grimacing|:grimacing:|sleeping|:sleeping:|
+|sweat_smile|:sweat_smile:|sweat|:sweat:|
+|cold_sweat|:cold_sweat:|fearful|:fearful:|
+|sob|:sob:|cry|:cry:|
+|joy|:joy:|triumph|:triumph:|
+|scream|:scream:|angry|:angry:|
+|yum|:yum:|mask|:mask:|
+|pushpin|:pushpin:|pencil|:pencil:|
 |thumbsup|:thumbsup:|thumbsdown|:thumbsdown:|
 |point_up|:point_up:|point_down|:point_down:|
 |point_left|:point_left:|point_right|:point_right:|
