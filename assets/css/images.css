@@ -1,5 +1,8 @@
-img#size-image { 
+img {
   margin: auto;
-  width: 80%; 
   display: block;
+}
+
+img#size-image { 
+  width: 80%; 
 }
