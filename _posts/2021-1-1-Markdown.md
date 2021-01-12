@@ -132,6 +132,7 @@ memo    :pencil:
 |computer|:computer:|iphone|:iphone:|
 |lock|:lock:|unlock|:unlock:|
 |bulb|:bulb:|moneybag|:moneybag:|
+|sound|:sound:|mute|:mute:|
 |calendar|:calendar:|dart|:dart:|
 |signal_strength|:signal_strength:|cinema|:cinema:|
 |u6e80|:u6e80:|u7a7a|:u7a7a:|
