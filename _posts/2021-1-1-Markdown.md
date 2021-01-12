@@ -139,11 +139,11 @@ I get 10 times more traffic from [Google][] than from
 
 # 內聯圖片
 ```
-![Alt text](/path/to/img.jpg)
+![Alt text](../assets/img/icon.png)
 ```
-![Alt text](/path/to/img.jpg)
+![Alt text]({{'/assets/img/icon.png' | relative_url }})
 
-
+ | relative_url
 # 使用表情符號
 ```
 pushpin :pushpin:
