@@ -118,14 +118,6 @@ git commit
 ```
 [GitHub Pages](https://hkdickyko.github.io)
 
-
-
-Here's a simple footnote,[^1] and here's a longer one.[^bignote]
-
-[^1]: This is the first footnote.
-
-[^bignote]: Here's one with multiple paragraphs and code.
-
 # 使用表情符號
 ```
 pushpin :pushpin:
@@ -173,3 +165,20 @@ pencil  :pencil:
 |seven|:seven:|eight|:eight:|
 |nine|:nine:|keycap_ten|:keycap_ten:|
 |zero|:zero:|hash|:hash:|
+
+
+# 腳註
+
+```
+Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+
+[^1]: This is the first footnote.
+
+[^bignote]: Here's one with multiple paragraphs and code.
+```
+
+Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+
+[^1]: This is the first footnote.
+
+[^bignote]: Here's one with multiple paragraphs and code.
