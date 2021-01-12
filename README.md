@@ -1,3 +1,3 @@
 # Dicky KO
 
-![](./assets/img/me.png)
+![](./assets/img/me.png){: #size-image}
