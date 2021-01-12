@@ -110,7 +110,7 @@ git commit
 - [ ] 未選複選框
 - [x] 選中複選框
 
-# 鏈接
+# 創建內聯鏈接
 將顯示的文字寫在方括號[]內，然後將互聯網鏈接寫在括號（）內。
 
 ```
@@ -118,11 +118,24 @@ git commit
 ```
 [GitHub Pages](https://hkdickyko.github.io)
 
+```
+I get 10 times more traffic from [1] than from [2] or [3].
+[1]: http://google.com/         "Google"
+[2]: http://search.yahoo.com/   "Yahoo Search"
+[3]: http://search.msn.com/     "MSN Search"
+```
+I get 10 times more traffic from [1] than from [2] or [3].
+[1]: http://google.com/         "Google"
+[2]: http://search.yahoo.com/   "Yahoo Search"
+[3]: http://search.msn.com/     "MSN Search"
+
+
 # 使用表情符號
 ```
 pushpin :pushpin:
 pencil  :pencil:
 ```
+
 
 | 名稱| 符號 | 名稱| 符號 |
 |:---:|:---:|:---:|:---:|
@@ -166,9 +179,13 @@ pencil  :pencil:
 |nine|:nine:|keycap_ten|:keycap_ten:|
 |zero|:zero:|hash|:hash:|
 
-# 段落
+
+# 創建新段落
 
 您可以通過在文本行之間留空行來創建新段落。
+
+# 創建ID
+ 
 
 # 忽略格式
 
@@ -179,7 +196,7 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 ```
 Let's rename \*our-new-project\* to \*our-old-project\*.
 
-# 腳註
+# 創建腳註
 
 ```
 Here's a simple footnote,[^1] and 
