@@ -166,20 +166,16 @@ I get 10 times more traffic from [Google][] than from
 |-: |設置內容和標題欄居右對齊|
 |:- |設置內容和標題欄居左對齊|
 |:-:|設置內容和標題欄居中對齊|
-
 <br/>
-
 ```
 | 名稱| 符號 | 符號 |
 |---|:---:|---:|
 |left|center|right|
 ```
 <br/>
-
 | 名稱| 符號 | 符號 |
 |---|:---:|---:|
 |left|center|right|
-
 
 # 使用表情符號
 ```
@@ -187,7 +183,6 @@ pushpin :pushpin:
 pencil  :pencil:
 ```
 <br/>
-
 | 名稱| 符號 | 名稱| 符號 |
 |:---:|:---:|:---:|:---:|
 |grimacing|:grimacing:|sleeping|:sleeping:|
