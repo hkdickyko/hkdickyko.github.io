@@ -133,7 +133,7 @@ memo    :pencil:
 |lock|:lock:|unlock|:unlock:|
 |bulb|:bulb:|moneybag|:moneybag:|
 |calendar|:calendar:|dart|:dart:|
-|signal_strength|:signal_strength:|
+|signal_strength|:signal_strength:|cinema|:cinema:|
 |u6e80|:u6e80:|u7a7a|:u7a7a:|
 |u7981|:u7981:|secret|:secret:|
 |no_entry_sign|:no_entry_sign:|warning|:warning:|
@@ -142,6 +142,8 @@ memo    :pencil:
 |trophy|:trophy:|confetti_ball|:confetti_ball:|
 |key|:key:|hourglass|:hourglass:|
 |star|:star:|question|:question:|
+|hotsprings|:hotsprings:|cool|:cool:|
+|ok|:ok:|free|:free:|
 |one|:one:|two|:two:|
 |three|:three:|four|:four:|
 |five|:five:|six|:six:|
