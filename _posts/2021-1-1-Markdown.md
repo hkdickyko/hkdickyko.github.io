@@ -129,7 +129,7 @@ memo    :pencil:
 |point_left|:point_left:|point_right|:point_right:|
 |pray|:pray:|ok_hand|:ok_hand:|
 |muscle|:muscle:|v|:v:|
-|computer|:computer:|phone|:phone:|
+|computer|:computer:|iphone|:iphone:|
 |lock|:lock:|unlock|:unlock:|
 |bulb|:bulb:|moneybag|:moneybag:|
 |calendar|:calendar:|dart|:dart:|
@@ -145,6 +145,7 @@ memo    :pencil:
 |star|:star:|sparkles|:sparkles:|
 |hotsprings|:hotsprings:|cool|:cool:|
 |ok|:ok:|free|:free:|
+|id|:id:|sos|:sos:|
 |one|:one:|two|:two:|
 |three|:three:|four|:four:|
 |five|:five:|six|:six:|
