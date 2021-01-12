@@ -121,8 +121,8 @@ pushpin :pushpin:
 memo    :pencil:
 ```
 
-| Name| code |
-|:---:|:---:|
+| Name| code | Name| code |
+|:---:|:---:|:---:|:---:|
 |pushpin|:pushpin:|
 |memo|:pencil:|
 |thumbsup|:thumbsup:|
