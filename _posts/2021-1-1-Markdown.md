@@ -10,9 +10,9 @@ Markdown是一種方便記憶、書寫的純文本標記語言，用戶可以使
 # 字體樣式
 
 ```
-**粗體** 或 **斜體**
+**粗體** 或 __粗體__
 ```
-**粗體** 或 **斜體**
+**粗體** 或 __粗體__
 
 ```
 *斜體* 或 _斜體_
@@ -38,14 +38,17 @@ Markdown是一種方便記憶、書寫的純文本標記語言，用戶可以使
  # Header 1
 ```
 # Header 1
+
 ```
 ## Header 2
 ```
 ## Header 2
+
 ```
 ### Header 3
 ```
 ### Header 3
+
 # 引用文字
 ```
 > Quoting Text
@@ -55,6 +58,7 @@ Markdown是一種方便記憶、書寫的純文本標記語言，用戶可以使
 > Quoting Text
 >> Quoting Text
 >>> Quoting Text
+
 # 引用代碼
 \```<br>
 git Status<br>
@@ -66,6 +70,7 @@ git Status
 git add
 git commit
 ```
+
 # 清單
 ```
  - Item 1
@@ -91,6 +96,7 @@ git commit
         - item 1.1.1
  2. Item 2
  3. Item 3
+   
 # 複選框
 ```
 - [ ] 未選複選框
@@ -98,6 +104,8 @@ git commit
 ```
 - [ ] 未選複選框
 - [x] 選中複選框
+
+
 ```
 @hkdickyko What do you think about these updates?
 ```
