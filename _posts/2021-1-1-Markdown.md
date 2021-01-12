@@ -114,6 +114,8 @@ git commit
 
 ## 標題ID
 
+為了使用CSS樣式表，所以添加ID到相關標籤。
+
 ```
 ### My Great Heading {#custom-id}
 ```
@@ -131,6 +133,7 @@ git commit
 
 ## 鏈接標籤
 ```
+
 I get 10 times more traffic from [Google][] than from
 [Yahoo][] or [MSN][].
 
@@ -151,7 +154,25 @@ I get 10 times more traffic from [Google][] than from
 ```
 ![Alt text]({{ '/assets/img/me.png' | relative_url }})
 
- | relative_url
+# 創建表格
+
+| 符號 | 說明 |
+|:---:|:---:|
+|-: |設置內容和標題欄居右對齊|
+|:- |設置內容和標題欄居左對齊|
+|:-:|設置內容和標題欄居中對齊|
+
+```
+| 名稱| 符號 | 符號 |
+|---|:---:|---:|
+|left|center|right|
+```
+
+| 名稱| 符號 | 符號 |
+|---|:---:|---:|
+|left|center|right|
+
+
 # 使用表情符號
 ```
 pushpin :pushpin:
