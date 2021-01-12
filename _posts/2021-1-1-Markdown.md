@@ -119,15 +119,25 @@ git commit
 [GitHub Pages](https://hkdickyko.github.io)
 
 ```
-I get 10 times more traffic from [1] than from [2] or [3].
-[1]: http://google.com/         "Google"
-[2]: http://search.yahoo.com/   "Yahoo Search"
-[3]: http://search.msn.com/     "MSN Search"
+I get 10 times more traffic from [Google][] than from
+[Yahoo][] or [MSN][].
+
+[Google]: http://google.com/      "Google"
+[Yahoo]: http://search.yahoo.com/ "Yahoo Search"
+[MSN]: http://search.msn.com/     "MSN Search"
 ```
-I get 10 times more traffic from [1] than from [2] or [3].
-[1]: http://google.com/         "Google"
-[2]: http://search.yahoo.com/   "Yahoo Search"
-[3]: http://search.msn.com/     "MSN Search"
+I get 10 times more traffic from [Google][] than from
+[Yahoo][] or [MSN][].
+
+[Google]:   http://google.com/          "Google"
+[Yahoo]:    http://search.yahoo.com/    "Yahoo Search"
+[MSN]:      http://search.msn.com/      "MSN Search"
+
+# 內聯圖片
+```
+![Alt text](/path/to/img.jpg)
+```
+![Alt text](/path/to/img.jpg)
 
 
 # 使用表情符號
