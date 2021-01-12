@@ -118,10 +118,11 @@ git commit
 # 使用表情符號
 ```
 pushpin :pushpin:
-memo :pencil:
-
+memo    :pencil:
 ```
-pushpin :pushpin:
 
-memo :pencil:
+| Name| code |
+|:---:|:---:|
+|pushpin|:pushpin:|
+|memo|:pencil:|
 
