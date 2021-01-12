@@ -36,11 +36,11 @@ description: "分享工程编程方法,如何運用電腦或手機幫助設計�
 #  id: "" # Required if you use google analytics. Replace with your tracking id here
 
 collections: # Define post series here
-  demo_series:
+  工程:
     output: true
-  demo_series_1:
+  編程:
     output: true
-  demo_series_2:
+  電控:
     output: true
 
 defaults:
