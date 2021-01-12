@@ -115,7 +115,9 @@ git commit
 ```
 [GitHub Pages](https://hkdickyko.github.io)
 
+# 使用表情符號
 ```
-@github/support What do you think about these updates?
+pushpin :pushpin:
+
 ```
-@github/support What do you think about these updates?
+pushpin :pushpin:
