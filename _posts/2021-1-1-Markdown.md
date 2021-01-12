@@ -149,6 +149,11 @@ I get 10 times more traffic from [Google][] than from
 [MSN]:      http://search.msn.com/      "MSN Search"
 
 # 內聯圖片
+
+- 一個感嘆號 `!`。
+- 緊跟著一對方括號, 包含了圖片的 `alt` 屬性。
+- 緊跟著一對圓括號, 包含了圖片的 `URL` 或者路徑, 以及一個可選的用單引號或雙引號包裹的`title`屬性。
+
 ```
 ![Alt text](../assets/img/me.png)
 ```
