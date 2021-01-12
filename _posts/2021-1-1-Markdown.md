@@ -107,6 +107,13 @@ git commit
 - [ ] 未選複選框
 - [x] 選中複選框
 
+# 鏈接
+將顯示的文字寫在方括號[]內，然後將互聯網鏈接寫在括號（）內。
+
+```
+[GitHub Pages](https://hkdickyko.github.io)
+```
+[GitHub Pages](https://hkdickyko.github.io)
 
 ```
 @github/support What do you think about these updates?
