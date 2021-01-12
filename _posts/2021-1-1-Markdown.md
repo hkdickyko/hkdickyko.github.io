@@ -166,6 +166,18 @@ pencil  :pencil:
 |nine|:nine:|keycap_ten|:keycap_ten:|
 |zero|:zero:|hash|:hash:|
 
+# 段落
+
+您可以通過在文本行之間留空行來創建新段落。
+
+# 忽略格式
+
+您可以在字符之前使用 `\` 來忽略格式。
+
+```
+Let's rename \*our-new-project\* to \*our-old-project\*.
+```
+Let's rename \*our-new-project\* to \*our-old-project\*.
 
 # 腳註
 
