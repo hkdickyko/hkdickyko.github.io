@@ -30,6 +30,8 @@ I<sup>2</sup>C 規格中定義的 V<sub>IL</sub>，也就是 0.3 V<sub>CC</sub>�
  > <center>3.3 = 0.003 * R</center>
  > <center>R = 1100（Ω</center>
 
+T<sub>R</sub>上升時間受總線的寄生電容和上拉電阻影響
+
 ![Alt i2C](../assets/img/i2c/i2c.png)
 
 # 寄生電容問題
