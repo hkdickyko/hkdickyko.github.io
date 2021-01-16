@@ -37,5 +37,6 @@ R = 1100（Ω）
 
  > V（t）= V<sub>CC</sub>（1 − e <sup>−（t / RC）</sup>）
 
+## 電阻與頻率的關係如下圖
 
 ![Alt i2C_RC](../assets/img/i2c/fRcgx.png)
