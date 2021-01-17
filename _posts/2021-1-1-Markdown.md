@@ -247,11 +247,10 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 ```
 Let's rename \*our-new-project\* to \*our-old-project\*.
 
-# 數學符號
+# 數學公式
 
 ## 相關網站
-[Math symbol](https://sites.psu.edu/symbolcodes/codehtml/#math)
-
+[Math equation](https://latex.codecogs.com/legacy/eqneditor/editor.php)
 
 # 創建腳註
 
