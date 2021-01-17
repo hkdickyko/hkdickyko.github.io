@@ -19,7 +19,7 @@ tags: [算法]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;x_{3}=\frac{x_{2}+x_{1}}{2})
 
-繼續尋找直到找到 \alpha。
+繼續尋找直到找到 $\alpha$。
 
 
 ![]({{ '/assets/img/bisection/bisection.png' | relative_url }})
