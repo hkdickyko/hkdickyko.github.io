@@ -7,7 +7,7 @@ tags: [MircoPython]
 
 MicroPython是2013年在Kickstarter上募資開始建立的小型硬體編程，因為資源有限，而將Python濃縮成一款小型包，載入硬體微控制器的一項開源專案。
 
-MicroPython怎麼寫？跟Python一模一樣。MicroPython除了留有Python的許多迷你化的標準函式庫，也有例如 machine、network等硬體相關的專屬函式庫用於控制硬體相關功能。詳細可參考[官方文件](https://docs.micropython.org/en/latest/esp8266/library/index.html#python-standard-libraries-and-micro-libraries)。
+MicroPython怎麼寫？跟Python一模一樣。MicroPython除了留有Python的許多迷你化的標準函式庫，也有例如 machine、network等硬體相關的專屬函式庫用於控制硬體相關功能。詳細可參考[官方文件](https://docs.python.org/zh-tw)。
 
 MicroPython的出現讓許多畏懼低階語言的開發者有機會以高階語言玩玩硬體端，也能加快原本物聯網開發者的開發速度。
 
