@@ -42,7 +42,7 @@ collections: # Define post series here
     output: true
   Programming:
     output: true
-  控制:
+  Control:
     output: true
 
 defaults:
