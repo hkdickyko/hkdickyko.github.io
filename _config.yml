@@ -36,7 +36,7 @@ description: "分享工程编程方法,如何運用電腦或手機幫助設計�
 #  id: "" # Required if you use google analytics. Replace with your tracking id here
 
 collections: # Define post series here
-  Documentation:
+  System:
     output: true
   Engineering:
     output: true
