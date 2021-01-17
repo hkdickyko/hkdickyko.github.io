@@ -49,7 +49,7 @@ MicroPython的出現讓許多畏懼低階語言的開發者有機會以高階語
 
   - tests/--測試框架和測試腳本。
 
-  -  example/--幾個Python腳本示例。
+  - example/--幾個Python腳本示例。
 
 MicroPython包含了諸如交互式提示，任意精度整數，關閉，列表解析，生成器，異常處理等高級功能。適合運行在只有256k的代碼空間和16k的RAM的芯片上。 
 
@@ -77,3 +77,9 @@ MicroPython旨在盡可能與普通Python兼容，讓您輕鬆將代碼從桌面
 - ustruct -- 打包和解壓縮原始數據類型
 - time -- 時間相關函數
 - uzlib -- zlib解壓縮
+
+# MicroPython C Stub Generator
+```
+# 使用C Stub Generator創建C代碼模板用於「extmod」中提供附加「非核心」模塊。
+```
+![]({{ '/assets/img/esp/c_stub.png' | relative_url }})
