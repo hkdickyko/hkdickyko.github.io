@@ -266,18 +266,16 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 |\$\pi\$|&amp;pi;|&pi;|\$\rho\$|&amp;rho;|&rho;|
 |\$\sigma\$|&amp;sigma;|&sigma;|\$\tau\$|&amp;tau;|&tau;|
 |\$\upsilon\$|&amp;upsilon;|&upsilon;|\$\phi\$|&amp;phi;|&phi;|
-|\$\varepsilon\$|&amp;varepsilon;|&varepsilon;|\$\varphi\$|&amp;varphi;|&varphi;|
 |\$\partial\$|&amp;part;|&part;|\$\infty\$|&amp;infin;|&infin;|
 |\$\Omega\$|&amp;Omega;|&Omega;|\$\omega\$|&amp;omega;|&omega;|
 |\$\Theta\$|&amp;Theta;|&Theta;|\$\theta\$|&amp;theta;|&theta;|
+|\$\geq\$|&amp;ge;|&ge;|\$\le\$|&amp;le;|&le;|
+|\$\equiv\$|&amp;equiv;|&equiv;|\$\sim\$|&amp;sim;|&sim;|
 
 ## 關係符號
 
-| 名稱| 符號 | 名稱| 符號 |
-|:---:|:---:|:---:|:---:|
-|\$\geq\$|$\geq$|\$\leq\$|$\leq$|
-|\$\equiv\$|$\equiv$|\$\sim\$|$\sim$|
-|\$\perp\$|$\perp$|\$\parallel\$|$\parallel$|
+| MD | HTML | 符號 | MD | HTML | 符號 |
+|:---:|:---:|:---:|:---:|:---:|:---:|
 
 
 # 創建腳註
