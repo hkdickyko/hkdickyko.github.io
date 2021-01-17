@@ -15,8 +15,6 @@ tags: [算法]
 
 如下圖所示，
 
-> X<sub>2</sub> = (X<sub>0</sub> + X<sub>1</sub>) &‌#47; 2 
-
-
+![](https://latex.codecogs.com/svg.latex?\Large&space;x_{2}=\frac{x_{0}+x_{1}}{2})
 
 ![]({{ '/assets/img/bisection/bisection.png' | relative_url }})
