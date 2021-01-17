@@ -254,22 +254,22 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 
 ## 數學符號
 
-| 名稱| 符號 | 名稱| 符號 |
-|:---:|:---:|:---:|:---:|
-|\$\alpha\$|$\alpha$|\$\nu\$|$\nu$|
-|\$\beta\$|$\beta$|\$\psi\$|$\psi$|
-|\$\gamma\$|$\gamma$|\$\lambda\$|$\lambda$|
-|\$\delta\$|$\delta$|\$\mu\$|$\mu$|
-|\$\epsilon\$|$\epsilon$|\$\zeta\$|$\zeta$|
-|\$\eta\$|$\eta$|\$\chi\$|$\chi$|
-|\$\iota\$|$\iota$|\$\xi\$|$\xi$|
-|\$\pi\$|$\pi$|\$\rho\$|$\rho$|
-|\$\sigma\$|$\sigma$|\$\tau\$|$\tau$|
-|\$\upsilon\$|$\upsilon$|\$\phi\$|$\phi$|
-|\$\varepsilon\$|$\varepsilon$|\$\varphi\$|$\varphi$|
-|\$\partial\$|$\partial$|\$\infty\$|$\infty$|
-|\$\Omega\$|$\Omega$|\$\omega\$|$\omega$|
-|\$\Theta\$|$\Theta$|\$\theta\$|$\theta$|
+| MD | 符號 | HTML | MD | 符號 | HTML |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|\$\alpha\$|$\alpha$|&alpha;|\$\nu\$|$\nu$|&nu;|
+|\$\beta\$|$\beta$|&beta;|\$\psi\$|$\psi$|&psi;|
+|\$\gamma\$|$\gamma$|&gamma;|\$\lambda\$|$\lambda$|&lambda;|
+|\$\delta\$|$\delta$|&delta;|\$\mu\$|$\mu$|&mu;|
+|\$\epsilon\$|$\epsilon$|&epsilon;|\$\zeta\$|$\zeta$|&zeta;|
+|\$\eta\$|$\eta$|&eta;|\$\chi\$|$\chi$|&chi;|
+|\$\iota\$|$\iota$|&iota;|\$\xi\$|$\xi$|&xi;|
+|\$\pi\$|$\pi$|&pi;|\$\rho\$|$\rho$|&rho;|
+|\$\sigma\$|$\sigma$|&sigma;|\$\tau\$|$\tau$|&tau;|
+|\$\upsilon\$|$\upsilon$|&upsilon;|\$\phi\$|$\phi$|&phi;|
+|\$\varepsilon\$|$\varepsilon$|&varepsilon;|\$\varphi\$|$\varphi$|&varphi;|
+|\$\partial\$|$\partial$|&part;|\$\infty\$|$\infty$|&infin;|
+|\$\Omega\$|$\Omega$|&Omega;|\$\omega\$|$\omega$|&omega;|
+|\$\Theta\$|$\Theta$|&Theta;|\$\theta\$|$\theta$|&theta;|
 
 ## 關係符號
 
