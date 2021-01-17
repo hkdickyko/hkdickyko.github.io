@@ -247,10 +247,38 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 ```
 Let's rename \*our-new-project\* to \*our-old-project\*.
 
-# 數學公式
+# 數學相關
 
-## 相關網站
+## 公式網站
 [Math equation](https://latex.codecogs.com/legacy/eqneditor/editor.php)
+
+## 數學符號
+
+| 名稱| 符號 | 名稱| 符號 |
+|:---:|:---:|:---:|:---:|
+|\$\alpha\$|$\alpha$|\$\nu\$|$\nu$|
+|\$\beta\$|$\beta$|\$\psi\$|$\psi$|
+|\$\gamma\$|$\gamma$|\$\lambda\$|$\lambda$|
+|\$\delta\$|$\delta$|\$\mu\$|$\mu$|
+|\$\epsilon\$|$\epsilon$|\$\zeta\$|$\zeta$|
+|\$\eta\$|$\eta$|\$\chi\$|$\chi$|
+|\$\iota\$|$\iota$|\$\xi\$|$\xi$|
+|\$\pi\$|$\pi$|\$\rho\$|$\rho$|
+|\$\sigma\$|$\sigma$|\$\tau\$|$\tau$|
+|\$\upsilon\$|$\upsilon$|\$\phi\$|$\phi$|
+|\$\varepsilon\$|$\varepsilon$|\$\varphi\$|$\varphi$|
+|\$\partial\$|$\partial$|\$\infty\$|$\infty$|
+|\$\Omega\$|$\Omega$|\$\omega\$|$\omega$|
+|\$\Theta\$|$\Theta$|\$\theta\$|$\theta$|
+
+## 關係符號
+
+| 名稱| 符號 | 名稱| 符號 |
+|:---:|:---:|:---:|:---:|
+|\$\geq\$|$\geq$|\$\leq\$|$\leq$|
+|\$\equiv\$|$\equiv$|\$\sim\$|$\sim$|
+|\$\perp\$|$\perp$|\$\parallel\$|$\parallel$|
+
 
 # 創建腳註
 
