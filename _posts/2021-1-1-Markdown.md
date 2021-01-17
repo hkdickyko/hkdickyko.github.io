@@ -256,20 +256,20 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 
 | MD | HTML | 符號 | MD | HTML | 符號 |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-|\$\alpha\$|\&alpha;|&alpha;|\$\nu\$|\&nu;|&nu;|
-|\$\beta\$|\&beta;|&beta;|\$\psi\$|\&psi;|&psi;|
-|\$\gamma\$|\&gamma;|&gamma;|\$\lambda\$|\&lambda;|&lambda;|
+|\$\alpha\$|&amp;alpha;|&alpha;|\$\nu\$|\&nu;|&nu;|
+|\$\beta\$|&amp;beta;|&beta;|\$\psi\$|\&psi;|&psi;|
+|\$\gamma\$|&amp;gamma;|&gamma;|\$\lambda\$|\&lambda;|&lambda;|
 |\$\delta\$|\&delta;|&delta;|\$\mu\$|\&mu;|&mu;|
 |\$\epsilon\$|\&epsilon;|&epsilon;|\$\zeta\$|\&zeta;|&zeta;|
 |\$\eta\$|\&eta;|&eta;|\$\chi\$|\&chi;|&chi;|
 |\$\iota\$|\&iota;|&iota;|\$\xi\$|\&xi;|&xi;|
-|\$\pi\$|$\pi$|&pi;|\$\rho\$|$\rho$|&rho;|
-|\$\sigma\$|$\sigma$|&sigma;|\$\tau\$|$\tau$|&tau;|
-|\$\upsilon\$|$\upsilon$|&upsilon;|\$\phi\$|$\phi$|&phi;|
-|\$\varepsilon\$|$\varepsilon$|&varepsilon;|\$\varphi\$|$\varphi$|&varphi;|
-|\$\partial\$|$\partial$|&part;|\$\infty\$|$\infty$|&infin;|
-|\$\Omega\$|$\Omega$|&Omega;|\$\omega\$|$\omega$|&omega;|
-|\$\Theta\$|$\Theta$|&Theta;|\$\theta\$|$\theta$|&theta;|
+|\$\pi\$|\&pi;|&pi;|\$\rho\$|\&rho;|&rho;|
+|\$\sigma\$|\&sigma;|&sigma;|\$\tau\$|\&tau;|&tau;|
+|\$\upsilon\$|\&upsilon;|&upsilon;|\$\phi\$|\&phi;|&phi;|
+|\$\varepsilon\$|\&varepsilon;|&varepsilon;|\$\varphi\$|\&varphi;|&varphi;|
+|\$\partial\$|\&part;|&part;|\$\infty\$|\&infin;|&infin;|
+|\$\Omega\$|\&Omega;|&Omega;|\$\omega\$|\&omega;|&omega;|
+|\$\Theta\$|\&Theta;|&Theta;|\$\theta\$|\&theta;|&theta;|
 
 ## 關係符號
 
