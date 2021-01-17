@@ -38,10 +38,10 @@ description: "分享工程编程方法,如何運用電腦或手機幫助設計�
 collections: # Define post series here
   Documentation:
     output: true
-#  Programming:
-#    output: true
-#  Control:
-#    output: true
+  Programming:
+    output: true
+  Control:
+    output: true
 
 defaults:
   - scope:
