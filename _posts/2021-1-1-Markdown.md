@@ -256,20 +256,20 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 
 | MD | HTML | 符號 | MD | HTML | 符號 |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-|\$\alpha\$|&amp;alpha;|&alpha;|\$\nu\$|\&nu;|&nu;|
-|\$\beta\$|&amp;beta;|&beta;|\$\psi\$|\&psi;|&psi;|
-|\$\gamma\$|&amp;gamma;|&gamma;|\$\lambda\$|\&lambda;|&lambda;|
-|\$\delta\$|\&delta;|&delta;|\$\mu\$|\&mu;|&mu;|
-|\$\epsilon\$|\&epsilon;|&epsilon;|\$\zeta\$|\&zeta;|&zeta;|
-|\$\eta\$|\&eta;|&eta;|\$\chi\$|\&chi;|&chi;|
-|\$\iota\$|\&iota;|&iota;|\$\xi\$|\&xi;|&xi;|
-|\$\pi\$|\&pi;|&pi;|\$\rho\$|\&rho;|&rho;|
-|\$\sigma\$|\&sigma;|&sigma;|\$\tau\$|\&tau;|&tau;|
-|\$\upsilon\$|\&upsilon;|&upsilon;|\$\phi\$|\&phi;|&phi;|
-|\$\varepsilon\$|\&varepsilon;|&varepsilon;|\$\varphi\$|\&varphi;|&varphi;|
-|\$\partial\$|\&part;|&part;|\$\infty\$|\&infin;|&infin;|
-|\$\Omega\$|\&Omega;|&Omega;|\$\omega\$|\&omega;|&omega;|
-|\$\Theta\$|\&Theta;|&Theta;|\$\theta\$|\&theta;|&theta;|
+|\$\alpha\$|&amp;alpha;|&alpha;|\$\nu\$|&amp;nu;|&nu;|
+|\$\beta\$|&amp;beta;|&beta;|\$\psi\$|&amp;psi;|&psi;|
+|\$\gamma\$|&amp;gamma;|&gamma;|\$\lambda\$|&amp;lambda;|&lambda;|
+|\$\delta\$|&amp;delta;|&delta;|\$\mu\$|&amp;mu;|&mu;|
+|\$\epsilon\$|&amp;epsilon;|&epsilon;|\$\zeta\$|&amp;zeta;|&zeta;|
+|\$\eta\$|&amp;eta;|&eta;|\$\chi\$|&amp;chi;|&chi;|
+|\$\iota\$|&amp;iota;|&iota;|\$\xi\$|&amp;xi;|&xi;|
+|\$\pi\$|&amp;pi;|&pi;|\$\rho\$|&amp;rho;|&rho;|
+|\$\sigma\$|&amp;sigma;|&sigma;|\$\tau\$|&amp;tau;|&tau;|
+|\$\upsilon\$|&amp;upsilon;|&upsilon;|\$\phi\$|&amp;phi;|&phi;|
+|\$\varepsilon\$|&amp;varepsilon;|&varepsilon;|\$\varphi\$|&amp;varphi;|&varphi;|
+|\$\partial\$|&amp;part;|&part;|\$\infty\$|&amp;infin;|&infin;|
+|\$\Omega\$|&amp;Omega;|&Omega;|\$\omega\$|&amp;omega;|&omega;|
+|\$\Theta\$|&amp;Theta;|&Theta;|\$\theta\$|&amp;theta;|&theta;|
 
 ## 關係符號
 
