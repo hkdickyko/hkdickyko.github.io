@@ -247,6 +247,12 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 ```
 Let's rename \*our-new-project\* to \*our-old-project\*.
 
+# 數學符號
+
+## 相關網站
+[Math symbol](https://sites.psu.edu/symbolcodes/codehtml/#math)
+
+
 # 創建腳註
 
 ```
@@ -258,7 +264,6 @@ here's a longer one.[^bignote]
 
 [^bignote]: footnote 2.
 ```
-
 Here's a simple footnote,[^1] and here's a longer one.[^bignote]
 
 [^1]: This is the first footnote.
