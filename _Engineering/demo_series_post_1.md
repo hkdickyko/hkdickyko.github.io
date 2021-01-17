@@ -4,4 +4,4 @@ tags: [Markdown]
 ---
 
 # Markdown 
-[Markdown](https://hkdickyko.github.io/_posts/2021-1-1-Markdown.md)
+[Markdown](https://hkdickyko.github.io/文章/Markdown)
