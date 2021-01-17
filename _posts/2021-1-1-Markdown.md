@@ -254,15 +254,15 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 
 ## 數學符號
 
-| MD | 符號 | HTML | MD | 符號 | HTML |
+| MD | HTML | 符號 | MD | HTML | 符號 |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-|\$\alpha\$|$\alpha$|&alpha;|\$\nu\$|$\nu$|&nu;|
-|\$\beta\$|$\beta$|&beta;|\$\psi\$|$\psi$|&psi;|
-|\$\gamma\$|$\gamma$|&gamma;|\$\lambda\$|$\lambda$|&lambda;|
-|\$\delta\$|$\delta$|&delta;|\$\mu\$|$\mu$|&mu;|
-|\$\epsilon\$|$\epsilon$|&epsilon;|\$\zeta\$|$\zeta$|&zeta;|
-|\$\eta\$|$\eta$|&eta;|\$\chi\$|$\chi$|&chi;|
-|\$\iota\$|$\iota$|&iota;|\$\xi\$|$\xi$|&xi;|
+|\$\alpha\$|\&alpha;|&alpha;|\$\nu\$|\&nu;|&nu;|
+|\$\beta\$|\&beta;|&beta;|\$\psi\$|\&psi;|&psi;|
+|\$\gamma\$|\&gamma;|&gamma;|\$\lambda\$|\&lambda;|&lambda;|
+|\$\delta\$|\&delta;|&delta;|\$\mu\$|\&mu;|&mu;|
+|\$\epsilon\$|\&epsilon;|&epsilon;|\$\zeta\$|\&zeta;|&zeta;|
+|\$\eta\$|\&eta;|&eta;|\$\chi\$|\&chi;|&chi;|
+|\$\iota\$|\&iota;|&iota;|\$\xi\$|\&xi;|&xi;|
 |\$\pi\$|$\pi$|&pi;|\$\rho\$|$\rho$|&rho;|
 |\$\sigma\$|$\sigma$|&sigma;|\$\tau\$|$\tau$|&tau;|
 |\$\upsilon\$|$\upsilon$|&upsilon;|\$\phi\$|$\phi$|&phi;|
