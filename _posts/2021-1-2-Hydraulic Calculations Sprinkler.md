@@ -38,10 +38,12 @@ tags: [消防系統]
 ## Calculation method
 
 1. Check number of sprinklers are necessary to calculate in hydraulically most unfavourable location.
-   - Sprinkers in the Area of operation
+
+    Sprinkers in the Area of operation
   
 2. Find the flow rate of the most remote sprinkler
-   - Q<sub>0</sub> = design density x area per sprinkler
+
+    Q<sub>0</sub> = design density x area per sprinkler
  
 3. Check the minimum pressure of the most remote sprinker
    
@@ -71,7 +73,7 @@ tags: [消防系統]
 
     ![](https://latex.codecogs.com/svg.latex?\Large&space;Q_{actual}=K_{E}\times\sqrt{P_{actual}})
 
-    - Q<sub>actual</sub> was calculated from the most remote sprinkler
+    Q<sub>actual</sub> for the range pipe was calculated from the most remote sprinkler pressure P<sub>actual</sub>
 
 
 
