@@ -45,31 +45,31 @@ tags: [消防系統]
  
 3. Check the minimum pressure of the most remote sprinker
    
-    ![](https://latex.codecogs.com/svg.latex?P_{s}=\left(\frac{Q_{0}}{K_{s}}\right)^{2})
+    ![](https://latex.codecogs.com/svg.latex?\Large&space;P_{s}=\left(\frac{Q_{0}}{K_{s}}\right)^{2})
 
 4. Calculate the pipe loss connected to the sprinkler
 
-    ![](https://latex.codecogs.com/svg.latex?P_{p}=K_{p}\times{L_{0}}\times{Q_{0}}^{1.85})
+    ![](https://latex.codecogs.com/svg.latex?\Large&space;P_{p}=K_{p}\times{L_{0}}\times{Q_{0}}^{1.85})
 
 5. The pressure of the next sprinkler 
 
-    ![](https://latex.codecogs.com/svg.latex?P_{s1}=P_{s}+P_{p}+P_{z})
+    ![](https://latex.codecogs.com/svg.latex?\Large&space;\Large&space;P_{s1}=P_{s}+P_{p}+P_{z})
    
 6. To calculate the flow of the next sprinkler
 
-    ![](https://latex.codecogs.com/svg.latex?Q_{1}=K_{s}\times\sqrt{P_{s1}})
+    ![](https://latex.codecogs.com/svg.latex?\Large&space;Q_{1}=K_{s}\times\sqrt{P_{s1}})
 
 7. To calculate the pipe loss of the next pipe
 
-    ![](https://latex.codecogs.com/svg.latex?P_{p1}=K_{p1}\times{L_{1}}\times{Q_{1}}^{1.85})
+    ![](https://latex.codecogs.com/svg.latex?\Large&space;P_{p1}=K_{p1}\times{L_{1}}\times{Q_{1}}^{1.85})
 
 8. For the whole range pipe treat it as a open outlet to find the K
 
-    ![](https://latex.codecogs.com/svg.latex?K=\frac{Q}{\sqrt{P}})
+    ![](https://latex.codecogs.com/svg.latex?\Large&space;K=\frac{Q}{\sqrt{P}})
 
 9. For the other whole range pipe with less pipe loss, you may use the same procedure as 3 to 8 to find the K<sub>E</sub> equivalent 
 
-    ![](https://latex.codecogs.com/svg.latex?Q_{actual}=K_{E}\times\sqrt{P_{actual}})
+    ![](https://latex.codecogs.com/svg.latex?\Large&space;Q_{actual}=K_{E}\times\sqrt{P_{actual}})
 
     - Q<sub>actual</sub> was calculated from the most remote sprinkler
 
