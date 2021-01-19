@@ -14,12 +14,13 @@ tags: [消防系統]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;Q=K_{s}\times\sqrt{P_{s}})
 
- - Q<sub>?</sub> = flow rate in litres per second (l/s)。
- - L<sub>?</sub> = Length including equivalent lenght for fitting (m)。
- - P<sub>p?</sub> = loss of pressure in pipe in bars per meter。
- - P<sub>s?</sub> = loss of pressure in sprinkler in bars per meter。
- - K<sub>p?</sub> = constant depending on the size and type of the pipe。
- - K<sub>s</sub> = constant depending on the orifice size of the sprinkler head。
+ - Q<sub>?</sub> = flow rate in litres per second (l/s)
+ - L<sub>?</sub> = Length including equivalent lenght for fitting (m)
+ - P<sub>p?</sub> = loss of pressure in pipe in bars
+ - P<sub>s?</sub> = loss of pressure in sprinkler in bars
+ - P<sub>z?</sub> = static difference between sprinkler in bars
+ - K<sub>p?</sub> = constant depending on the size and type of the pipe
+ - K<sub>s</sub> = constant depending on the orifice size of the sprinkler head
   
 「?」is number for reference。
 
@@ -50,9 +51,9 @@ tags: [消防系統]
 
     ![](https://latex.codecogs.com/svg.latex?P_{p}=K_{p}\times{L_{0}}\times{Q_{0}}^{1.85})
 
-5. The pressure of the next sprinkler
+5. The pressure of the next sprinkler 
 
-    ![](https://latex.codecogs.com/svg.latex?P_{s1}=P_{s}+P_{p})
+    ![](https://latex.codecogs.com/svg.latex?P_{s1}=P_{s}+P_{p}+P_{z})
    
 6. To calculate the flow of the next sprinkler
 
