@@ -153,8 +153,8 @@ I get 10 times more traffic from [Google][] than from
 # 內聯圖片
 
 - 一個感嘆號 `!`。
-- 緊跟著一對方括號, 包含了圖片的 `alt` 屬性。
-- 緊跟著一對圓括號, 包含了圖片的 `URL` 或者路徑, 以及一個可選的用單引號或雙引號包裹的`title`屬性。
+- 緊跟著一對方括號， 包含了圖片的 `alt` 屬性。
+- 緊跟著一對圓括號， 包含了圖片的 `URL` 或者路徑， 以及一個可選的用單引號或雙引號包裹的`title`屬性。
 
 ```
 ![Alt text](../assets/img/me.png)
@@ -252,6 +252,11 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 ## 公式網站
 [Math equation](https://latex.codecogs.com/legacy/eqneditor/editor.php)
 
+```
+ 您可以通過下面的圖形鏈接功能，使用該功能網站公式。
+ ![](https://latex.codecogs.com/svg.latex?\Large&space;公式來自公式網站)
+```
+
 ## 數學符號
 
 | MD | HTML | 符號 | MD | HTML | 符號 |
@@ -281,7 +286,7 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 # 創建腳註
 
 ```
-Here's a simple footnote,[^1] and 
+Here's a simple footnote，[^1] and 
 
 here's a longer one.[^bignote]
 
@@ -289,7 +294,7 @@ here's a longer one.[^bignote]
 
 [^bignote]: footnote 2.
 ```
-Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+Here's a simple footnote，[^1] and here's a longer one.[^bignote]
 
 [^1]: This is the first footnote.
 
