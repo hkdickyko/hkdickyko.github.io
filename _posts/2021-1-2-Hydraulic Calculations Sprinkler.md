@@ -75,5 +75,5 @@ tags: [消防系統]
 
     Q<sub>actual</sub> for the range pipe was calculated from the most remote sprinkler pressure P<sub>actual</sub>
 
-
+10. Use the above menthod to calculate whole Sprinkers in the Area of operation
 
