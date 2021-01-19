@@ -14,12 +14,15 @@ tags: [消防系統]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;Q=K_{s}\times\sqrt{P_{s}})
 
- - Q<sub>?</sub> = flow rate in litres per second (l/s)，「?」is number for reference。
- - L<sub>?</sub> = Length including equivalent lenght for fitting (m)，「?」is number for reference。
+ - Q<sub>?</sub> = flow rate in litres per second (l/s)。
+ - L<sub>?</sub> = Length including equivalent lenght for fitting (m)。
  - P<sub>p?</sub> = loss of pressure in pipe in bars per meter。
  - P<sub>s?</sub> = loss of pressure in sprinkler in bars per meter。
  - K<sub>p?</sub> = constant depending on the size and type of the pipe。
- - K<sub>s?</sub> = constant depending on the orifice size of the sprinkler head。
+ - K<sub>s</sub> = constant depending on the orifice size of the sprinkler head。
+  
+「?」is number for reference。
+
 
 ## Find the location for calculation
 
@@ -33,7 +36,7 @@ tags: [消防系統]
 
 ## Calculation method
 
-1. Check number of sprinklers are necessary to calculate.
+1. Check number of sprinklers are necessary to calculate in hydraulically most unfavourable location.
    - Sprinkers in the Area of operation
   
 2. Find the flow rate of the most remote sprinkler
@@ -45,7 +48,7 @@ tags: [消防系統]
 
 4. Calculate the pipe loss connected to the sprinkler
 
-    ![](https://latex.codecogs.com/svg.latex?P_{p}=K_{p}\times{L}\times{Q_{0}}^{1.85})
+    ![](https://latex.codecogs.com/svg.latex?P_{p}=K_{p}\times{L_{0}}\times{Q_{0}}^{1.85})
 
 5. The pressure of the next sprinkler
 
@@ -55,6 +58,19 @@ tags: [消防系統]
 
     ![](https://latex.codecogs.com/svg.latex?Q_{1}=K_{s}\times\sqrt{P_{s1}})
 
-7. To calculate the flow of the next pipe    
+7. To calculate the pipe loss of the next pipe
 
-    ![](https://latex.codecogs.com/svg.latex?P_{p1}=K_{p1}\times{L}\times{Q_{1}}^{1.85})
+    ![](https://latex.codecogs.com/svg.latex?P_{p1}=K_{p1}\times{L_{1}}\times{Q_{1}}^{1.85})
+
+8. For the whole range pipe treat it as a open outlet to find the K
+
+    ![](https://latex.codecogs.com/svg.latex?K=\frac{Q}{\sqrt{P}})
+
+9. For the other whole range pipe with less pipe loss, you may use the same procedure as 3 to 8 to find the K<sub>E</sub> equivalent 
+
+    ![](https://latex.codecogs.com/svg.latex?Q_{actual}=K_{E}\times\sqrt{P_{actual}})
+
+    - Q<sub>actual</sub> was calculated from the most remote sprinkler
+
+
+
