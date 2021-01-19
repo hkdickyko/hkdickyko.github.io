@@ -75,5 +75,12 @@ tags: [消防系統]
 
     Q<sub>actual</sub> for the range pipe was calculated from the most remote sprinkler pressure P<sub>actual</sub>
 
-10. Use the above menthod to calculate whole Sprinkers in the Area of operation
+10. Use the above method to calculate whole Sprinkers in the Area of operation to find the Q<sub>sum</sub> and P<sub>sum</sub> at the end of the calculation distribution pipe
 
+11. The pressure loss ( P<sub>L</sub> ) from the end of the calculation distribution pipe to the control valve + / - Elevation head 
+
+    ![](https://latex.codecogs.com/svg.latex?\Large&space;P_{L}=\sum\left({K\times{L}\times{Q_{sum}}^{1.85}}\right)\left(^{+}/_{-}\right)P_{Elevation})
+
+12. The total pressure loss ( P<sub>Total</sub> ) at the control valve at Q<sub>sum</sub>
+
+    ![](https://latex.codecogs.com/svg.latex?\Large&space;P_{Total}=P_{L}+P_{sum})
