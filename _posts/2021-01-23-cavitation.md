@@ -11,4 +11,4 @@ tags: [水泵]
 一般避免方法時增加入水壓力。使水泵的入水壓力不會低於空氣的蒸發壓力。
 
 
-![Alt relationship]({{ '/assets/img/oop/cavitation.png' | relative_url }})
+![Alt Cavitation]({{ '/assets/img/oop/cavitation.png' | relative_url }})
