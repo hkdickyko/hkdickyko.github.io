@@ -22,13 +22,13 @@ I<sup>2</sup>C 規格中定義的 V<sub>IL</sub>，也就是 0.3 V<sub>CC</sub>�
 
  > <center>V = IR</center>
  > <center>2.31 = 0.003 * R</center>
- > <center>R = 770（Ω）</center>
+ > <center>R = 770(Ω)</center>
 
 如果將 SCL 或 SDA 拉到 0 V，就要在 R<sub>p</sub> 上造出完整的 3.3 V 壓差，這時的電阻值就是：
 
  > <center>V = IR</center>
  > <center>3.3 = 0.003 * R</center>
- > <center>R = 1100（Ω</center>
+ > <center>R = 1100(Ω)</center>
 
 T<sub>R</sub>上升時間受總線的寄生電容和上拉電阻影響
 
