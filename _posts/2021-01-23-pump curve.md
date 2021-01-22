@@ -4,4 +4,4 @@ tags: [水泵]
 ---
 
 
-![Alt relationship]({{ '/assets/img/oop/pumpcurve.png' | relative_url }})
+![Alt Pump]({{ '/assets/img/pump/pumpcurve.png' | relative_url }})
