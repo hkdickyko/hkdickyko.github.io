@@ -15,3 +15,6 @@ tags: [水泵]
 入水端和出水端水循環及水泵過熱等問題。
 
 ![Alt Pump]({{ '/assets/img/pump/pumpcurve.png' | relative_url }})
+
+
+![Alt Pump]({{ '/assets/img/pump/BEP.png' | relative_url }})
