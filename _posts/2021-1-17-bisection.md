@@ -19,13 +19,17 @@ tags: [算法]
 
 因當x<sub>0</sub>時的求值為負。，x<sub>1</sub>時的求值為正。
 而我們所需要求的數值為零。
-而當代入x<sub>2</sub>計算的出來的數值為負。
-所以x<sub>2</sub>用以代替x<sub>0</sub>。
 
+而當代入x<sub>2</sub>計算出來的數值為負。
+所以x<sub>2</sub>用以代替x<sub>0</sub>。
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;x_{3}=\frac{x_{2}+x_{1}}{2})
 
-繼續尋找直到找到 &alpha;。
+而當代入x<sub>3</sub>計算出來的數值為正。
+所以x<sub>3</sub>用以代替x<sub>1</sub>。
+
+用以上的計算原理。繼續尋找直到找到 &alpha;，
+一般來說我們會設計一個可接受的誤差 &epsilon;。用於減少計算時間。
 
 
 ![]({{ '/assets/img/bisection/bisection.png' | relative_url }})
