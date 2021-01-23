@@ -17,6 +17,12 @@ tags: [算法]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;x_{2}=\frac{x_{0}+x_{1}}{2})
 
+因當x<sub>0</sub>時的求值為負。，x<sub>1</sub>時的求值為正。
+而我們所需要求的數值為零。
+而當代入x<sub>2</sub>計算的出來的數值為負。
+所以x<sub>2</sub>用以代替x<sub>0</sub>。
+
+
 ![](https://latex.codecogs.com/svg.latex?\Large&space;x_{3}=\frac{x_{2}+x_{1}}{2})
 
 繼續尋找直到找到 &alpha;。
