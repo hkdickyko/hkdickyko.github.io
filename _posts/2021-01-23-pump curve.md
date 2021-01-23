@@ -22,5 +22,10 @@ tags: [水泵]
 
 ![Alt Pump]({{ '/assets/img/pump/BEP.png' | relative_url }})
 
+ - 在H2及Q2時是這個系統是處於最大的水阻力，水流是最小。
+ - 在H1及Q1時是這個系統是處於最小的水阻力。小流是最大。
+
+基於日常水管閥之調整，系統曲線會在H2及H1之間改變。
+當水管老化時，系統阻力也會增加。
 
 ![Alt Pump]({{ '/assets/img/pump/pumpinfo.png' | relative_url }})
