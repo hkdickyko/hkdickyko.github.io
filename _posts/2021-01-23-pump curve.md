@@ -21,3 +21,6 @@ tags: [水泵]
 
 
 ![Alt Pump]({{ '/assets/img/pump/BEP.png' | relative_url }})
+
+
+![Alt Pump]({{ '/assets/img/pump/pumpinfo.png' | relative_url }})
