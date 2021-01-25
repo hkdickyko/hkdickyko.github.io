@@ -4,6 +4,9 @@ tags: [I2c]
 ---
 
 # I<sup>2</sup>C bus 的 pull-up 電阻設計
+
+![Alt i2C](../assets/img/i2c/i2cpr.png)
+
 I<sup>2</sup>C bus 的 pull-up 電阻設計，是一個兩難的局面：
 
  - R<sub>p</sub> 很小：low-to-high 的變化速度會很快，clock速度沒有限制，但影響 low 的位準。
