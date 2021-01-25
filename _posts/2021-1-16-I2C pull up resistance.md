@@ -14,7 +14,11 @@ I<sup>2</sup>C 規格中定義的 V<sub>IL</sub>，也就是 0.3 V<sub>CC</sub>�
 
 根據 I<sup>2</sup>C 的規範，在 100 KH<sub>z</sub> 的 standard mode 和 400 KH<sub>z</sub> 的 fast mode 下，I<sup>2</sup>C 裝置最少要能驅動 3 mA 的電流。
 
-首先計算 V<sub>IL</sub>：V<sub>IL</sub>= V<sub>CC</sub> * 0.3 = 3.3 * 0.3 = 0.99 V
+首先計算 V<sub>IL</sub>：
+
+ > <center>V<sub>IL</sub> = V<sub>CC</sub> * 0.3 </center>
+ > <center>= 3.3V * 0.3</center>
+ > <center>= 0.99 V</center>
 
 因此最少要將訊號線拉到 0.99 V。此時 R<sub>p</sub> 上的電位差就是：3.3 – 0.99 =2.31 V
 
@@ -41,6 +45,8 @@ T<sub>R</sub>上升時間受總線的寄生電容和上拉電阻影響
 這個電路中，電容器上的電壓可以用一個看起來很恐怖但其實很簡單的數學式來表示：
 
 > <center> V（t）= V<sub>CC</sub>（1 − e <sup>−（t / RC）</sup>）</center>
+
+ ![](https://latex.codecogs.com/svg.latex?\Large&space;V_{(t)}=V_{cc}\times(1-e^{\frac{t}{RC}}))
 
 ## 電阻與頻率的關係如下圖
 
