@@ -25,6 +25,6 @@ tags: [電子]
  * 加速電路
 ## 電容電路等性
 低頻電阻電容
-![Alt rclo]({{ '/assets/img/IC/rclo.png' | relative_url }}
+![Alt rclo]({{ '/assets/img/IC/rclo.png' | relative_url }})
 高頻電阻電容
-![Alt rchi]({{ '/assets/img/IC/rchi.png' | relative_url }}
+![Alt rchi]({{ '/assets/img/IC/rchi.png' | relative_url }})
