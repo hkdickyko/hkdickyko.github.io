@@ -24,7 +24,7 @@ tags: [電子]
  * 靜噪電路
  * 加速電路
 ## 電容電路等性
-低頻電阻電容
+低通濾波器
 ![Alt rclo]({{ '/assets/img/IC/rclo.png' | relative_url }})
-高頻電阻電容
+高通濾波器
 ![Alt rchi]({{ '/assets/img/IC/rchi.png' | relative_url }})
