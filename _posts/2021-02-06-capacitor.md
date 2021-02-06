@@ -46,4 +46,7 @@ tags: [電子]
 ## Q 電容電感系數
 ![Alt Q]({{ '/assets/img/IC/qr.png' | relative_url }})
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;Q=\dfrac{f_0}{f_2 -f_1})
+![](https://latex.codecogs.com/svg.latex?\Large&space;Q=\dfrac{f_0}{f_2-f_1})
+![](https://latex.codecogs.com/svg.latex?\Large&space;Q=\frac{1}{R}\times \sqrt{\frac{L}{C} })
+
+
