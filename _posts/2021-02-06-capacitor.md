@@ -25,9 +25,9 @@ tags: [電子]
  * 加速電路
 
 ## 電容電路等性
-低通濾波器
+低通濾波器(積分電路)
 ![Alt rclo]({{ '/assets/img/IC/rclo.png' | relative_url }})
-高通濾波器
+高通濾波器(微分電路)
 ![Alt rchi]({{ '/assets/img/IC/rchi.png' | relative_url }})
  ## 電容在集成電路中的用途
 ![Alt decoupling]({{ '/assets/img/IC/decoupling.png' | relative_url }})
