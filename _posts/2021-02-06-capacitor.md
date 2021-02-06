@@ -29,7 +29,9 @@ tags: [電子]
 ![Alt rclo]({{ '/assets/img/IC/rclo.png' | relative_url }})
 高通濾波器(微分電路)
 ![Alt rchi]({{ '/assets/img/IC/rchi.png' | relative_url }})
- ## 電容在集成電路中的用途
+
+## 電容在集成電路中的用途
+ 
 ![Alt decoupling]({{ '/assets/img/IC/decoupling.png' | relative_url }})
 1. 在輸入電壓下降，則去耦電容器將能夠為集成電路提供足夠的功率，以保持電壓穩定。 
 2. 在輸入電壓增加，則去耦電容器將吸收試圖流過集成電路的多餘能量，從而保持電壓穩定。
