@@ -57,7 +57,7 @@ tags: [電子]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;Q=\frac{4}{2\times{R}}\times\sqrt{\frac{L}{C}})
 
--3dB衰減，相當於電壓從最大降低到70.7%或功率從最大降低到50.0%。
+* -3dB衰減，相當於電壓從最大降低到70.7%或功率從最大降低到50.0%。
 
 ![Alt ]({{ '/assets/img/IC/ktoem.png' | relative_url }})
 
