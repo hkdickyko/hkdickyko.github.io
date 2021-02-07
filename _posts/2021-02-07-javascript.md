@@ -8,9 +8,14 @@ tags: [Javascript]
 [JavaScript](https://developer.mozilla.org/zh-TW/docs/Glossary/JavaScript) 是動態程式語言，應用於 [HTML](https://developer.mozilla.org/zh-TW/docs/Glossary/HTML) 文件，可以為網頁提供動態的互動功能。
 
 變數（[Variables](https://developer.mozilla.org/en-US/docs/Glossary/Variable)）用來儲存數值。要宣告一個變數，
-全域變數用 `var`，區域變數用 `let`，若你需要固定不變的常數則用 `const`。並在後面輸入想要用來呼的名字如下：
-```
-var myVariable;
+* 全域變數用 `var`；
+* 區域變數用 `let`；
+* 常數則用 `const`。
+並在後面輸入想要用來呼的名字如下：
+```javascript
+var xVariable;
+let iVariable;
+const jVariable;
 ```
 **備註**：JavaScript 是會區分大小寫字母的，所以`myVariable` 跟 `myvariable` 是不相同！
 
@@ -32,6 +37,7 @@ var myVariable;
 * `for`
 * `while`
 * `do...while`
+
  條件判斷以及在處理陣列上很常使用的迴圈。
 
 **備註**：JavaScript 中的 false 值：`undefined`、`null`、`NaN`、`0`、`""`（空字串）和  `false`，以上幾種情況在邏輯判斷時會轉換成 false。
