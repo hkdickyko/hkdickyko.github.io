@@ -24,7 +24,7 @@ var myVariable;
 |[Array](https://developer.mozilla.org/zh-TW/docs/Glossary/array)|陣列，一個可以儲存多個數值在單一結構。可以用這個方式來呼叫陣列的每一個成員。|
 |[Object](https://developer.mozilla.org/zh-TW/docs/Glossary/Object)|物件。JavaScript 內的所有東西都可以視為一個物件，而且可以被存放在變數裡。|
 
-# 流程控制（flow control）
+## 流程控制（flow control）
 
 在 JavaScript 中如許多程式語言一樣有
 * `if...else`
@@ -98,7 +98,7 @@ var myVariable;
     ```
     
 
-# 函式/函數（function）
+## 函式/函數（function）
 函數是一段程式區塊重複使用的程式撰寫方法，在 JavaScript 中可以將函數當參數或變數傳遞，讓 JavaScript 在函數式程式設計上更容易發揮。  
 函數也可傳入參數。及可用 return 回傳數值，陣列或物件。
 
@@ -118,7 +118,7 @@ const sum = (a, b) => {
 sum(1, 2);
 ```
 
-# 物件（object）
+## 物件（object）
 
 物件是儲存資料的結構，具有屬性及方法。有三種建立方式如下：
 
@@ -161,7 +161,7 @@ sum(1, 2);
     dog.wow();
     ```
     
-# DOM & BOM
+## DOM & BOM
 
 DOM 提供 HTML 網頁一種存取的方式，可以將 HTML 元素轉換成一棵節點樹，每一個標籤和文字內容是為一個節點，讓我們可以走訪節點 (Nodes) 來存取 HTML 元素。
 
@@ -197,7 +197,7 @@ Document 物件有提供使用「CSS」選擇器來選取元素，效能較好
 -   `document.querySelector()`  方法  
     只會回傳一個符合的元素，沒有就回傳 null。
 
-## 範例：   
+### 範例：   
   ```javascript
 <div class="obj"></div>
 <div class="obj"></div>
@@ -208,10 +208,10 @@ Document 物件有提供使用「CSS」選擇器來選取元素，效能較好
     });
 </script>
 ```
-# 事件處理（event handler）
+## 事件處理（event handler）
 事件處理就是當一個事件發生時如網頁載入、按下右鍵等等，程式會相對應做出怎樣的處理。
 
-## 事件處理機制
+### 事件處理機制
 
 ```
 事件處理 = 事件種類 + 事件處理方法
@@ -249,4 +249,26 @@ btn.addEventListener('click', function() {
 </html>
 ```
 
-# JSON（JavaScript Object Notation）
+## JSON（JavaScript Object Notation）
+JSON 是個以純文字為儲存和傳送簡單結構資料，你可以透過特定的格式去儲存任何資料如字串,數字,陣列,物件等，也可以透過物件或陣列來傳送較複雜的資料。一旦建立了您的 JSON 資料，就可以非常簡單的跟其他程式溝通或交換資料。
+
+**備註** 以下規則用來建立 JSON 字串:
+
+1.  JSON 字串可以包含陣列 Array 資料或者是物件 Object 資料；
+2.  陣列可以用  **[ ]**  來寫入資料；
+3.  物件可以用  **{ }**  來寫入資料；
+4.  name / value 是成對的，中間透過 (**:**) 來區隔。
+
+**備註** 物件或陣列的數值限制如下:
+
+1.  數字 (整數或浮點數)
+2.  字串 (請用 "" 括號)
+3.  布林函數 (boolean) (true 或 false)
+4.  陣列 (請用 [ ] )
+5.  物件 (請用 { } )
+6.  NULL
+
+## JavaScript 處理 JSON 資料
+* JSON.stringify 用來轉換JavaScript變數至JSON文本。
+* JSON.parse 用來轉換JSON文本至JavaScript變數。
+---
