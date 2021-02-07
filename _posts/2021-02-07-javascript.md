@@ -225,7 +225,9 @@ btn.addEventListener('click', function() {
    alert('被點擊!');
 });
 ```
+
 範例：
+
 ```javascript
 <!DOCTYPE html>
 <html>
