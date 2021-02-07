@@ -42,7 +42,7 @@ const jVariable;
 
 **備註**：JavaScript 中的 false 值：`undefined`、`null`、`NaN`、`0`、`""`（空字串）和  `false`，以上幾種情況在邏輯判斷時會轉換成 false。
 
-1.  if...else
+1.  if...else :
     
     ```javascript
     // 可以投票
