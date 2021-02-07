@@ -57,5 +57,8 @@ tags: [電子]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;Q=\frac{4}{2\times{R}}\times\sqrt{\frac{L}{C}})
 
+![Alt ]({{ '/assets/img/IC/ktoem.png' | relative_url }})
+
+
 
 
