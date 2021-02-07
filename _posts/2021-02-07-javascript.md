@@ -271,4 +271,4 @@ JSON 是個以純文字為儲存和傳送簡單結構資料，你可以透過特
 ## JavaScript 處理 JSON 資料
 * JSON.stringify 用來轉換JavaScript變數至JSON文本。
 * JSON.parse 用來轉換JSON文本至JavaScript變數。
----
+
