@@ -204,3 +204,44 @@ Document 物件有提供使用「CSS」選擇器來選取元素，效能較好
 </script>
 ```
 # 事件處理（event handler）
+事件處理就是當一個事件發生時如網頁載入、按下右鍵等等，程式會相對應做出怎樣的處理。
+
+## 事件處理機制
+
+```
+事件處理 = 事件種類 + 事件處理方法
+```
+-   事件種類（Event Type）  
+    又稱事件名稱 (Event Name)，為一個字串，說明發生了什麼事件，例如：click (點擊)、mousemove (滑鼠滑過)
+    
+-   事件處理（Event Handlers）  
+    係指處理事件的函數名稱，當事件發生時要呼叫哪個函數進行處理
+``` javascript
+// 當發生 click 事件，會發出 alert 
+btn.addEventListener('click', function() {
+   alert('被點擊!');
+});
+```
+範例：
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"      content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <button id="btn">點我點我</button>
+  <script type="text/javascript">
+ const btn = document.querySelector('#btn');
+
+   btn.addEventListener('click', function() {
+   alert('被點了!');
+ });   
+  </script>
+</body>
+</html>
+```
+
+# JSON（JavaScript Object Notation）
