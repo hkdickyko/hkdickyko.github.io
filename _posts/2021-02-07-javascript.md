@@ -21,7 +21,7 @@ var myVariable;
 |[String](https://developer.mozilla.org/en-US/docs/Glossary/String)|字串，一段文字。如果要將字串指定給一個變數，需要用引號將字串框起來。|
 |[Number](https://developer.mozilla.org/zh-TW/docs/Glossary/Number)|數值，一個數字。|
 |[Boolean](https://developer.mozilla.org/zh-TW/docs/Glossary/Boolean)|布林值，一個 True（真）/False（假）數值。`true`/`false`  是 JavaScript 內的特殊關鍵字。|
-|[Array](https://developer.mozilla.org/zh-TW/docs/Glossary/array)|陣列，一個可以儲存多個數值在單一結構。|可以用這個方式來呼叫陣列的每一個成員。|
+|[Array](https://developer.mozilla.org/zh-TW/docs/Glossary/array)|陣列，一個可以儲存多個數值在單一結構。可以用這個方式來呼叫陣列的每一個成員。|
 |[Object](https://developer.mozilla.org/zh-TW/docs/Glossary/Object)|物件。JavaScript 內的所有東西都可以視為一個物件，而且可以被存放在變數裡。|
 
 # 流程控制（flow control）
@@ -35,7 +35,7 @@ var myVariable;
     ```
     // 可以投票
     if(age > 18) {
-    console.log('可以投票！');
+       console.log('可以投票！');
     }
     
     ```
@@ -51,7 +51,7 @@ var myVariable;
       case 'Japan':
           console.log('hello' + country);
           break;
-    default:
+      default:
           console.log('hello' + country);  
     }
     ```
@@ -151,10 +151,9 @@ sum(1, 2);
        function() {
          console.log('QQQ');
        }
-       const dog = new Dog('lucky', 2);
+    const dog = new Dog('lucky', 2);
     // wow!wow!
     dog.wow();
-    
     ```
     
 
