@@ -5,10 +5,10 @@ tags: [Javascript]
 
 # JavaScript
 
-[JavaScript](https://developer.mozilla.org/zh-TW/docs/Glossary/JavaScript) 是一個成熟的動態程式語言，應用於 [HTML](https://developer.mozilla.org/zh-TW/docs/Glossary/HTML) 文件上時，可以為網頁提供動態的互動功能。
+[JavaScript](https://developer.mozilla.org/zh-TW/docs/Glossary/JavaScript) 是動態程式語言，應用於 [HTML](https://developer.mozilla.org/zh-TW/docs/Glossary/HTML) 文件，可以為網頁提供動態的互動功能。
 
-變數（[Variables](https://developer.mozilla.org/en-US/docs/Glossary/Variable)）是可以用來儲存數值的容器。要宣告一個變數，
-全域變數將使用 `var`，區域變數使用 `let`，若你需要固定不變的常數則是使用 `const`。並在後面輸入您想要用來呼叫她的名字如下：
+變數（[Variables](https://developer.mozilla.org/en-US/docs/Glossary/Variable)）用來儲存數值。要宣告一個變數，
+全域變數用 `var`，區域變數用 `let`，若你需要固定不變的常數則用 `const`。並在後面輸入想要用來呼的名字如下：
 ```
 var myVariable;
 ```
@@ -26,9 +26,15 @@ var myVariable;
 
 # 流程控制（flow control）
 
-在 JavaScript 中如許多程式語言一樣有  `if...else`、`switch`  條件判斷以及在處理陣列上很常使用的迴圈。
+在 JavaScript 中如許多程式語言一樣有
+* `if...else`
+* `switch`
+* `for`
+* `while`
+* `do...while`
+ 條件判斷以及在處理陣列上很常使用的迴圈。
 
-另外要注意的是在 JavaScript 中的 false 值：`undefined`、`null`、`NaN`、`0`、`""`（空字串）和  `false`，以上幾種情況在邏輯判斷時會轉換成 false
+**備註**：JavaScript 中的 false 值：`undefined`、`null`、`NaN`、`0`、`""`（空字串）和  `false`，以上幾種情況在邏輯判斷時會轉換成 false。
 
 1.  if...else
     
@@ -39,7 +45,7 @@ var myVariable;
     }
     ```
     
-2.  switch：當條件很多時可以善用 switch 判斷，記得要在每個 case 後寫 break，不然會全部都執行
+2.  switch：當條件很多時可以善用 switch 判斷，記得要在每個 case 後寫 break，不然會全部都執行。
     
     ```javascript
     const country = 'Taiwan';
@@ -55,7 +61,7 @@ var myVariable;
     }
     ```
     
-3.  for：當你知道程式需要重複執行幾次時可以使用 for 迴圈
+3.  for：當你知道程式需要重複執行幾次時可以使用 for 迴圈。
     
     ```javascript
     const arr = ['Mark', 'Zuck', 'Jack'];
@@ -64,7 +70,7 @@ var myVariable;
     }
     ```
     
-4.  while：當你程式不知道需要重複執行幾次時可以使用 while 迴圈
+4.  while：當你程式不知道需要重複執行幾次時可以使用 while 迴圈。
     
     ```javascript
     // 從 1 累加到 10
@@ -75,7 +81,7 @@ var myVariable;
     }
     ```
     
-5.  do...while：當迴圈次數不明確時，可以使用 while，而 do while 會至少執行一次
+5.  do...while：當迴圈次數不明確時，可以使用 while，而 do while 會至少執行一次。
     
     ```javascript
     let x = 0;
@@ -93,8 +99,8 @@ var myVariable;
     
 
 # 函式/函數（function）
-函數是一段程式區塊重複使用的程式撰寫方式，在 JavaScript 中可以將函數當參數或變數傳遞，也讓 JavaScript 在函數式程式設計上更容易發揮。  
-函數可傳入參數。也可用 return 回傳數值或物件。
+函數是一段程式區塊重複使用的程式撰寫方法，在 JavaScript 中可以將函數當參數或變數傳遞，讓 JavaScript 在函數式程式設計上更容易發揮。  
+函數也可傳入參數。及可用 return 回傳數值，陣列或物件。
 
 ```javascript
 function sum(a, b) {
@@ -103,7 +109,7 @@ function sum(a, b) {
 sum(12, 20);
 ```
 
-在 ES6中，簡化了函數的使用出現了箭頭函數（arrow function）如：
+在 ES6中，簡化了函數，而出現了箭頭函數（arrow function）如下：
 
 ```javascript
 const sum = (a, b) => {
@@ -155,7 +161,6 @@ sum(1, 2);
     dog.wow();
     ```
     
-
 # DOM & BOM
 
 DOM 提供 HTML 網頁一種存取的方式，可以將 HTML 元素轉換成一棵節點樹，每一個標籤和文字內容是為一個節點，讓我們可以走訪節點 (Nodes) 來存取 HTML 元素。
@@ -211,11 +216,9 @@ Document 物件有提供使用「CSS」選擇器來選取元素，效能較好
 ```
 事件處理 = 事件種類 + 事件處理方法
 ```
--   事件種類（Event Type）  
-    又稱事件名稱 (Event Name)，為一個字串，說明發生了什麼事件，例如：click (點擊)、mousemove (滑鼠滑過)
+-   事件種類（Event Type）為一個字串，說明發生了什麼事件，例如：click (點擊)、mousemove (滑鼠滑過)
     
--   事件處理（Event Handlers）  
-    係指處理事件的函數名稱，當事件發生時要呼叫哪個函數進行處理
+-   事件處理（Event Handlers）為處理事件的函數名稱，當事件發生時要呼叫哪個函數進行處理。
 ``` javascript
 // 當發生 click 事件，會發出 alert 
 btn.addEventListener('click', function() {
