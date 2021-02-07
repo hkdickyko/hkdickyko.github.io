@@ -216,7 +216,7 @@ Document 物件有提供使用「CSS」選擇器來選取元素，效能較好
 ```
 事件處理 = 事件種類 + 事件處理方法
 ```
--   事件種類（Event Type）為一個字串，說明發生了什麼事件，例如：click (點擊)、mousemove (滑鼠滑過)
+-   事件種類（Event Type）為一個字串，說明發生了什麼事件，例如：click (點擊)、mousemove (滑鼠滑過)。
     
 -   事件處理（Event Handlers）為處理事件的函數名稱，當事件發生時要呼叫哪個函數進行處理。
 ``` javascript
