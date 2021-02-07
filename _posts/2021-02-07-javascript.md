@@ -32,17 +32,16 @@ var myVariable;
 
 1.  if...else
     
-    ```
+    ```javascript
     // 可以投票
     if(age > 18) {
        console.log('可以投票！');
     }
-    
     ```
     
 2.  switch：當條件很多時可以善用 switch 判斷，記得要在每個 case 後寫 break，不然會全部都執行
     
-    ```
+    ```javascript
     const country = 'Taiwan';
     switch(grade) {
       case 'Taiwan':
@@ -58,7 +57,7 @@ var myVariable;
     
 3.  for：當你知道程式需要重複執行幾次時可以使用 for 迴圈
     
-    ```
+    ```javascript
     const arr = ['Mark', 'Zuck', 'Jack'];
     for(let i = 0; i < arr.length; arrr++) {
          console.log(arr[i]);
@@ -67,7 +66,7 @@ var myVariable;
     
 4.  while：當你程式不知道需要重複執行幾次時可以使用 while 迴圈
     
-    ```
+    ```javascript
     // 從 1 累加到 10
     const num = 1;
     while(num <= 10) {
@@ -78,7 +77,7 @@ var myVariable;
     
 5.  do...while：當迴圈次數不明確時，可以使用 while，而 do while 會至少執行一次
     
-    ```
+    ```javascript
     let x = 0;
     while(x < 10) {
        console.log(x);
@@ -97,7 +96,7 @@ var myVariable;
 函數是一段程式區塊重複使用的程式撰寫方式，在 JavaScript 中可以將函數當參數或變數傳遞，也讓 JavaScript 在函數式程式設計上更容易發揮。  
 函數可傳入參數。也可用 return 回傳數值或物件。
 
-```
+```javascript
 function sum(a, b) {
    return a + b;
 }
@@ -106,7 +105,7 @@ sum(12, 20);
 
 在 ES6中，簡化了函數的使用出現了箭頭函數（arrow function）如：
 
-```
+```javascript
 const sum = (a, b) => {
     return a + b;
 };
@@ -119,13 +118,13 @@ sum(1, 2);
 
 1.  使用  `new Object`
     
-    ```
+    ```javascript
     var obj = new Object();
     ```
     
 2.  使用  `{}`
     
-    ```
+    ```javascript
     var obj = {
        name: 'Mark',
        age: 23
@@ -135,7 +134,7 @@ sum(1, 2);
 3.  使用建構函數
     
     雖然 JavaScript 並非是類別為基編程的物件導向程式語言，而是基於原型編程的物件導向程式語言。
-    ```
+    ```javascript
     // 實務上建構函數命名採單字首字大寫。
     function Dog(name, age) {
     // 屬性值
@@ -159,4 +158,49 @@ sum(1, 2);
 
 # DOM & BOM
 
+DOM 提供 HTML 網頁一種存取的方式，可以將 HTML 元素轉換成一棵節點樹，每一個標籤和文字內容是為一個節點，讓我們可以走訪節點 (Nodes) 來存取 HTML 元素。
 
+```html
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>My title</title>
+</head>
+<body>
+   <h1>My header</h1>
+   <a href="">Sample link</a>
+</body>
+</html>
+```
+## 操作 DOM 元素的方法如下:
+-   用ID名稱選取  
+`document.getElementById(elementId)`
+-   用元素名稱選取  
+ `document.getElementsByTagName(tagName)`  
+-   用名稱選取  
+ `document.getElementsByName(name)`
+-   用Class 名稱選取  
+ `document.getElementsByClassName(classname)`
+    
+有很多元素回傳的是  `NodeList`  物件集合。可用 item() 存取，或用迭代forEach操作。
+
+Document 物件有提供使用「CSS」選擇器來選取元素，效能較好
+-   `document.querySelectorAll()`  方法  
+    Document 物件的  `querySelectorAll()`  方法可以取得 HTML 的節點陣列或清單，為一個  `NodeList`  物件。
+    
+-   `document.querySelector()`  方法  
+    只會回傳一個符合的元素，沒有就回傳 null。
+
+## 範例：   
+  ```javascript
+<div class="obj"></div>
+<div class="obj"></div>
+<div id="baseID"></div>
+<script type="text/javascript">                 document.querySelector('#baseID').innerHTML = '<h1>單個操作！</h1>';
+  document.querySelectorAll('.obj').forEach((value, index) => {
+     value.innerHTML = '<h1>迭代forEach操作！</h1>';
+    });
+</script>
+```
+# 事件處理（event handler）
