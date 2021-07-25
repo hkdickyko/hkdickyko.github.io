@@ -1,0 +1,93 @@
+---
+category: 電腦
+tags: [鴻蒙作業系統]
+---
+## Install Harmony OS
+<hr/>
+- mkdir ~/HarmonyOS
+- cd ~/HarmonyOS
+- vi ~/.bashrc (*edit bash shell script*)
+
+### Check Linux update before any installation
+
+- sudo apt update
+
+
+## Install Python in your linux
+<hr/>
+- sudo apt install python*3.9*
+- sudo apt-get install python3-pip
+- python3 --version
+
+## Install Node.js (NVM Node.js Version Manager)
+<hr/>
+- sudo apt install curl
+- curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+- source ~/.bashrc
+- nvm --version *(List current version)*
+- nvm ls-remote *(List all available version)*
+- nvm install 14.17.3 *(install version 14.17.3 into your linux system)*
+- node --version (*v14.17.3 shall be shown*)
+  
+### Remove Node.js (*if necessary*)
+
+- sudo apt-get remove nodejs
+
+## Install OpenJDK
+<hr/>
+ - sudo apt-get install openjdk-8-jre
+ - java -version
+
+## Install DevEco Device Tool using in Visual Studio
+<hr/>
+- Download the file from https://device.harmonyos.com/cn/ide#download_release
+- Extract it and chmod 777
+- run the extract file in command prompt (*./deveco-device-tool-2.1.0279451.b672a187.run*)
+
+
+## Installation hpm (HarmonyOS Package Manager)
+<hr/>
+ - npm install --registry=https://registry.npm.taobao.org --loglevel=silly
+ - npm cache clean --force
+ - npm install
+ - sudo npm install --save core-js@3.15.2
+ - npm install -g @ohos/hpm-cli
+ - npm update -g @ohos/hpm-cli
+
+
+### HarmonyOS Package Manager utilities
+
+ - hpm i -g @ohos/llvm
+ - hpm i -g @ohos/ninja 
+ - hpm i -g @ohos/gn
+ - hpm i -g @ohos/hc_gen
+ - hpm i -g @ohos/sysroot
+ 
+## Sample for package installation 
+<hr/>
+### Download package Neptune
+
+ - cd ~/HarmonyOS
+ - mkdir neptune (*create a project directory name: neptune*)
+ - cd neptune
+ - hpm init -t dist (*init the environment*)
+ - hpm i @hihope/neptune_iot
+ - hpm dist (*complier the source*)
+
+### Download package Bearpi Nano
+ - cd ~/HarmonyOS
+ - mkdir nano (*create a project directory name: neptune*)
+ - cd nano
+ - hpm init -t dist (*init the environment*)
+ - hpm i @bearpi/bearpi_hm_nano
+ - hpm dist (*complier the source*)
+
+
+
+## LLVM (Low Level Virtual Machine)
+<hr/>
+![]({{ '/assets/img/OS/LLVM.png' | relative_url }})
+
+## ninja (Similar to make)
+<hr/>
+![]({{ '/assets/img/OS/ninja.png' | relative_url }})
