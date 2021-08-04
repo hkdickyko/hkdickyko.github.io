@@ -5,11 +5,11 @@ tags: [Make]
 
 # makefile的規則
 
-### 示例
-
 ```
 目標文件 : 依赖的文件
         命令
+
+規則示例
 
 app : main.o
 	gcc main.o -o app
@@ -28,14 +28,18 @@ main.o : main.c
 # make 是如何工作
 
 - make會在當前目錄下找名字叫“Makefile”或“makefile”的文件
+- 執行Makefile中的第一個規則，此規則最終需要更新或者創建的目標
+- 如果目標.o 文件不存在，使用其描述規則創建它
+- 依賴文件.c或.h中的任何一個比目標.o文件新，則根據規則重新編譯
 
 
 ## makefile 中的變量
 
 - makefile中以 **$(objects)** 的方式來表達這個變量
 
+### 變量示例
+
 ```
-示例
 files = main.o fun1.o
 app : $(files)
 	gcc $(files) -o app
@@ -109,7 +113,7 @@ obj = $(patsubst %.c, %.o, $(src))
 ```
 
 
-### 基本的腳本樣本
+### 基本的腳本樣本示例
 
 ```
 src = $(wildcard ./*.c)
