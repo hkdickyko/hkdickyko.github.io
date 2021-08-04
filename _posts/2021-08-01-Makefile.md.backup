@@ -5,8 +5,8 @@ tags: [Make]
 
 # makefile的規則
 
-目標文件:依赖的文件
-	命令
+目標文件&nbsp;:&nbsp;依赖的文件 </br>
+&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;命令
 
 ### 示例
 
@@ -18,7 +18,7 @@ main.o : main.c
 	gcc -c main.o -o main.o
 
 ```
-&nbsp;
+
 
 | &nbsp; &nbsp; &nbsp;目標文件 &nbsp; &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;依赖的文件&nbsp; &nbsp; &nbsp;| 命令 |
 |:---:|:---:|:---|
