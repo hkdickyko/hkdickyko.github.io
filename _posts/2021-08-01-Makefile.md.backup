@@ -110,7 +110,7 @@ obj = $(patsubst %.c, %.o, $(src))
 ```
 
 
-### 基本的腳本樣本
+### 基本的腳本
 
 ```
 src = $(wildcard ./*.c)
