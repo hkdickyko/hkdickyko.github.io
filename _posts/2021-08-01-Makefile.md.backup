@@ -5,18 +5,12 @@ tags: [Make]
 
 # makefile的規則
 
-| &nbsp; &nbsp; &nbsp;目標文件 &nbsp; &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;依赖的文件&nbsp; &nbsp; &nbsp;| 命令 |
-|:---:|:---:|:---|
-|app | main.o |gcc main.o -o app|
-|main.o|main.c |gcc main.c -o main.o|
-
-
-```
 目標文件:依赖的文件
 	命令
 
-示例
+### 示例
 
+```
 app : main.o
 	gcc main.o -o app
 
@@ -24,6 +18,12 @@ main.o : main.c
 	gcc -c main.o -o main.o
 
 ```
+&nbsp;
+
+| &nbsp; &nbsp; &nbsp;目標文件 &nbsp; &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;依赖的文件&nbsp; &nbsp; &nbsp;| 命令 |
+|:---:|:---:|:---|
+|app | main.o |gcc main.o -o app|
+|main.o|main.c |gcc main.c -o main.o|
 
 # make 是如何工作
 
