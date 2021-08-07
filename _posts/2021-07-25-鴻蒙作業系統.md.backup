@@ -111,7 +111,7 @@ $ pip install pycryptodome
 $ pip install ecdsa
 ```
 
-## Clone and complier the hardware
+## Clone and com hardware 
 ```
 $ mkdir ~/HarmonyOS/package_1	        
 $ cd ~/HarmonyOS/package_1	        
