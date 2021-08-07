@@ -2,13 +2,13 @@
 category: 電腦
 tags: [鴻蒙作業系統]
 ---
-## Install Harmony OS
+# 安裝鴻蒙操作系統
 ```
 $ mkdir ~/HarmonyOS
 $ cd ~/HarmonyOS
 $ vi ~/.bashrc (edit bash shell script if necessary)
 ```
-### Check Linux update before any installation
+## 在任何安裝之前檢查 **Linux** 更新
 ```
 $ sudo apt update
 ```
@@ -94,24 +94,38 @@ $ rm -rf ~/.config/nvm
 ![]({{ '/assets/img/OS/ninja.svg' | relative_url }})
 
 
-## Install Package environment in Python Virtual Environment
+# 在 **Python** 虛擬環境中安裝包環境
 
 
-### Create virtual environment
+## 創建虛擬環境
 ```
 $ conda create --name HM python=3.8  (HM is virtual enviroment name)
 $ conda activate HM	
 ```
 
-### Install missing python package
+## 安裝所需的python包
 ```
-$ pip install SCons
-$ pip uninstall crypto pycryptodome
-$ pip install pycryptodome
-$ pip install ecdsa
+$ conda install SCons
+$ conda install kconfiglib
+$ conda uninstall crypto pycryptodome
+$ conda install pycryptodome
+$ conda install ecdsa
+```
+## 安裝編譯器和構建工具
+
+- Cross complier : gcc_riscv32-linux-7.3.0.tar.gz
+- meta-build     : gn.1523.tar
+- build system   : ninja.1.9.0.tar
+
+## 解壓並移動到 HarmonyOS 文件夾下
+```
+$ echo 'export PATH=~/.local/bin:$PATH' | tee -a ~/.bashrc
+$ echo 'export PATH=~/HarmonyOS/gn:$PATH' | tee -a ~/.bashrc
+$ echo 'export PATH=~/HarmonyOS/ninja:$PATH' | tee -a ~/.bashrc
+$ echo 'export PATH=~/HarmonyOS/gcc_riscv32:$PATH' | tee -a ~/.bashrc
 ```
 
-## Clone and complier the hardware
+## 克隆和編譯硬件
 ```
 $ mkdir ~/HarmonyOS/package_1	        
 $ cd ~/HarmonyOS/package_1	        
