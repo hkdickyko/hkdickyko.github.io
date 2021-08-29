@@ -1,6 +1,6 @@
 ---
 category: 積體電路 
-tags: [I2c]
+tags: [IoT]
 ---
 
 # I<sup>2</sup>C bus 的 pull-up 電阻設計
