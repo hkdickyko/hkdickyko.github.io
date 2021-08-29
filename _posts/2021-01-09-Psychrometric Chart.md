@@ -1,9 +1,9 @@
 ---
 category: 工程
-tags: [空調系統]
+tags: [工程]
 ---
 
-# Psychrometric Chart Quick Guide
+# 空調系統 - Psychrometric Chart Quick Guide
 
 **7** properties can be obtained at any point in psychrometric chart. You can locate the point by any 2 properties. The properties as listed below.
  - Dry bulb temperature (℃)

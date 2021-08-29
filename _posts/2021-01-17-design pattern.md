@@ -1,6 +1,6 @@
 ---
 category: 編程 
-tags: [設計模式]
+tags: [編程]
 ---
 
 

@@ -1,6 +1,6 @@
 ---
 category: 編程
-tags: [JavaScript]
+tags: [編程]
 ---
 
 # JavaScript

@@ -1,6 +1,6 @@
 ---
 category: 積體電路
-tags: [電子]
+tags: [IoT]
 ---
 
 # 電容

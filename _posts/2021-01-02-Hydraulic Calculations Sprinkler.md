@@ -1,10 +1,10 @@
 ---
 category: 工程 
-tags: [消防系統]
+tags: [工程]
 ---
 
 
-# Hydraulic Calculations - Sprinkler
+# 消防系統 - Hydraulic Calculations - Sprinkler
 
 ## The pipe friction from the sprinkler rule
 
