@@ -9,7 +9,7 @@ MicroPython是2013年在Kickstarter上募資開始建立的小型硬體編程，
 
 MicroPython怎麼寫？跟Python一模一樣。MicroPython除了留有Python的許多迷你化的標準函式庫，也有例如 machine、network等硬體相關的專屬函式庫用於控制硬體相關功能。
 
-詳細可參考[官方文件](https://docs.python.org/zh-tw)。
+詳細可參考 : [官方文件](https://docs.python.org/zh-tw)
 
 源代碼下載地址 : [MicroPython](https://micropython.org/download/)
 
