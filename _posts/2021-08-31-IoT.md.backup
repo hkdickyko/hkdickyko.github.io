@@ -625,19 +625,7 @@ class esp32IO:
 main.py - 通用輸入/輸出功能的示例 
 
 ```
-from esp32IO import esp32IO
-import time
 
-espx = esp32IO()
-# espx.On(25)
-# time.sleep(3)
-# espx.Off(25)
-# espx.On(26)
-# time.sleep(3)
-# espx.Off(26)
 
-while True:
-    print(espx.aht10())
-    time.sleep(10)
 
 ```
