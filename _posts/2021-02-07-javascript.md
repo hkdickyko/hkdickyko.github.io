@@ -291,18 +291,18 @@ jQuery 代替 JavaScript選擇HTML物件的方法：
 
 ##   
 典型的代碼開頭 通常，jQuery是通過將初始化代碼和事件處理常式添加到`$（_ handler_）`中來使用的。 
-```javascript
+```jquery
 $（函數（）{ 
   //這個匿名函數是頁面加載時要調用的第一個函數。 
   // jQuery代碼，事件處理任意寫在這裡 }）; 
 ``` 
 或者 
-```javascript
+```jquery
  $（fn）;
   //在其他地方定義的fn的函數，是頁面加載時要調用的第一個函數。 
 ```
   或者我們也可以使用 
-```javascript
+```jquery
    $（document）.ready（function（）{
     //這是頁面加載時要調用的第一個函數。 
     // jQuery代碼，事件處理任意寫在這裡
