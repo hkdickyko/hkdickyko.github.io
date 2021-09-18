@@ -44,16 +44,16 @@ const jVariable;
 
 1.  if...else :
     
-    ```javascript
+```javascript
     // 可以投票
     if(age > 18) {
        console.log('可以投票！');
     }
-    ```
+```
     
 2.  switch：當條件很多時可以善用 switch 判斷，記得要在每個 case 後寫 break，不然會全部都執行。
     
-    ```javascript
+```javascript
     const country = 'Taiwan';
     switch(grade) {
       case 'Taiwan':
@@ -65,31 +65,31 @@ const jVariable;
       default:
           console.log('hello' + country);  
     }
-    ```
+```
     
 3.  for：當你知道程式需要重複執行幾次時可以使用 for 迴圈。
     
-    ```javascript
+```javascript
     const arr = ['Mark', 'Zuck', 'Jack'];
     for(let i = 0; i < arr.length; arrr++) {
          console.log(arr[i]);
     }
-    ```
+```
     
 4.  while：當你程式不知道需要重複執行幾次時可以使用 while 迴圈。
     
-    ```javascript
+```javascript
     // 從 1 累加到 10
     const num = 1;
     while(num <= 10) {
        let sum += num; // sum = sum + num
        num += 1;
     }
-    ```
+```
     
 5.  do...while：當迴圈次數不明確時，可以使用 while，而 do while 會至少執行一次。
     
-    ```javascript
+```javascript
     let x = 0;
     while(x < 10) {
        console.log(x);
@@ -101,7 +101,7 @@ const jVariable;
        console.log(y);
        y++; 
     } while(i < 10);
-    ```
+```
     
 
 ## 函式/函數（function）
@@ -130,23 +130,23 @@ sum(1, 2);
 
 1.  使用  `new Object`
     
-    ```javascript
+```javascript
     var obj = new Object();
-    ```
+```
     
 2.  使用  `{}`
     
-    ```javascript
+```javascript
     var obj = {
        name: 'Mark',
        age: 23
     }
-    ```
+```
     
 3.  使用建構函數
     
     雖然 JavaScript 並非是類別為基編程的物件導向程式語言，而是基於原型編程的物件導向程式語言。
-    ```javascript
+```javascript
     // 實務上建構函數命名採單字首字大寫。
     function Dog(name, age) {
     // 屬性值
@@ -165,7 +165,7 @@ sum(1, 2);
     const dog = new Dog('lucky', 2);
     // wow!wow!
     dog.wow();
-    ```
+```
     
 ## DOM & BOM
 
@@ -203,8 +203,9 @@ Document 物件有提供使用「CSS」選擇器來選取元素，效能較好
 -   `document.querySelector()`  方法  
     只會回傳一個符合的元素，沒有就回傳 null。
 
-### 範例：   
-  ```javascript
+### 範例： 
+  
+```javascript
 <div class="obj"></div>
 <div class="obj"></div>
 <div id="baseID"></div>
@@ -225,6 +226,7 @@ Document 物件有提供使用「CSS」選擇器來選取元素，效能較好
 -   事件種類（Event Type）為一個字串，說明發生了什麼事件，例如：click (點擊)、mousemove (滑鼠滑過)。
     
 -   事件處理（Event Handlers）為處理事件的函數名稱，當事件發生時要呼叫哪個函數進行處理。
+
 ``` javascript
 // 當發生 click 事件，會發出 alert 
 btn.addEventListener('click', function() {
@@ -234,7 +236,7 @@ btn.addEventListener('click', function() {
 
 範例：
 
-```javascript
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -289,18 +291,18 @@ jQuery 代替 JavaScript選擇HTML物件的方法：
 
 ##   
 典型的代碼開頭 通常，jQuery是通過將初始化代碼和事件處理常式添加到`$（_ handler_）`中來使用的。 
-``` 
+```javascript
 $（函數（）{ 
   //這個匿名函數是頁面加載時要調用的第一個函數。 
   // jQuery代碼，事件處理任意寫在這裡 }）; 
 ``` 
 或者 
-```
+```javascript
  $（fn）;
   //在其他地方定義的fn的函數，是頁面加載時要調用的第一個函數。 
 ```
   或者我們也可以使用 
-  ```
+```javascript
    $（document）.ready（function（）{
     //這是頁面加載時要調用的第一個函數。 
     // jQuery代碼，事件處理任意寫在這裡
