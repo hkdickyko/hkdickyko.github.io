@@ -27,11 +27,11 @@ tags: [Kalman Filter]
 
  - index = 測量值編號 (測量值位置), status = 計算值狀態 (0:初始值或估計值, 1:計算修正估值)
  
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1,{\color{Red}0}} = X_{0,{\color{Red}0}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,{\color{Red}0}} = X_{i-1,{\color{Red}0}})
 	 
  - 延伸估值的不確定性方差 + 估計系統噪聲方差 (R) 在整個估計過程中是固定不變的
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,{\color{Red}0}}^{2} = \sigma_{0,{\color{Red}0}}^{2} + {\color{blue}\mathbf{R}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,{\color{Red}0}}^{2} = \sigma_{i-1,{\color{Red}0}}^{2} + {\color{blue}\mathbf{R}})
 	 
 ## *反復計算* (從測量值)
 
@@ -46,18 +46,18 @@ tags: [Kalman Filter]
  - 卡爾曼增益 (K<sub>1</sub>) 介於 0 到 1 之間	
  - 測量設備誤差為 (σ<sub>r</sub>) 在整個估計過程中是固定不變的
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;K_{1} = \frac{\sigma_{1,0}^{2}}{\sigma_{1,0}^{2} + {\color{blue}\sigma_{r}}^{2}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i} = \frac{\sigma_{i,0}^{2}}{\sigma_{i,0}^{2} + {\color{blue}\sigma_{r}}^{2}})
 
 ### 更新估值 (X<sub>1,1</sub>)
 
 增量之間的距離 = (測量值 - 預測估值)
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1,1} = X_{1,0} + K _{1} \times (Z_{1} - X_{1,0}))
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1} = X_{i,0} + K _{i} \times (Z_{i} - X_{i,0}))
    
    
 ### 更新誤差方差估值 (σ<sub>1,1</sub><sup>2</sup>)  
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,1}^{2} = (1 - K_{1}) \times \sigma_{1,0}^{2})
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2} = (1 - K_{i}) \times \sigma_{i,0}^{2})
    
   
 	 
@@ -65,9 +65,9 @@ tags: [Kalman Filter]
 
 - 系統噪聲方差 ( R )
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{2,0} = X_{1,1})
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i+1,0} = X_{i,1})
 
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{2,0}^{2} = \sigma_{1,1}^{2} + {\color{blue}\mathbf{R}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i+1,0}^{2} = \sigma_{i,1}^{2} + {\color{blue}\mathbf{R}})
 
 ## 重複以上 (*反復計算*) 過程
