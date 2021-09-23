@@ -27,7 +27,7 @@ tags: [Kalman Filter]
 
  - index = 測量值編號 (測量值位置), status = 計算值狀態 (0:初始值或估計值, 1:計算修正估值)
  
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1,{\color{Red}0} = X_{0,{\color{Red}0})
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1,{\color{Red}0}} = X_{0,{\color{Red}0}})
 	 
  - 延伸估值的不確定性方差 + 估計系統噪聲方差 (R)
 
