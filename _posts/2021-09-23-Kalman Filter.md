@@ -35,7 +35,12 @@ tags: [Kalman Filter]
 
 由於卡爾曼增益 (K<sub>1</sub>) 介於 0 到 1 之間	
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;K_{1} = \frac{\sigma_{1}^{2}}{\sigma_{1}^{2} + \sigma_{2}^{2}})   
+![](https://latex.codecogs.com/svg.latex?\Large&space;K_{1} = \frac{\sigma_{1}^{2}}{\sigma_{1}^{2} + \sigma_{2}^{2}})
+
+### 更新估值
+
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1} = X_{0} + K _{1} \times (Z_{1} - X_{0}))
+   
   
 	 
 
