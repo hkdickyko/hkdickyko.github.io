@@ -43,10 +43,10 @@ tags: [Kalman Filter]
  
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{Z_{i}, {\color{blue}\sigma_{r}}^{2}})
 	
-### 計算卡爾曼增益 (K<sub>i</sub>)
+### 計算卡爾曼增益 (![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i}))
 
- - 卡爾曼增益 (K<sub>i</sub>) 介於 0 到 1 之間	
- - 測量設備誤差為 (σ<sub>r</sub>) 在整個估計過程中是固定不變的
+ - 卡爾曼增益 (![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i}))介於 0 到 1 之間	
+ - 測量設備誤差為 (![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{r}})) 在整個估計過程中是固定不變的
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i} = \frac{\sigma_{i,0}^{2}}{\sigma_{i,0}^{2} + {\color{blue}\sigma_{r}}^{2}})
 
