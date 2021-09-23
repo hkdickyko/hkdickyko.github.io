@@ -34,26 +34,26 @@ tags: [Kalman Filter]
 
 ### 測量值
 
-來自設備的測量值 = Z<sub>1</sub>
+ - 來自設備的測量值 = Z<sub>1</sub>
 
-由於測量誤差為 (σ<sub>r</sub>)，方差 (σ<sub>r</sub><sup>2</sup> ) 例如，如果如果設備準確誤差為 0.1 誤差方差為 0.1 <sup>2</sup> = 0.01.
+ - 由於測量誤差為 (σ<sub>r</sub>)，方差 (σ<sub>r</sub><sup>2</sup>) 例如，如果如果設備準確誤差為 0.1 誤差方差為 0.1 <sup>2</sup> = 0.01.
 	
 ### 更新卡爾曼增益計算
 
  - 卡爾曼增益 (K<sub>1</sub>) 介於 0 到 1 之間	
 
-### 計算卡爾曼增益
+### 計算卡爾曼增益 (K<sub>1</sub>)
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;K_{1} = \frac{\sigma_{1,0}^{2}}{\sigma_{1,0}^{2} + \sigma_{r}^{2}})
 
-### 更新估值
+### 更新估值 (X<sub>1,1</sub>)
 
 增量之間的距離 = (測量值 - 預測估值)
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1,1} = X_{1,0} + K _{1} \times (Z_{1} - X_{1,0}))
    
    
-### 更新誤差方差估值   
+### 更新誤差方差估值 (σ<sub>1,1</sub><sup>2</sup>)  
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,1}^{2} = (1 - K_{1}) \times \sigma_{1,0}^{2})
    
