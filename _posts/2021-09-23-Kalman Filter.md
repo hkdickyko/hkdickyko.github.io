@@ -7,7 +7,7 @@ tags: [Kalman Filter]
 
 是一種利用線性系統狀態，通過系統輸入及輸出數據，它能夠從不完全及包含雜訊的測量中，估計動態系統的狀態。
 
-![Alt Filter]({{ '/assets/img/IoT/estimation.png' | relative_url }})
+![Alt Filter]({{ '/assets/img/kalman/estimation.png' | relative_url }})
 
 ## 初始估值
 
