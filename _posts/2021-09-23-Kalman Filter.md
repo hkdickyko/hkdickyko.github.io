@@ -37,7 +37,9 @@ tags: [Kalman Filter]
 
    σ<sub>1</sub><sup>2</sup> 
    
-$\frac{\partial f}{\partial x}$	 
+   
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=$\frac{\partial f}{\partial x}$" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />   
+	 
 
 
 
