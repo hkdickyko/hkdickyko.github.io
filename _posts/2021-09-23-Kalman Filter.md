@@ -31,7 +31,7 @@ tags: [Kalman Filter]
 	 
  - 延伸估值的不確定性方差 + 估計系統噪聲方差 (R) 在整個估計過程中是固定不變的
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,{\color{Red}0}}^{2} = \sigma_{0,{\color{Red}0}}^{2} + \mathbf{R})
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,{\color{Red}0}}^{2} = \sigma_{0,{\color{Red}0}}^{2} + {\color{blue}\mathbf{R}})
 	 
 ## 反復計算 (從測量值)
 
@@ -46,7 +46,7 @@ tags: [Kalman Filter]
  - 卡爾曼增益 (K<sub>1</sub>) 介於 0 到 1 之間	
  - 測量設備誤差為 (σ<sub>r</sub>) 在整個估計過程中是固定不變的
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;K_{1} = \frac{\sigma_{1,0}^{2}}{\sigma_{1,0}^{2} + {\color{Red}\sigma_{r}}^{2}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;K_{1} = \frac{\sigma_{1,0}^{2}}{\sigma_{1,0}^{2} + {\color{blue}\sigma_{r}}^{2}})
 
 ### 更新估值 (X<sub>1,1</sub>)
 
@@ -68,6 +68,6 @@ tags: [Kalman Filter]
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{2,0} = X_{1,1})
 
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{2,0}^{2} = \sigma_{1,1}^{2} + \mathbf{R})
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{2,0}^{2} = \sigma_{1,1}^{2} + {\color{blue}\mathbf{R}})
 
 
