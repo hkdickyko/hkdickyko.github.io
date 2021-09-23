@@ -37,9 +37,11 @@ tags: [Kalman Filter]
 
 ### 測量值
 
- - 來自測量設備的測量值 = Z<sub>1</sub>
+ - 來自測量設備的測量值 = Z<sub>i</sub>
 
  - 來自測量設備誤差為 (σ<sub>r</sub>)，方差 (σ<sub>r</sub><sup>2</sup>) 例如，如果如果設備準確誤差為 0.1 誤差方差為 0.1 <sup>2</sup> = 0.01.
+ 
+![](https://latex.codecogs.com/svg.latex?\Large&space;{Z_{i}, {\color{blue}\sigma_{r}}^{2}})
 	
 ### 更新卡爾曼增益計算 (計算卡爾曼增益 (K<sub>1</sub>))
 
