@@ -16,8 +16,8 @@ tags: [Kalman Filter]
 - 初始系統狀態值
 	- 初始化參數 X<sub>0,0</sub> 不精確，卡爾曼濾波器也能收斂到接近真實值。如果我們用更準確的值初始化，卡爾曼濾波器更快的收斂到近真實值。
 
-- 初始狀態不確定性 (σ<sub>0</sub><sup>2</sup>)
-	- 初始化的估計不確定性是誤差方差 (σ<sup>2</sup>)。  σ<sub>0</sub><sup>2</sup>
+- 初始狀態不確定性 (σ<sub>0,0</sub><sup>2</sup>)
+	- 初始化的估計不確定性是誤差方差 (σ<sup>2</sup>)。  σ<sub>0,0</sub><sup>2</sup>
 	
 ## 預測估值
 
@@ -43,21 +43,21 @@ tags: [Kalman Filter]
  
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{Z_{i}, {\color{blue}\sigma_{r}}^{2}})
 	
-### 更新卡爾曼增益計算 (計算卡爾曼增益 (K<sub>1</sub>))
+### 更新卡爾曼增益計算 (計算卡爾曼增益 (K<sub>i</sub>))
 
- - 卡爾曼增益 (K<sub>1</sub>) 介於 0 到 1 之間	
+ - 卡爾曼增益 (K<sub>i</sub>) 介於 0 到 1 之間	
  - 測量設備誤差為 (σ<sub>r</sub>) 在整個估計過程中是固定不變的
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i} = \frac{\sigma_{i,0}^{2}}{\sigma_{i,0}^{2} + {\color{blue}\sigma_{r}}^{2}})
 
-### 更新估值 (X<sub>1,1</sub>)
+### 更新估值 (X<sub>i,1</sub>)
 
 增量之間的距離 = (測量值 - 預測估值)
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1} = X_{i,0} + K _{i} \times (Z_{i} - X_{i,0}))
    
    
-### 更新誤差方差估值 (σ<sub>1,1</sub><sup>2</sup>)  
+### 更新誤差方差估值 (σ<sub>i,1</sub><sup>2</sup>)  
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2} = (1 - K_{i}) \times \sigma_{i,0}^{2})
    
@@ -65,7 +65,7 @@ tags: [Kalman Filter]
 	 
 ### 預測估值 (下一輪預測開始初始估值)
 
-- 系統噪聲方差 ( R )
+- 系統噪聲方差 (R) 在整個估計過程中是固定不變的
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i+1,0} = X_{i,1})
 
