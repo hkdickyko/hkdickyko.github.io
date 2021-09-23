@@ -45,10 +45,11 @@ index = 測量值編號 (測量值位置), status = 計算值狀態 (0:初始值
 ### 更新卡爾曼增益計算
 
  - 卡爾曼增益 (K<sub>1</sub>) 介於 0 到 1 之間	
+ - 測量設備誤差為 (σ<sub>r</sub>) 在整個估計過程中是固定不變的
 
 ### 計算卡爾曼增益 (K<sub>1</sub>)
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;K_{1} = \frac{\sigma_{1,0}^{2}}{\sigma_{1,0}^{2} + \sigma_{r}^{2}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;K_{1} = \frac{\sigma_{1,0}^{2}}{\sigma_{1,0}^{2} + {\color{Red}\sigma_{r}}^{2}})
 
 ### 更新估值 (X<sub>1,1</sub>)
 
