@@ -23,12 +23,11 @@ tags: [Kalman Filter]
 
  - 由於模型具有恆定動態，因此預測估計等於當前初始估值。
  
-![](https://latex.codecogs.com/svg.latex?\Large&space;X _{index, status})
+![](https://latex.codecogs.com/svg.latex?\Large&space;X _{index, {\color{Red}status})
 
-index = 測量值編號 (測量值位置), status = 計算值狀態 (0:初始值或估計值, 1:計算修正估值)
+ - index = 測量值編號 (測量值位置), status = 計算值狀態 (0:初始值或估計值, 1:計算修正估值)
  
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1,0} = X_{0,0})
-
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1,{\color{Red}0} = X_{0,{\color{Red}0})
 	 
  - 延伸估值的不確定性方差 + 估計系統噪聲方差 (R)
 
@@ -42,12 +41,10 @@ index = 測量值編號 (測量值位置), status = 計算值狀態 (0:初始值
 
  - 來自測量設備誤差為 (σ<sub>r</sub>)，方差 (σ<sub>r</sub><sup>2</sup>) 例如，如果如果設備準確誤差為 0.1 誤差方差為 0.1 <sup>2</sup> = 0.01.
 	
-### 更新卡爾曼增益計算
+### 更新卡爾曼增益計算 (計算卡爾曼增益 (K<sub>1</sub>))
 
  - 卡爾曼增益 (K<sub>1</sub>) 介於 0 到 1 之間	
  - 測量設備誤差為 (σ<sub>r</sub>) 在整個估計過程中是固定不變的
-
-### 計算卡爾曼增益 (K<sub>1</sub>)
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;K_{1} = \frac{\sigma_{1,0}^{2}}{\sigma_{1,0}^{2} + {\color{Red}\sigma_{r}}^{2}})
 
