@@ -15,6 +15,7 @@ tags: [Kalman Filter]
 	
  - 初始系統狀態值
 	 + 初始化參數不精確，卡爾曼濾波器也能收斂到接近真實值。  X<sub>0</sub>
+	 + 
  - 初始狀態不確定性 (σ<sup>2</sup>)
 	 + 初始化的估計不確定性是誤差方差 (σ<sup>2</sup>)。  σ<sub>0</sub><sup>2</sup>
 	
@@ -22,6 +23,7 @@ tags: [Kalman Filter]
 
  - 由於模型具有恆定動態，因此預測估計等於當前初始估值。
 	 - X<sub>1</sub> = X<sub>0</sub>
+	 
  - 延伸估值的不確定性方差 + 系統噪聲方差
 	 + σ<sub>1</sub><sup>2</sup> = σ<sub>0</sub><sup>2</sup> + 系統噪聲方差 ( R )
 	 
@@ -38,6 +40,8 @@ tags: [Kalman Filter]
 ![](https://latex.codecogs.com/svg.latex?\Large&space;K_{1} = \frac{\sigma_{1}^{2}}{\sigma_{1}^{2} + \sigma_{2}^{2}})
 
 ### 更新估值
+
+來自設備的測量值 = Z<sub>1</sub>
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1} = X_{0} + K _{1} \times (Z_{1} - X_{0}))
    
