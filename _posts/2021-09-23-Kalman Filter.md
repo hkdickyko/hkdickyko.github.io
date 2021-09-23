@@ -29,9 +29,9 @@ tags: [Kalman Filter]
  
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1,{\color{Red}0}} = X_{0,{\color{Red}0}})
 	 
- - 延伸估值的不確定性方差 + 估計系統噪聲方差 (R)
+ - 延伸估值的不確定性方差 + 估計系統噪聲方差 (R) 在整個估計過程中是固定不變的
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,0}^{2} = \sigma_{0,0}^{2} + R)
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,{\color{Red}0}}^{2} = \sigma_{0,{\color{Red}0}}^{2} + \mathbf{R})
 	 
 ## 反復計算 (從測量值)
 
@@ -68,6 +68,6 @@ tags: [Kalman Filter]
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{2,0} = X_{1,1})
 
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{2,0}^{2} = \sigma_{1,1}^{2} + R)
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{2,0}^{2} = \sigma_{1,1}^{2} + \mathbf{R})
 
 
