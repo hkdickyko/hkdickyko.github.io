@@ -22,7 +22,7 @@ tags: [Kalman Filter]
 ## 預測估值
 
  - 由於模型具有恆定動態，因此預測估計等於當前初始估值。
- 	- X<sub>1,0</sub> = X<sub>0,0</sub>
+ 	 - X<sub>1,0</sub> = X<sub>0,0</sub>
 	 
  - 延伸估值的不確定性方差 + 系統噪聲方差
 	 - σ<sub>1,0</sub><sup>2</sup> = σ<sub>0,0</sub><sup>2</sup> + 系統噪聲方差 ( R )
