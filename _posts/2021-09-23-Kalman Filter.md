@@ -23,6 +23,10 @@ tags: [Kalman Filter]
 
  - 由於模型具有恆定動態，因此預測估計等於當前初始估值。
  
+![](https://latex.codecogs.com/svg.latex?\Large&space;X _{index, status})
+
+index = 測量值編號 (測量值位置), status = 計算值狀態 (0:初始值或估計值, 1:計算修正估值)
+ 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1,0} = X_{0,0})
 
 	 
