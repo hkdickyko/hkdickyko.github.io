@@ -33,7 +33,7 @@ tags: [Kalman Filter]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,{\color{Red}0}}^{2} = \sigma_{0,{\color{Red}0}}^{2} + {\color{blue}\mathbf{R}})
 	 
-## 反復計算 (從測量值)
+## *反復計算* (從測量值)
 
 ### 測量值
 
@@ -70,4 +70,4 @@ tags: [Kalman Filter]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{2,0}^{2} = \sigma_{1,1}^{2} + {\color{blue}\mathbf{R}})
 
-
+## 重複以上 (*反復計算*) 過程
