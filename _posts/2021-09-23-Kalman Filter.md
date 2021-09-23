@@ -26,7 +26,7 @@ tags: [Kalman Filter]
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1,0} = X_{0,0})
 
 	 
- - 延伸估值的不確定性方差 + 系統噪聲方差 (R)
+ - 延伸估值的不確定性方差 + 估計系統噪聲方差 (R)
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,0}^{2} = \sigma_{0,0}^{2} + R)
 	 
@@ -34,9 +34,9 @@ tags: [Kalman Filter]
 
 ### 測量值
 
- - 來自設備的測量值 = Z<sub>1</sub>
+ - 來自測量設備的測量值 = Z<sub>1</sub>
 
- - 由於測量誤差為 (σ<sub>r</sub>)，方差 (σ<sub>r</sub><sup>2</sup>) 例如，如果如果設備準確誤差為 0.1 誤差方差為 0.1 <sup>2</sup> = 0.01.
+ - 來自測量設備誤差為 (σ<sub>r</sub>)，方差 (σ<sub>r</sub><sup>2</sup>) 例如，如果如果設備準確誤差為 0.1 誤差方差為 0.1 <sup>2</sup> = 0.01.
 	
 ### 更新卡爾曼增益計算
 
@@ -59,13 +59,13 @@ tags: [Kalman Filter]
    
   
 	 
-### 預測估值
+### 預測估值 (下一輪預測開始初始估值)
 
 - 系統噪聲方差 ( R )
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1,1} = X_{1,0})
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{2,0} = X_{1,1})
 
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,0}^{2} = \sigma_{0,0}^{2} + R)
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{2,0}^{2} = \sigma_{1,1}^{2} + R)
 
 
