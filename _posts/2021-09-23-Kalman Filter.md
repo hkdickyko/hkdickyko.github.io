@@ -37,6 +37,8 @@ tags: [Kalman Filter]
 
 由於卡爾曼增益 (K<sub>1</sub>) 介於 0 到 1 之間	
 
+### 計算卡爾曼增益
+
 ![](https://latex.codecogs.com/svg.latex?\Large&space;K_{1} = \frac{\sigma_{1}^{2}}{\sigma_{1}^{2} + \sigma_{2}^{2}})
 
 ### 更新估值
@@ -45,9 +47,13 @@ tags: [Kalman Filter]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{1} = X_{0} + K _{1} \times (Z_{1} - X_{0}))
    
+### 更新誤差方差估值   
+
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{2}^{2} = (1 - K_{1}) \times \sigma_{1}^{2})
+   
   
 	 
-
+### 預測估值
 
 
 
