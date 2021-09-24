@@ -54,7 +54,7 @@ tags: [Kalman Filter]
 
 增量之間的距離 = (測量值 - 預測估值)
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1}=X_{i,0} + K _{i} \times (Z_{i} - X_{i,0}))
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1}=X_{i,0}+K_{i}\times(Z_{i}-X_{i,0})
    
    
 ### 更新誤差方差估值 (![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2}))  
