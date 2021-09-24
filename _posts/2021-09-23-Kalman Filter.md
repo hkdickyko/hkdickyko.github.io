@@ -16,8 +16,8 @@ tags: [Kalman Filter]
 - 初始系統狀態值
 	- 初始化參數![](https://latex.codecogs.com/svg.latex?\Large&space;X_{0,0})不精確，卡爾曼濾波器也能收斂到接近真實值。如果我們用更準確的值初始化，卡爾曼濾波器更快的收斂到近真實值。
 
-- 初始狀態不確定性 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma)
-	- 初始化的估計不確定性是誤差方差 (![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma^{2}))。  
+- 初始狀態不確定性 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0})
+	- 初始化的估計不確定性是誤差方差 (![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0}^{2}))。  
 	
 ## 預測估值 (測量值從 ==1== 開始)
 
@@ -54,12 +54,12 @@ tags: [Kalman Filter]
 
 增量之間的距離 = (測量值 - 預測估值)
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1}=X_{i,0}+K_{i}\times(Z_{i}-X_{i,0})
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1}=X_{i,0}+K_{i}\times{(Z_{i}-X_{i,0}))
    
    
 ### 更新誤差方差估值 (![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2}))  
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2}=(1-K_{i}\)\times\sigma_{i,0}^{2})
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2}={(1-K_{i})}\times\sigma_{i,0}^{2})
    
   
 	 
@@ -70,6 +70,6 @@ tags: [Kalman Filter]
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i+1,0}=X_{i,1})
 
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i+1,0}^{2}=\sigma_{i,1}^{2} + {\color{blue}\mathbf{R}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{{i+1},0}^{2}}={\sigma_{i,1}^{2}+{\color{blue}\mathbf{R}})
 
 ## 重複以上 (*反復計算*) 過程
