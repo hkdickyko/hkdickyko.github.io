@@ -75,18 +75,18 @@ tags: [Kalman Filter]
 
 #### 卡爾曼增益
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i}=\frac{\sigma_{i,0}^{2}}{\color{blue}\sigma_{i,0}^{2}+{\color{blue}\sigma_{r}}^{2}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i}=\frac{\sigma_{i,\color{Red}0}^{2}}{\color{blue}\sigma_{i,\color{Red}0}^{2}+{\color{blue}\sigma_{r}}^{2}})
 
 ### 更新估值 
 <hr/>
 
 #### 新估值 : 增量之間的距離 = (測量值 - 預測估值)
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1}=X_{i,0}+K_{i}\times{(Z_{i}-X_{i,0}))
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1}=X_{i,\color{Red}0}+K_{i}\times{(Z_{i}-X_{i,\color{Red}0}))
    
 #### 更新誤差方差估值 
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2}={(1-K_{i})}\times\sigma_{i,0}^{2})
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2}={(1-K_{i})}\times\sigma_{i,\color{Red}0}^{2})
    
   
 	 
@@ -100,6 +100,6 @@ tags: [Kalman Filter]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{i+1,\color{Red}0}^{2}}={\sigma_{i,1}^{2}+{\color{blue}\mathbf{R}})
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{2,\color{Red}0}^{2}}={\sigma_{i,1}^{2}+{\color{blue}\mathbf{R}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{2,\color{Red}0}^{2}}={\sigma_{1,1}^{2}+{\color{blue}\mathbf{R}})
 
 ## 重複以上 (*反復計算*) 過程
