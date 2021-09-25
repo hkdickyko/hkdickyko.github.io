@@ -18,13 +18,13 @@ tags: [Kalman Filter]
 	
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{0,0})
 	
-### 初始狀態測量設備誤差 (**測量設備誤差在整個估計過程中是固定不變的**)
+### 初始狀態測量設備誤差
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\color{blue}\sigma_{0,0})
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0})
 
 ### 初始化的估計不確定性是誤差方差 
 	
-![](https://latex.codecogs.com/svg.latex?\Large&space;\color{blue}\sigma_{0,0}^{2})  
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0}^{2})  
 	
 ## 預測估值 (測量值位置從  **1**  開始)
 
@@ -50,17 +50,17 @@ tags: [Kalman Filter]
  
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{Z_{i}})
 
-#### 來自測量設備誤差為 (**測量設備誤差在整個估計過程中是固定不變的**)
+#### 來自測量設備誤差為 (測量設備誤差在整個估計過程中是固定不變的)
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{\color{blue}\sigma_{r}}) 
 
-#### 來自測量設備誤差方差為  
+#### 來自測量設備誤差方差為 (測量設備誤差方差在整個估計過程中是固定不變的)  
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{\color{blue}\sigma_{r}^{2}})
 
 例如，如果如果設備準確誤差為 0.1 誤差方差為 
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;{0.1^{2}} = 0.01)
+![](https://latex.codecogs.com/svg.latex?\Large&space;{\color{blue}0.1^{2}} = {\color{blue}0.01})
 
 ### 計算卡爾曼增益
 
