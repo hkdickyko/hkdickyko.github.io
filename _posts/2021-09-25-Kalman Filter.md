@@ -45,7 +45,7 @@ tags: [Kalman Filter]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,{\color{Red}0}}^{2}=\sigma_{0,{\color{Red}0}}^{2}+{\color{blue}\mathbf{R}})
 	 
-## *反復計算* (從測量值)
+## *反復計算*
 
 ### 測量值
 <hr/>
@@ -96,9 +96,11 @@ tags: [Kalman Filter]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i+1,\color{Red}0}=X_{i,1})
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{2,\color{Red}0}=X_{1,1})
-
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{i+1,\color{Red}0}^{2}}={\sigma_{i,1}^{2}+{\color{blue}\mathbf{R}})
+
+#### 如在第一輪計算
+
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{2,\color{Red}0}=X_{1,1})
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{2,\color{Red}0}^{2}}={\sigma_{1,1}^{2}+{\color{blue}\mathbf{R}})
 
