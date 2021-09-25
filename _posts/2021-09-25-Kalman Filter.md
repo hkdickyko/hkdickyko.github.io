@@ -70,6 +70,6 @@ tags: [Kalman Filter]
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i+1,0}=X_{i,1})
 
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{{i+1},0}^{2}}={\sigma_{i,1}^{2}+{\color{blue}\mathbf{R}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{i,0}^{2}}={\sigma_{i,1}^{2}+{\color{blue}\mathbf{R}})
 
 ## 重複以上 (*反復計算*) 過程
