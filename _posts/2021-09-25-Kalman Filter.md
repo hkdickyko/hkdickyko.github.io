@@ -75,7 +75,7 @@ tags: [Kalman Filter]
 
 #### 卡爾曼增益
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i}=\frac{\sigma_{i,\color{Red}0}^{2}}{\color{blue}\sigma_{i,\color{Red}0}^{2}+{\color{blue}\sigma_{r}}^{2}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i}=\frac{\sigma_{i,\color{Red}0}^{2}}{\sigma_{i,\color{Red}0}^{2}+{\color{blue}\sigma_{r}}^{2}})
 
 ### 更新估值 
 <hr/>
