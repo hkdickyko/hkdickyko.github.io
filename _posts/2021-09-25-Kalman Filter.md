@@ -16,9 +16,8 @@ tags: [Kalman Filter]
 
 ### 初始系統狀態值
 	
-	![](https://latex.codecogs.com/svg.latex?\Large&space;X_{0,0})
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{0,0})
 	
-
 ### 初始狀態不確定誤差
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0})
@@ -27,7 +26,7 @@ tags: [Kalman Filter]
 	
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0}^{2})  
 	
-## 預測估值 (測量值從 ==1== 開始)
+## 預測估值 (測量值從 1 開始)
 
  - 由於模型具有恆定動態，因此預測估計等於當前初始估值。
  
