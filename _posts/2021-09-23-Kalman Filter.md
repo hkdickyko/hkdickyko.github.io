@@ -39,7 +39,7 @@ tags: [Kalman Filter]
 
  - 來自測量設備的測量值 = ![](https://latex.codecogs.com/svg.latex?\Large&space;{Z_{i}})
 
- - 來自測量設備誤差為![](https://latex.codecogs.com/svg.latex?\Large&space;{{\color{blue}\sigma_{r}}}) ，方差  ![](https://latex.codecogs.com/svg.latex?\Large&space;{{\color{blue}\sigma_{r}}^{2}})例如，如果如果設備準確誤差為 0.1 誤差方差為 ![](https://latex.codecogs.com/svg.latex?\Large&space;{0.1^{2}}) = 0.01.
+ - 來自測量設備誤差為![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{r}}) ，方差  ![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{r}^{2}})例如，如果如果設備準確誤差為 0.1 誤差方差為 ![](https://latex.codecogs.com/svg.latex?\Large&space;{0.1^{2}}) = 0.01.
  
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{Z_{i},{\color{blue}\sigma_{r}}^{2}})
 	
