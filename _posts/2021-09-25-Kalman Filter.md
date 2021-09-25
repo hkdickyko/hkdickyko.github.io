@@ -11,13 +11,21 @@ tags: [Kalman Filter]
 
 ## 初始估值 
 
-只執行一次，它提供兩個參數
-	
-- 初始系統狀態值
-	- 初始化參數![](https://latex.codecogs.com/svg.latex?\Large&space;X_{0,0})不精確，卡爾曼濾波器也能收斂到接近真實值。如果我們用更準確的值初始化，卡爾曼濾波器更快的收斂到近真實值。
+只執行一次，它提供兩個參數，即使初始化參數不精確，卡爾曼濾波器也能收斂到接近真實值。如果我們用更準確的值初始化，卡爾曼濾波器更快的收斂到近真實值。
 
-- 初始狀態不確定性 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0})
-	- 初始化的估計不確定性是誤差方差 (![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0}^{2}))。  
+
+### 初始系統狀態值
+	
+	![](https://latex.codecogs.com/svg.latex?\Large&space;X_{0,0})
+	
+
+### 初始狀態不確定誤差
+
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0})
+
+### 初始化的估計不確定性是誤差方差 
+	
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0}^{2})  
 	
 ## 預測估值 (測量值從 ==1== 開始)
 
@@ -37,27 +45,44 @@ tags: [Kalman Filter]
 
 ### 測量值
 
- - 來自測量設備的測量值 = ![](https://latex.codecogs.com/svg.latex?\Large&space;{Z_{i}})
+ - 來自測量設備的測量值 
+![](https://latex.codecogs.com/svg.latex?\Large&space;{Z_{i}})
 
- - 來自測量設備誤差為![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{r}}) ，方差  ![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{r}^{2}})例如，如果如果設備準確誤差為 0.1 誤差方差為 ![](https://latex.codecogs.com/svg.latex?\Large&space;{0.1^{2}}) = 0.01.
+#### 來自測量設備誤差為
+![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{r}}) 
+#### 誤差方差為  
+![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{r}^{2}})
+
+例如，如果如果設備準確誤差為 0.1 誤差方差為 
+
+![](https://latex.codecogs.com/svg.latex?\Large&space;{0.1^{2}} = 0.01)
  
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{Z_{i},{\color{blue}\sigma_{r}}^{2}})
 	
-### 計算卡爾曼增益 (![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i}))
+### 計算卡爾曼增益
 
- - 卡爾曼增益 (![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i}))介於 0 到 1 之間	
- - 測量設備誤差為 (![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{r}})) 在整個估計過程中是固定不變的
+ - 卡爾曼增益介於 0 到 1 之間	
+
+![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i})
+
+ - 測量設備誤差在整個估計過程中是固定不變的
+ 
+![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{r}})) 
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i}=\frac{\sigma_{i,0}^{2}}{\sigma_{i,0}^{2}+{\color{blue}\sigma_{r}}^{2}})
 
-### 更新估值 (![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1}))
+### 更新估值 
+
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1})
 
 增量之間的距離 = (測量值 - 預測估值)
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1}=X_{i,0}+K_{i}\times{(Z_{i}-X_{i,0}))
    
    
-### 更新誤差方差估值 (![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2}))  
+### 更新誤差方差估值 
+
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2})  
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2}={(1-K_{i})}\times\sigma_{i,0}^{2})
    
