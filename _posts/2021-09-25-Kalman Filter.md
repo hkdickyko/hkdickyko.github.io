@@ -82,7 +82,7 @@ tags: [Kalman Filter]
 
 #### 新估值 : 增量之間的距離 = (測量值 - 預測估值)
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1}=X_{i,\color{Red}0}+K_{i}\times{(\color{DarkGreen}Z_{i}-X_{i,\color{Red}0}))
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1}=X_{i,\color{Red}0}+K_{i}\times{({\color{DarkGreen}Z_{i}}-X_{i,\color{Red}0}))
    
 #### 更新誤差方差估值 
 
