@@ -42,6 +42,8 @@ tags: [Kalman Filter]
 ### 延伸估值的不確定性方差 + 估計系統噪聲方差 (R) 在整個估計過程中是固定不變的
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,{\color{Red}0}}^{2}=\sigma_{i-1,{\color{Red}0}}^{2}+{\color{blue}\mathbf{R}})
+
+![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{1,{\color{Red}0}}^{2}=\sigma_{0,{\color{Red}0}}^{2}+{\color{blue}\mathbf{R}})
 	 
 ## *反復計算* (從測量值)
 
@@ -64,12 +66,8 @@ tags: [Kalman Filter]
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{\color{blue}0.1^{2}} = {\color{blue}0.01})
 
-### 計算卡爾曼增益
+### 計算卡爾曼增益 (卡爾曼增益介於 0 到 1 之間)
 <hr/>
-
-#### 卡爾曼增益介於 0 到 1 之間	
-
-![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i})
 
 #### 測量設備誤差在整個估計過程中是固定不變的
  
@@ -82,16 +80,11 @@ tags: [Kalman Filter]
 ### 更新估值 
 <hr/>
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1})
-
-增量之間的距離 = (測量值 - 預測估值)
+#### 新估值 : 增量之間的距離 = (測量值 - 預測估值)
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1}=X_{i,0}+K_{i}\times{(Z_{i}-X_{i,0}))
    
-   
-### 更新誤差方差估值 
-
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2})  
+#### 更新誤差方差估值 
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,1}^{2}={(1-K_{i})}\times\sigma_{i,0}^{2})
    
@@ -101,9 +94,12 @@ tags: [Kalman Filter]
 
 - 系統噪聲方差 (R) 在整個估計過程中是固定不變的
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i+1,0}=X_{i,1})
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i+1,\color{Red}0}=X_{i,1})
 
+![](https://latex.codecogs.com/svg.latex?\Large&space;X_{2,\color{Red}0}=X_{1,1})
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{i,0}^{2}}={\sigma_{i,1}^{2}+{\color{blue}\mathbf{R}})
+![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{i+1,\color{Red}0}^{2}}={\sigma_{i,1}^{2}+{\color{blue}\mathbf{R}})
+
+![](https://latex.codecogs.com/svg.latex?\Large&space;{\sigma_{2,\color{Red}0}^{2}}={\sigma_{i,1}^{2}+{\color{blue}\mathbf{R}})
 
 ## 重複以上 (*反復計算*) 過程
