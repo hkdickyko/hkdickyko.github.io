@@ -28,24 +28,25 @@ tags: [Kalman Filter]
 	
 ## 預測估值 (測量值位置從  **1**  開始)
 
- - 由於模型具有恆定動態，因此預測估計等於當前初始估值。
- 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{index,{\color{Red}status}})
 
  - index = 測量值編號 (測量值位置) 
  - status = 計算值狀態 (0:初始值或估計值, 1:計算修正估值)
  
+### 由於模型具有恆定動態，因此預測估計等於當前初始估值。
+
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,{\color{Red}0}}=X_{i-1,{\color{Red}0}})
 	 
- - 延伸估值的不確定性方差 + 估計系統噪聲方差 (R) 在整個估計過程中是固定不變的
+### 延伸估值的不確定性方差 + 估計系統噪聲方差 (R) 在整個估計過程中是固定不變的
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{i,{\color{Red}0}}^{2}=\sigma_{i-1,{\color{Red}0}}^{2}+{\color{blue}\mathbf{R}})
 	 
 ## *反復計算* (從測量值)
 
 ### 測量值
+<hr/>
 
- - 來自測量設備的測量值
+#### 來自測量設備的測量值
  
 ![](https://latex.codecogs.com/svg.latex?\Large&space;{Z_{i}})
 
@@ -69,11 +70,12 @@ tags: [Kalman Filter]
 
  - 測量設備誤差在整個估計過程中是固定不變的
  
-![](https://latex.codecogs.com/svg.latex?\Large&space;{\color{blue}\sigma_{r}})) 
+![](https://latex.codecogs.com/svg.latex?\Large&space;{\color{blue}\sigma_{r}}) 
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;K_{i}=\frac{\sigma_{i,0}^{2}}{\color{blue}\sigma_{i,0}^{2}+{\color{blue}\sigma_{r}}^{2}})
 
 ### 更新估值 
+<hr/>
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{i,1})
 
