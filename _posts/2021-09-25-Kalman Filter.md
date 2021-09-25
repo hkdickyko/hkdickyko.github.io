@@ -20,11 +20,11 @@ tags: [Kalman Filter]
 	
 ### 初始狀態不確定誤差
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0})
+![](https://latex.codecogs.com/svg.latex?\Large&space;\color{blue}\sigma_{0,0})
 
 ### 初始化的估計不確定性是誤差方差 
 	
-![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0}^{2})  
+![](https://latex.codecogs.com/svg.latex?\Large&space;\color{blue}\sigma_{0,0}^{2})  
 	
 ## 預測估值 (測量值從 1 開始)
 
