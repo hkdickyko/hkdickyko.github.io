@@ -2,12 +2,11 @@
 category: [編程]
 tags: [Kalman Filter]
 ---
-
 # Kalman Filter (卡爾曼濾波)
 
 是一種利用線性系統狀態，通過系統輸入及輸出數據，它能夠從不完全及包含雜訊的測量中，估計動態系統的狀態。
 
-![Alt Filter]({{ '/assets/img/kalman/estimation.png' | relative_url }})
+![Alt Filter](../assets/img/kalman/estimation.png)
 
 ## 初始估值 
 
@@ -26,7 +25,7 @@ tags: [Kalman Filter]
 	
 ![](https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{0,0}^{2})  
 	
-## 預測估值 (測量值位置從  **1**  開始)
+## 預測估值 (測量值位置從  `1` 開始)
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;X_{index,{\color{Red}status}})
 
@@ -64,9 +63,9 @@ tags: [Kalman Filter]
 
 例如，如果如果設備準確誤差為 0.1 誤差方差為 
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;{\color{blue}0.1^{2}} = {\color{blue}0.01})
+![](https://latex.codecogs.com/svg.latex?\Large&space;{\color{blue}0.1}^{2}={\color{blue}0.01})
 
-### 計算卡爾曼增益 (卡爾曼增益介於 0 到 1 之間)
+### 計算卡爾曼增益 (卡爾曼增益介於 `0` 到 `1` 之間)
 <hr/>
 
 #### 測量設備誤差在整個估計過程中是固定不變的
