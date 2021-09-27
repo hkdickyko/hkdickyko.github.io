@@ -15,9 +15,9 @@ markdown: true
       {% endif %}
 
       <p id="post-meta">
-      發布日期
+      更新日期
       {% if page.date %}
-         <b>{{ page.date | date_to_string }}</b>
+         <b>{{ page.date | date: "%b/%Y" }}</b>
       {% endif %}
       {% if page.categories[0] %}
          在 [ <b>{{ page.categories | join: ", " }}</b> ] 類別下
