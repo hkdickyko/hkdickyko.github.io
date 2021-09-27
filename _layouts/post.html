@@ -17,7 +17,7 @@ markdown: true
       <p id="post-meta">
       發布日期
       {% if page.date %}
-         <b>{{ page.date | date_to_string }}</b>
+         <b>{{ date_to_string }}</b>
       {% endif %}
       {% if page.categories[0] %}
          在類別 <b>{{ page.categories | join: ", " }}</b>
