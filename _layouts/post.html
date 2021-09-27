@@ -20,7 +20,7 @@ markdown: true
          <b>{{ page.date | date_to_string }}</b>
       {% endif %}
       {% if page.categories[0] %}
-         在 <b>{{ page.categories | join: ", " }}</b> 類別下
+         在 [ <b>{{ page.categories | join: ", " }}</b> ] 類別下
       {% endif %}
       {% unless page.collection == 'posts'  %}
         in series <b>{{ page.collection }}</b>
