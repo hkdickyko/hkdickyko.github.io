@@ -15,12 +15,12 @@ markdown: true
       {% endif %}
 
       <p id="post-meta">
-      posted
+      發布日期
       {% if page.date %}
          on <b>{{ page.date | date_to_string }}</b>
       {% endif %}
       {% if page.categories[0] %}
-        under category <b>{{ page.categories | join: ", " }}</b>
+         在類別 <b>{{ page.categories | join: ", " }}</b>
       {% endif %}
       {% unless page.collection == 'posts'  %}
         in series <b>{{ page.collection }}</b>
