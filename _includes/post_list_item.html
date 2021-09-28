@@ -1,6 +1,7 @@
 <article class="row">
     <div class="date col-lg-2 col-md-2 col-sm-2">
         {% if post.date %}
+        更新日期
         <p class="day">{{ post.date | date: "%d" }}</p>
         <p class="month">{{ post.date | date: "%b/%Y" }}</p>
         <p class="category">{{ post.category }}</p>
