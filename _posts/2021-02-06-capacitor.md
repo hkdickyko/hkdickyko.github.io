@@ -1,6 +1,8 @@
 ---
 category: 積體電路
 tags: [IoT]
+title: Capacitor
+date: 2021-02-06 22:34:36
 ---
 
 # 電容
@@ -26,13 +28,13 @@ tags: [IoT]
 
 ## 電容電路等性
 低通濾波器(積分電路)
-![Alt rclo]({{ '/assets/img/IC/rclo.png' | relative_url }})
+![Alt rclo](../assets/img/IC/rclo.png)
 高通濾波器(微分電路)
-![Alt rchi]({{ '/assets/img/IC/rchi.png' | relative_url }})
+![Alt rchi](../assets/img/IC/rchi.png)
 
 ## 電容在集成電路中的用途
  
-![Alt decoupling]({{ '/assets/img/IC/decoupling.png' | relative_url }})
+![Alt decoupling](../assets/img/IC/decoupling.png)
 1. 在輸入電壓下降，則去耦電容器將能夠為集成電路提供足夠的功率，以保持電壓穩定。 
 2. 在輸入電壓增加，則去耦電容器將吸收試圖流過集成電路的多餘能量，從而保持電壓穩定。
 3. 10μF至100μF「`電解質`」電容並聯安裝儘量接近電源正負極。將有效保持電池供應穩定。
@@ -41,20 +43,20 @@ tags: [IoT]
 
 ## 耦合電容用途
 
-![Alt ]({{ '/assets/img/IC/couple.png' | relative_url }})
+![Alt ](../assets/img/IC/couple.png)
 
 
  * 耦合電容的作用是將前級信號盡可能無損耗地加到後級電路中，同時去掉不需要的信號，例如耦合電容就能在將交流信號從前級耦合到後級的同時隔開前級電路中的直流成分，因為電容具有隔直流信號通交流信號的特性。
 
 ## 去耦電容用途
 
-![Alt ]({{ '/assets/img/IC/decouple.png' | relative_url }})
+![Alt ](../assets/img/IC/decouple.png)
  * 交流信號可能在直流電路上存在，去耦電容的工作方式是利容電容特性將特定範圍的交流信號接地，從而使傳遞的信號為所選定的交流信號。
  * 在集成電路邏輯線路以高頻開關的數字電路中，在開關期間需要大電流。`寄生電阻`和`寄生電感`將不允許開關過程中所需的大電流突然流動，因此，去耦電容應放置在盡可能靠近集成電路引腳的位置以減小寄生電感，在需要時提供瞬間電源，有助於減少電源波動。
  * 如果設備的帶寬約為1MHz，則使用1μF的去耦電容器。如果帶寬約為10MHz或更高，則使用0.1µF的去耦電容器。
  
 ## 旁路電容用途
-![Alt ]({{ '/assets/img/IC/bypass.png' | relative_url }})
+![Alt ](../assets/img/IC/bypass.png)
  * 交流信號可能在直流電路上存在，旁路電容的工作方式是利容電容特性將特定範圍的交流信號接地，從而使傳遞的信號為所選定的交流信號。
  * 旁路電容的電抗應不大於並聯電阻(X<sub>R</sub>)的10%。可以使用以下公式計算要使用的旁路電容器的電容值。計算出的單位為μF。
  
@@ -64,7 +66,7 @@ tags: [IoT]
 * 旁路電容器設計用於分流噪聲信號，而去耦電容器設計用於通過穩定失真的信號來平滑信號。為了使信號分流，我們可以只使用一個電解電容器，但是為了使信號平穩，我們需要兩種不同類型的電容。
 
 ## Q 電容電感系數
-![Alt Q]({{ '/assets/img/IC/qr.png' | relative_url }})
+![Alt Q](../assets/img/IC/qr.png)
 
 ![](https://latex.codecogs.com/svg.latex?\Large&space;Q=\dfrac{f_0}{f_2-f_1})
 
@@ -77,7 +79,7 @@ tags: [IoT]
 
 * -3dB衰減，相當於電壓從最大降低到70.7%或功率從最大降低到50.0%。
 
-![Alt ]({{ '/assets/img/IC/ktoem.png' | relative_url }})
+![Alt ](../assets/img/IC/ktoem.png)
 
 
 

@@ -1,6 +1,8 @@
 ---
 category: 編程 
 tags: [編程]
+title: 二等分法
+date: 2021-01-17 22:34:36
 ---
 
 # 算法 - 二等分法
@@ -36,4 +38,4 @@ tags: [編程]
 一般來說我們會設計一個可接受的誤差 &epsilon;。用於減少計算時間。
 
 
-![]({{ '/assets/img/bisection/bisection.png' | relative_url }})
+![](../assets/img/bisection/bisection.png)

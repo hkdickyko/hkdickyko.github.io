@@ -1,6 +1,8 @@
 ---
 category: 工程 
 tags: [工程]
+title: Cavitation
+date: 2021-01-23 22:34:36
 ---
 
 # 水泵氣蝕 Cavitation
@@ -18,4 +20,4 @@ tags: [工程]
 一般避免方法時增加入水壓力。使水泵的入水壓力不會低於空氣的蒸發壓力。
 
 
-![Alt Cavitation]({{ '/assets/img/pump/cavitation.png' | relative_url }})
+![Alt Cavitation](../assets/img/pump/cavitation.png)

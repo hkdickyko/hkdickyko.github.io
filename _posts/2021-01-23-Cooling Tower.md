@@ -1,6 +1,8 @@
 ---
 category: 工程
 tags: [工程]     
+title: Cooling Tower
+date: 2021-01-23 22:34:36
 ---
 
 # 空調系統 - 水塔霧化蒸氣
@@ -25,4 +27,4 @@ tags: [工程]
 水塔風量越大黑線長度越短。
 紅線為霧化水蒸氣的空氣。如黑線長度未及至「1」。則沒有水蒸氣出現。
 
-![]({{ '/assets/img/acmv/ctpsy.png' | relative_url }})
+![](../assets/img/acmv/ctpsy.png)

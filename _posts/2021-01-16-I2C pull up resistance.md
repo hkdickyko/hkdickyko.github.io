@@ -1,6 +1,8 @@
 ---
 category: 積體電路 
 tags: [IoT]
+title: pull-up 電阻設計
+date: 2021-01-16 22:34:36
 ---
 
 # I<sup>2</sup>C bus 的 pull-up 電阻設計

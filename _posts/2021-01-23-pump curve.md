@@ -1,6 +1,8 @@
 ---
 category: 工程 
 tags: [工程]
+title: Pump Curve
+date: 2021-01-23 22:34:36
 ---
 
 # 水泵特性曲線
@@ -17,10 +19,10 @@ tags: [工程]
 選擇的範圍超出以上提議。水泵有可能產生震盪，水泵氣蝕，軸偏差，
 入水端和出水端水循環及水泵過熱等問題。請參考附圖如下。
 
-![Alt Pump]({{ '/assets/img/pump/pumpcurve.png' | relative_url }})
+![Alt Pump](../assets/img/pump/pumpcurve.png)
 
 
-![Alt Pump]({{ '/assets/img/pump/BEP.png' | relative_url }})
+![Alt Pump](../assets/img/pump/BEP.png)
 
 下圖是簡單介紹系統曲線與其它水泵特性之關係:
 
@@ -30,4 +32,4 @@ tags: [工程]
 基於日常水管閥之調整，系統曲線會在H2及H1之間改變。
 當水管老化時，系統阻力也會增加。
 
-![Alt Pump]({{ '/assets/img/pump/pumpinfo.png' | relative_url }})
+![Alt Pump](../assets/img/pump/pumpinfo.png)

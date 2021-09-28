@@ -1,6 +1,8 @@
 ---
 category: 編程 
 tags: [IoT]
+title: MircoPython
+date: 2021-01-02 22:34:36
 ---
 
 # MircoPython
@@ -85,4 +87,4 @@ MicroPython旨在盡可能與普通Python兼容，讓您輕鬆將代碼從桌面
 # MicroPython C Stub Generator
 
 > 使用C Stub Generator創建C代碼模板用於「extmod」中提供附加「非核心」模塊。
-![]({{ '/assets/img/esp/c_stub.png' | relative_url }})
+![](../assets/img/esp/c_stub.png)
