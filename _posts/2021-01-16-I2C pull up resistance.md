@@ -51,6 +51,8 @@ T<sub>R</sub>上升時間受總線的寄生電容和上拉電阻影響
 
  ![](https://latex.codecogs.com/svg.latex?\Large&space;V_{(t)}=V_{cc}\times(1-e^{\frac{-t}{RC}}))
 
+$$V_{(t)}=V_{cc}\times(1-e^{\frac{-t}{RC}}))$$
+
 ## 電阻與頻率的關係如下圖
 
 ![Alt i2C_RC](../assets/img/i2c/fRcgx.png)
