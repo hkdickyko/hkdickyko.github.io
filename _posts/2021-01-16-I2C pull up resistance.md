@@ -49,11 +49,7 @@ T<sub>R</sub>上升時間受總線的寄生電容和上拉電阻影響
 
 這個電路中，電容器上的電壓可以用一個看起來很恐怖但其實很簡單的數學式來表示：
 
- ![](https://latex.codecogs.com/svg.latex?\Large&space;V_{(t)}=V_{cc}\times(1-e^{\frac{-t}{RC}}))
-
 $$ V_{(t)}=V_{cc}\times(1-e^{\frac{-t}{RC}}) $$
-
-$$ \nabla_\boldsymbol{x} J(\boldsymbol{x}) $$
 
 ## 電阻與頻率的關係如下圖
 
