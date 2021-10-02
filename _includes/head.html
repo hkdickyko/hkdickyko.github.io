@@ -33,13 +33,14 @@
 
 <script type="text/javascript" src="{{ '/assets/js/mermaid.min.js' | relative_url }}"></script>
 
-<script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config"> 
+   		MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); 
+   	</script>
+    <script type="text/x-mathjax-config">
     	MathJax.Hub.Config({tex2jax: {
              inlineMath: [ ['$','$'], ["\\(","\\)"] ],
              processEscapes: true
-           }，
-           TeX: { equationNumbers: { autoNumber: "all"}},
-           CommonHTML: { scale: 130 }
+           },
          });
 </script>
     
