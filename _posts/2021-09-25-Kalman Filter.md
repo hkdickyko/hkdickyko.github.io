@@ -11,7 +11,6 @@ date: 2021-09-25 22:34:36
 ![Alt Filter](../assets/img/kalman/estimation.png)
 
 
----
 ## <font color="#FF6D00">初始化估值</font> 
 
 只執行一次，它提供兩個參數，即使初始化參數不精確，卡爾曼濾波器也能收斂到接近真實值。如果我們用更準確的值初始化，卡爾曼濾波器更快的收斂到近真實值。
@@ -41,9 +40,8 @@ $$ \sigma_{i,{\color{Red}0}}^{2}=\sigma_{i-1,{\color{Red}0}}^{2}+{\color{blue}R}
 
 $$ \sigma_{1,{\color{Red}0}}^{2}=\sigma_{0,{\color{Red}0}}^{2}+{\color{blue}R} $$
 
----
 ## <mark>反復計算</mark>
----
+
 ### <font color="#FF3D00">測量值計算參數</font>
 
 #### 來自測量設備的測量值 : $ {\color{DarkGreen}Z_{i}} $
@@ -84,7 +82,6 @@ $$ X_{i+1,\color{Red}0}=X_{i,1} $$
 
 $$ {\sigma_{i+1,\color{Red}0}^{2}}=\sigma_{i,1}^{2}+{\color{blue}R} $$
 
----
 
 ## 重複以上 (<mark>反復計算</mark>) 過程
 
