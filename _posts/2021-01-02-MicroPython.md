@@ -1,11 +1,11 @@
 ---
 category: 編程 
 tags: [IoT]
-title: MircoPython
+title: MicroPython
 date: 2021-01-02 22:34:36
 ---
 
-# MircoPython
+# MicroPython
 
 MicroPython是2013年在Kickstarter上募資開始建立的小型硬體編程，因為資源有限，而將Python濃縮成一款小型包，載入硬體微控制器的一項開源專案。
 
@@ -123,7 +123,7 @@ screen /dev/ttyACM0
 
 ```
 
-Build by MircoPython from source
+Build by MicroPython from source
 
 源代碼下載地址 : [MicroPython](https://micropython.org/resources/micropython-master.zip)
 
