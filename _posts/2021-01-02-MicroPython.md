@@ -17,7 +17,7 @@ MicroPython怎麼寫？跟Python一模一樣。MicroPython除了留有Python的�
 
 MicroPython的出現讓許多畏懼低階語言的開發者有機會以高階語言玩玩硬體端，也能加快原本物聯網開發者的開發速度。
 
-但目前MicroPython包含的函式庫還十分有限，所以s太複雜的專案難以完成。
+但目前MicroPython包含的函式庫還十分有限，所以太複雜的專案難以完成。
 
 ## 主要由以下構成：
 
@@ -88,3 +88,27 @@ MicroPython旨在盡可能與普通Python兼容，讓您輕鬆將代碼從桌面
 
 > 使用C Stub Generator創建C代碼模板用於「extmod」中提供附加「非核心」模塊。
 ![](../assets/img/esp/c_stub.png)
+
+
+# Burn build image into the board
+
+[Sample WeAct Studio STM32F411CEU6 Core Board](https://github.com/WeActTC)
+
+[Download Hex file](https://github.com/WeActTC/WeAct_F411CE-MicroPython/releases)
+
+```shell
+sudo apt-get build-dep dfu-util
+sudo apt-get install libusb-1.0-0-dev
+```
+
+Download firmware : firmware_internal_rom_stm32f411_v1.12-35.hex
+Convert firmware from hex to bin
+
+```shell
+sudo apt-get update
+sudo apt-get install binutils
+objcopy --input-target=ihex --output-target=binary firmware_internal_rom_stm32f411_v1.12-35.hex stm32f411.bin
+sudo dfu-util -a 0 -s 0x08000000:leave -t 0 -D stm32f411.bin
+
+```
+
