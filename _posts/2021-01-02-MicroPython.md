@@ -90,7 +90,7 @@ MicroPython旨在盡可能與普通Python兼容，讓您輕鬆將代碼從桌面
 ![](../assets/img/esp/c_stub.png)
 
 
-# Burn build image into the board
+# Burn build image into the board (WeAct Studio STM32F411CEU)
 
 [Sample WeAct Studio STM32F411CEU6 Core Board](https://github.com/WeActTC)
 
@@ -112,3 +112,44 @@ sudo dfu-util -a 0 -s 0x08000000:leave -t 0 -D stm32f411.bin
 
 ```
 
+
+Install tools **Screen** for access the board
+
+```shell
+sudo apt install screen
+sudo apt purge modemmanager
+sudo chmod 666 /dev/ttyACM0
+screen /dev/ttyACM0
+
+```
+
+Build by MircoPython from source
+
+源代碼下載地址 : [MicroPython](https://micropython.org/resources/micropython-master.zip)
+
+Extract the zip file to a suitable location you want. Install relevant complier as below.
+
+```
+sudo apt-get update -y
+sudo apt-get install -y gcc-arm-none-eabi
+
+```
+
+
+Build WeAct_F411CE-MicroPython
+
+```shell
+cd MicroPython  **(Location to store the source of micropython)
+git submodule update --init
+cd mpy-cross
+make -j4
+cd ../ports/stm32/boards
+git clone https://github.com/WeActTC/WeAct_F411CE-MicroPython.git WeAct_F411CE
+cd ..
+make BOARD=WeAct_F411CE -j
+cd ./build-WeAct_F411CE
+
+objcopy --input-target=ihex --output-target=binary firmware.hex firmware.bin
+sudo dfu-util -a 0 -s 0x08000000:leave -t 0 -D firmware.bin
+
+```
