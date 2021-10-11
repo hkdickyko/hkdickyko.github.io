@@ -148,8 +148,11 @@ git clone https://github.com/WeActTC/WeAct_F411CE-MicroPython.git WeAct_F411CE
 cd ..
 make BOARD=WeAct_F411CE -j
 cd ./build-WeAct_F411CE
-
 objcopy --input-target=ihex --output-target=binary firmware.hex firmware.bin
 sudo dfu-util -a 0 -s 0x08000000:leave -t 0 -D firmware.bin
+
+or direct burn image
+
+make BOARD=WeAct_F411CE depoly
 
 ```
