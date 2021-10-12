@@ -157,19 +157,28 @@ struct Header
 
 ```
 - time -- 時間相關函數
+
+```python
+import time
+time.sleep(1)			# 1秒
+time.sleep_ms(1)		# 0.001秒
+time.sleep_us(1)		# 0.000001秒
+
+tStart = time.ticks_ms()
+tStop = time.ticks_ms()
+tElapse = (tStop - tStart) / 1000.0 	# 測量微分時間
+
+```
 - uzlib -- zlib解壓縮
 
 MicroPython 的數據類型
 
 MicroPython中支持的格式
 
-|格式|C|Python|字節數|
+|代表字符|C 格式|Python 格式|字節數|
 |:---:|:---:|:---:|:---:|
-|x|pad byte|no value|1|
-|c|char|string of length 1|1|
 |b|signed char|integer|1|
 |B|unsigned char|integer|1|
-|?|_Bool|bool|1|
 |h|short|integer|2|
 |H|unsigned short|integer|2|
 |i|int|integer|4|
@@ -178,21 +187,22 @@ MicroPython中支持的格式
 |L|unsigned long|long|4|
 |q|long long|long|8|
 |Q|unsigned long long|long|8|
+|s|char[]|string|1|
+|P|void *|long||
 |f|float|float|4|
 |d|double|float|8|
-|s|char[]|string|1|
-|p|char[]|string|1|
-|P|void *|long||
+
+注意：(<font color="#FF0010">f</font> 和 <font color="#FF0010">d</font> 取決於浮點支持)
 
 struct根據本地機器字節順序轉換.可以用格式中的第一個字符來改變對齊方式.定義如下
 
-|字符|字節順序|大小和對齊方式|
+|代表字符|字節順序|大小和對齊方式|
 |:---:|:---:|:---:|
-|@|native|凑够4个字节|
-|=|native|按原字节数|
-|<|little-endian|按原字节数|
-|>|big-endian|按原字节数|
-|!|network (=big-endian)|按原字节数|
+|@|native|湊夠4個字節|
+|=|native|按原字節數|
+|<|little-endian|按原字節數|
+|>|big-endian|按原字節數|
+|!|network (<font color="#FF0010">></font>)|按原字節數|
 
 ### 最小的 MicroPython 固件移植
 
