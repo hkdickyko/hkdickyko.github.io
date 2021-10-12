@@ -212,7 +212,7 @@ struct根據本地機器字節順序轉換.可以用格式中的第一個字符�
 |>|big-endian|按原字節數|
 |!|network (<font color="#FF0010">></font>)|按原字節數|
 
-## 最小的 MicroPython 固件移植
+# 最小的 MicroPython 固件移植
 
 將 *MicroPython* 移植到新開發板的集成最小固件。
 首先，我們將最小目錄複製到新目錄 *example_port* 下，然後看下該目錄下的各個文件，功能如下
@@ -295,7 +295,7 @@ MP_DEFINE_CONST_FUN_OBJ_KW(mp_builtin_open_obj, 1, mp_builtin_open);
 
 ```
 
-### 相關編譯 make 檔案
+## 相關編譯 make 檔案
 
 ```
 include ../../py/mkenv.mk
@@ -324,14 +324,14 @@ $(BUILD)/firmware.hex: $(BUILD)/firmware.elf
 include $(TOP)/py/mkrules.mk
 ```
 
-### 配置 *MicroPython* 文件  
+## 配置 *MicroPython* 文件  
 
 這些配置在名為 mpconfigport.h 和 mphalport.h 檔案內。
 
 <font color="#FF0010">mpconfigport.h</font> 配置文件包含特定於機器的配置，包括是否啟用不同的 *MicroPython* 功能等方面。  
 <font color="#FF0010">mphalport.h</font> 配置包括類型定義、根指針、電路板名稱、微控制器名稱等。
 
-### 將新增模塊功能移植到開發板
+## 將新增模塊功能移植到開發板
 
 在文件 modulexx.c 中添加模塊定義。
 
