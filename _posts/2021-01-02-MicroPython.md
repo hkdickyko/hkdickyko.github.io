@@ -51,7 +51,7 @@ MicroPython的出現讓許多畏懼低階語言的開發者有機會以高階語
 
   - ports/stm32/--運行在Pyboard和類似的stm32板上的Micropyhon版本（使用st的cube-hal驅動程序）。
 
-  - ports/minimal/--最小的Micropython內核檔案。用以適配其他開發版。
+  - ports/minimal/--最小的Micropython內核檔案。用以移植其他開發版。
 
   - tests/--測試框架和測試腳本。
 
@@ -66,7 +66,7 @@ MicroPython旨在盡可能與普通Python兼容，讓您輕鬆將代碼從桌面
 ```
 make submodules
 ```
-這將獲取適配所需的所有相關儲存在git內的程式庫子模塊。 使用這命令獲取更新的子模塊的最新版本。
+這將獲取移植所需的所有相關儲存在git內的程式庫子模塊。 使用這命令獲取更新的子模塊的最新版本。
 
 ```
 make deplibs
@@ -101,7 +101,7 @@ make deplibs
 - uzlib -- zlib解壓縮
 
 
-### 最小的 MicroPython 固件適配
+### 最小的 MicroPython 固件移植
 
 將 *MicroPython* 移植到新開發板的集成最小固件。
 首先，我們將最小目錄複製到新目錄 *example_port* 下，然後看下該目錄下的各個文件，功能如下
@@ -132,7 +132,7 @@ mkdir example_port
  - libgcc.a -- 從編譯工具鏈獲得，用於提供除法相關的符號定義
  - mylibc.a -- 增加對printf函數以及字符串庫的支持，這裡沒有使用工程自帶的printf函數，原因是自帶的printf函數打印整形數據會出現錯誤
 
-最小的 *MicroPython* 固件適配例子:
+最小的 *MicroPython* 固件移植例子:
 
 ```c
 #include "py/compile.h"
@@ -220,7 +220,7 @@ include $(TOP)/py/mkrules.mk
 <font color="#FF0010">mpconfigport.h</font> 配置文件包含特定於機器的配置，包括是否啟用不同的 *MicroPython* 功能等方面。  
 <font color="#FF0010">mphalport.h</font> 配置包括類型定義、根指針、電路板名稱、微控制器名稱等。
 
-### 將新增模塊功能適配到開發板
+### 將新增模塊功能移植到開發板
 
 在文件 modulexx.c 中添加模塊定義。
 
@@ -250,7 +250,7 @@ extern const struct _mp_obj_module_t pyb_module;
     { MP_OBJ_NEW_QSTR(MP_QSTR_pyb), (mp_obj_t)&pyb_module },
 ```
 
-如果適配正確，那麼應標準的命令行解釋器如下
+如果移植正確，那麼應標準的命令行解釋器如下
 
 ```
 >>> 2
