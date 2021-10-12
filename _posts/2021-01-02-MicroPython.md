@@ -23,13 +23,13 @@ MicroPython的出現讓許多畏懼低階語言的開發者有機會以高階語
 
   - py/-- 核心python實現，包括編譯器、運行時和核心庫。
 
-  - mpy cross/--用於將腳本轉換為預編譯字節碼的Micropyhon交叉編譯器。
+  - mpy cross/--用於將腳本轉換為預編譯字節碼的 *Micropyhon* 交叉編譯器。 該程序用於將 *MicroPython* 腳本預編譯為 .mpy 文件，然後可將其包含到固件或可執行文件中。讓這程序在 *MicroPython* 中使用。
 
-  - extmod/--在C中實現的附加（非核心）模塊。
+  - extmod/--在 *C* 中實現的附加（非核心）模塊用以提供一些額外的功能。
 
   - tools/--各種工具
 
-  - docs/--sphinx格式的用戶文檔。呈現的HTML文檔可在http://docs.tpyboard.com上找到。
+  - docs/--sphinx格式的用戶文檔。呈現的HTML文檔可在[http://docs.tpyboard.com](http://docs.tpyboard.com)上找到。
 
 ## 其他組件
 
@@ -51,7 +51,7 @@ MicroPython的出現讓許多畏懼低階語言的開發者有機會以高階語
 
   - ports/stm32/--運行在Pyboard和類似的stm32板上的Micropyhon版本（使用st的cube-hal驅動程序）。
 
-  - ports/minimal/--最小的Micropython端口。
+  - ports/minimal/--最小的Micropython內核檔案。用以適配其他開發版。
 
   - tests/--測試框架和測試腳本。
 
@@ -60,6 +60,22 @@ MicroPython的出現讓許多畏懼低階語言的開發者有機會以高階語
 MicroPython包含了諸如交互式提示，任意精度整數，關閉，列表解析，生成器，異常處理等高級功能。適合運行在只有256k的代碼空間和16k的RAM的芯片上。 
 
 MicroPython旨在盡可能與普通Python兼容，讓您輕鬆將代碼從桌面傳輸到微控制器或嵌入式。
+
+## 網上相關程式庫
+
+```
+make submodules
+```
+這將獲取適配所需的所有相關儲存在git內的程式庫子模塊。 使用這命令獲取更新的子模塊的最新版本。
+
+```
+make deplibs
+```
+
+這將構建所有可用的相關程式庫（無論是否使用它們）。 如果使用其他選項（例如交叉編譯）構建 MicroPython，則應將相同的選項集傳遞給 make deplibs。 要啟用或禁用相關程式庫，需要編輯 mpconfigport.mk 文件，其中包含選項的開關設定。  
+例如:
+要構建 SSL 模塊（上述 upip 工具需要，因此默認啟用）， *MICROPY_PY_USSL* 應設置為 *1*。
+但是仍需要使用以上的 make submodules 命令來獲取相關程式庫。
 
 # Micropython標準庫
 
@@ -83,6 +99,166 @@ MicroPython旨在盡可能與普通Python兼容，讓您輕鬆將代碼從桌面
 - ustruct -- 打包和解壓縮原始數據類型
 - time -- 時間相關函數
 - uzlib -- zlib解壓縮
+
+
+### 最小的 MicroPython 固件適配
+
+將 *MicroPython* 移植到新開發板的集成最小固件。
+首先，我們將最小目錄複製到新目錄 *example_port* 下，然後看下該目錄下的各個文件，功能如下
+
+ ```
+cd ports
+mkdir example_port
+```
+
+  - frozentest.py -- 測試用的源代碼文件
+  - frozentest.mpy -- 利用micropython自帶的編譯工具mpy-cross對frozentest.py編譯出的字節碼文件
+  - main.c -- c代碼入口
+  - uart_core.c -- 串口驅動文件
+  - mpconfigport.h -- 主要的配置文件
+  - mphalport.h -- hal層的配置文件
+  - qstrdefsport.h -- 外部符號的定義
+  - stm32f405.ld -- 默認的鏈接腳本
+  - Makefile -- 如下介紹
+  - README.md -- 說明的md文件
+
+其中，需要修改的文件包括：<font color="#FF0010"> Makefile</font>、<font color="#FF0010">stm32f405.ld</font>、<font color="#FF0010">uart_core.c</font>、<font color="#FF0010">main.c</font>、<font color="#FF0010">mpconfigport.h </font>
+
+另外，还需要增加如下文件：
+
+ - start.S -- 初始化代碼，也就是最終編譯出bin文件的入口，用於初始化棧、sram、nand flash以及復制代碼到sram等，並最終跳轉到main.c文件中的主要函數
+ - nand.c / nand.h -- nand flash 驅動文件
+ - uart.h -- 串口驅動頭文件
+ - libgcc.a -- 從編譯工具鏈獲得，用於提供除法相關的符號定義
+ - mylibc.a -- 增加對printf函數以及字符串庫的支持，這裡沒有使用工程自帶的printf函數，原因是自帶的printf函數打印整形數據會出現錯誤
+
+最小的 *MicroPython* 固件適配例子:
+
+```c
+#include "py/compile.h"
+#include "py/runtime.h"
+#include "py/repl.h"
+#include "py/gc.h"
+#include "lib/utils/pyexec.h"
+
+#include <stdio.h>
+
+static char heap[2048];
+
+int main (int argc, char **argv) {
+    gc_init(heap, heap + sizeof(heap));
+
+    mp_init();
+
+    pyexec_friendly_repl();
+
+    mp_deinit();
+    return 0;
+}
+
+void nlr_jump_fail(void *val) {
+    while (1) {
+        ;
+    }
+}
+
+void NORETURN __fatal_error(const char *msg) {
+    while (1) {
+        ;
+    }
+}
+
+mp_lexer_t *mp_lexer_new_from_file(const char *filename) {
+    mp_raise_OSError(MP_ENOENT);
+}
+
+mp_import_stat_t mp_import_stat(const char *path) {
+    return MP_IMPORT_STAT_NO_EXIST;
+}
+
+mp_obj_t mp_builtin_open(uint n_args, const mp_obj_t *args, mp_map_t *kwargs) {
+    return mp_const_none;
+}
+
+MP_DEFINE_CONST_FUN_OBJ_KW(mp_builtin_open_obj, 1, mp_builtin_open);
+
+```
+
+### 相關編譯 make 檔案
+
+```
+include ../../py/mkenv.mk
+
+CROSS = 0
+
+# Include py core make definitions
+include $(TOP)/py/py.mk
+
+LIBS =
+
+SRC_C = \
+    main.c \
+
+$(BUILD)/firmware.elf: $(OBJ)
+    $(ECHO) "LINK $@"
+    $(Q)$(LD) $(LDFLAGS) -o $@ $^ $(LIBS)
+    $(Q)$(SIZE) $@
+
+$(BUILD)/firmware.bin: $(BUILD)/firmware.elf
+    $(Q)$(OBJCOPY) -O binary $^ $@
+
+$(BUILD)/firmware.hex: $(BUILD)/firmware.elf
+    $(Q)$(OBJCOPY) -O ihex -R .eeprom $< $@
+
+include $(TOP)/py/mkrules.mk
+```
+
+### 配置 *MicroPython* 文件  
+
+這些配置在名為 mpconfigport.h 和 mphalport.h 檔案內。
+
+<font color="#FF0010">mpconfigport.h</font> 配置文件包含特定於機器的配置，包括是否啟用不同的 *MicroPython* 功能等方面。  
+<font color="#FF0010">mphalport.h</font> 配置包括類型定義、根指針、電路板名稱、微控制器名稱等。
+
+### 將新增模塊功能適配到開發板
+
+在文件 modulexx.c 中添加模塊定義。
+
+```c
+#include "py/mpconfig.h"
+#include "py/obj.h"
+
+STATIC const mp_map_elem_t pyb_module_globals_table[] = {
+    { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_pyb) },
+};
+
+STATIC MP_DEFINE_CONST_DICT(pyb_module_globals, pyb_module_globals_table);
+
+const mp_obj_module_t pyb_module = {
+    .base = { &mp_type_module },
+    .globals = (mp_obj_dict_t*)&pyb_module_globals,
+};
+```
+
+相應地修改配置文件 <font color="#FF0010">mpconfigport.h</font>
+
+```c
+// extra built-in modules to add to the list of known ones
+extern const struct _mp_obj_module_t pyb_module;
+
+#define MICROPY_PORT_BUILTIN_MODULES \
+    { MP_OBJ_NEW_QSTR(MP_QSTR_pyb), (mp_obj_t)&pyb_module },
+```
+
+如果適配正確，那麼應標準的命令行解釋器如下
+
+```
+>>> 2
+2
+>>> print(“Hello!”)
+Hello!
+>>>
+```
 
 # MicroPython C Stub Generator
 
@@ -150,9 +326,5 @@ make BOARD=WeAct_F411CE -j
 cd ./build-WeAct_F411CE
 objcopy --input-target=ihex --output-target=binary firmware.hex firmware.bin
 sudo dfu-util -a 0 -s 0x08000000:leave -t 0 -D firmware.bin
-
-or direct burn image
-
-make BOARD=WeAct_F411CE depoly
 
 ```
