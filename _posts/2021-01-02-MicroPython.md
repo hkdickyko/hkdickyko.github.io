@@ -382,9 +382,9 @@ Hello!
 >>>
 ```
 
-# MicroPython C Stub Generator
+# MicroPython C 函數庫生成器
 
-> 使用C Stub Generator創建C代碼模板用於「extmod」中提供附加「非核心」模塊。
+> 使用 **C** 函數庫創建C代碼模板用於「extmod」中提供附加「非核心」模塊。
 
 ![](../assets/img/esp/c_stub.png)
 
@@ -394,9 +394,9 @@ Hello!
 
 # 將構建映像刻錄到板上 (WeAct Studio STM32F411CEU)
 
-[Sample WeAct Studio STM32F411CEU6 Core Board](https://github.com/WeActTC)
+[樣板 WeAct Studio STM32F411CEU6 Core Board](https://github.com/WeActTC)
 
-[Download Hex file](https://github.com/WeActTC/WeAct_F411CE-MicroPython/releases)
+[下載已編譯 Hex 檔案](https://github.com/WeActTC/WeAct_F411CE-MicroPython/releases)
 
 ```shell
 sudo apt-get build-dep dfu-util
@@ -424,7 +424,7 @@ screen /dev/ttyACM0
 
 ```
 
-由源代碼構建MicroPython
+由源代碼構建 MicroPython
 
 源代碼下載地址 : [MicroPython](https://micropython.org/resources/micropython-master.zip)
 

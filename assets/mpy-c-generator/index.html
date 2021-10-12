@@ -17,17 +17,17 @@
 
 <body>
     <div class="container header">
-        <h2>MicroPython C Stub Generator</h2>
+        <h2>MicroPython C 函數庫生成器</h2>
     </div>
     <div class="container body-content">
         <div class="input-form">
             <fieldset class="u-full-width">
                 <div class="three columns">
-                    <label for="functionName">Function Name</label>
+                    <label for="functionName">函數庫名稱</label>
                     <input class="u-full-width" type="text" id="functionName" value="my_function" />
                 </div>
                 <div class="three columns">
-                    <label for="outputType">Output Type</label>
+                    <label for="outputType">輸出數據類型</label>
                     <select class="u-full-width" id="outputType">
                         <option value="void">None</option>
                         <option value="bool">Boolean</option>
@@ -41,18 +41,18 @@
                     </select>
                 </div>
                 <div class="three columns">
-                    <label for="outputName">Output Name</label>
+                    <label for="outputName">輸出變量名稱</label>
                     <input class="u-full-width" type="text" id="outputName" value="ret_val" />
                 </div>
                 <div class="three columns">
-                    <label for="numInputs">Number of Inputs</label>
+                    <label for="numInputs">輸入變量數量</label>
                     <input class="u-full-width" type="number" id="numInputs" value="0" min="0" max="10" />
                 </div>
                 <div class="inputsArea"></div>
             </fieldset>
             <fieldset class="u-full-width">
                 <div class="three columns">
-                    <label for="outputName">Sub Function Name</label>
+                    <label for="outputName">函數名稱</label>
                     <input class="u-full-width" type="text" id="subfunctionName" value="sub_function" />
                 </div>
                 <div class="three columns">
@@ -60,16 +60,16 @@
                 </div>
                 <div class="three columns">
                     <br/>
-                    <input class="button-primary u-full-width" type="button" id="generateCode" value="Generate!" />
+                    <input class="button-primary u-full-width" type="button" id="generateCode" value="創建代碼!" />
                 </div>
                 <div class="three columns">
                     <br/>
-                    <input class="button u-full-width" type="button" id="copyCode" value="Copy" />
+                    <input class="button u-full-width" type="button" id="copyCode" value="複製到剪貼板" />
                 </div>
             </fieldset>
         </div>
         <div class="u-full-width">
-            <label for="codeOutput">Output</label>
+            <label for="codeOutput">輸出代碼</label>
             <pre><code class="language-c" id="codeOutput"></code></pre>
         </div>
     </div>
