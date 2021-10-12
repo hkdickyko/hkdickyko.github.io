@@ -84,9 +84,12 @@ make deplibs
 
 ```python
 import array
-arr = array.array('B')    								# unsigned byte
-arr = array.array('i', [11, 22, 33, 44, 55])				# integer
-arr = array.array('f', [1.1, 2.2, 3.3, 4.4, 5.5])			# float
+# unsigned byte
+arr = array.array('B') 
+# integer
+arr = array.array('i', [11, 22, 33, 44, 55])
+# float
+arr = array.array('f', [1.1, 2.2, 3.3, 4.4, 5.5])
 ```
 
 - gc -- 回收內存碎片
@@ -95,7 +98,8 @@ arr = array.array('f', [1.1, 2.2, 3.3, 4.4, 5.5])			# float
 import gc
 gc.mem_free()
 gc.mem_alloc()
-gc.collect() 		# 強制對堆中未引用的對象進行垃圾回收
+# 強制對堆中未引用的對象進行垃圾回收
+gc.collect() 		
 ```
 
 - math -- 數學運算函數
@@ -104,9 +108,12 @@ gc.collect() 		# 強制對堆中未引用的對象進行垃圾回收
 
 ```python
 import ubinascii
-ubinascii.hexlify(data[, sep])		# 轉換二進制數據為16進製字符串
-ubinascii.unhexlify('313233')		# 轉換HEX數據為二進製字符串
-ubinascii.a2b_base64(data)			# 轉換 Base64 編碼數據為二進製字符串
+# 轉換二進制數據為16進製字符串
+ubinascii.hexlify(data[, sep])
+# 轉換HEX數據為二進製字符串
+ubinascii.unhexlify('313233')
+# 轉換 Base64 編碼數據為二進製字符串
+ubinascii.a2b_base64(data)			
 ```
 
 - ucollections -- 容器數據類型
@@ -119,8 +126,10 @@ ubinascii.a2b_base64(data)			# 轉換 Base64 編碼數據為二進製字符串
 ```python
 import ujson
 obj = {1:2, 3:4, "a":6}
-jsObj = ujson.dumps(obj) 			# 將dict類型轉換為字符串
-parsed = ujson.loads(jsObj) 		# 將字符串轉換為dict類型
+# 將dict類型轉換為字符串
+jsObj = ujson.dumps(obj)
+# 將字符串轉換為dict類型 			
+parsed = ujson.loads(jsObj) 		
 
 ```
 
@@ -129,7 +138,8 @@ parsed = ujson.loads(jsObj) 		# 將字符串轉換為dict類型
 
 ```python
 import re
-re.match(r'\$', string)	# 比較以$開頭的string字符串
+# 比較以$開頭的string字符串
+re.match(r'\$', string)	
 regex = ure.compile("[\r\n]")
 regex.split("line1\rline2\nline3\r\n")
 
@@ -174,7 +184,8 @@ time.sleep_us(1)		# 0.000001秒
 
 tStart = time.ticks_ms()
 tStop = time.ticks_ms()
-tElapse = (tStop - tStart) / 1000.0 	# 測量微分時間
+# 測量微分時間
+tElapse = (tStop - tStart) / 1000.0 	
 
 ```
 - uzlib -- zlib解壓縮
