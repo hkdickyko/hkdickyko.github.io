@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micropython C Generator</title>
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/skeleton.css" />
+    <link rel="stylesheet" type="text/css" href="css/prism.css" />
+    <link rel="stylesheet" type="text/css" href="css/mcg.css" />
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/jquery.scrollTo.js"></script>
+    <script src="js/mcg.js"></script>
+</head>
+
+<body>
+    <div class="container header">
+        <h2>MicroPython C Stub Generator</h2>
+    </div>
+    <div class="container body-content">
+        <div class="input-form">
+            <fieldset class="u-full-width">
+                <div class="three columns">
+                    <label for="functionName">Function Name</label>
+                    <input class="u-full-width" type="text" id="functionName" value="my_function" />
+                </div>
+                <div class="three columns">
+                    <label for="outputType">Output Type</label>
+                    <select class="u-full-width" id="outputType">
+                        <option value="void">None</option>
+                        <option value="bool">Boolean</option>
+                        <option value="int">Integer</option>
+                        <option value="float">Float</option>
+                        <option value="string">String</option>
+                        <option value="bytes">Bytes</option>
+                        <option value="tuple">Tuple</option>
+                        <option value="list">List</option>
+                        <option value="dict">Dictionary</option>
+                    </select>
+                </div>
+                <div class="three columns">
+                    <label for="outputName">Output Name</label>
+                    <input class="u-full-width" type="text" id="outputName" value="ret_val" />
+                </div>
+                <div class="three columns">
+                    <label for="numInputs">Number of Inputs</label>
+                    <input class="u-full-width" type="number" id="numInputs" value="0" min="0" max="10" />
+                </div>
+                <div class="inputsArea"></div>
+            </fieldset>
+            <fieldset class="u-full-width">
+                <div class="three columns">
+                    <label for="outputName">Sub Function Name</label>
+                    <input class="u-full-width" type="text" id="subfunctionName" value="sub_function" />
+                </div>
+                <div class="three columns">
+                    <br/>
+                </div>
+                <div class="three columns">
+                    <br/>
+                    <input class="button-primary u-full-width" type="button" id="generateCode" value="Generate!" />
+                </div>
+                <div class="three columns">
+                    <br/>
+                    <input class="button u-full-width" type="button" id="copyCode" value="Copy" />
+                </div>
+            </fieldset>
+        </div>
+        <div class="u-full-width">
+            <label for="codeOutput">Output</label>
+            <pre><code class="language-c" id="codeOutput"></code></pre>
+        </div>
+    </div>
+    <div class="container footer">
+        <footer>
+            <hr>
+            <p>&copy; 2020 - Dicky KO</p>
+            <p>
+                The owner of this site takes no responsibility for the validity of any data received through the use of this site, or damage that utilising it may cause. All information is provided as-is, for reference only, with no guarantee of quality or usefulness.
+            </p>
+        </footer>
+    </div>
+</body>

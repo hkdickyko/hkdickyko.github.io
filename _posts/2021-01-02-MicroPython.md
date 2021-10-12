@@ -19,7 +19,7 @@ MicroPython的出現讓許多畏懼低階語言的開發者有機會以高階語
 
 但目前MicroPython包含的函式庫還十分有限，所以太複雜的專案難以完成。
 
-## 核心庫：
+## 核心庫
 
   - py/-- 核心python實現，包括編譯器、運行時和核心庫。
 
@@ -385,7 +385,13 @@ Hello!
 # MicroPython C Stub Generator
 
 > 使用C Stub Generator創建C代碼模板用於「extmod」中提供附加「非核心」模塊。
+
 ![](../assets/img/esp/c_stub.png)
+
+橙色區域是一個新的創建函數
+
+![](../assets/img/python/mpy-sample.png)
+
 
 
 # 將構建映像刻錄到板上 (WeAct Studio STM32F411CEU)
