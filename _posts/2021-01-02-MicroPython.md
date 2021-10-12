@@ -74,31 +74,77 @@ make deplibs
 
 這將構建所有可用的相關程式庫（無論是否使用它們）。 如果使用其他選項（例如交叉編譯）構建 MicroPython，則應將相同的選項集傳遞給 make deplibs。 要啟用或禁用相關程式庫，需要編輯 mpconfigport.mk 文件，其中包含選項的開關設定。  
 例如:
-要構建 SSL 模塊（上述 upip 工具需要，因此默認啟用）， *MICROPY_PY_USSL* 應設置為 *1*。
+要構建 SSL 模塊（上述 upip 工具需要，因此默認啟用），*MICROPY_PY_USSL* 應設置為 *1*。
 但是仍需要使用以上的 make submodules 命令來獲取相關程式庫。
 
 # Micropython標準庫
 
 - Builtin -- 內建函數和異常
-- array -- 數值數組
+- array -- 數值數組 
+
+```python
+import array
+  arr = array.array('B')    								# unsigned byte
+  arr = array.array('i', [11, 22, 33, 44, 55])				# integer
+  arr = array.array('f', [1.1, 2.2, 3.3, 4.4, 5.5])			# float
+```
+
 - gc -- 回收內存碎片
 - math -- 數學運算函數
 - sys -- 系統特定功能
 - ubinascii -- 二進制/ ASCII互轉
+
+```python
+import ubinascii
+  ubinascii.hexlify(data[, sep])		# 轉換二進制數據為16進製字符串
+  ubinascii.unhexlify('313233')			# 轉換HEX數據為二進製字符串
+  ubinascii.a2b_base64(data)			# 轉換 Base64 編碼數據為二進製字符串
+```
+
 - ucollections -- 容器數據類型
 - uerrno -- 系統錯誤代碼
 - uhashlib -- 散列算法
 - uheapq -- 堆隊列算法
 - uio -- 輸入/輸出流
 - ujson -- JSON 編碼和解碼
+
+```python
+import ujson
+  obj = {1:2, 3:4, "a":6}
+  jsObj = ujson.dumps(obj) 			# 將dict類型轉換為字符串
+  parsed = ujson.loads(jsObj) 		# 將字符串轉換為dict類型
+
+```
+
 - os -- 基本的操作系統
 - ure -- 正則表達式
+
+```python
+import re
+re.match(r'\$', string)	# 比較以$開頭的string字符串
+regex = ure.compile("[\r\n]")
+regex.split("line1\rline2\nline3\r\n")
+
+['line1', 'line2', 'line3', '', '']
+
+```
+
 - select -- 高效地等待I/O
 - usocket -- socket 模塊
 - ussl -- SSL/TLS module
 - ustruct -- 打包和解壓縮原始數據類型
+
+```python
+import ustruct
+ustruct.pack('H', 1, 2)
+b' \x01,\x01
+
+```
 - time -- 時間相關函數
 - uzlib -- zlib解壓縮
+
+MicroPython 的數據類型
+![](../assets/img/python/datatype.png)
 
 
 ### 最小的 MicroPython 固件移植
@@ -266,7 +312,7 @@ Hello!
 ![](../assets/img/esp/c_stub.png)
 
 
-# Burn build image into the board (WeAct Studio STM32F411CEU)
+# 將構建映像刻錄到板上 (WeAct Studio STM32F411CEU)
 
 [Sample WeAct Studio STM32F411CEU6 Core Board](https://github.com/WeActTC)
 
@@ -277,8 +323,8 @@ sudo apt-get build-dep dfu-util
 sudo apt-get install libusb-1.0-0-dev
 ```
 
-Download firmware : firmware_internal_rom_stm32f411_v1.12-35.hex
-Convert firmware from hex to bin
+下載固件 : firmware_internal_rom_stm32f411_v1.12-35.hex
+將固件從十六進制 (HEX) 轉換為二進制 (BIN)
 
 ```shell
 sudo apt-get update
@@ -289,7 +335,7 @@ sudo dfu-util -a 0 -s 0x08000000:leave -t 0 -D stm32f411.bin
 ```
 
 
-Install tools **Screen** for access the board
+安裝工具 **Screen** 用於訪問開發板
 
 ```shell
 sudo apt install screen
@@ -299,11 +345,11 @@ screen /dev/ttyACM0
 
 ```
 
-Build by MicroPython from source
+由源代碼構建MicroPython
 
 源代碼下載地址 : [MicroPython](https://micropython.org/resources/micropython-master.zip)
 
-Extract the zip file to a suitable location you want. Install relevant complier as below.
+將壓縮文件解壓到所需的目錄位置及安裝相關編譯器
 
 ```
 sudo apt-get update -y
@@ -312,7 +358,7 @@ sudo apt-get install -y gcc-arm-none-eabi
 ```
 
 
-Build WeAct_F411CE-MicroPython
+構建工具 WeAct_F411CE-MicroPython
 
 ```shell
 cd MicroPython  **(Location to store the source of micropython)
