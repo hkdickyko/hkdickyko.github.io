@@ -19,7 +19,7 @@ MicroPython的出現讓許多畏懼低階語言的開發者有機會以高階語
 
 但目前MicroPython包含的函式庫還十分有限，所以太複雜的專案難以完成。
 
-## 主要由以下構成：
+## 核心庫：
 
   - py/-- 核心python實現，包括編譯器、運行時和核心庫。
 
@@ -77,28 +77,36 @@ make deplibs
 要構建 SSL 模塊（上述 upip 工具需要，因此默認啟用），*MICROPY_PY_USSL* 應設置為 *1*。
 但是仍需要使用以上的 make submodules 命令來獲取相關程式庫。
 
-# Micropython標準庫
+## 標準庫
 
 - Builtin -- 內建函數和異常
 - array -- 數值數組 
 
 ```python
 import array
-  arr = array.array('B')    								# unsigned byte
-  arr = array.array('i', [11, 22, 33, 44, 55])				# integer
-  arr = array.array('f', [1.1, 2.2, 3.3, 4.4, 5.5])			# float
+arr = array.array('B')    								# unsigned byte
+arr = array.array('i', [11, 22, 33, 44, 55])				# integer
+arr = array.array('f', [1.1, 2.2, 3.3, 4.4, 5.5])			# float
 ```
 
 - gc -- 回收內存碎片
+
+```python
+import gc
+gc.mem_free()
+gc.mem_alloc()
+gc.collect() 		# 強制對堆中未引用的對象進行垃圾回收
+```
+
 - math -- 數學運算函數
 - sys -- 系統特定功能
 - ubinascii -- 二進制/ ASCII互轉
 
 ```python
 import ubinascii
-  ubinascii.hexlify(data[, sep])		# 轉換二進制數據為16進製字符串
-  ubinascii.unhexlify('313233')			# 轉換HEX數據為二進製字符串
-  ubinascii.a2b_base64(data)			# 轉換 Base64 編碼數據為二進製字符串
+ubinascii.hexlify(data[, sep])		# 轉換二進制數據為16進製字符串
+ubinascii.unhexlify('313233')		# 轉換HEX數據為二進製字符串
+ubinascii.a2b_base64(data)			# 轉換 Base64 編碼數據為二進製字符串
 ```
 
 - ucollections -- 容器數據類型
@@ -110,9 +118,9 @@ import ubinascii
 
 ```python
 import ujson
-  obj = {1:2, 3:4, "a":6}
-  jsObj = ujson.dumps(obj) 			# 將dict類型轉換為字符串
-  parsed = ujson.loads(jsObj) 		# 將字符串轉換為dict類型
+obj = {1:2, 3:4, "a":6}
+jsObj = ujson.dumps(obj) 			# 將dict類型轉換為字符串
+parsed = ujson.loads(jsObj) 		# 將字符串轉換為dict類型
 
 ```
 
@@ -171,7 +179,7 @@ tElapse = (tStop - tStart) / 1000.0 	# 測量微分時間
 ```
 - uzlib -- zlib解壓縮
 
-MicroPython 的數據類型
+###MicroPython 的數據類型
 
 MicroPython中支持的格式
 
@@ -204,12 +212,12 @@ struct根據本地機器字節順序轉換.可以用格式中的第一個字符�
 |>|big-endian|按原字節數|
 |!|network (<font color="#FF0010">></font>)|按原字節數|
 
-### 最小的 MicroPython 固件移植
+## 最小的 MicroPython 固件移植
 
 將 *MicroPython* 移植到新開發板的集成最小固件。
 首先，我們將最小目錄複製到新目錄 *example_port* 下，然後看下該目錄下的各個文件，功能如下
 
- ```
+```shell
 cd ports
 mkdir example_port
 ```
@@ -390,7 +398,6 @@ objcopy --input-target=ihex --output-target=binary firmware_internal_rom_stm32f4
 sudo dfu-util -a 0 -s 0x08000000:leave -t 0 -D stm32f411.bin
 
 ```
-
 
 安裝工具 **Screen** 用於訪問開發板
 
