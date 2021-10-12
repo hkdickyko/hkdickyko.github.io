@@ -142,6 +142,19 @@ ustruct.unpack('HH', b'\x01\x00\x02\x00')
 b' \x01,\x01
 (1,2)
 
+import struct
+id, tag, version, count = struct.unpack("!H4s2I", s)
+ss = struct.pack("!H4s2I", id, tag, version, count);
+
+C 中的類似結構
+struct Header
+{
+    unsigned short id;
+    char[4] tag;
+    unsigned int version;
+    unsigned int count;
+}
+
 ```
 - time -- 時間相關函數
 - uzlib -- zlib解壓縮
@@ -150,26 +163,26 @@ MicroPython 的數據類型
 
 MicroPython中支持的格式
 
-|格式|C Type|Python|字節數|
+|格式|C|Python|字節數|
 |:---:|:---:|:---:|:---:|
-|x	|pad byte|no value|	1|
-|c	|char|string of length 1	|1|
-|b	|signed char|integer|1|
-|B	|unsigned char|	integer	|1|
-|?	|_Bool|bool|1|
-|h	|short|integer|2|
-|H	|unsigned short|	integer	|2|
-|i	|int|integer	|4|
-|I	|unsigned int	|integer or long|	4|
-|l	|long|integer	|4|
-|L	|unsigned long|	long	|4|
-|q	|long long	|long	|8|
-|Q	|unsigned long |long|	long|	8|
-|f	|float	|float	|4|
-|d	|double	|float	|8|
-|s	|char[]	|string	|1|
-|p	|char[]	|string	|1|
-|P|void *	|long||
+|x|pad byte|no value|1|
+|c|char|string of length 1|1|
+|b|signed char|integer|1|
+|B|unsigned char|integer|1|
+|?|_Bool|bool|1|
+|h|short|integer|2|
+|H|unsigned short|integer|2|
+|i|int|integer|4|
+|I|unsigned int|integer or long|	4|
+|l|long|integer|4|
+|L|unsigned long|long|4|
+|q|long long|long|8|
+|Q|unsigned long long|long|8|
+|f|float|float|4|
+|d|double|float|8|
+|s|char[]|string|1|
+|p|char[]|string|1|
+|P|void *|long||
 
 struct根據本地機器字節順序轉換.可以用格式中的第一個字符來改變對齊方式.定義如下
 
