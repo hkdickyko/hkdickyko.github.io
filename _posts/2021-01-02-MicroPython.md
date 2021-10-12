@@ -388,11 +388,9 @@ Hello!
 
 ![](../assets/img/esp/c_stub.png)
 
-橙色區域是一個新的創建函數
+**Core** 是函數庫名稱, **Sum** 是函數名稱。 橙色區域是一個新的創建函數, 綠色區域是存儲所有新創建函數的函數庫。
 
-![](../assets/img/python/mpy-sample.png)
-
-
+![](../assets/img/python/mpy-sample.png) 
 
 # 將構建映像刻錄到板上 (WeAct Studio STM32F411CEU)
 
