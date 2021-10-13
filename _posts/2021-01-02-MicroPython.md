@@ -428,28 +428,45 @@ screen /dev/ttyACM0
 
 源代碼下載地址 : [MicroPython](https://micropython.org/resources/micropython-master.zip)
 
-將壓縮文件解壓到所需的目錄位置及安裝相關編譯器
-
-```
-sudo apt-get update -y
-sudo apt-get install -y gcc-arm-none-eabi
-
-```
+將Git文件下載到所需的目錄位置及安裝相關編譯器
 
 
-構建工具 WeAct_F411CE-MicroPython
+# 移植到 **STM32** 開發板 (WeAct_F411CE-MicroPython)
 
 ```shell
-cd ~/MicroPython/micropython-1.17  **(Location to store the source of micropython)
-git submodule update --init
-cd mpy-cross
+sudo apt-get update -y
+sudo apt-get install -y gcc-arm-none-eabi
+sudo apt-get install -y binutils-arm-none-eabi
+sudo apt-get install -y libnewlib-arm-none-eabi
+cd ~/MicroPython
+git clone https://github.com/micropython/micropython
+cd ~/MicroPython/micropythoncd/ports/stm32
+make submodules update --init
+make
+cd ~/MicroPython/micropython/mpy-cross
 make -j4
-cd ../ports/stm32/boards
+cd ~/MicroPython/micropython/ports/stm32/boards
 git clone https://github.com/WeActTC/WeAct_F411CE-MicroPython.git WeAct_F411CE
-cd ..
+cd ~/MicroPython/micropython/ports/stm32
 make BOARD=WeAct_F411CE -j
-cd ./build-WeAct_F411CE
-objcopy --input-target=ihex --output-target=binary firmware.hex firmware.bin
-sudo dfu-util -a 0 -s 0x08000000:leave -t 0 -D firmware.bin
-
+cd ~/MicroPython/micropython/ports/stm32/build-WeAct_F411CE
 ```
+
+編譯文件是存儲在 *build-WeAct_F411CE* 文件夾內，安裝 *dfu-util* 工具來刻錄 firmware.dfu 檔案
+
+```shell
+sudo apt-get install dfu-util
+sudo dfu-util --list
+```
+
+![](../assets/img/python/dfu-util.png)
+
+數據將刻錄到 *Intrenal Flash* 內部存儲位置如上屏幕截圖
+
+```shell
+
+sudo dfu-util -i 0 -a 0 -d 0483:df11 -D firmware.dfu
+```
+
+
+
