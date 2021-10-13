@@ -440,7 +440,7 @@ sudo apt-get install -y gcc-arm-none-eabi
 構建工具 WeAct_F411CE-MicroPython
 
 ```shell
-cd MicroPython  **(Location to store the source of micropython)
+cd ~/MicroPython/micropython-1.17  **(Location to store the source of micropython)
 git submodule update --init
 cd mpy-cross
 make -j4
