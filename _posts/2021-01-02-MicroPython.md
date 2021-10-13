@@ -440,8 +440,8 @@ sudo apt-get install -y binutils-arm-none-eabi
 sudo apt-get install -y libnewlib-arm-none-eabi
 cd ~/MicroPython
 git clone https://github.com/micropython/micropython
-cd ~/MicroPython/micropythoncd/ports/stm32
-make submodules update --init
+cd ~/MicroPython/micropython/ports/stm32
+make submodules update
 make
 cd ~/MicroPython/micropython/mpy-cross
 make -j4
@@ -469,5 +469,7 @@ sudo dfu-util -i 0 -a 0 -d 0483:df11 -D firmware.dfu
 
 ```
 
-
+```c
+#define MICROPY_HW_SPIFLASH_ENABLE_CACHE (1)
+```
 
