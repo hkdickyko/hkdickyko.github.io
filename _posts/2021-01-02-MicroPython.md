@@ -457,6 +457,7 @@ cd ~/MicroPython/micropython/ports/stm32/build-WeAct_F411CE
 ```shell
 sudo apt-get install dfu-util
 sudo dfu-util --list
+
 ```
 
 ![](../assets/img/python/dfu-util.png)
@@ -464,8 +465,8 @@ sudo dfu-util --list
 數據將刻錄到 *Intrenal Flash* 內部存儲位置如上屏幕截圖
 
 ```shell
-
 sudo dfu-util -i 0 -a 0 -d 0483:df11 -D firmware.dfu
+
 ```
 
 
