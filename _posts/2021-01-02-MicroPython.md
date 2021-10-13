@@ -244,11 +244,11 @@ mkdir example_port
   - Makefile -- 如下介紹
   - README.md -- 說明的md文件
 
-其中，需要修改的文件包括：<font color="#FF0010"> Makefile</font>、<font color="#FF0010">stm32f405.ld</font>、<font color="#FF0010">uart_core.c</font>、<font color="#FF0010">main.c</font>、<font color="#FF0010">mpconfigport.h </font>
+其中，需要修改的文件包括：<font color="#FF0010"> Makefile</font>，<font color="#FF0010">stm32f405.ld</font>，<font color="#FF0010">uart_core.c</font>，<font color="#FF0010">main.c</font>，<font color="#FF0010">mpconfigport.h </font>
 
 另外，还需要增加如下文件：
 
- - start.S -- 初始化代碼，也就是最終編譯出bin文件的入口，用於初始化棧、sram、nand flash以及復制代碼到sram等，並最終跳轉到main.c文件中的主要函數
+ - start.S -- 初始化代碼，也就是最終編譯出bin文件的入口，用於初始化棧，sram，nand flash以及復制代碼到sram等，並最終跳轉到main.c文件中的主要函數
  - nand.c / nand.h -- nand flash 驅動文件
  - uart.h -- 串口驅動頭文件
  - libgcc.a -- 從編譯工具鏈獲得，用於提供除法相關的符號定義
