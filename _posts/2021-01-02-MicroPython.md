@@ -386,7 +386,7 @@ Hello!
 
 > 使用 **C** 函數庫創建C代碼模板用於「extmod」中提供附加「非核心」模塊。
 
-![](../assets/img/esp/c_stub.png)
+![](../assets/img/python/c_stub.png)
 
 **Core** 是函數庫名稱, **Sum** 是函數名稱。 橙色區域是一個新的創建函數, 綠色區域是存儲所有新創建函數的函數庫。
 
