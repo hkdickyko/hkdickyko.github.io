@@ -384,7 +384,7 @@ Hello!
 
 # MicroPython C 函數庫生成器
 
-> 使用 **C** 函數庫創建C代碼模板用於「extmod」中提供附加「非核心」模塊。
+使用 **C** 函數庫生成器，創建 **C** 代碼模板用於「extmod」中提供附加「非核心」模塊。這功能也可修改已有的 **C** 程式庫，使其能成為 **MicroPython** 的程式庫。
 
 ![](../assets/img/python/c_stub.png)
 
