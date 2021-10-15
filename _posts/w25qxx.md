@@ -1,8 +1,8 @@
 ---
-category: [IoT]
+category: [積體電路]
 tags: [IoT, 編程]
 title: 存儲設備
-date: 2021-10-16 18:00:00
+date: 2021-10-15 18:00:00
 ---
 
 # 存儲設備
