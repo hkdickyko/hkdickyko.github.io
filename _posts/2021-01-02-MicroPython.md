@@ -473,3 +473,11 @@ sudo dfu-util -i 0 -a 0 -d 0483:df11 -D firmware.dfu
 #define MICROPY_HW_SPIFLASH_ENABLE_CACHE (1)
 ```
 
+
+erase firmware 
+
+```shell
+dd if=/dev/zero of=zeroes bs=330000 count=1
+dfu-util -a 0 -s 0x0801f000 -D zeroes
+
+```
