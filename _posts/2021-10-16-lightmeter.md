@@ -75,3 +75,7 @@ while True:
   print("{:.3f} lux".format(gy.luminance(gy.CONT_LUX_05)))
 
 ```
+
+ESP32 及 GY-30 的連接如下圖
+
+![Alt gy30](../assets/img/iot/gy30.png)
