@@ -2,7 +2,7 @@
 category: [積體電路]
 tags: [IoT, 編程]
 title: 光強度傳感器
-date: 2021-10-16 18:00:00
+date: 2021-10-17 18:00:00
 ---
 
 # 光強度傳感器 (GY-30 light intensity sensor)
