@@ -29,12 +29,14 @@ date: 2021-11-06 12:00:00
 
 # 模數轉換器校準
 
-這取決於數學,使用斜率和交點的標準公式：$ y = mx + c $ ... 或 $ m = \frac{y-x}{b} $
+這取決於數學,使用簡單的線性函數：$ y = mx + c $ 或 $ m = \frac{y-x}{b} $
 
-y 是您想要的任何單位的實際重量（g、kg、oz 等）
-x 是來自 HX711 的原始值 - 來自 scale.read_average()
-m 是你的斜率（乘數）
-b 是您的交點（偏移量） - 也來自 scale.read_average() 但沒有重量，或使用 scale.tare() 
+ - y 是您想要的任何單位的實際重量（g, kg 或oz 等）
+ - x 是來自 HX711 的原始值
+ - m 是你的斜率（乘數）
+ - b 是您的交點（偏移量）
+
+您可以使用 m 乘以 x 來獲得實際重量 y。 你的公式可能完全不同，但基本原理方法是一樣的。
  
   [網絡資源 HX711](https://github.com/SergeyPiskunov/micropython-hx711)
 
