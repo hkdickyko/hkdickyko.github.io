@@ -107,7 +107,7 @@ if __name__ == "__main__":
       if cmd == 'o':
         print("校準空載重量 : {}".format(scales.tare()))
       if cmd == 'c':
-        print("校準比率因子 : {}".format(scales.calibration(268)))
+        print("校準比率因子 : {}".format(scales.calibration(268))) # 268g 參考重量
       if cmd == 's' :
         val = scales.getValue()
         print("測量值 : {}g".format(val))
