@@ -117,3 +117,5 @@ if __name__ == "__main__":
     print("\n停止及離開!")
 
 ```
+
+![Alt scale](../assets/img/iot/scales.png)
