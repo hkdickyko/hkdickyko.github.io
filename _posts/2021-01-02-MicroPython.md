@@ -84,6 +84,7 @@ make deplibs
 
 ```python
 import array
+
 # unsigned byte
 arr = array.array('B') 
 # integer
@@ -96,6 +97,7 @@ arr = array.array('f', [1.1, 2.2, 3.3, 4.4, 5.5])
 
 ```python
 import gc
+
 gc.mem_free()
 gc.mem_alloc()
 # 強制對堆中未引用的對象進行垃圾回收
@@ -108,6 +110,7 @@ gc.collect()
 
 ```python
 import ubinascii
+
 # 轉換二進制數據為16進製字符串
 ubinascii.hexlify(data[, sep])
 # 轉換HEX數據為二進製字符串
@@ -125,19 +128,39 @@ ubinascii.a2b_base64(data)
 
 ```python
 import ujson
+
 obj = {1:2, 3:4, "a":6}
 # 將dict類型轉換為字符串
 jsObj = ujson.dumps(obj)
+
+with open("filename.txt", "w") as f:
+    json.dumps(jsObj, f)
+
 # 將字符串轉換為dict類型 			
-parsed = ujson.loads(jsObj) 		
+parsed = ujson.loads(jsObj) 
+
+with open("filename.txt", "r") as f:
+   parsed = json.loads(f)
 
 ```
 
 - os -- 基本的操作系統
+
+```python
+import os
+
+ilist=os.listdir()
+print(ilist)
+
+> ['boot.py','main.py','data.txt']
+
+```
+
 - ure -- 正則表達式
 
 ```python
 import re
+
 # 比較以$開頭的string字符串
 re.match(r'\$', string)	
 regex = ure.compile("[\r\n]")
@@ -154,13 +177,16 @@ regex.split("line1\rline2\nline3\r\n")
 
 ```python
 import ustruct
-ustruct.pack('HH', 1, 2)
-b'\x01\x00\x02\x00'
-ustruct.unpack('HH', b'\x01\x00\x02\x00')
-b' \x01,\x01
-(1,2)
 
-import struct
+ustruct.pack('HH', 1, 2)
+> b'\x01\x00\x02\x00'
+ustruct.unpack('HH', b'\x01\x00\x02\x00')
+> b' \x01,\x01
+> (1,2)
+```
+```python
+import ustruct
+
 id, tag, version, count = struct.unpack("!H4s2I", s)
 ss = struct.pack("!H4s2I", id, tag, version, count);
 
@@ -172,12 +198,12 @@ struct Header
     unsigned int version;
     unsigned int count;
 }
-
 ```
 - time -- 時間相關函數
 
 ```python
 import time
+
 time.sleep(1)			# 1秒
 time.sleep_ms(1)		# 0.001秒
 time.sleep_us(1)		# 0.000001秒
@@ -190,7 +216,7 @@ tElapse = (tStop - tStart) / 1000.0
 ```
 - uzlib -- zlib解壓縮
 
-###MicroPython 的數據類型
+### MicroPython 的數據類型
 
 MicroPython中支持的格式
 
