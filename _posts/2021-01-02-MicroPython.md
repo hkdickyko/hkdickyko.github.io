@@ -77,9 +77,11 @@ make deplibs
 要構建 SSL 模塊（上述 upip 工具需要，因此默認啟用），*MICROPY_PY_USSL* 應設置為 *1*。
 但是仍需要使用以上的 make submodules 命令來獲取相關程式庫。
 
-## 標準庫
+## 標準庫介紹
 
-- Builtin -- 內建函數和異常
+注意:MicroPython中支持的格式，看最下的表格
+
+- builtin -- 內建函數和異常
 - array -- 數值數組 
 
 ```python
@@ -171,7 +173,96 @@ regex.split("line1\rline2\nline3\r\n")
 ```
 
 - select -- 高效地等待I/O
+
+所有socket方法都曾阻塞系統正常運作。當socket讀取或寫入時，程序不能做任何其他事情。可能的解決方案有將客戶端的工作委託給單獨的線程。 然而，創建線程並在它們之間切換並不是低消耗的操作。 為了解決這個問題有一種使用套接字的異步方式。 主要思想是將維護套接字的狀態委託給操作系統，並讓它在有內容要從套接字讀取或準備寫入時通知程序。
+
+除了一行server.setblocking(0)和一般創建socket的方法是相同。 這樣做是為了使socket設為非阻塞。它可以為多個客戶端提供服務。
+
+select.select要求操作系統分別檢查給定的socket是否準備好寫入、讀取或是否有一些異常。 這就是為什麼它通過三個套接字列表來指定期望哪個套接字是可寫的、可讀的，以及應該檢查錯誤的。
+
+```python
+import select, socket, sys, Queue
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setblocking(0)
+server.bind(('localhost', 50000))
+server.listen(5)
+inputs = [server]
+outputs = []
+message_queues = {}
+while inputs:
+    readable, writable, exceptional = select.select(
+        inputs, outputs, inputs)
+    for s in readable:
+        if s is server:
+            connection, client_address = s.accept()
+            connection.setblocking(0)
+            inputs.append(connection)
+            message_queues[connection] = Queue.Queue()
+        else:
+            data = s.recv(1024)
+            if data:
+                message_queues[s].put(data)
+                if s not in outputs:
+                    outputs.append(s)
+            else:
+                if s in outputs:
+                    outputs.remove(s)
+                inputs.remove(s)
+                s.close()
+                del message_queues[s]
+    for s in writable:
+        try:
+            next_msg = message_queues[s].get_nowait()
+        except Queue.Empty:
+            outputs.remove(s)
+        else:
+            s.send(next_msg)
+    for s in exceptional:
+        inputs.remove(s)
+        if s in outputs:
+            outputs.remove(s)
+        s.close()
+        del message_queues[s]
+
+```
+ 
 - usocket -- socket 模塊
+
+```python
+# server.py
+import socket
+
+HOST = ''
+PORT = 5050
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((HOST, PORT))
+    s.listen(2)
+    coon, addr = s.accept()
+    with coon:
+        print('Connected by', addr)
+        while True:
+            data = coon.recv(1024)
+            if not data:
+                break
+            coon.sendall(data)
+
+
+# client.py
+import socket
+
+HOST = 'localhost'
+PORT = 5050
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    s.sendall(b'Hello Server!')
+    data = s.recv(1024)
+print('Recevied', repr(data))
+
+```
+
+
 - ussl -- SSL/TLS module
 - ustruct -- 打包和解壓縮原始數據類型
 
@@ -193,7 +284,7 @@ ss = struct.pack("!H4s2I", id, tag, version, count);
 C 中的類似結構
 struct Header
 {
-    unsigned short id;
+    unsigned short id
     char[4] tag;
     unsigned int version;
     unsigned int count;
@@ -215,10 +306,34 @@ tElapse = (tStop - tStart) / 1000.0
 
 ```
 - uzlib -- zlib解壓縮
+- uasyncio -- 異步程序
 
-### MicroPython 的數據類型
+異步程序是基於協同調度的方法。程序/任務只能在await代碼中操作。如果await中沒有任何協程，則不可能進行任何任務。要注意是 **await** 語法只能出現在通過 **async** 修飾的函數中，否則會報SyntaxError錯誤。簡單就是由 **asyncio** 類別調用 **async** 函數， 而函數內的 **await** 為可臨時終斷的節點。也是恢復的接入點。
 
-MicroPython中支持的格式
+asyncio能在中途中斷、中途返回值給其他協程、中途恢復、中途傳入參數的函數等，和一般的函數只能在起始傳入參數，不能中斷，而且最後返回值給父函數之後就結束的概念不一樣。定義協程很簡單，只要在定義函數時再前面加入 **async** 這個關鍵字如下例子
+
+```python
+import asyncio
+
+async def count():
+    i = 0
+    while True:
+        print(i)
+        i += 1
+        await asyncio.sleep(1)
+        
+async def main():
+    asyncio.create_task(count())
+    await asyncio.sleep(5)
+    
+asyncio.run(main())
+asyncio.new_event_loop()
+asyncio.run(main())
+
+```
+
+
+### MicroPython 中支持的數據類型的格式如下表
 
 |代表字符|C 格式|Python 格式|字節數|
 |:---:|:---:|:---:|:---:|
@@ -239,7 +354,7 @@ MicroPython中支持的格式
 
 注意：(<font color="#FF0010">f</font> 和 <font color="#FF0010">d</font> 取決於浮點支持)
 
-struct根據本地機器字節順序轉換.可以用格式中的第一個字符來改變對齊方式.定義如下
+### struct 根據本地機器字節順序轉換.可以用格式中的第一個字符來改變對齊方式定義如下表
 
 |代表字符|字節順序|大小和對齊方式|
 |:---:|:---:|:---:|
@@ -249,7 +364,72 @@ struct根據本地機器字節順序轉換.可以用格式中的第一個字符�
 |>|big-endian|按原字節數|
 |!|network (<font color="#FF0010">></font>)|按原字節數|
 
-# 最小的 MicroPython 固件移植
+### socket 模塊中定義了許多和協議相關的宏，整理出了下表
+
+|宏名稱|值|功能|用途|
+|:---:|:---:|:---:|:---:|
+|AF_INET |2 |地址|TCP/IP – IPv4|
+|AF_INET |10|地址|TCP/IP - IPv6|
+|SOCK_STREAM|1| 最終類型|TCP流|
+|SOCK_DGRAM|2| 類型 |UDP 數據報|
+|SOCK_RAW |3 | 真實類型 |原始真實性||
+|SO_REUSEADDR|4 |有效類型|socket可重用|
+|IPPROTO_TCP|16|IP 協議號|  TCP協議|
+|IPPROTO_UDP|17|IP協議號|UDP協議|
+|SOL_SOCKET|4095|評價指標級別 ||
+
+### socket TCP/IP 連接程序
+
+![](../assets/img/misc/tcpip.png)
+
+## 基礎庫總結如下表
+
+爲了做區分這部分庫在命名上稍有改變在最前加了字母u，例如原版的 json 模塊在MicroPython中改名爲 ujson ，不過在使用的時候用 json 和 ujson 兩個名稱都可以。
+
+|程式庫名稱	|說明	|例子|
+|:---:|:---:|:---|
+|builtin	|內建函數和異常<br/><font color="#FF1000">（不需要引入模塊）</font>|	abs()、pow()、max()、min()、bin()、hex()、input()、print()、len()、range()、next()|
+|math	|浮點運算相關函數	|cos()、exp()、log()、sin()、e、pi|
+|cmath	|複數運算相關函數	|cos()、exp()、log()、sin()、e、pi
+|gc	|垃圾回收控制	|enable()、disable()、collect()|
+|sys|	系統相關功能	|exit()、stdin()、stdout()|
+|uarray	|數組相關功能	||
+|ubinascii	|二進制和ASCII格式轉化|	hexlify()、unhexlify()、a2b_base64()、b2a_base64()|
+|ucollections|	集合相關內容	||
+|uerrno|	定義了一些錯誤碼	||
+|uhashlib	|哈希和信息摘要算法	|sha256、sha1、md5|
+|uheapq	|堆相關操作|	heappush()、heappop()、heapify()|
+|uio|	流和文件相關操作	|open()|
+|ujson|	python數據類型和json相互轉換|	dump()、dumps()、load()、loads()|
+|uos|	文件系統相關操作|	chdir()、listdir()、mkdir()、remove()、rename()|
+|ure|	正則表達式相關功能	||
+|uselect	|steam相關異步功能	||
+|usocket|	socket相關功能，用於網絡通信	||
+|ussl	|SSL/TLS相關功能	||
+|ustruct	|打包解包基礎數據類型	||
+|utime|	時間相關功能|	time()、sleep()|
+|uzlib|	壓縮與解壓縮相關功能（當前只能解壓縮）||	
+|_thread	|多線程功能（還在試驗中）	||
+
+
+## 嵌入式設備相關庫
+
+|程式庫名稱	|說明	|例子|
+|:---:|:---:|:---|
+|btree	|BTree數據庫||
+|framebuf|	幀緩衝模塊，可以用於圖形輸出等||
+|machine|	包含了對模塊上CPU、外設等片上資源相關的操作	|reset()、soft_reset()、reset_cause()、disable_irq()、enable_irq()、lightsleep()、deepsleep()、Pin、ADC、UART、SPI、I2C、RTC、WDT、SDCard|
+|micropython|解釋器與系統相關內容	|
+|network	|網絡搜索、連接、建立AP等相關操作	|connect()、scan()、ifconfig()|
+|urequests|用於HTTP訪問||
+|ubluetooth|藍牙相關操作||
+|ucryptolib|加密解密等功能	||
+|uctypes	|提供與C兼容功能||
+
+
+
+
+# MicroPython 最小固件移植
 
 將 *MicroPython* 移植到新開發板的集成最小固件。
 首先，我們將最小目錄複製到新目錄 *example_port* 下，然後看下該目錄下的各個文件，功能如下
