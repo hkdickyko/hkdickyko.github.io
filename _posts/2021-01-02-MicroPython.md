@@ -368,13 +368,13 @@ asyncio.run(main())
 
 |宏名稱|值|功能|用途|
 |:---:|:---:|:---:|:---:|
-|AF_INET |2 |地址|TCP/IP – IPv4|
-|AF_INET |10|地址|TCP/IP - IPv6|
-|SOCK_STREAM|1| 最終類型|TCP流|
-|SOCK_DGRAM|2| 類型 |UDP 數據報|
-|SOCK_RAW |3 | 真實類型 |原始真實性||
+|AF_INET|2|地址|TCP/IP – IPv4|
+|AF_INET|10|地址|TCP/IP - IPv6|
+|SOCK_STREAM|1|最終類型|TCP流|
+|SOCK_DGRAM|2|類型|UDP 數據報|
+|SOCK_RAW|3|真實類型|原始真實性|
 |SO_REUSEADDR|4 |有效類型|socket可重用|
-|IPPROTO_TCP|16|IP 協議號|  TCP協議|
+|IPPROTO_TCP|16|IP 協議號|TCP協議|
 |IPPROTO_UDP|17|IP協議號|UDP協議|
 |SOL_SOCKET|4095|評價指標級別 ||
 
