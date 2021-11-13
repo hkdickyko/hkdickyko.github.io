@@ -93,6 +93,15 @@ arr = array.array('B')
 arr = array.array('i', [11, 22, 33, 44, 55])
 # float
 arr = array.array('f', [1.1, 2.2, 3.3, 4.4, 5.5])
+
+x.append([4, 5])
+print(x)
+> [1, 2, 3, [4, 5]]
+
+x.extend([4, 5])
+print(x)
+> [1, 2, 3, 4, 5]
+
 ```
 
 - gc -- 回收內存碎片
@@ -168,7 +177,12 @@ re.match(r'\$', string)
 regex = ure.compile("[\r\n]")
 regex.split("line1\rline2\nline3\r\n")
 
-['line1', 'line2', 'line3', '', '']
+> ['line1', 'line2', 'line3', '', '']
+
+re.split(r'\s+', 'a b   c')
+re.split(r'[\s\,]+', 'a,b, c  d')
+re.split(r'[\s\,\;]+', 'a,b;; c  d')
+> ['a', 'b', 'c']
 
 ```
 
@@ -393,7 +407,7 @@ asyncio.run(main())
 |cmath	|複數運算相關函數	|cos()、exp()、log()、sin()、e、pi
 |gc	|垃圾回收控制	|enable()、disable()、collect()|
 |sys|	系統相關功能	|exit()、stdin()、stdout()|
-|uarray	|數組相關功能	||
+|uarray	|數組相關功能	|append()、extend()|
 |ubinascii	|二進制和ASCII格式轉化|	hexlify()、unhexlify()、a2b_base64()、b2a_base64()|
 |ucollections|	集合相關內容	||
 |uerrno|	定義了一些錯誤碼	||
@@ -402,7 +416,7 @@ asyncio.run(main())
 |uio|	流和文件相關操作	|open()|
 |ujson|	python數據類型和json相互轉換|	dump()、dumps()、load()、loads()|
 |uos|	文件系統相關操作|	chdir()、listdir()、mkdir()、remove()、rename()|
-|ure|	正則表達式相關功能	||
+|ure|	正則表達式相關功能	|complie()、search()、match()、sub()|
 |uselect	|steam相關異步功能	||
 |usocket|	socket相關功能，用於網絡通信	||
 |ussl	|SSL/TLS相關功能	||
