@@ -75,21 +75,17 @@ class TCS3472():
             return ustruct.unpack('<H', data)[0]
         data = ustruct.pack('<H', value)
         self._i2c.writeto_mem(self._address, register, data)
-        
-    def readStatus(self):
-        return self._8bits(REG_STATUS)
-
-    def readRawData(self):
-        c = self._16bits(REG_CDATA)
-        r = self._16bits(REG_RDATA)
-        g = self._16bits(REG_GDATA)
-        b = self._16bits(REG_BDATA)
-        data = (r, g, b, c)
-        return self.html_hex(data)
     
     def _valid(self):
         return bool(self._8bits(_REGISTER_STATUS) & 0x01)
 
+    def _convertRGB(self, data):
+        r, g, b, c = data
+        r = int(255 * r / c) 
+        g = int(255 * g / c)
+        b = int(255 * b / c)
+        return (r, g , b)
+   
     def read(self, raw=False):
         was_active = self.active()
         self.active(True)
@@ -104,7 +100,7 @@ class TCS3472():
         self.active(was_active)
         if raw:
             return data
-        return self.convertRGB(data)    
+        return self._convertRGB(data)    
     
     def active(self, value=None):
         if value is None:
@@ -160,13 +156,6 @@ class TCS3472():
         else:
             self._led.value(0)
         
-    def convertRGB(self, data):
-        r, g, b, c = data
-        r = int(255 * r / c) 
-        g = int(255 * g / c)
-        b = int(255 * b / c)
-        return (r, g , b)
-   
     def toHex(self, data):
         r, g, b = data
         return "{:02x}{:02x}{:02x}".format(int(r), int(g), int(b))
@@ -203,7 +192,7 @@ class TCS3472():
             
     def gamma(self, value):
         return self._gamma[int(value)]
-
+                   
 ```
 
 main.py 使用上面的 MicroPython 代碼的示例
