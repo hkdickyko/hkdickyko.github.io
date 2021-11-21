@@ -16,7 +16,6 @@ TCS3472 器件提供紅色、綠色、藍色 (RGB) 和清晰光感測值的數�
 
 ![Colormap](../assets/img/iot/colorresolution.png)
 
-
 # 色溫（照明技術術語中的相關色溫或 CCT）
 
 色溫是描述燈泡提供的光外觀的一種方式。 它以開爾文 (K) 度數為單位測量，範圍從 1,000 到 10,000。 通常，商業和住宅照明應用的開爾文溫度介於 2000K 到 6500K 之間。
@@ -195,7 +194,7 @@ class TCS3472():
                    
 ```
 
-main.py 使用上面的 MicroPython 代碼的示例
+main.py 使用上的 MicroPython 代碼的示例
 
 ```python
 from machine import Pin
@@ -225,3 +224,5 @@ tcs.onLeds(False)
 tcs.active(False)
 
 ```
+
+![Colormap](../assets/img/iot/tcs3472.png)
