@@ -300,10 +300,15 @@ ustruct.unpack('HH', b'\x01\x00\x02\x00')
 ```python
 import ustruct
 
-id, tag, version, count = struct.unpack("!H4s2I", s)
+pack函數如下: id, tag, version, count按照指定的格式轉換成了結構體，ss現在組合成一個字符串。用以方便儲存或傳送。
+
 ss = struct.pack("!H4s2I", id, tag, version, count);
 
-C 中的類似結構
+unpack函數如下: ! 表示我們要使用網絡字節順序解析，因為我們的數據 ss 是從網絡中接收到的，在網絡上傳送的時候它是網絡字節順序的.後面的H表示一個unsigned short的id, 4s 表示4字節長的字符串， 2I 表示有兩個unsigned int類型的數據.
+
+id, tag, version, count = struct.unpack("!H4s2I", ss)
+
+模擬出相似於 C 中的類似結構
 struct Header
 {
     unsigned short id
@@ -404,6 +409,13 @@ asyncio.run(main())
 
 ![](../assets/img/misc/tcpip.png)
 
+### 位元組順序
+
+![](../assets/img/misc/endian.png)
+
+### 位元運算
+
+![](../assets/img/misc/bitwise.png)
 
 ### 正則字元
 
