@@ -322,17 +322,21 @@ ustruct.pack('HH', 1, 2)
 > b'\x01\x00\x02\x00'
 
 ustruct.unpack('HH', b'\x01\x00\x02\x00')
-> b' \x01,\x01
 > (1,2)
-```
-```python
-import ustruct
 
-# pack函數由一組數值變成字串。如下: id, tag, version, count按照指定的格式轉換成了結構體，ss現在組合成一個字符串。用以方便儲存或傳送。
+# pack函數由一組數值變成字串。如下: 
+id, tag, version, count按照指定的格式轉換。
+組合成 ss 的一個字符串。用以方便儲存或傳送。
 
 ss = struct.pack("!H4s2I", id, tag, version, count);
 
-# unpack函數由字串分解為一組數值。如下: ! 表示我們要使用網絡字節順序解析，因為我們的數據 ss 是從網絡中接收到的，在網絡上傳送的時候它是網絡字節順序的.後面的H表示一個unsigned short的id, 4s 表示4字節長的字符串， 2I 表示有兩個unsigned int類型的數據.
+# unpack函數由字串分解為一組數值。如下:
+ ! 表示我們要使用網絡字節順序解析，
+因為我們的數據 ss 是從網絡中接收到的，
+在網絡上傳送的時候它是網絡字節順序的。
+ - H 表示一個unsigned short的id, 
+ - 4s 表示4字節長的字符串， 
+ - 2I 表示有兩個unsigned int類型的數據。
 
 id, tag, version, count = struct.unpack("!H4s2I", ss)
 
