@@ -82,6 +82,31 @@ make deplibs
 注意:MicroPython中支持的格式，看最下的表格
 
 - builtin -- 內建函數和異常
+
+```python
+prime_numbers = [2, 3, 5, 7]
+# 轉換列表至數組
+byte_array = bytearray(prime_numbers)
+print(byte_array)
+
+> bytearray(b'\x02\x03\x05\x07')
+
+string = "Python is interesting."
+# 選擇合適的字元編碼，例如 'utf-8'
+byte_array = bytearray(string, 'utf-8')
+print(byte_array)
+
+> bytearray(b'Python is interesting.')
+
+size = 5
+# 初始值為0
+byte_array = bytearray(size)
+print(byte_array)
+
+> bytearray(b'\x00\x00\x00\x00\x00')
+
+```
+
 - array -- 數值數組 
 
 ```python
@@ -288,22 +313,34 @@ print('Recevied', repr(data))
 - ussl -- SSL/TLS module
 - ustruct -- 打包和解壓縮原始數據類型
 
+在ustruct轉換數據類型是。必須注意大小端 <font color="#FF1000">endian</font> 問題。也就是字節數內容是高位還是低位順序。
+
 ```python
 import ustruct
 
 ustruct.pack('HH', 1, 2)
 > b'\x01\x00\x02\x00'
-ustruct.unpack('HH', b'\x01\x00\x02\x00')
-> b' \x01,\x01
-> (1,2)
-```
-```python
-import ustruct
 
-id, tag, version, count = struct.unpack("!H4s2I", s)
+ustruct.unpack('HH', b'\x01\x00\x02\x00')
+> (1,2)
+
+# pack函數由一組數值變成字串。如下: 
+id, tag, version, count按照指定的格式轉換。
+組合成 ss 的一個字符串。用以方便儲存或傳送。
+
 ss = struct.pack("!H4s2I", id, tag, version, count);
 
-C 中的類似結構
+# unpack函數由字串分解為一組數值。如下:
+ ! 表示我們要使用網絡字節順序解析，
+因為我們的數據 ss 是從網絡中接收到的，
+在網絡上傳送的時候它是網絡字節順序的。
+ - H 表示一個unsigned short的id, 
+ - 4s 表示4字節長的字符串， 
+ - 2I 表示有兩個unsigned int類型的數據。
+
+id, tag, version, count = struct.unpack("!H4s2I", ss)
+
+# 模擬出相似於 C 中的類似結構
 struct Header
 {
     unsigned short id
@@ -317,7 +354,7 @@ struct Header
 ```python
 import time
 
-time.sleep(1)			# 1秒
+time.sleep(1)			  # 1秒
 time.sleep_ms(1)		# 0.001秒
 time.sleep_us(1)		# 0.000001秒
 
@@ -404,6 +441,13 @@ asyncio.run(main())
 
 ![](../assets/img/misc/tcpip.png)
 
+### 位元組順序
+
+![](../assets/img/misc/endian.png)
+
+### 位元運算
+
+![](../assets/img/misc/bitwise.png)
 
 ### 正則字元
 
