@@ -83,7 +83,15 @@ make deplibs
 
 - builtin -- 內建函數和異常
 
+  - const
+  - bytearray
+  - bitwise
+
+const() 及劃線 _ 開頭的變量可以減少RAM的使用。因編譯器在編譯時用數字代替符號。如變數需要更改則需要儲存在RAM內。因此只讀對象必須是不可變的字節或字符串。不能使用 join 或 format 等方法。列表或數組必須使用到 RAM。
+
 ```python
+# 位元組數組 bytearray
+
 prime_numbers = [2, 3, 5, 7]
 # 轉換列表至數組
 byte_array = bytearray(prime_numbers)
@@ -104,6 +112,24 @@ byte_array = bytearray(size)
 print(byte_array)
 
 > bytearray(b'\x00\x00\x00\x00\x00')
+
+
+# 位元運作 bitwise
+
+MASK    = ~0b00001111
+value    = 0b10101010
+newValue = 0b00000101
+
+# MASK 將以上後4位取補數用作清零
+value = (value & MASK) 
+
+> value = 0b10100000
+
+# 原數值尾4位清零保留其它值再組合新值
+value = value | newValue
+
+> value = 0b10100101
+
 
 ```
 
