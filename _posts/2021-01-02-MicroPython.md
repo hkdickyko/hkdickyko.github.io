@@ -726,6 +726,106 @@ Hello!
 
 ![](../assets/img/python/mpy-sample.png) 
 
+## 使用 ESP32 交叉編譯 mpy 文件的例子
+
+```c
+// MicroPython 應用程序接口的頭文件
+#include "py/dynruntime.h"
+
+// 計算階乘的輔助函數
+STATIC mp_int_t factorial_helper(mp_int_t x) {
+    if (x == 0) {
+        return 1;
+    }
+    return x * factorial_helper(x - 1);
+}
+
+// 這是 Python 調用的函數，如 factorial(x)
+STATIC mp_obj_t factorial(mp_obj_t x_obj) {
+    // 從 MicroPython 輸入中提取整數
+    mp_int_t x = mp_obj_get_int(x_obj);
+    // 計算階乘
+    mp_int_t result = factorial_helper(x);
+    // 將結果轉換為整數返回
+    return mp_obj_new_int(result);
+}
+// 對上述函數的 Python 定義
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(factorial_obj, factorial);
+
+// 在導入模塊時調用的入口點
+mp_obj_t mpy_init(mp_obj_fun_bc_t *self, size_t n_args, size_t n_kw, mp_obj_t *args) {
+    // 這是第一個必須設置的全局字典入口
+    MP_DYNRUNTIME_INIT_ENTRY
+
+    // 函數的命名空間
+    mp_store_global(MP_QSTR_factorial, MP_OBJ_FROM_PTR(&factorial_obj));
+
+    // 最後必須恢復全局字典
+    MP_DYNRUNTIME_INIT_EXIT
+}
+
+```
+
+## Makefile 文件名區分大小寫，*makefile* 中的 **M** 必須是大寫
+
+```make
+# MicroPython 目錄的位置
+MPY_DIR = ../../..
+
+# 模塊功能名稱
+MOD = factorial
+
+# 源文件 (.c or .py)
+SRC = factorial.c
+
+# 構建的架構為（x86, x64, armv7m, xtensa & xtensawin）
+ARCH = xtensawin
+
+# 獲取編譯和鏈接模塊的規則
+include $(MPY_DIR)/py/dynruntime.mk
+
+```
+
+## 用於 ESP32 的 mpy 交叉編譯器及相關編譯模塊
+
+由於 MicroPython 尚未安裝 ESP32 的編譯器, 我們需要單獨安裝它如下
+
+[下載 ESP32 編譯器工具集](https://dl.espressif.com/dl/xtensa-esp32-elf-linux32-1.22.0-59.tar.gz)
+
+```shell
+# 將下載文件 xtensa-esp32-elf-linux32-1.22.0-59.tar.gz 解壓到以下路徑
+cd ~/esp
+tar -xzf ~/Desktop/xtensa-esp32-elf-linux32-1.22.0-59.tar.gz
+
+# 通過編輯 bashrc 文件將工具鏈路徑添加到環境中：
+sudo vi ~/.bashrc
+
+# 在 bashrc 文件末尾添加以下代碼,調整為安裝路徑
+export PATH=$PATH:$HOME/esp/xtensa-esp32-elf/bin
+
+# 保存更改的 bashrc 文件。 打開一個新的終端並輸入以下命令
+echo $PATH
+
+# 應該是 v0.25 或更高版本
+pip3 install pyelftools 
+
+```
+
+## 交叉編譯程序命令
+
+```shell
+make
+
+LINK build/factorial.o
+arch:         EM_XTENSA
+text size:    104
+rodata size:  8
+bss size:     0
+GOT entries:  3
+GEN factorial.mpy
+
+```
+
 # 將構建映像刻錄到板上 (WeAct Studio STM32F411CEU)
 
 [樣板 WeAct Studio STM32F411CEU6 Core Board](https://github.com/WeActTC)
