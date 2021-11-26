@@ -827,6 +827,10 @@ bss size:     0
 GOT entries:  3
 GEN factorial.mpy
 
+
+# 將編譯好的文件複製到ESP32模塊
+ampy -p /dev/ttyUSB0 put factorial.mpy
+
 ```
 
 ## 在 MicroPython 中使用
