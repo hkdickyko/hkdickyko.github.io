@@ -809,6 +809,9 @@ echo $PATH
 # 應該是 v0.25 或更高版本
 pip3 install pyelftools 
 
+# 檢查工具是否可用
+xtensa-esp32-elf-gcc -v
+
 ```
 
 ## 交叉編譯程序命令
@@ -824,6 +827,17 @@ bss size:     0
 GOT entries:  3
 GEN factorial.mpy
 
+```
+
+## 在 MicroPython 中使用
+
+複製到模塊導入路徑中 以便可以 MicroPython 可以在找到。 
+
+```python
+import factorial
+print(factorial.factorial(10))
+
+> 3628800
 ```
 
 # 將構建映像刻錄到板上 (WeAct Studio STM32F411CEU)
