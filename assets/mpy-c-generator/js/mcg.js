@@ -188,7 +188,7 @@ function generateCode() {
                 mpType = null;
                 mpObjGet = INDENT + 'mp_obj_t *' + argName + ' = NULL;\n';
                 mpObjGet += INDENT + 'size_t ' + argName + '_len = 0;\n';
-                mpObjGet += INDENT + 'mp_obj_get_array(' + argName + '_arg, &' + argName + '_len, &' + argName + ');\n';
+                mpObjGet += INDENT + 'mp_obj_get_array(' + argName + '_obj, &' + argName + '_len, &' + argName + ');\n';
                 mpObjGet += INDENT + 'mp_int_t ' + argName + '_item_1 = mp_obj_get_int(' + argName + '[0]);\n';
                 mpObjGet += INDENT + 'mp_float_t ' + argName + '_item_2 = mp_obj_get_float(' + argName + '[1]);\n';
                 mpObjGet += INDENT + 'const char* ' + argName + '_item_3 = mp_obj_str_get_str(' + argName + '[2]);\n';
