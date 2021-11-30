@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micropython C Generator</title>
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/skeleton.css" />
+    <link rel="stylesheet" type="text/css" href="css/prism.css" />
+    <link rel="stylesheet" type="text/css" href="css/mcg.css" />
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/jquery.scrollTo.js"></script>
+    <script src="js/mcg.js"></script>
+</head>
+
+<body>
+    <div class="container header">
+        <h3>MicroPython C 交叉編譯函數產生器</h3>
+    </div>
+    <div class="container body-content">
+        <div class="input-form">
+            <fieldset class="u-full-width">
+                <div class="three columns">
+                    <label for="functionName">函數名稱</label>
+                    <input class="u-full-width" type="text" id="functionName" value="InlineName" />
+                </div>
+                <div class="three columns">
+                    <label for="outputType">輸出數據類型</label>
+                    <select class="u-full-width" id="outputType">
+                        <option value="void">None</option>
+                        <option value="bool">Boolean</option>
+                        <option value="int">Integer</option>
+                        <option value="float">Float</option>
+                        <option value="string">String</option>
+                        <option value="bytes">Bytes</option>
+                        <option value="tuple">Tuple</option>
+                        <option value="list">List</option>
+                        <option value="dict">Dictionary</option>
+                    </select>
+                </div>
+                <div class="three columns">
+                    <label for="outputName">輸出變量名稱</label>
+                    <input class="u-full-width" type="text" id="outputName" value="Return_Value" />
+                </div>
+                <div class="three columns">
+                    <label for="numInputs">輸入變量數量</label>
+                    <input class="u-full-width" type="number" id="numInputs" value="0" min="0" max="10" />
+                </div>
+                <div class="inputsArea"></div>
+            </fieldset>
+            <fieldset class="u-full-width">
+                <div class="three columns">
+                    <br/>
+                </div>
+                <div class="three columns">
+                    <br/>
+                </div>
+                <div class="three columns">
+                    <br/>
+                </div>
+                <div class="three columns">
+                    <input class="button u-full-width" type="button" id="copyCode" value="複製到剪貼板" />
+                </div>
+            </fieldset>
+        </div>
+        <div class="u-full-width">
+            <label for="codeOutput">輸出代碼</label>
+            <pre><code class="language-c" id="codeOutput"></code></pre>
+        </div>
+    </div>
+    <div class="container footer">
+        <footer>
+            <hr>
+            <p>&copy; 2021 - Dicky KO</p>
+            <p>
+                本網站的所有者對通過使用本網站收到的任何數據的有效性或使用它可能造成的損害不承擔任何責任。所有信息均僅供參考，不保證質量或有用性。
+            </p>
+        </footer>
+    </div>
+</body>
