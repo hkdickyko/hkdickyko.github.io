@@ -5,6 +5,12 @@ title: MicroPython
 date: 2021-01-02 22:34:36
 ---
 
+<style>
+    table {
+        width: 100%;
+    }
+</style>
+
 # MicroPython
 
 MicroPython是2013年在Kickstarter上募資開始建立的小型硬體編程，因為資源有限，而將Python濃縮成一款小型包，載入硬體微控制器的一項開源專案。
