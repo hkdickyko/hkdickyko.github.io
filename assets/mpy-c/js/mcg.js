@@ -122,9 +122,9 @@ function generateCode() {
     var formDict = getFormDict();
     if (formDict == null) return;
 
-    outputCode = '';
+    outputCode = '// MicroPython 應用程序接口的頭文件\n';
     outputCode += '#include "py/obj.h"\n';
-    outputCode += '#include "py/runtime.h"\n';
+    outputCode += '#include "py/dynruntime.h"\n';
     outputCode += '\n';
 
     // Create function initialiser
@@ -310,7 +310,7 @@ function generateCode() {
     outputCode += INDENT + 'MP_DYNRUNTIME_INIT_ENTRY \n';  
     outputCode += '\n';
     outputCode += '// 函數入口點定義開始 ----------------------\n';
-    outputCode += INDENT + 'mp_store_global(MP_QSTR_' + formDict['function'] + ', MP_OBJ_FROM_PTR(' + formDict['function'] + '_obj));\n';
+    outputCode += INDENT + 'mp_store_global(MP_QSTR_' + formDict['function'] + ', MP_OBJ_FROM_PTR(&' + formDict['function'] + '_obj));\n';
     outputCode += '// 函數入口點定義結束 ----------------------\n';
     outputCode += '\n';
     outputCode += INDENT + 'MP_DYNRUNTIME_INIT_EXIT\n';
