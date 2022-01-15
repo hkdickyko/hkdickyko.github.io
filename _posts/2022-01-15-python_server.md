@@ -68,6 +68,7 @@ if __name__ == '__main__':
 ### Html 導入 index.html 文件如下
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <html lang='en'>
 
@@ -96,6 +97,7 @@ if __name__ == '__main__':
 </body>
 
 </html>
+{% endraw %}
 ```
 
 ### CSS 導入 main.css 文件如下
@@ -199,7 +201,9 @@ app.run(host='0.0.0.0', port=80)
 url_for 定位到我們檔案的靜態位置，寫在模板中外面要加兩個大括弧包住。以下程序是引入 main.css， 而檔案是儲存在主目錄下的 static 目錄下。
 
 ```python
+{% raw %}
 <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+{% endraw %}
 ```
 @app.route() 的意思是指定這部分程式碼的路由，讓我們可以透過不同的網址列執行不同的服務，這是動態設定網址的方法。
 
@@ -231,8 +235,6 @@ def index(req, resp):
 最後，我們將使用流編寫器的 awrite 方法發送其餘內容。 我們將發送一個簡單的 hello world 消息。
 
 要考慮的一個重要方面是我們在調用每個函數之前使用關鍵字的 yield。 這與本文討論範圍之外的更高級的 Python 功能有關。 您可以在此處閱讀有關產量的更多信息。 您還可以在此處閱讀有關異步 Python 和關鍵字產量的更多信息。
-
-
 
 
 
