@@ -46,6 +46,12 @@ http://127.0.0.1:5000/<font color='red'>file</font> 主要的不同是地址的�
 
 ## 詳細的 Flask 例子, 包括導入 Html、CSS、Javascript 和參數導入
 
+檔案目錄架構
+
+![Alt flask](../assets/img/misc/flask_fs.png)
+
+### Python 導入 main.py 文件如下
+
 ```python
 import flask
 app = flask.Flask(__name__)
@@ -180,3 +186,39 @@ setInterval(function() {
 完整的網絡服務器如下:
 
 ![Alt flask](../assets/img/misc/flask_sample.png)
+
+### Flask 的有用設置
+
+更改 Host 或 Port 
+
+```python
+app.run(host='0.0.0.0', port=80)
+```
+url_for 定位到我們檔案的靜態位置，寫在模板中外面要加兩個大括弧包住。以下程序是引入 main.css， 而檔案是儲存在主目錄下的 static 目錄下。
+
+```python
+<link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+```
+@app.route() 的意思是指定這部分程式碼的路由，讓我們可以透過不同的網址列執行不同的服務，這是動態設定網址的方法。
+
+
+
+
+### 測試時間可能發生的問題
+
+ - 背景程序仍運行中。使 Flask 程序不能更新。你可使用以下方法清除掉背景程序。30800為 PID 。
+
+```shell
+netstat -tlnp | grep 5000  
+tcp  0  0 127.0.0.1:5000   0.0.0.0:*   LISTEN    30800/python
+kill -9 30800
+```
+ - CSS 或 Javascript 更改後沒有更新。這應該是瀏覽器的緩存 *cache* 影響到更新。你可按 Ctrl-F5 手動更新網頁緩存。
+
+
+
+
+
+
+
+
