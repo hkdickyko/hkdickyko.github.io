@@ -82,7 +82,7 @@ if __name__ == '__main__':
 <body>
     歡迎來到 Flask!
     <p>參數值:
-        <font color='red'>{{param}}</font>
+        <font color='red'>[{{param}}]</font>
     </p>
 
     <div id="timer">
@@ -229,7 +229,6 @@ def index(req, resp):
 最後，我們將使用流編寫器的 awrite 方法發送其餘內容。 我們將發送一個簡單的 hello world 消息。
 
 要考慮的一個重要方面是我們在調用每個函數之前使用關鍵字的 yield。 這與本文討論範圍之外的更高級的 Python 功能有關。 您可以在此處閱讀有關產量的更多信息。 您還可以在此處閱讀有關異步 Python 和關鍵字產量的更多信息。
-
 
 
 
