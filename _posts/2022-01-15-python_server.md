@@ -215,6 +215,23 @@ kill -9 30800
 ```
  - CSS 或 Javascript 更改後沒有更新。這應該是瀏覽器的緩存 *cache* 影響到更新。你可按 Ctrl-F5 手動更新網頁緩存。
 
+## MicroPython 嵌入式系統下的 Picoweb
+
+用 Picoweb 可以簡單地定義 HTTP 請求的端點，採用類似 Flask 的框架樣式。 我們只需使用應用對象的路由裝飾器，將 URL 作為輸入傳遞，該 URL 將觸發我們接下來定義的函數的執行。
+
+```python
+@app.route("/")
+def index(req, resp):
+    (...)
+
+```
+
+
+
+
+
+
+
 
 
 
