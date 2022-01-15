@@ -44,7 +44,7 @@ http://127.0.0.1:5000/<font color='red'>file</font> 主要的不同是地址的�
 
 ![Alt flask](../assets/img/misc/flask_file.png)
 
-更詳細的 Flask 例子, 包括導入 Html、CSS、Javascript 和參數導入
+## 詳細的 Flask 例子, 包括導入 Html、CSS、Javascript 和參數導入
 
 ```python
 import flask
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     app.run()
 ```
 
-Html 導入 index.html 文件如下
+### Html 導入 index.html 文件如下
 
 ```html
 <!DOCTYPE html>
@@ -90,7 +90,7 @@ Html 導入 index.html 文件如下
 </html>
 ```
 
-CSS 導入 main.css 文件如下
+### CSS 導入 main.css 文件如下
 
 ```css
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,900,700italic,700,600italic,600,400italic);
@@ -137,7 +137,7 @@ span {
 }
 ```
 
-Javascript 導入 main.js 文件如下
+### Javascript 導入 main.js 文件如下
 
 ```js
 function makeTimer() {
