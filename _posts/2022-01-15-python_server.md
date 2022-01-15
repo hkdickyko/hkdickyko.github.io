@@ -76,7 +76,7 @@ if __name__ == '__main__':
     <meta charset="utf-8" />
     <title>歡迎來到 Flask!</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='main.css')}}" />
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='main.css')}}" />
     <script src="{{url_for('static', filename='main.js')}}"></script>
 </head>
 
@@ -224,15 +224,21 @@ kill -9 30800
 用 Picoweb 可以簡單地定義 HTTP 請求的端點，採用類似 Flask 的框架樣式。 我們只需使用應用對象的路由裝飾器，將 URL 作為輸入傳遞，該 URL 將觸發我們接下來定義的函數的執行。
 
 ```python
+import picoweb
+ 
+app = picoweb.WebApp(__name__)
+ 
 @app.route("/")
 def index(req, resp):
-    (...)
+    yield from picoweb.start_response(resp)
+    yield from resp.awrite("歡迎來到 picoweb!")
+ 
+app.run(debug=True, host="192.168.1.87")
 
 ```
 
-最後，我們將使用流編寫器的 awrite 方法發送其餘內容。 我們將發送一個簡單的 hello world 消息。
+最後，我們將使用流編寫器的 awrite 方法發送其餘內容。 我們將發送一個簡單的 *歡迎來到 picoweb!"* 消息。
 
-要考慮的一個重要方面是我們在調用每個函數之前使用關鍵字的 yield。 這與本文討論範圍之外的更高級的 Python 功能有關。 您可以在此處閱讀有關產量的更多信息。 您還可以在此處閱讀有關異步 Python 和關鍵字產量的更多信息。
-
+但要注意一個重要的功能是在調用每個函數之前要使用關鍵字的 <font color="#FF1000">yield</font>。 yield 能夠創建一系列值，因為對於每次調用，函數都會從產生值的點繼續。 這種類型的函數稱為生成器。 這樣的函數創建了一個生成器迭代器，每次調用 next() 方法時，我們都會轉到下一個 yield ，這樣我們就能記下所有返回的值來再存取使用。詳細可參考相關的 [yield 的網絡資源](https://www.sitepoint.com/quick-tip-understanding-the-yield-keyword-in-python/)
 
 
