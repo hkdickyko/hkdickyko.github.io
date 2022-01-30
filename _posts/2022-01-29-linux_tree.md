@@ -2,7 +2,7 @@
 category: [積體電路]
 tags: [IoT, 編程]
 title: Linux
-date: 2022-01-30 12:00:00
+date: 2022-01-29 12:00:00
 ---
 
 <style>
