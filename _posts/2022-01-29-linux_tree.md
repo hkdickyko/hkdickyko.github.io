@@ -1,7 +1,7 @@
 ---
-category: [積體電路]
-tags: [IoT, 編程]
-title: Linux
+category: [編程]
+tags: [編程]
+title: Linux 檔案結構
 date: 2022-01-29 12:00:00
 ---
 
