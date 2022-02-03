@@ -21,18 +21,28 @@ date: 2022-02-02 18:00:00
 
 ![Alt x](../assets/img/linux/glcd.png)
 
-使用標準美式鍵盤，請按 Enter 鍵。
+使用標準美式鍵盤，請按 Enter 鍵
 
 ![Alt x](../assets/img/linux/gp1.png)
 
-要使用美國英語，請按 Enter 鍵。
+要使用美國英語，請按 Enter 鍵
 
 ![Alt x](../assets/img/linux/gp2.png)
 
-要啟動默認圖形環境並開始 GNome 硬盤分區編輯器應用程序，請按 Enter 鍵。
+要啟動默認圖形環境並開始 GNome 硬盤分區編輯器應用程序，請按 Enter 鍵
 
 ![Alt x](../assets/img/linux/gp3.png)
 
 現在可以開始使用 GNome 硬盤分區編輯器應用程序
 
 ![Alt x](../assets/img/linux/gp4.png)
+
+可以通過使用拖放功能調整磁盤大小，如下所示
+
+![Alt x](../assets/img/linux/gresize.png)
+
+按工具欄中的 Apply 確認處理調整分區大小的功能，需要時間來處理調整大小的工作，完成後將顯示以下頁面
+
+![Alt x](../assets/img/linux/gend.png)
+
+你可以自己動手試試。有關詳細信息，請參考 [GNome Partition Editor 啟動盤](https://gparted.org/display-doc.php%3Fname%3Dgparted-live-manual)
