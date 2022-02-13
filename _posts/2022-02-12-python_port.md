@@ -155,5 +155,11 @@ include $(TOP)/py/mkrules.mk
 ### 頭文件
 
 
-
 ### 內存管理文件
+
+
+```shell
+$ ls -l ~/.PlayOnLinux/wineprefix/c_driver/dosdevices
+$ ln -s /dev/ttyUSB0 ~/.PlayOnLinux/wineprefix/c_driver/dosdevices/com33
+
+```
