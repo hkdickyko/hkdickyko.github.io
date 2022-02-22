@@ -139,27 +139,54 @@ include $(TOP)/py/mkrules.mk
 <font color="#FF0010">mpconfigport.h</font> 配置文件包含特定於機器的配置，包括是否啟用不同的 *MicroPython* 功能等方面。  
 <font color="#FF0010">mphalport.h</font> 配置包括類型定義、根指針、電路板名稱、微控制器名稱等。
 
+## USB 端口配置程序
 
-
-### 源文件
-
-
-
-### 可選源文件
-
- 
-**總結**
-
-
-
-### 頭文件
-
-
-### 內存管理文件
-
+將內核映像刻錄到控制板，需要修改 WINE USB 端口配置，請在運行 HiBurn 後使用的以下命令，然後再將控制板插入到電腦USB端口 (不能在 Python 虛擬環境中運行)。com33 應根據實際情況更改。
 
 ```shell
 $ ls -l ~/.PlayOnLinux/wineprefix/c_driver/dosdevices
+lrwxrwxrwx 1 xxxx xxxx 12 Feb 13 16:57 com33 -> /dev/ttyUSB0
+
+# 尋找 /dev/ttyUSB 設備如上，在這個例子是 com33 
+$ rm -rf ~/.PlayOnLinux/wineprefix/C_driver/dosdevices/com33
 $ ln -s /dev/ttyUSB0 ~/.PlayOnLinux/wineprefix/c_driver/dosdevices/com33
+
+```
+
+## ELF 轉換成 HEX / BIN
+
+一些交叉編譯器將創建一個輸出 *ELF* 文件, 假設文件名是 *firmware.elf* 從 ELF 到 HEX 的轉換方法如下。文件名 *output.hex* 將根據需要更改。
+
+```shell
+# 安裝轉換工具 *objcopy* 如果之前沒有安裝
+$ sudo apt-get install binutils-multiarch 
+
+# 轉換指令 HEX
+$ objcopy -O ihex firmware.elf output.hex
+
+# 轉換指令 BIN
+$ objcopy -O binary firmware.elf output.bin
+```
+
+## 將映像刻錄到 STM32 控制板
+
+```shell
+$ objcopy -O binary firmware.elf output.bin
+$ sudo apt-get install dfu-util
+$ sudo dfu-util -a 0 -s 0x08000000:leave -t 0 -D output.bin
+
+```
+
+## 列表將是設備 tty 的連接順序資料
+```shell
+$ dmesg | grep tty
+
+[ 4033.421847] cdc_acm 1-1.4:1.1: ttyACM0: USB ACM device
+[ 6380.194805] usb 1-1.4: ch341-uart converter now attached to ttyUSB0
+[ 6563.406395] ch341-uart ttyUSB0: ch341-uart converter now disconnected from ttyUSB0
+[ 6567.325537] usb 1-1.4: ch341-uart converter now attached to ttyUSB0
+
+
+ampy --port /dev/ttyACM0 --baud 115200 ls
 
 ```
