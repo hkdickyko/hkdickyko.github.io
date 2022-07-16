@@ -856,18 +856,18 @@ class Transform {
 
 ```html
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
+  <head>
+    <meta charset="utf-8" />
+    <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/d3.v7.min.js"></script>
-    <script type="text/javascript" src="./source/color_module.js"></script>
-		<script type="text/javascript" src="./source/matrix2d.js"></script>
-		<script type="text/javascript" src="./source/touch.js"></script>
-		<script type="text/javascript" src="./source/mTransform.js"></script>
-		<script type="text/javascript" src="./source/mScreen.js"></script>
+    <script type="text/javascript" src="./core/color_module.js"></script>
+    <script type="text/javascript" src="./core/matrix2d.js"></script>
+    <script type="text/javascript" src="./core/touch.js"></script>
+    <script type="text/javascript" src="./core/mTransform.js"></script>
+    <script type="text/javascript" src="./core/mScreen.js"></script>
 <body>
   <div id="main">
     <div id="svgbasics">
