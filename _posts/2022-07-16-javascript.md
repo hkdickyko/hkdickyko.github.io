@@ -100,6 +100,9 @@ function perpendicular(p0, p1) {
 </script>
 ```
 
+![Alt text](../assets/img/misc/gradient.png)
+
+
 # 手機觸控控制
 
 ## jQuery 掛鉤到屏幕控制
