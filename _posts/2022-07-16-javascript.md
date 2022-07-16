@@ -883,3 +883,5 @@ class Transform {
 </body>
 </html>
 ```
+
+![Alt text](../assets/img/misc/gradient.gif)
