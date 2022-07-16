@@ -884,6 +884,6 @@ class Transform {
 </html>
 ```
 
-## 屏幕信息的調試
+## 屏幕調試信息
 
 ![Alt text](../assets/img/misc/gradient.gif)
