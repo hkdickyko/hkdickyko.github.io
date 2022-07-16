@@ -99,9 +99,9 @@ function perpendicular(p0, p1) {
   const gradient = new gradientColor("#test",'rgb(0,200,0)', 'rgb(255,0,0)', 5);
 </script>
 ```
+## 屏幕輸出結果
 
 ![Alt text](../assets/img/misc/gradient.png)
-
 
 # 手機觸控控制
 
@@ -883,5 +883,7 @@ class Transform {
 </body>
 </html>
 ```
+
+## 屏幕信息的調試
 
 ![Alt text](../assets/img/misc/gradient.gif)
