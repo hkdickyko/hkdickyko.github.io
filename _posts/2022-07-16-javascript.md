@@ -85,6 +85,7 @@ function perpendicular(p0, p1) {
   return [u01x / u01d, u01y / u01d];
 }
 ```
+## SVG 中的漸變填充路徑的網頁示例
 
 ```html
 <svg width="600" height="300">
@@ -722,7 +723,7 @@ class Transform {
         // 縮放功能
         let scale = pDistance / this._refDistance;
         scale = Math.round(scale * 1000) / 1000;
-        pt = this.getRefOffset(this._refOrigin, this._matrix, this._objectParameter);
+        let pt = this.getRefOffset(this._refOrigin, this._matrix, this._objectParameter);
         this._matrix.translate(pt.x, pt.y).scale(scale, scale).translate(-pt.x, -pt.y);
         this._matrixStr = this._matrix.toCSS();
         this._refDistance = pDistance;
@@ -739,7 +740,7 @@ class Transform {
     this._tapTime = 0;
     this._holdTime = 0;
     this.updateObject();
-    event.preventDefault();
+//    event.preventDefault();
   }
 
   updateObject() {
@@ -847,3 +848,34 @@ class Transform {
 }
 ```
 
+## jQuery 觸屏控制的網頁示例
+
+```html
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="text/javascript" src="./source/color_module.js"></script>
+		<script type="text/javascript" src="./source/matrix2d.js"></script>
+		<script type="text/javascript" src="./source/touch.js"></script>
+		<script type="text/javascript" src="./source/mTransform.js"></script>
+		<script type="text/javascript" src="./source/mScreen.js"></script>
+<body>
+  <div id="main">
+    <div id="svgbasics">
+      <svg width="600" height="300">
+        <path id="test" d="M100,250 C213,4 310,19 400,250" stroke-width="80" fill="none"/>
+      </svg>
+    </div>
+  </div>
+  <script>
+    const gradient = new gradientColor("#test",'rgb(0,200,0)', 'rgb(255,0,0)', 5);
+    $("#svgbasics").addScreen();
+  </script>
+</body>
+</html>
+```
