@@ -887,3 +887,239 @@ class Transform {
 ## 屏幕調試信息
 
 ![Alt text](../assets/img/misc/gradient.gif)
+
+# jQuery 刷屏控制
+
+```js
+(function($){
+  var StartFlag = true;
+  var swipeFlag = true;
+  var defaults = {
+    easing:"ease",
+    animationTime:0,
+    pagination:true,
+    swipe:true
+  };
+
+  $.fn.swipeEvents = function() {
+    if(swipeFlag){
+      return this.each(function() {
+        var startX,	startY,	$this = $(this);
+        $this.bind('touchstart', touchstart);
+        function touchstart(event) {
+          var touches = event.originalEvent.touches;
+          if (touches && touches.length) {
+            startX = touches[0].pageX;
+            startY = touches[0].pageY;
+            $this.bind('touchmove', touchmove);
+          }
+          //event.preventDefault();
+        }
+
+        function touchmove(event) {
+          var touches = event.originalEvent.touches;
+          if (touches && touches.length) {
+            var deltaX = startX - touches[0].pageX;
+            var deltaY = startY - touches[0].pageY;
+            if (deltaX >= 50) {
+              $this.trigger("swipeLeft");
+            }
+            if (deltaX <= -50) {
+              $this.trigger("swipeRight");
+            }
+            if (deltaY >= 50) {
+  //						$this.trigger("swipeUp");
+            }
+            if (deltaY <= -50) {
+  //						$this.trigger("swipeDown");
+            }
+            if (Math.abs(deltaX) >= 50 || Math.abs(deltaY) >= 50) {
+              $this.unbind('touchmove', touchmove);
+            }
+          }
+          event.preventDefault();
+        }
+      });
+    }
+  };
+
+$.fn.HSlider = function(options){
+    var settings = $.extend({}, defaults, options),
+      $slider = $(this),
+      sections = $("section"),
+      total = sections.length,
+      quiet = false,
+      paginationList = "";
+      swipeFlag = settings.swipe;
+    $.fn.transformPage = function(settings,pos){
+      $(this).css({
+        "transform": "translate3d(" + pos + "%, 0 ,0)",
+        "transition": "all " + settings.animationTime + "ms " + settings.easing
+      });
+      return $(this);
+    }
+
+    $.fn.slideLeft = function(){
+      var _index = $("section.active").data("index");
+      if (_index < total) location.hash = '#'+ (_index + 1);
+      return $(this);
+    }
+
+    $.fn.slideRight = function(){
+      var _index = $("section.active").data("index");
+      if (_index <= total && _index > 1) location.hash = '#'+ (_index - 1);
+      return $(this);
+    }
+
+    $.fn._render = function(){
+      var _hash = Math.floor(Number(location.hash.split('#')[1]));	// get hash, do type cast
+      if (!StartFlag){
+        if(isNaN(_hash)){
+          return $(this);
+        };
+      }else{
+        StartFlag = false;
+      }
+      _hash = _hash ?   _hash : 1;
+      if(_hash < 1) 	  _hash = 1;
+      if(_hash > total) _hash = total;
+      var _activeIndex = _hash;
+
+      $("section.active").removeClass("active");
+      $(".pagination li a" + ".active").removeClass("active");
+      $("section[data-index=" + _activeIndex + "]").addClass("active");
+      $(".pagination li a" + "[data-index=" + _activeIndex + "]").addClass("active");
+      $.each(sections,function(i){
+        if ( $(this).hasClass( "active" ) ) {
+          $(this).css({"display":"block"});
+        }else{
+          $(this).css({"display":"none"});
+        }
+      });
+      var pos = ((_activeIndex - 1) * 100) * -1;
+      $slider.transformPage(settings, pos);
+      return $(this);
+    }
+
+    $.fn._renderPagination = function(){
+      if(!settings.pagination) return;
+      $("<ul class='pagination'>" + paginationList + "</ul>").prependTo("body");
+      posTop = ($slider.find(".HSlider").height() / 2) * -1;
+      $slider.find(".HSlider").css("margin-top", posTop);
+      $(".pagination li a").click(function (){
+        var page_index = $(this).data("index");
+        location.hash = '#' + page_index;
+      });
+    }
+
+    $.fn._bindEvent = function(){
+      $(window).on('hashchange', $slider._render);
+      if(swipeFlag){
+        $slider.swipeEvents().bind("swipeLeft",function(){
+          $slider.slideLeft();
+        }).bind("swipeRight",function(){
+          $slider.slideRight();
+        });
+      }
+      return $(this);
+    }
+
+    $.fn._initStyle = function(){
+      $slider.addClass("HSlider").css({
+        "position":"relative",
+        width:"100%",
+        height:"100%",
+      });
+
+      $.each(sections,function(i){
+        $(this).css({
+          position:"absolute",
+          width:"100%",
+          height:"100%",
+          left:i*100 +"%"
+        }).addClass("section").attr("data-index", i+1);
+        if(settings.pagination == true) {
+          paginationList += "<li><a data-index='"+(i+1)+"' href='#" + (i+1) + "'></a></li>"
+        }
+      });
+      return $(this);
+    }
+
+    $slider
+      ._initStyle()
+      ._bindEvent()
+      ._render()
+      ._renderPagination()
+  }
+})(jQuery);
+```
+
+### ## jQuery 刷屏控制的 CSS
+
+```css
+.pagination {
+  position: absolute;
+  right: 1px;
+  top: 15%;
+  z-index: 5;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.pagination li {
+  padding: 1px;
+  width: 12px;
+  height: 50px;
+}
+
+.pagination li a{
+  margin: 0 auto;
+  width: 8px;
+  height: 38px;
+  display: block;
+  background: #cccccc;
+  border: 1px solid #AAAAAA;
+  border-radius: 10px;
+  transition:all 0.2s ease;
+  opacity:0.3;
+}
+
+.pagination li a:hover,.pagination li a.active{
+  margin: 0 auto;
+  width: 8px;
+  height: 38px;
+  display: block;
+  background: #ff3636;
+  border: 1px solid #CCCCCC;
+  border-radius: 10px;
+  transition:all 0.5s ease;
+  opacity:0.7;
+}
+```
+
+## jQuery 刷屏控制的網頁示例
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="./swipe.js"></script>
+		<link rel="stylesheet" type="text/css" href="./swipe.css">
+    </head>
+  <body>
+    <div class="slider">
+      <section><div>Page 1</div></section>
+      <section><div>Page 2</div></section>
+      <section><div>Page 3</div></section>
+    </div>
+    <script>
+      $(".slider").HSlider({ swipe: false });
+    </script>
+  </body>
+</html>
+```
