@@ -110,53 +110,53 @@ function perpendicular(p0, p1) {
 ```js
 $.fn.extend({
 
-	addScreen: function () {
-		_mainID = "#" + $(this).attr("id");
-		_containerID = "#" + $(this).parent().attr("id");
-		var objScreen = new Transform(_containerID, _mainID);
-		objScreen.setTapCallback(resetDiv);
+  addScreen: function () {
+    _mainID = "#" + $(this).attr("id");
+    _containerID = "#" + $(this).parent().attr("id");
+    var objScreen = new Transform(_containerID, _mainID);
+    objScreen.setTapCallback(resetDiv);
         resetDiv();
 
-		$(_containerID).touchstart(function (event) {
-			if (typeof objScreen !== "undefined") {
-				objScreen.touchStart(event);
-			}
-		});
+    $(_containerID).touchstart(function (event) {
+      if (typeof objScreen !== "undefined") {
+        objScreen.touchStart(event);
+      }
+    });
 
-		$(_containerID).touchend(function (event) {
-			if (typeof objScreen !== "undefined") {
-				objScreen.touchEnd(event);
-			}
-		});
+    $(_containerID).touchend(function (event) {
+      if (typeof objScreen !== "undefined") {
+        objScreen.touchEnd(event);
+      }
+    });
 
-		$(_containerID).touchleave(function (event) {
-			if (typeof objScreen !== "undefined") {
-				objScreen.touchLeave(event);
-			}
-		});
+    $(_containerID).touchleave(function (event) {
+      if (typeof objScreen !== "undefined") {
+        objScreen.touchLeave(event);
+      }
+    });
 
-		$(_containerID).touchup(function (event) {
-			if (typeof objScreen !== "undefined") {
-				objScreen.touchUp(event);
-			}
-		});
+    $(_containerID).touchup(function (event) {
+      if (typeof objScreen !== "undefined") {
+        objScreen.touchUp(event);
+      }
+    });
 
-		$(_containerID).touchmove(function (event) {
-			if (typeof objScreen !== "undefined") {
-				objScreen.touchMove(event);
-			}
-		});
+    $(_containerID).touchmove(function (event) {
+      if (typeof objScreen !== "undefined") {
+        objScreen.touchMove(event);
+      }
+    });
 
-		function resetDiv() {
-			if (objScreen) {
-				var _param = '{"x":0,"y":0}|{"x":0,"y":0}|{"translation":[0,0],"rotation":0,"scale":[1.0, 1.0],"skew":[0,0]}|[1,0,0,1,0,0]|false';
-				objScreen.setParameter(_param);
-				$(_containerID + "> :first-child").attr("style", 'position: absolute; left: 0px; top: 0px; z-index: 93; transform-origin: left top; transform: matrix(1, 0, 0, 1, 0, 0);');
-				objScreen.updateObject();
-				objScreen.rotation = true;
-			}
-		};
-	}
+    function resetDiv() {
+      if (objScreen) {
+        var _param = '{"x":0,"y":0}|{"x":0,"y":0}|{"translation":[0,0],"rotation":0,"scale":[1.0, 1.0],"skew":[0,0]}|[1,0,0,1,0,0]|false';
+        objScreen.setParameter(_param);
+        $(_containerID + "> :first-child").attr("style", 'position: absolute; left: 0px; top: 0px; z-index: 93; transform-origin: left top; transform: matrix(1, 0, 0, 1, 0, 0);');
+        objScreen.updateObject();
+        objScreen.rotation = true;
+      }
+    };
+  }
 });
 ```
 
