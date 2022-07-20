@@ -2,7 +2,7 @@
 category: [編程]
 tags: [編程]
 title: 前端元件
-date: 2022-07-20 06:00:00
+date: 2022-07-19 06:00:00
 ---
 
 <style>
@@ -257,4 +257,3 @@ body {
 ## 前端元件輸出結果
 
 ![Alt text](../assets/img/misc/frontend.gif)
-
