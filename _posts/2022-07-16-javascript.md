@@ -884,67 +884,23 @@ class Transform {
 </html>
 ```
 
-## 屏幕調試信息
+## 屏幕拖放調試信息
 
 ![Alt text](../assets/img/misc/gradient.gif)
 
-# jQuery 刷屏控制
+# jQuery 轉屏幕控制
 
 ```js
 (function($){
-  var StartFlag = true;
-  var swipeFlag = true;
-  var defaults = {
+  let StartFlag = true;
+  let defaults = {
     easing:"ease",
     animationTime:0,
     pagination:true,
-    swipe:true
-  };
-
-  $.fn.swipeEvents = function() {
-    if(swipeFlag){
-      return this.each(function() {
-        var startX,	startY,	$this = $(this);
-        $this.bind('touchstart', touchstart);
-        function touchstart(event) {
-          var touches = event.originalEvent.touches;
-          if (touches && touches.length) {
-            startX = touches[0].pageX;
-            startY = touches[0].pageY;
-            $this.bind('touchmove', touchmove);
-          }
-          //event.preventDefault();
-        }
-
-        function touchmove(event) {
-          var touches = event.originalEvent.touches;
-          if (touches && touches.length) {
-            var deltaX = startX - touches[0].pageX;
-            var deltaY = startY - touches[0].pageY;
-            if (deltaX >= 50) {
-              $this.trigger("swipeLeft");
-            }
-            if (deltaX <= -50) {
-              $this.trigger("swipeRight");
-            }
-            if (deltaY >= 50) {
-  //						$this.trigger("swipeUp");
-            }
-            if (deltaY <= -50) {
-  //						$this.trigger("swipeDown");
-            }
-            if (Math.abs(deltaX) >= 50 || Math.abs(deltaY) >= 50) {
-              $this.unbind('touchmove', touchmove);
-            }
-          }
-          event.preventDefault();
-        }
-      });
-    }
   };
 
 $.fn.HSlider = function(options){
-    var settings = $.extend({}, defaults, options),
+    let settings = $.extend({}, defaults, options),
       $slider = $(this),
       sections = $("section"),
       total = sections.length,
@@ -958,21 +914,8 @@ $.fn.HSlider = function(options){
       });
       return $(this);
     }
-
-    $.fn.slideLeft = function(){
-      var _index = $("section.active").data("index");
-      if (_index < total) location.hash = '#'+ (_index + 1);
-      return $(this);
-    }
-
-    $.fn.slideRight = function(){
-      var _index = $("section.active").data("index");
-      if (_index <= total && _index > 1) location.hash = '#'+ (_index - 1);
-      return $(this);
-    }
-
     $.fn._render = function(){
-      var _hash = Math.floor(Number(location.hash.split('#')[1]));	// get hash, do type cast
+      let _hash = Math.floor(Number(location.hash.split('#')[1]));	// get hash, do type cast
       if (!StartFlag){
         if(isNaN(_hash)){
           return $(this);
@@ -983,8 +926,7 @@ $.fn.HSlider = function(options){
       _hash = _hash ?   _hash : 1;
       if(_hash < 1) 	  _hash = 1;
       if(_hash > total) _hash = total;
-      var _activeIndex = _hash;
-
+      let _activeIndex = _hash;
       $("section.active").removeClass("active");
       $(".pagination li a" + ".active").removeClass("active");
       $("section[data-index=" + _activeIndex + "]").addClass("active");
@@ -996,7 +938,7 @@ $.fn.HSlider = function(options){
           $(this).css({"display":"none"});
         }
       });
-      var pos = ((_activeIndex - 1) * 100) * -1;
+      let pos = ((_activeIndex - 1) * 100) * -1;
       $slider.transformPage(settings, pos);
       return $(this);
     }
@@ -1007,20 +949,13 @@ $.fn.HSlider = function(options){
       posTop = ($slider.find(".HSlider").height() / 2) * -1;
       $slider.find(".HSlider").css("margin-top", posTop);
       $(".pagination li a").click(function (){
-        var page_index = $(this).data("index");
+        let page_index = $(this).data("index");
         location.hash = '#' + page_index;
       });
     }
 
     $.fn._bindEvent = function(){
       $(window).on('hashchange', $slider._render);
-      if(swipeFlag){
-        $slider.swipeEvents().bind("swipeLeft",function(){
-          $slider.slideLeft();
-        }).bind("swipeRight",function(){
-          $slider.slideRight();
-        });
-      }
       return $(this);
     }
 
@@ -1054,7 +989,7 @@ $.fn.HSlider = function(options){
 })(jQuery);
 ```
 
-### ## jQuery 刷屏控制的 CSS
+### ## jQuery 轉屏幕控制的 CSS
 
 ```css
 .pagination {
@@ -1098,7 +1033,7 @@ $.fn.HSlider = function(options){
 }
 ```
 
-## jQuery 刷屏控制的網頁示例
+## jQuery 轉屏幕控制的網頁示例
 
 ```html
 <!DOCTYPE html>
@@ -1109,7 +1044,15 @@ $.fn.HSlider = function(options){
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" src="./swipe.js"></script>
-		<link rel="stylesheet" type="text/css" href="./swipe.css">
+    <link rel="stylesheet" type="text/css" href="./swipe.css">
+  <style>
+    div {
+      font-size:10vw;
+      text-align: center;
+      margin: auto;
+      padding:100px 0px;
+  }
+  </style>
     </head>
   <body>
     <div class="slider">
@@ -1118,8 +1061,13 @@ $.fn.HSlider = function(options){
       <section><div>Page 3</div></section>
     </div>
     <script>
-      $(".slider").HSlider({ swipe: false });
+      $(".slider").HSlider();
     </script>
   </body>
 </html>
+
 ```
+
+## 轉屏幕調試信息
+
+![Alt text](../assets/img/misc/slider.gif)
