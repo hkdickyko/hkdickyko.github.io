@@ -616,7 +616,6 @@ div.bar-end-rh {
   border-radius: 3px;
   color: white;
 }
-
 ```
 
 ## Javascript 代碼
@@ -843,7 +842,6 @@ class components {
       "><span></div></div></div>";
   }
 }
-
 ```
 ## 前端元件的網頁示例
 
@@ -851,73 +849,26 @@ class components {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-		<meta charset="utf-8" />
-		<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
+    <meta charset="utf-8" />
+    <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="./switch.css" />
     <script type="text/javascript" src="./components.js"></script>
   </head>
   <body>
     <div class="container">
       <div id="clock"></div>
-      <div
-        id="L1"
-        idx="p1"
-        cname="無線上網狀態"
-        icon="fa-wifi"
-        status="NORMAL"
-      ></div>
-      <div
-        id="L2"
-        idx="p1"
-        cname="錯誤狀態"
-        icon="fa-exclamation-triangle"
-        status="ALARM"
-      ></div>
-      <div
-        id="L3"
-        idx="p1"
-        cname="藍牙狀態"
-        icon="fa-bluetooth-b"
-        status="CLOSE"
-      ></div>
+      <div id="L1" idx="p1" cname="無線上網狀態" icon="fa-wifi" status="NORMAL"></div>
+      <div id="L2" idx="p1" cname="錯誤狀態" icon="fa-exclamation-triangle" status="ALARM"></div>
+      <div id="L3" idx="p1" cname="藍牙狀態" icon="fa-bluetooth-b" status="CLOSE"></div>
       <div id="L0" idx="lighting" cname="照明控制" icon="fa-lightbulb-o"></div>
       <div id="R0" idx="refresh" cname="更新" icon="fa-refresh"></div>
       <div id="C1" idx="camera" cname="拍照" icon="fa-camera"></div>
-      <div
-        id="B1"
-        idx="measure"
-        cname="溫度和濕度"
-        bname="測量"
-        icon="fa-thermometer-half,fa-tint"
-      ></div>
-      <div
-        id="m1"
-        idx="temperature"
-        value="33.9"
-        cname="溫度 (°C)"
-        max="50"
-        unit="°C"
-      ></div>
-      <div
-        id="m2"
-        idx="humidity"
-        value="95.2"
-        cname="濕度 (%)"
-        unit="%"
-        color="switch-bar-rh"
-      ></div>
-      <div
-        id="P0"
-        idx="location"
-        cname="全球定位系統"
-        bname="定位"
-        icon="fa-map-marker"
-      ></div>
+      <div id="B1" idx="measure" cname="溫度和濕度" bname="測量" icon="fa-thermometer-half,fa-tint"></div>
+      <div id="m1" idx="temperature" value="33.9" cname="溫度 (°C)" max="50" unit="°C"></div>
+      <div id="m2" idx="humidity" value="95.2" cname="濕度 (%)" unit="%" color="switch-bar-rh"></div>
+      <div id="P0" idx="location" cname="全球定位系統" bname="定位" icon="fa-map-marker"></div>
       <script>
         let x = new components();
         x.clock("clock");
@@ -936,7 +887,6 @@ class components {
     </div>
   </body>
 </html>
-
 ```
 
 ## 前端平板輸出結果
