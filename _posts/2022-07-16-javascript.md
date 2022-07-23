@@ -1489,4 +1489,4 @@ var MainMenu = function (selection) {
 
 ## 圖形菜單幕調試信息
 
-![Alt text](../assets/img/misc/screen.gif)
+![Alt text](../assets/img/misc/menu.gif)
