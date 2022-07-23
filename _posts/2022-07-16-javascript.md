@@ -989,7 +989,7 @@ $.fn.HSlider = function(options){
 })(jQuery);
 ```
 
-### ## jQuery 轉屏幕控制的 CSS
+## jQuery 轉屏幕控制的 CSS
 
 ```css
 .pagination {
@@ -1071,3 +1071,422 @@ $.fn.HSlider = function(options){
 ## 轉屏幕調試信息
 
 ![Alt text](../assets/img/misc/slider.gif)
+
+# 圖形菜單
+
+## Javascript 圖形菜單
+
+```js
+$(document).ready(function () {
+  $("#menu").click(function () {
+    menuShow();
+  });
+});
+
+function menuHide() {
+  $(".kMenu_Main").css("right", "-100px");
+  $(".kMenu_wrapper").scrollTop(0);
+  $("#menu").css("border-right", "3px solid rgba(255,0,0,0.6)");
+}
+
+function menuShow() {
+  $(".kMenu_Main").css("right", "-8px");
+  $("#menu").css("border-right", "13px solid rgba(255,255,255,0)");
+  $("#menu").css("background-image", "url()");
+  $(".kMenu_wrapper").scrollTop(0);
+}
+(function ($) {
+  if (!$.kMenu) {
+    $.kMenu = new Object();
+  }
+
+  $.kMenu = function (el, links, options) {
+    let base = this;
+    base.$el = $(el);
+    base.el = el;
+    base.$el.data("kMenu", base);
+    let kMenu_Main_btn;
+    let kMenu_Btns;
+    base.init = function () {
+      if (typeof links === "undefined" || links === null) {
+        links = [
+          {
+            url: null,
+            bgcolor: "red",
+            icon: "+",
+            title: "Click me",
+          },
+        ];
+      }
+      base.links = links;
+      if (base.links.length > 0) {
+        main_btn = base.links[0];
+        color_style = main_btn.color ? "color:" + main_btn.color + ";" : "";
+        bg_color_style = main_btn.bgcolor
+          ? "background-color:" + main_btn.bgcolor + ";"
+          : "";
+        main_btn_dom =
+          "<button data-link-href='" +
+          (main_btn.url ? main_btn.url : "") +
+          "' data-link-target='" +
+          (main_btn.target ? main_btn.target : "") +
+          "' class='kMenu_Main' style='" +
+          bg_color_style +
+          "'>" +
+          main_btn.icon +
+          "</button>";
+        kMenu_Btn_Dom = "";
+        base.links.shift();
+        for (let i = 0; i < base.links.length; i++) {
+          color_style = base.links[i].color
+            ? "color:" + base.links[i].color + ";"
+            : "";
+          bg_color_style = base.links[i].bgcolor
+            ? "background-color:" + base.links[i].bgcolor + ";"
+            : "";
+          kMenu_Btn_Dom +=
+            "<button data-link-title='" +
+            base.links[i].title +
+            "' data-link-href='" +
+            (base.links[i].url ? base.links[i].url : "") +
+            "' data-link-target='" +
+            (base.links[i].target ? base.links[i].target : "") +
+            "' class='kMenu_Btn' style='" +
+            bg_color_style +
+            "'>" +
+            base.links[i].icon +
+            "</button>";
+        }
+        kMenu_Btn_Dom =
+          "<div class='kMenu_wrapper'>" + kMenu_Btn_Dom + "</div>";
+        base.$el.append(kMenu_Btn_Dom).append(main_btn_dom);
+      } else {
+        if (typeof console == "undefined") {
+          window.console = {
+            log: function (msg) {
+              alert(msg);
+            },
+          };
+        }
+        console.log("Invalid links array param");
+      }
+      let btnHeight = $("button").height();
+      base.options = $.extend({}, $.kMenu.defaultOptions, options);
+      kMenu_Main_btn = base.$el.find(".kMenu_Main");
+      kMenu_Btns = base.$el.find(".kMenu_wrapper");
+      kMenu_Main_btn.click(function (e) {
+        if ($(this).attr("data-link-href").length > 0) {
+          if ($(this).attr("data-link-target")) {
+            window.open(
+              $(this).attr("data-link-href"),
+              $(this).attr("data-link-target")
+            );
+          } else {
+            window.location.href = $(this).attr("data-link-href");
+          }
+        }
+        kMenu_Btns.toggleClass("show");
+
+        if ($(".kMenu_overlay").length > 0) {
+          $(".kMenu_overlay").remove();
+          kMenu_Main_btn.blur();
+        } else {
+          $("body").append('<div class="kMenu_overlay" ></div>');
+        }
+
+        if ($(this).find(".ink").length === 0) {
+          $(this).prepend("<img class='ink'></img>");
+        } else {
+          $(this).find(".ink").remove();
+          $(this).prepend("<img class='ink'></img>");
+        }
+
+        ink = $(this).find(".ink");
+
+        if (!ink.height() && !ink.width()) {
+          d = Math.max($(this).outerWidth(), $(this).outerHeight());
+          ink.css({ height: d, width: d });
+        }
+
+        x = e.pageX - $(this).offset().left - ink.width() / 2;
+        y = e.pageY - $(this).offset().top - ink.height() / 2;
+
+        ink.css({ top: y + "px", left: x + "px" }).addClass("animate");
+      });
+
+      kMenu_Btns.find(".kMenu_Btn").on("mousedown", function (e) {
+        if ($(this).attr("data-link-href").length > 0) {
+          if ($(this).attr("data-link-target")) {
+            window.open(
+              $(this).attr("data-link-href"),
+              $(this).attr("data-link-target")
+            );
+          } else {
+            window.location.href = $(this).attr("data-link-href");
+          }
+        } else {
+          let Name = $(this).attr("data-link-target");
+          if (Name) {
+            options(Name);
+          }
+        }
+      });
+
+      kMenu_Main_btn.focusout(function () {
+        kMenu_Btns.removeClass("show");
+        overlay = $(".kMenu_overlay");
+        overlay.remove();
+        menuHide();
+      });
+    };
+    base.init();
+  };
+
+  $.kMenu.defaultOptions = {};
+
+  $.fn.kMenu_init = function (links, options) {
+    return this.each(function () {
+      new $.kMenu(this, links, options);
+    });
+  };
+})(jQuery);
+
+```
+
+## 圖形菜單 CSS
+
+```css
+.kmenusvg {
+  width: 50px;
+  height: auto;
+}
+
+#menu {
+  background-image: url(./menutxt.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.kMenu_overlay {
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.6); /*dim the background*/
+}
+
+.kMenu {
+  z-index: 100;
+  width: 16px;
+  height: 80px;
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  border-right: 3px solid rgba(255, 0, 0, 0.6);
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* remove scrollbar space */
+  background: transparent; /* optional: just make scrollbar invisible */
+}
+
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #ff0000;
+}
+
+.kMenu_wrapper {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 180px; /* menu height */
+  width: 300px;
+  right: -25px; /* All menu btton left right */
+  bottom: 85px;
+  position: absolute;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+  pointer-events: all;
+}
+
+.kMenu_wrapper button[data-link-title]:hover:after {
+  content: attr(data-link-title);
+  opacity: 1;
+  transition: all 0.5s;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 4px 0px;
+  border-radius: 3px;
+  color: #0000aa;
+  font-size: 13px;
+  pointer-events: none;
+  position: absolute;
+  right: 80px;
+  min-width: 150px;
+}
+
+.kMenu_wrapper.show {
+  display: block;
+  opacity: 1;
+}
+
+.kMenu_wrapper button {
+  border-radius: 100%;
+  background: #f44336;
+  margin: 0px 0px 10px 233px; /* button location with tooltip */
+  padding: 0;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 19px;
+  transition: 0.3s;
+  pointer-events: all;
+}
+
+button.kMenu_Main {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: #f44336;
+  padding: 0;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 19px;
+  transition: 0.3s;
+  pointer-events: all;
+  right: -100px;
+  position: absolute;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.kMenu_Main span {
+  transition: 0.5s;
+}
+
+.kMenu_Main:focus {
+  transform: scale(1.1);
+  transform: rotate(90deg);
+}
+
+.ink {
+  display: block;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 100%;
+  transform: scale(0);
+  pointer-events: all;
+}
+
+.animate {
+  animation: ripple 0.65s linear;
+}
+
+@-webkit-keyframes ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+  }
+}
+@-moz-keyframes ripple {
+  100% {
+    opacity: 0;
+    -moz-transform: scale(2.5);
+  }
+}
+@-o-keyframes ripple {
+  100% {
+    opacity: 0;
+    -o-transform: scale(2.5);
+  }
+}
+@keyframes ripple {
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+```
+
+## Javascript 圖形菜單設置
+
+```js
+var links = [
+  {
+    bgcolor: "rgba(255, 255, 0, 0.8)",
+    color: "#fffff",
+    icon: "<img class='kmenusvg' src='./menupin.svg'/>",
+    title: "Click me",
+  },
+  {
+    target: "Find",
+    bgcolor: "rgba(0, 255, 0, 0.3)",
+    color: "#fffff",
+    icon: "<img class='kmenusvg' src='./find.svg'/>",
+    title: "Find Files",
+  },
+  {
+    target: "Print",
+    bgcolor: "rgba(255, 0, 255, 0.4)",
+    color: "#fffff",
+    icon: "<img class='kmenusvg' src='./print.svg'/>",
+    title: "Print opened File",
+  },
+  {
+    target: "Delete",
+    bgcolor: "rgba(255, 0, 0, 0.5)",
+    color: "#fffff",
+    icon: "<img class='kmenusvg' src='./delete.svg'/>",
+    title: "Delete selected File",
+  },
+  {
+    target: "Save",
+    bgcolor: "rgba(0, 255, 255, 0.6)",
+    color: "#fffff",
+    icon: "<img class='kmenusvg' src='./save.svg'/>",
+    title: "Save to File",
+  },
+];
+
+var MainMenu = function (selection) {
+  menuHide(); // For close the menu in press any button
+  switch (selection) {
+    case "Find":
+      break;
+    case "Print":
+      break;
+    case "Delete":
+      break;
+    case "Save":
+      break;
+    case "default":
+      break;
+  }
+};
+
+```
+
+## 圖形菜單的網頁示例
+
+```html
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="./kMenuCore.js"></script>
+    <script type="text/javascript" src="./kMenu.js"></script>
+    <link rel="stylesheet" type="text/css" href="./kMenu.css">
+<body>
+  <div class="kMenu" id="menu"></div>
+  <script>
+    $('.kMenu').kMenu_init(links, MainMenu);
+  </script>
+</body>
+</html>
+```
+
+## 圖形菜單幕調試信息
+
+![Alt text](../assets/img/misc/screen.gif)
