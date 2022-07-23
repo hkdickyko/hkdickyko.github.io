@@ -387,7 +387,7 @@ div.bar-end-rh {
 
 .switch-text strong {
   position: relative;
-  left: -15px;
+  left: -13px;
   top: -15px;
   font-size: 17px;
   color: rgb(28, 13, 4);
@@ -940,9 +940,16 @@ class components {
 
 ```
 
-## 前端元件輸出結果
+## 前端平板輸出結果
+
+### 垂直屏
 
 ![Alt text](../assets/img/misc/hscreen.gif)
 
+### 橫向屏
+
 ![Alt text](../assets/img/misc/lscreen.gif)
 
+## 前端手機輸出結果
+
+![Alt text](../assets/img/misc/mscreen.gif)
