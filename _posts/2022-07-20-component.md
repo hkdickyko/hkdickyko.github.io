@@ -942,6 +942,7 @@ class components {
 
 ## 前端元件輸出結果
 
-![Alt text](../assets/img/misc/frontendex.gif)
-=======
->>>>>>> d58291c5dc4eb50ec0770eda00cafb14d1e49820
+![Alt text](../assets/img/misc/hscreen.gif)
+
+![Alt text](../assets/img/misc/lscreen.gif)
+
