@@ -257,7 +257,6 @@ body {
 ## 前端元件輸出結果
 
 ![Alt text](../assets/img/misc/frontend.gif)
-<<<<<<< HEAD
 
 # 前端元件代碼 (CSS & Javascript)
 
