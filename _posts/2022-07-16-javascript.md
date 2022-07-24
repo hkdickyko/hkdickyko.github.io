@@ -1082,7 +1082,7 @@ $.fn.HSlider = function(options){
 
 ## 圖形菜單幕調試信息
 
-![Alt text](../assets/img/misc/screen.gif)
+![Alt text](../assets/img/misc/menu.gif)
 
 ## Javascript 圖形菜單代碼
 
