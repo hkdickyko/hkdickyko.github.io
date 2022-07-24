@@ -15,6 +15,13 @@ date: 2022-07-16 06:00:00
 
 ## SVG 中的漸變填充路徑
 
+## 屏幕輸出結果
+
+![Alt text](../assets/img/misc/gradient.png)
+
+
+## Javascript SVG 中的漸變填充路徑代碼
+
 ```js
 class gradientColor {
   constructor(id, fromColor, toColor, resolution) {
@@ -99,13 +106,14 @@ function perpendicular(p0, p1) {
   const gradient = new gradientColor("#test",'rgb(0,200,0)', 'rgb(255,0,0)', 5);
 </script>
 ```
-## 屏幕輸出結果
-
-![Alt text](../assets/img/misc/gradient.png)
 
 # 手機觸控控制
 
-## jQuery 掛鉤到屏幕控制
+## 屏幕拖放調試信息
+
+![Alt text](../assets/img/misc/gradient.gif)
+
+## Javascript 掛鉤到屏幕控制代碼
 
 ```js
 $.fn.extend({
@@ -160,7 +168,7 @@ $.fn.extend({
 });
 ```
 
-## jQuery 觸屏控制
+## Javascript 觸屏控制代碼
 
 ```js
 (function ($, undefined) {
@@ -354,7 +362,7 @@ $.fn.extend({
 })(jQuery);
 ```
 
-## 屏幕二維矩陣變換
+## 屏幕二維矩陣變換代碼
 
 ```js
 // 	| a  c  tx |
@@ -609,7 +617,7 @@ class Matrix2D {
 }
 ```
 
-## 屏幕變換功能（平移, 旋轉 和 縮放）
+## 屏幕變換功能（平移, 旋轉 和 縮放）代碼
 
 ```js
 class Transform {
@@ -852,7 +860,7 @@ class Transform {
 }
 ```
 
-## jQuery 觸屏控制的網頁示例
+## jQuery 觸屏控制的網頁示例代碼
 
 ```html
 <html>
@@ -884,11 +892,13 @@ class Transform {
 </html>
 ```
 
-## 屏幕拖放調試信息
+# Javascript 轉屏幕控制
 
-![Alt text](../assets/img/misc/gradient.gif)
+## 轉屏幕調試信息
 
-# jQuery 轉屏幕控制
+![Alt text](../assets/img/misc/slider.gif)
+
+## Javascript 轉屏幕控制代碼
 
 ```js
 (function($){
@@ -989,7 +999,7 @@ $.fn.HSlider = function(options){
 })(jQuery);
 ```
 
-## jQuery 轉屏幕控制的 CSS
+## CSS 轉屏幕控制代碼
 
 ```css
 .pagination {
@@ -1033,7 +1043,7 @@ $.fn.HSlider = function(options){
 }
 ```
 
-## jQuery 轉屏幕控制的網頁示例
+## jQuery 轉屏幕控制的網頁示例代碼
 
 ```html
 <!DOCTYPE html>
@@ -1068,13 +1078,13 @@ $.fn.HSlider = function(options){
 
 ```
 
-## 轉屏幕調試信息
-
-![Alt text](../assets/img/misc/slider.gif)
-
 # 圖形菜單
 
-## Javascript 圖形菜單
+## 圖形菜單幕調試信息
+
+![Alt text](../assets/img/misc/screen.gif)
+
+## Javascript 圖形菜單代碼
 
 ```js
 $(document).ready(function () {
@@ -1253,7 +1263,7 @@ function menuShow() {
 
 ```
 
-## 圖形菜單 CSS
+## CSS 圖形菜單代碼
 
 ```css
 .kmenusvg {
@@ -1411,7 +1421,7 @@ button.kMenu_Main {
 }
 ```
 
-## Javascript 圖形菜單設置
+## Javascript 圖形菜單設置代碼
 
 ```js
 var links = [
@@ -1469,7 +1479,7 @@ var MainMenu = function (selection) {
 
 ```
 
-## 圖形菜單的網頁示例
+## 圖形菜單的網頁示例代碼
 
 ```html
 <html>
@@ -1486,7 +1496,3 @@ var MainMenu = function (selection) {
 </body>
 </html>
 ```
-
-## 圖形菜單幕調試信息
-
-![Alt text](../assets/img/misc/screen.gif)
