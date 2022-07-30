@@ -50,26 +50,53 @@ deb http://ppa.build.openkylin.top/packaging/ppa2/openkylin yangtze main
 #deb file:/cdrom yangtze main
 
 deb http://archive.ubuntu.com/ubuntu/ focal main restricted universe multiverse
+
 deb-src http://archive.ubuntu.com/ubuntu/ focal main restricted universe multiverse
 
 deb http://archive.ubuntu.com/ubuntu/ focal-updates main restricted universe multiverse
+
 deb-src http://archive.ubuntu.com/ubuntu/ focal-updates main restricted universe multiverse
 
 deb http://archive.ubuntu.com/ubuntu/ focal-security main restricted universe multiverse
+
 deb-src http://archive.ubuntu.com/ubuntu/ focal-security main restricted universe multiverse
 
 deb http://archive.ubuntu.com/ubuntu/ focal-backports main restricted universe multiverse
+
 deb-src http://archive.ubuntu.com/ubuntu/ focal-backports main restricted universe multiverse
 
 deb http://archive.canonical.com/ubuntu focal partner
+
 deb-src http://archive.canonical.com/ubuntu focal partner
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ jammy main restricted universe multiverse
+
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy main restricted universe multiverse
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse
+
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse
+
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ jammy-security main restricted universe multiverse
+
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-security main restricted universe multiverse
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse
+
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse
+
+
 ```
 
 加入後會發現仍然有錯誤。原因是<font color="#FF1000">沒有公共金匙</font>來下載倉庫軟件如下
 
 
 ```shell
-> sudo apt update
+> sudo apt-get update
 Get:1 http://archive.canonical.com/ubuntu focal InRelease [12.1 kB]
 Err:1 http://archive.canonical.com/ubuntu focal InRelease 
   The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 3B4FE6ACC0B21F32 NO_PUBKEY 871920D1991BC93C
@@ -122,7 +149,7 @@ gpg: Total number processed: 1
 gpg:               imported: 1
 
 > sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
-> 
+
 Executing: /tmp/apt-key-gpghome.Fr7e23ni5Y/gpg.1.sh --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
 gpg: key 871920D1991BC93C: "Ubuntu Archive Automatic Signing Key (2018) <ftpmaster@ubuntu.com>" not changed
 gpg: Total number processed: 1
@@ -132,8 +159,9 @@ gpg:              unchanged: 1
 用以下指令測試是否設定未完成
 
 ```
-> sudo apt update
+> sudo apt-get update
 
+// 輸出如下
 Hit:1 http://archive.canonical.com/ubuntu focal InRelease                      
 Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease                         
 Hit:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease
@@ -147,10 +175,13 @@ All packages are up to date.
 
 根據以上。列出的資訊已能在網上尋找到適當的軟件倉庫。
 
+更新軟件資料
 
-
-
-
+```
+> sudo apt update
+> sudo apt upgrade
+> sudo apt --fix-broken install
+```
 
 
 
