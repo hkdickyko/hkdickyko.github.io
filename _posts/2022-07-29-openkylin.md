@@ -187,8 +187,8 @@ All packages are up to date.
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get --fix-broken install
+sudo apt-get upgrade
 ```
-
 
 
 
