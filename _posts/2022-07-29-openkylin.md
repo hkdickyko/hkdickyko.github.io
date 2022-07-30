@@ -17,9 +17,11 @@ date: 2022-07-29 06:00:00
 <font color="#FF1000">apt-get</font> 但在開放麒麟不能直接使用。有如下錯誤:
 
 ```shell
-> sudo apt-get update
-> [sudo] password for dickyko: 
+sudo apt-get update
 
+// sudo 取執行密碼
+> [sudo] password for dickyko: 
+// 輸出結果如下
 Get:1 file:/cdrom yangtze InRelease
 Ign:1 file:/cdrom yangtze InRelease
 Get:2 file:/cdrom yangtze Release
@@ -34,11 +36,11 @@ N: See apt-secure(8) manpage for repository creation and user configuration deta
 以是問題是因為 /etc/apt/sources.list 這檔案係設定。
 
 ```shell
-> cd /etc/apt
+cd /etc/apt
 // 保存原檔案
-> sudo cp sources.list sources.list.bak
+sudo cp sources.list sources.list.bak
 // 列出原檔案內容
-> cat sources.list
+cat sources.list
 // 原內容如下
 deb http://ppa.build.openkylin.top/packaging/ppa2/openkylin yangtze main
 #deb file:/cdrom yangtze main
@@ -96,7 +98,9 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted unive
 
 
 ```shell
-> sudo apt-get update
+sudo apt-get update
+
+// 輸出結果如下
 Get:1 http://archive.canonical.com/ubuntu focal InRelease [12.1 kB]
 Err:1 http://archive.canonical.com/ubuntu focal InRelease 
   The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 3B4FE6ACC0B21F32 NO_PUBKEY 871920D1991BC93C
@@ -141,15 +145,17 @@ N: See apt-secure(8) manpage for repository creation and user configuration deta
 
 
 ```shell
-> sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
 
+// 輸出結果如下
 Executing: /tmp/apt-key-gpghome.h4o7D1rBQf/gpg.1.sh --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
 gpg: key 3B4FE6ACC0B21F32: public key "Ubuntu Archive Automatic Signing Key (2012) <ftpmaster@ubuntu.com>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1
 
-> sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
 
+// 輸出結果如下
 Executing: /tmp/apt-key-gpghome.Fr7e23ni5Y/gpg.1.sh --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
 gpg: key 871920D1991BC93C: "Ubuntu Archive Automatic Signing Key (2018) <ftpmaster@ubuntu.com>" not changed
 gpg: Total number processed: 1
@@ -159,7 +165,7 @@ gpg:              unchanged: 1
 用以下指令測試是否設定未完成
 
 ```
-> sudo apt-get update
+sudo apt-get update
 
 // 輸出如下
 Hit:1 http://archive.canonical.com/ubuntu focal InRelease                      
@@ -178,11 +184,10 @@ All packages are up to date.
 更新軟件資料
 
 ```
-> sudo apt update
-> sudo apt upgrade
-> sudo apt --fix-broken install
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get --fix-broken install
 ```
-
 
 
 
