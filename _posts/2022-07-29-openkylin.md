@@ -12,9 +12,11 @@ date: 2022-07-29 06:00:00
 [開放麒麟下載](https://www.openkylin.top/downloads/)
 
 
-安裝其它軟件的方法
+## 安裝其它軟件的方法
 
-<font color="#FF1000">apt-get</font> 但在開放麒麟不能直接使用。有如下錯誤:
+在 Linux 下有幾種安裝軟件的方法，請參加 [軟件安裝方法 (Linux)](https://hkdickyko.github.io/%E7%B3%BB%E7%B5%B1/linux)
+
+但在開放麒麟不能直接使用 <font color="#FF1000">apt-get</font> 。有如下錯誤:
 
 ```shell
 sudo apt-get update
@@ -32,8 +34,7 @@ E: The repository 'file:/cdrom yangtze Release' does not have a Release file.
 N: Updating from such a repository can't be done securely, and is therefore disabled by default.
 N: See apt-secure(8) manpage for repository creation and user configuration details. 
 ```
-注意: <font color="#FF1000">sudo</font> 是將指今改為 root 指令
-以是問題是因為 /etc/apt/sources.list 這檔案係設定。
+注意: <font color="#FF1000">sudo</font> 是將指今改為 root 指令，使能安裝其它軟件及更新。以上問題是因為 /etc/apt/sources.list 這檔案係設定。
 
 ```shell
 cd /etc/apt
@@ -94,8 +95,16 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted unive
 
 ```
 
-加入後會發現仍然有錯誤。原因是<font color="#FF1000">沒有公共金匙</font>來下載倉庫軟件如下
+軟件倉庫主要分四類型如下：
 
+|名稱|解釋|
+|:---:|:---|
+|Main|Canonical 支持的免費和開源軟件|
+|Universe|社區維護的免費和開源軟件|
+|Restricted|受限設備的專有驅動程序|
+|Multiverse|受版權或法律問題限制的軟件|
+
+加入後會發現仍然有錯誤。原因是<font color="#FF1000">沒有公共金匙</font>來下載倉庫軟件如下
 
 ```shell
 sudo apt-get update
@@ -143,6 +152,8 @@ N: See apt-secure(8) manpage for repository creation and user configuration deta
 
 在以上出現的金匙可能會不同。請自尋找顯示的金匙。並用以下指令生成金匙。
 
+ - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <font color="#FF1000">金匙號碼</font>
+
 
 ```shell
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
@@ -181,7 +192,7 @@ All packages are up to date.
 
 根據以上。列出的資訊已能在網上尋找到適當的軟件倉庫。
 
-更新軟件資料
+## 更新軟件資料
 
 ```
 sudo apt-get update
@@ -189,11 +200,6 @@ sudo apt-get upgrade
 sudo apt-get --fix-broken install
 sudo apt-get upgrade
 ```
-
-
-
-
-
 
 
 
