@@ -207,5 +207,5 @@ sudo apt-get upgrade
 
 ```
 sudo apt-get install build-essential
+sudo apt-get autoremove
 ```
-
