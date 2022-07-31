@@ -255,21 +255,21 @@ sudo cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.bak
 
 編輯文件內容如下:
 
-#Show shared printers on the local network.</br>
-&nbsp;&nbsp;&nbsp;&nbsp;Browsing <font color="#FF1000">On</font></br>
-&nbsp;&nbsp;&nbsp;&nbsp;BrowseLocalProtocols dnssd</br>
+#Show shared printers on the local network.\
+&nbsp;&nbsp;&nbsp;&nbsp;Browsing <font color="#FF1000">On</font>\
+&nbsp;&nbsp;&nbsp;&nbsp;BrowseLocalProtocols dnssd\
 
-#Restrict access to the server</br>
-\<Location /></br>
-&nbsp;&nbsp;&nbsp;&nbsp;Order allow,deny</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font></br>
-\<Location></br>
+#Restrict access to the server\
+\<Location />\
+&nbsp;&nbsp;&nbsp;&nbsp;Order allow,deny\
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font>\
+\<Location>\
 
-#Restrict access to the admin pages.</br>
-\<Location /admin></br>
-&nbsp;&nbsp;&nbsp;&nbsp;Order allow,deny</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font></br>
-\<Location></br>
+#Restrict access to the admin pages.\
+\<Location /admin>\
+&nbsp;&nbsp;&nbsp;&nbsp;Order allow,deny\
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font>\
+\<Location>\
 
 如果使用 CUPS 瀏覽器界面進行配置，建議使用 root 或在 lpadmin 組中經過身份驗證的用戶。要將用戶添加到 lpadmin 組，請鍵入：
 
