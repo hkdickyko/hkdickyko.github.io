@@ -212,8 +212,6 @@ sudo apt-get upgrade
 
 ## 實用軟件介紹
 
-<hr/>
-
 ### CUPS 打印系統
 
 CUPS（Common UNIX Printing System 的首字母縮寫詞）是用於類 Unix 計算機操作系統的模塊化打印系統，它允許計算機充當打印服務器。運行 CUPS 的計算機是可以接受來自客戶端計算機的打印作業、處理它們並將它們發送到適當的打印機的主機。
@@ -251,7 +249,6 @@ TriggeredBy: ● cups.path
      CGroup: /system.slice/cups.service
              └─998 /usr/sbin/cupsd -l
 ```
-
 <br/>
 
 #### 配置文件更新
@@ -281,7 +278,6 @@ sudo cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.bak
 &nbsp;&nbsp;&nbsp;&nbsp;Order allow,deny\
 &nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font>\
 \<Location>
-
 <br/>
 
 #### 共享打印機至網絡
@@ -300,7 +296,6 @@ sudo apt-get install ufw
 sudo ufw allow 631/tcp
 sudo ufw allow 5353/udp
 ```
-
 <br/>
 
 #### 用戶添加到 lpadmin 組 (命令行模式)
@@ -326,7 +321,6 @@ sudo systemctl restart cups
 ```shell
 lpadmin -p HP515 -E -v ipp://192.186.3.7 -m everywhere
 ```
-
 <br/>
 
 #### 在網絡瀏覽器中添加打印機
