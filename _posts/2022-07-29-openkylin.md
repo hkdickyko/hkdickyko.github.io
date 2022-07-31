@@ -312,7 +312,9 @@ sudo systemctl restart cups
 lpadmin -p Smart-Tank-510-series -E -v socket://192.186.3.7 -m everywhere
 ```
 
+
 #### 網絡瀏覽器地址 : [http://localhost:631/admin](http://localhost:631/admin)
+
 
 ![Alt text](../assets/img/kylin/cups.png)
 
