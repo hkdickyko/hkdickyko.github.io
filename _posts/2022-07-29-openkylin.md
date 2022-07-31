@@ -203,5 +203,9 @@ sudo apt-get --fix-broken install
 sudo apt-get upgrade
 ```
 
+## 安裝編譯軟件用以編譯源文件壓縮包
 
+```
+sudo apt-get install build-essential
+```
 
