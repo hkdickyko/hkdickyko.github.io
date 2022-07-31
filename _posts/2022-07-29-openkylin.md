@@ -207,6 +207,7 @@ sudo apt-get upgrade
 ```
 sudo apt-get install build-essential
 sudo apt-get autoremove
+sudo apt-get upgrade
 ```
 
 ## 實用軟件介紹
