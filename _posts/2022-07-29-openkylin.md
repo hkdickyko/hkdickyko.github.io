@@ -101,8 +101,10 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted unive
 |:---:|:---|
 |Main|Canonical 支持的免費和開源軟件|
 |Universe|社區維護的免費和開源軟件|
-|Restricted|受限設備的專有驅動程序|
+|Restricted|設備的專有驅動程序|
 |Multiverse|受版權或法律問題限制的軟件|
+
+注: <font color="#FF1000">Canonical</font> 為 Ubuntu 的開發公司
 
 加入後會發現仍然有錯誤。原因是<font color="#FF1000">沒有公共金匙</font>來下載倉庫軟件如下
 
@@ -200,9 +202,6 @@ sudo apt-get upgrade
 sudo apt-get --fix-broken install
 sudo apt-get upgrade
 ```
-
-
-
 
 
 
