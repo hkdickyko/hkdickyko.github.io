@@ -242,14 +242,13 @@ TriggeredBy: ● cups.path
      CGroup: /system.slice/cups.service
              └─998 /usr/sbin/cupsd -l
 ```
-在 Web 瀏覽器中打開 CUPS
 
-![Alt text](../assets/img/linux/cups.png)
+#### 配置文件更新
 
-但需要更改配置文件以適應安裝的環境
+網絡瀏覽器中打開 CUPS，需要更改配置文件以適應安裝的環境
 
 ```shell
-sudo cd /etc/cups
+cd /etc/cups
 sudo cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.bak
 ```
 
@@ -263,13 +262,33 @@ sudo cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.bak
 \<Location />\
 &nbsp;&nbsp;&nbsp;&nbsp;Order allow,deny\
 &nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font>\
-\<Location>\
+\<Location>
+
 
 #Restrict access to the admin pages.\
 \<Location /admin>\
 &nbsp;&nbsp;&nbsp;&nbsp;Order allow,deny\
 &nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font>\
-\<Location>\
+\<Location>
+
+### 共享打印機至網絡
+
+要 CUPS 共享打印機至網絡，需要安裝 avahi-daemon 。 avahi-daemon 是一個 Bonjour 服務器將廣播打印機信息至網絡。
+
+```shell
+sudo apt-get install avahi-daemon
+sudo systemctl start avahi-daemon
+```
+
+設置允許 CUPS 通過防火牆來共享打印機訪問權限
+
+```shell
+sudo apt-get install ufw
+sudo ufw allow 631/tcp
+sudo ufw allow 5353/udp
+```
+
+### 用戶添加到 lpadmin 組
 
 如果使用 CUPS 瀏覽器界面進行配置，建議使用 root 或在 lpadmin 組中經過身份驗證的用戶。要將用戶添加到 lpadmin 組，請鍵入：
 
@@ -293,7 +312,7 @@ sudo systemctl restart cups
 lpadmin -p Smart-Tank-510-series -E -v socket://192.186.3.7 -m everywhere
 ```
 
-#### 網絡瀏覽器地址 : http://localhost:631/admin
+#### 網絡瀏覽器地址 : [http://localhost:631/admin](http://localhost:631/admin)
 
 ![Alt text](../assets/img/kylin/cups.png)
 
@@ -321,21 +340,7 @@ lpadmin -p Smart-Tank-510-series -E -v socket://192.186.3.7 -m everywhere
 
 ![Alt text](../assets/img/kylin/prn6.png)
 
-### 共享打印機至網絡
 
-要 CUPS 共享打印機至網絡，需要安裝 avahi-daemon 。 avahi-daemon 是一個 Bonjour 服務器將廣播打印機信息至網絡。
-
-```shell
-sudo apt-get install avahi-daemon
-sudo systemctl start avahi-daemon
-```
-
-設置允許 CUPS 通過防火牆來共享打印機訪問權限
-
-```shell
-sudo ufw allow 631/tcp
-sudo ufw allow 5353/udp
-```
 
 ### Krita : Krita 是一個專業的免費開源繪畫程序
 
