@@ -293,7 +293,7 @@ sudo systemctl restart cups
 lpadmin -p Smart-Tank-510-series -E -v socket://192.186.3.7 -m everywhere
 ```
 
-![Alt text](../assets/img/kylin/hp510.png)
+![Alt text](../assets/img/kylin/cups.png)
 
 ![Alt text](../assets/img/kylin/prn1.png)
 
