@@ -224,9 +224,16 @@ CUPS 由打印假脫機程序和調度程序、將打印數據轉換為打印機
 ```shell
 sudo apt-get update
 sudo apt-get install cups
-sudo systemctl stop cups
+
+// 啟動 CUPS
 sudo systemctl start cups
+// 停止 CUPS
+sudo systemctl stop cups
+// 重新開始 CUPS
+sudo systemctl start cups
+// 啟用服務器啟動時自動啟動 cups
 sudo systemctl enable cups
+// 顯示狀態 CUPS
 sudo systemctl status cups
 
 // 輸出如下
@@ -242,6 +249,7 @@ TriggeredBy: ● cups.path
      CGroup: /system.slice/cups.service
              └─998 /usr/sbin/cupsd -l
 ```
+
 
 #### 配置文件更新
 
@@ -271,6 +279,7 @@ sudo cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.bak
 &nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font>\
 \<Location>
 
+
 #### 共享打印機至網絡
 
 要 CUPS 共享打印機至網絡，需要安裝 avahi-daemon 。 avahi-daemon 是一個 Bonjour 服務器將廣播打印機信息至網絡。
@@ -287,6 +296,7 @@ sudo apt-get install ufw
 sudo ufw allow 631/tcp
 sudo ufw allow 5353/udp
 ```
+
 
 #### 用戶添加到 lpadmin 組
 
@@ -309,8 +319,9 @@ sudo systemctl restart cups
     - o : 選項值設置命名選項
 
 ```shell
-lpadmin -p HP515 -E -v socket://192.186.3.7 -m everywhere
+lpadmin -p HP515 -E -v ipp://192.186.3.7 -m everywhere
 ```
+
 
 #### 在網絡瀏覽器中添加打印機
 
@@ -330,7 +341,7 @@ lpadmin -p HP515 -E -v socket://192.186.3.7 -m everywhere
 
 ![Alt text](../assets/img/kylin/prn3.png)
 
-###### 打印機驅動程序
+##### 打印機驅動程序
 
 ![Alt text](../assets/img/kylin/prn4.png)
 
