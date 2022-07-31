@@ -271,7 +271,7 @@ sudo cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.bak
 &nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font>\
 \<Location>
 
-### 共享打印機至網絡
+#### 共享打印機至網絡
 
 要 CUPS 共享打印機至網絡，需要安裝 avahi-daemon 。 avahi-daemon 是一個 Bonjour 服務器將廣播打印機信息至網絡。
 
@@ -288,7 +288,7 @@ sudo ufw allow 631/tcp
 sudo ufw allow 5353/udp
 ```
 
-### 用戶添加到 lpadmin 組
+#### 用戶添加到 lpadmin 組
 
 如果使用 CUPS 瀏覽器界面進行配置，建議使用 root 或在 lpadmin 組中經過身份驗證的用戶。要將用戶添加到 lpadmin 組，請鍵入：
 
@@ -309,37 +309,36 @@ sudo systemctl restart cups
     - o : 選項值設置命名選項
 
 ```shell
-lpadmin -p Smart-Tank-510-series -E -v socket://192.186.3.7 -m everywhere
+lpadmin -p HP515 -E -v socket://192.186.3.7 -m everywhere
 ```
 
+#### 在網絡瀏覽器中添加打印機
 
-
- ## 網絡瀏覽器地址 : [http://localhost:631/admin](http://localhost:631/admin)
-
+網絡瀏覽器地址 : [http://localhost:631/admin](http://localhost:631/admin)
 
 ![Alt text](../assets/img/kylin/cups.png)
 
-#### 選擇打印機
+##### 選擇打印機
 
 ![Alt text](../assets/img/kylin/prn1.png)
 
-#### 打印機說明
+##### 打印機說明
 
 ![Alt text](../assets/img/kylin/prn2.png)
 
-#### 打印機類型
+##### 打印機類型
 
 ![Alt text](../assets/img/kylin/prn3.png)
 
-#### 打印機驅動程序
+###### 打印機驅動程序
 
 ![Alt text](../assets/img/kylin/prn4.png)
 
-#### 打印機默認設置
+##### 打印機默認設置
 
 ![Alt text](../assets/img/kylin/prn5.png)
 
-#### 打印機信息
+##### 打印機信息
 
 ![Alt text](../assets/img/kylin/prn6.png)
 
