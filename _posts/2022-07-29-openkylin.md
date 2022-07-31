@@ -293,35 +293,35 @@ sudo systemctl restart cups
 lpadmin -p Smart-Tank-510-series -E -v socket://192.186.3.7 -m everywhere
 ```
 
-### 網絡瀏覽器地址 : http://localhost:631/admin
+#### 網絡瀏覽器地址 : http://localhost:631/admin
 
 ![Alt text](../assets/img/kylin/cups.png)
 
-### 選擇打印機
+#### 選擇打印機
 
 ![Alt text](../assets/img/kylin/prn1.png)
 
-### 打印機說明
+#### 打印機說明
 
 ![Alt text](../assets/img/kylin/prn2.png)
 
-### 打印機類型
+#### 打印機類型
 
 ![Alt text](../assets/img/kylin/prn3.png)
 
-### 打印機驅動程序
+#### 打印機驅動程序
 
 ![Alt text](../assets/img/kylin/prn4.png)
 
-### 打印機默認設置
+#### 打印機默認設置
 
 ![Alt text](../assets/img/kylin/prn5.png)
 
-### 打印機信息
+#### 打印機信息
 
 ![Alt text](../assets/img/kylin/prn6.png)
 
-## 共享打印機至網絡
+### 共享打印機至網絡
 
 要 CUPS 共享打印機至網絡，需要安裝 avahi-daemon 。 avahi-daemon 是一個 Bonjour 服務器將廣播打印機信息至網絡。
 
@@ -335,50 +335,6 @@ sudo systemctl start avahi-daemon
 ```shell
 sudo ufw allow 631/tcp
 sudo ufw allow 5353/udp
-```
-
-
-中州韻輸入法引擎 : RIME 中文輸入法
-
-安裝 fcitx5 輸入法方式：
-
-```shell
-# --- 卸載過時相關軟件包並清理依賴包
-sudo apt purge fcitx*
-sudo apt autoremove
-# --- 刪除配置文件目錄
-rm -rf ~/.config/fcitx
-# --- 安裝中州韻輸入法引擎 ---
-sudo apt-get install fcitx-data
-sudo apt-get install fcitx-rime
-sudo apt-get install fcitx5 fcitx5-chinese-addons
-sudo apt-get install fcitx5-config-qt
-```
-
-```shell
-# --- 可以根據需要安裝以下項目 ---
-# --- 朙月拼音（預裝）
-sudo apt-get install librime-data-luna-pinyin
-# --- 倉頡五代（預裝）
-sudo apt-get install librime-data-cangjie5
-# --- 雙拼
-sudo apt-get install librime-data-double-pinyin
-# --- 宮保拼音
-sudo apt-get install librime-data-combo-pinyin
-# --- 注音、地球拼音
-sudo apt-get install librime-data-terra-pinyin librime-data-bopomofo
-# --- 速成五代
-sudo apt-get install librime-data-quick5
-# --- 五筆86、袖珍簡化字拼音、五筆畫
-sudo apt-get install librime-data-wubi librime-data-pinyin-simp librime-data-stroke-simp
-# --- IPA (X-SAMPA)
-sudo apt-get install librime-data-ipa-xsampa
-# --- 上海吳語
-sudo apt-get install librime-data-wugniu
-# --- 粵拼
-sudo apt-get install librime-data-jyutping
-# --- 中古漢語拼音
-sudo apt-get install librime-data-zyenpheng
 ```
 
 ### Krita : Krita 是一個專業的免費開源繪畫程序
