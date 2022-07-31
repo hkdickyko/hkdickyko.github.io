@@ -293,19 +293,25 @@ sudo systemctl restart cups
 lpadmin -p Smart-Tank-510-series -E -v socket://192.186.3.7 -m everywhere
 ```
 
-![Alt text](../assets/img/linux/hp510.png)
+![Alt text](../assets/img/kylin/hp510.png)
 
-![Alt text](../assets/img/linux/prn1.png)
+![Alt text](../assets/img/kylin/prn1.png)
 
-![Alt text](../assets/img/linux/prn2.png)
+![Alt text](../assets/img/kylin/prn2.png)
 
-![Alt text](../assets/img/linux/prn3.png)
+![Alt text](../assets/img/kylin/prn3.png)
 
-![Alt text](../assets/img/linux/prn4.png)
+![Alt text](../assets/img/kylin/prn4.png)
 
-![Alt text](../assets/img/linux/prn5.png)
+![Alt text](../assets/img/kylin/prn5.png)
 
-![Alt text](../assets/img/linux/prn6.png)
+![Alt text](../assets/img/kylin/prn6.png)
+
+
+要 CUPS 共享打印機至網絡，需要安裝 avahi-daemon 。 avahi-daemon 是一個 Bonjour 服務器將廣播打印機信息至網絡。
+
+
+
 
 
 中州韻輸入法引擎 : RIME 中文輸入法
