@@ -7,7 +7,7 @@ date: 2022-07-29 06:00:00
 
 # 開放麒麟
 
-下載並安裝至電腦如網站所述: 
+下載並安裝至電腦如網站所述:
 
 [開放麒麟下載](https://www.openkylin.top/downloads/)
 
@@ -22,7 +22,7 @@ date: 2022-07-29 06:00:00
 sudo apt-get update
 
 // sudo 取執行密碼
-> [sudo] password for dickyko: 
+> [sudo] password for dickyko:
 // 輸出結果如下
 Get:1 file:/cdrom yangtze InRelease
 Ign:1 file:/cdrom yangtze InRelease
@@ -32,7 +32,7 @@ Err:2 file:/cdrom yangtze Release
 Reading package lists... Done
 E: The repository 'file:/cdrom yangtze Release' does not have a Release file.
 N: Updating from such a repository can't be done securely, and is therefore disabled by default.
-N: See apt-secure(8) manpage for repository creation and user configuration details. 
+N: See apt-secure(8) manpage for repository creation and user configuration details.
 ```
 注意: <font color="#FF1000">sudo</font> 是將指今改為 root 指令，使能安裝其它軟件及更新。以上問題是因為 /etc/apt/sources.list 這檔案係設定。
 
@@ -113,7 +113,7 @@ sudo apt-get update
 
 // 輸出結果如下
 Get:1 http://archive.canonical.com/ubuntu focal InRelease [12.1 kB]
-Err:1 http://archive.canonical.com/ubuntu focal InRelease 
+Err:1 http://archive.canonical.com/ubuntu focal InRelease
   The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 3B4FE6ACC0B21F32 NO_PUBKEY 871920D1991BC93C
 Get:2 http://archive.ubuntu.com/ubuntu focal InRelease [265 kB]
 Err:2 http://archive.ubuntu.com/ubuntu focal InRelease
@@ -181,13 +181,13 @@ gpg:              unchanged: 1
 sudo apt-get update
 
 // 輸出如下
-Hit:1 http://archive.canonical.com/ubuntu focal InRelease                      
-Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease                         
+Hit:1 http://archive.canonical.com/ubuntu focal InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
 Hit:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease
 Hit:4 http://archive.ubuntu.com/ubuntu focal-security InRelease
 Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease
 Reading package lists... Done
-Building dependency tree       
+Building dependency tree
 Reading state information... Done
 All packages are up to date.
 ```
@@ -198,7 +198,6 @@ All packages are up to date.
 
 ```
 sudo apt-get update
-sudo apt-get upgrade
 sudo apt-get --fix-broken install
 sudo apt-get upgrade
 ```
@@ -209,3 +208,51 @@ sudo apt-get upgrade
 sudo apt-get install build-essential
 sudo apt-get autoremove
 ```
+
+## 實用軟件介紹
+
+中州韻輸入法引擎 : RIME 中文輸入法
+
+安裝 fcitx5 輸入法方式：
+
+```shell
+# --- 卸載過時相關軟件包並清理依賴包
+sudo apt purge fcitx*
+sudo apt autoremove
+# --- 刪除配置文件目錄
+rm -rf ~/.config/fcitx# --- 中州韻輸入法引擎安裝 ---
+sudo apt-get install fcitx-rime
+sudo apt-get install fcitx5 fcitx5-chinese-addons
+sudo apt-get install fcitx5-config-qt
+```
+
+```shell
+# --- 可以根據需要安裝以下項目 ---
+# --- 朙月拼音（預裝）
+sudo apt-get install librime-data-luna-pinyin
+# --- 倉頡五代（預裝）
+sudo apt-get install librime-data-cangjie5
+# --- 雙拼
+sudo apt-get install librime-data-double-pinyin
+# --- 宮保拼音
+sudo apt-get install librime-data-combo-pinyin
+# --- 注音、地球拼音
+sudo apt-get install librime-data-terra-pinyin librime-data-bopomofo
+# --- 速成五代
+sudo apt-get install librime-data-quick5
+# --- 五筆86、袖珍簡化字拼音、五筆畫
+sudo apt-get install librime-data-wubi librime-data-pinyin-simp librime-data-stroke-simp
+# --- IPA (X-SAMPA)
+sudo apt-get install librime-data-ipa-xsampa
+# --- 上海吳語
+sudo apt-get install librime-data-wugniu
+# --- 粵拼
+sudo apt-get install librime-data-jyutping
+# --- 中古漢語拼音
+sudo apt-get install librime-data-zyenpheng
+```
+
+Krita : Krita 是一個專業的免費開源繪畫程序
+
+![Alt text](../assets/img/kylin/krita.png)
+
