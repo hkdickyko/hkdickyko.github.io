@@ -353,6 +353,11 @@ lpadmin -p HP515 -E -v ipp://192.186.3.7 -m everywhere
 
 ![Alt text](../assets/img/kylin/prn6.png)
 
+```shell
+apt-cache search hplip
+sudo apt-get install openprinting-ppds
+```
+
 <hr/>
 ### Krita : Krita 是一個專業的免費開源繪畫程序
 
