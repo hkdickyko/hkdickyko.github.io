@@ -212,6 +212,102 @@ sudo apt-get upgrade
 
 ## 實用軟件介紹
 
+### CUPS 打印系統
+
+CUPS（Common UNIX Printing System 的首字母縮寫詞）是用於類 Unix 計算機操作系統的模塊化打印系統，它允許計算機充當打印服務器。運行 CUPS 的計算機是可以接受來自客戶端計算機的打印作業、處理它們並將它們發送到適當的打印機的主機。
+
+CUPS 由打印假脫機程序和調度程序、將打印數據轉換為打印機可以理解的格式的過濾系統以及將此數據發送到打印設備的後端系統組成。 CUPS 使用 Internet 打印協議 (IPP) 作為管理打印作業和隊列的基礎。系統管理員可以通過編輯 Adob​​e 的 PostScript 打印機描述 (PPD) 格式的文本文件來配置 CUPS 提供的設備驅動程序。它具有內置的基於 Web 的界面。
+
+
+安裝方式：
+
+```shell
+sudo apt-get update
+sudo apt-get install cups
+sudo systemctl stop cups
+sudo systemctl start cups
+sudo systemctl enable cups
+sudo systemctl status cups
+
+// 輸出如下
+cups.service - CUPS Scheduler
+     Loaded: loaded (/lib/systemd/system/cups.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2022-07-31 15:57:33 HKT; 8min ago
+TriggeredBy: ● cups.path
+             ● cups.socket
+       Docs: man:cupsd(8)
+   Main PID: 998 (cupsd)
+      Tasks: 1 (limit: 4465)
+     Memory: 6.6M
+     CGroup: /system.slice/cups.service
+             └─998 /usr/sbin/cupsd -l
+```
+在 Web 瀏覽器中打開 CUPS
+
+![Alt text](../assets/img/linux/cups.png)
+
+但需要更改配置文件以適應安裝的環境
+
+```shell
+sudo cd /etc/cups
+sudo cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.bak
+```
+
+編輯文件內容如下:
+
+#Show shared printers on the local network.</br>
+&nbsp;&nbsp;&nbsp;&nbsp;Browsing <font color="#FF1000">On</font></br>
+&nbsp;&nbsp;&nbsp;&nbsp;BrowseLocalProtocols dnssd</br>
+
+#Restrict access to the server</br>
+\<Location /></br>
+&nbsp;&nbsp;&nbsp;&nbsp;Order allow,deny</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font></br>
+\<Location></br>
+
+#Restrict access to the admin pages.</br>
+\<Location /admin></br>
+&nbsp;&nbsp;&nbsp;&nbsp;Order allow,deny</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font></br>
+\<Location></br>
+
+如果使用 CUPS 瀏覽器界面進行配置，建議使用 root 或在 lpadmin 組中經過身份驗證的用戶。要將用戶添加到 lpadmin 組，請鍵入：
+
+ - sudo usermod -aG lpadmin 用戶名
+
+```shell
+sudo usermod -aG lpadmin root
+sudo systemctl restart cups
+```
+
+ - lpadmin -p <font color="#FF1000">printer-name</font> -E -v device
+    - p : 創建或修改的打印機
+    - E : 啟用打印機並接受新的打印作業
+    - v : 設置打印機的 URI
+    - m : 型號名稱設置打印機驅動程序 (everywhere：驅動程序用於自 2009 年左右以來銷售的幾乎所有現代網絡打印機)
+    - L : 設置打印機的位置，例如 會議室
+    - D : 顯示的打印機描述，不是打印機名稱，例如 HP LaserJet
+    - o : 選項值設置命名選項
+
+```shell
+lpadmin -p Smart-Tank-510-series -E -v socket://192.186.3.7 -m everywhere
+```
+
+![Alt text](../assets/img/linux/hp510.png)
+
+![Alt text](../assets/img/linux/prn1.png)
+
+![Alt text](../assets/img/linux/prn2.png)
+
+![Alt text](../assets/img/linux/prn3.png)
+
+![Alt text](../assets/img/linux/prn4.png)
+
+![Alt text](../assets/img/linux/prn5.png)
+
+![Alt text](../assets/img/linux/prn6.png)
+
+
 中州韻輸入法引擎 : RIME 中文輸入法
 
 安裝 fcitx5 輸入法方式：
@@ -221,7 +317,9 @@ sudo apt-get upgrade
 sudo apt purge fcitx*
 sudo apt autoremove
 # --- 刪除配置文件目錄
-rm -rf ~/.config/fcitx# --- 中州韻輸入法引擎安裝 ---
+rm -rf ~/.config/fcitx
+# --- 安裝中州韻輸入法引擎 ---
+sudo apt-get install fcitx-data
 sudo apt-get install fcitx-rime
 sudo apt-get install fcitx5 fcitx5-chinese-addons
 sudo apt-get install fcitx5-config-qt
@@ -253,7 +351,7 @@ sudo apt-get install librime-data-jyutping
 sudo apt-get install librime-data-zyenpheng
 ```
 
-Krita : Krita 是一個專業的免費開源繪畫程序
+### Krita : Krita 是一個專業的免費開源繪畫程序
 
 ![Alt text](../assets/img/kylin/krita.png)
 
