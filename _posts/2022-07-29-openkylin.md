@@ -212,6 +212,8 @@ sudo apt-get upgrade
 
 ## 實用軟件介紹
 
+<hr/>
+
 ### CUPS 打印系統
 
 CUPS（Common UNIX Printing System 的首字母縮寫詞）是用於類 Unix 計算機操作系統的模塊化打印系統，它允許計算機充當打印服務器。運行 CUPS 的計算機是可以接受來自客戶端計算機的打印作業、處理它們並將它們發送到適當的打印機的主機。
@@ -250,6 +252,7 @@ TriggeredBy: ● cups.path
              └─998 /usr/sbin/cupsd -l
 ```
 
+<br/>
 
 #### 配置文件更新
 
@@ -264,7 +267,7 @@ sudo cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.bak
 
 #Show shared printers on the local network.\
 &nbsp;&nbsp;&nbsp;&nbsp;Browsing <font color="#FF1000">On</font>\
-&nbsp;&nbsp;&nbsp;&nbsp;BrowseLocalProtocols dnssd\
+&nbsp;&nbsp;&nbsp;&nbsp;BrowseLocalProtocols dnssd
 
 #Restrict access to the server\
 \<Location />\
@@ -279,6 +282,7 @@ sudo cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.bak
 &nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF1000">Allow @LOCAL</font>\
 \<Location>
 
+<br/>
 
 #### 共享打印機至網絡
 
@@ -297,8 +301,9 @@ sudo ufw allow 631/tcp
 sudo ufw allow 5353/udp
 ```
 
+<br/>
 
-#### 用戶添加到 lpadmin 組
+#### 用戶添加到 lpadmin 組 (命令行模式)
 
 如果使用 CUPS 瀏覽器界面進行配置，建議使用 root 或在 lpadmin 組中經過身份驗證的用戶。要將用戶添加到 lpadmin 組，請鍵入：
 
@@ -322,6 +327,7 @@ sudo systemctl restart cups
 lpadmin -p HP515 -E -v ipp://192.186.3.7 -m everywhere
 ```
 
+<br/>
 
 #### 在網絡瀏覽器中添加打印機
 
@@ -353,8 +359,7 @@ lpadmin -p HP515 -E -v ipp://192.186.3.7 -m everywhere
 
 ![Alt text](../assets/img/kylin/prn6.png)
 
-
-
+<hr/>
 ### Krita : Krita 是一個專業的免費開源繪畫程序
 
 ![Alt text](../assets/img/kylin/krita.png)
