@@ -780,13 +780,19 @@ class components {
       "</span></div>";
   }
 
-  meter(id) {
+  setMeter(id, value){
+    let elem = document.getElementById(id);
+    elem.firstElementChild.remove();
+    this.meter(id, value);
+  }
+
+  meter(id, value) {
     let elem = document.getElementById(id);
     let idx = elem.getAttribute("idx");
     let cname = elem.getAttribute("cname");
     let max = elem.getAttribute("max");
     let unit = elem.getAttribute("unit");
-    let value = elem.getAttribute("value");
+    elem.setAttribute("value", value);
     let barStyle = elem.getAttribute("color");
     if (barStyle == null) barStyle = "switch-bar-t";
     let pointer = parseInt(parseFloat(value) * 2);
@@ -841,6 +847,11 @@ class components {
       idx +
       "><span></div></div></div>";
   }
+
+  click(id, fName){
+    let elem = document.getElementById(id);
+    elem.addEventListener("click", fName);
+  }
 }
 ```
 ## 前端元件的網頁示例
@@ -883,6 +894,11 @@ class components {
         x.led("L1");
         x.led("L2");
         x.led("L3");
+        function onclickCRH(){
+          x.setMeter("m1", "35.5");
+          x.setMeter("m2", "80.5");
+        }
+        x.click("B1", onclickCRH);
       </script>
     </div>
   </body>
