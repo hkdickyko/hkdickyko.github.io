@@ -2,7 +2,7 @@
 category: [積體電路]
 tags: [IoT, 電子]
 title: 電容器
-date: 2022-08-20 12:00:00
+date: 2022-08-20 1:00:00
 ---
 
 <style>
@@ -70,8 +70,9 @@ $$ X_{c} = \frac{1}{2\pi{fC}} $$
 
 ## 常用電路
 
+### 濾波電腦
 
-
+![Alt text](../assets/img/misc/cfilter.jpg)
 
 
 
