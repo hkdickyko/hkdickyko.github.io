@@ -34,10 +34,10 @@ $$ X_{c} = \frac{1}{2\pi{fC}} $$
 
 |名稱|圖片|
 |:---:|:---:|
-|電解電容|![Alt text](../assets/img/misc/c1.jpg)|
-|鉭質電容|![Alt text](../assets/img/misc/c2.jpg)|
-|聚合物薄膜電容|![Alt text](../assets/img/misc/c3.jpg)|
-|陶瓷電容|![Alt text](../assets/img/misc/c4.jpg)|
+|電解電容|![Alt text](../assets/img/misc/c1.png)|
+|鉭質電容|![Alt text](../assets/img/misc/c2.png)|
+|聚合物薄膜電容|![Alt text](../assets/img/misc/c3.png)|
+|陶瓷電容|![Alt text](../assets/img/misc/c4.png)|
 
 分類
 
@@ -73,8 +73,6 @@ $$ X_{c} = \frac{1}{2\pi{fC}} $$
 ### 濾波電腦
 
 ![Alt text](../assets/img/misc/cfilter.jpg)
-
-
 
 
 
