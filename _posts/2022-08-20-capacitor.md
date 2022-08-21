@@ -24,31 +24,6 @@ $$ X_{c} = \frac{1}{2\pi{fC}} $$
  - 電容用 $C$ (F)
  - 頻率用 $f$ (Hz)
 
-<script>
-function multiplyBy()
-{
-        num1 = document.getElementById("firstNumber").value;
-        num2 = document.getElementById("secondNumber").value;
-        document.getElementById("result").innerHTML = num1 * num2;
-}
-
-function divideBy() 
-{ 
-        num1 = document.getElementById("firstNumber").value;
-        num2 = document.getElementById("secondNumber").value;
-document.getElementById("result").innerHTML = num1 / num2;
-}
-</script>
-
-
-<form>
-1st Number : <input type="text" id="firstNumber" /><br>
-2nd Number: <input type="text" id="secondNumber" /><br>
-<input type="button" onClick="multiplyBy()" Value="Multiply" />
-<input type="button" onClick="divideBy()" Value="Divide" />
-</form>
-
-
 注意: 電容電路分析中需要用到電容器<font color="#FF1000">兩端電壓不能突變</font>的特性，這是分析電容電路工作原理時的一個重要特性。
 
 
@@ -161,7 +136,6 @@ document.getElementById("result").innerHTML = num1 / num2;
 電阻對交流電的電阻不變，即對不同頻率的交流電其電阻不變，但是電容的容抗隨交流電的頻率變化而變化，所以RC串聯電路總的阻抗是隨頻率變化而改變的。
 
 $$ f_{ω} = \frac{1}{2\pi{RC}} $$
-
 
 
 
