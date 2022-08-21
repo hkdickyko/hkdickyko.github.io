@@ -57,29 +57,28 @@ date: 2021-02-06 22:34:36
  
 ## 旁路電容用途
 ![Alt ](../assets/img/IC/bypass.png)
+
  * 交流信號可能在直流電路上存在，旁路電容的工作方式是利容電容特性將特定範圍的交流信號接地，從而使傳遞的信號為所選定的交流信號。
  * 旁路電容的電抗應不大於並聯電阻(X<sub>R</sub>)的10%。可以使用以下公式計算要使用的旁路電容器的電容值。計算出的單位為μF。
  
-![](https://latex.codecogs.com/svg.latex?\Large&space;C=\frac{10^6}{2\pi{f}\times({X_{R}\times{0.1}})})
-
+$$ C=\frac{10^6}{2\pi{f}\times({X_{R}\times{0.1}})}$$
 ## 旁路電容和去耦電容之間的分別
 * 旁路電容器設計用於分流噪聲信號，而去耦電容器設計用於通過穩定失真的信號來平滑信號。為了使信號分流，我們可以只使用一個電解電容器，但是為了使信號平穩，我們需要兩種不同類型的電容。
 
 ## Q 電容電感系數
 ![Alt Q](../assets/img/IC/qr.png)
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;Q=\dfrac{f_0}{f_2-f_1})
+$$Q=\dfrac{f_0}{f_2-f_1}$$
 
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;Q=\frac{1}{R}\times \sqrt{\frac{L}{C}})
+$$Q=\frac{1}{R}\times \sqrt{\frac{L}{C}}$$
 
  * 如果將電感器的圈數加倍，則Q的增加將帶來淨收益。考慮將圈數加倍也會使電阻`加倍`，這對Q不利。但是將圈數加倍也會使電感增加`四倍`，並且要保持相同的工作頻率電容值必須降低`四分之一`。因此，L / C之比變為16 * L / C，因此取平方根，Q的新值變為原來的「`2`」倍。
 
-![](https://latex.codecogs.com/svg.latex?\Large&space;Q=\frac{4}{2\times{R}}\times\sqrt{\frac{L}{C}})
+$$Q=\frac{4}{2\times{R}}\times\sqrt{\frac{L}{C}}$$
 
 * -3dB衰減，相當於電壓從最大降低到70.7%或功率從最大降低到50.0%。
 
 ![Alt ](../assets/img/IC/ktoem.png)
-
 
 
