@@ -25,7 +25,7 @@
       let height = window.innerHeight;
 
       let zf = 35;
-      let camera = new THREE.OrthographicCamera(width/-zf,width/zf,height/zf,height/-zf,10,100);
+      let camera = new THREE.OrthographicCamera(width/-zf,width/zf,height/zf,height/-zf,-100,100);
 
       camera.position.y = 5;
       camera.position.z = 25;
@@ -46,19 +46,44 @@
       dlight.position.set(500, 300, 500);
       scene.add(dlight);
 
+
       let earth = new THREE.Mesh(
         new THREE.SphereGeometry(10, 32, 32),
         new THREE.MeshPhongMaterial({
           map: new THREE.TextureLoader().load("texture/earthmap4k.jpg"),
-          bumpMap: new THREE.TextureLoader().load("texture/earthbump4k.jpg"),
-          bumpScale: 1,
-          specularMap: new THREE.TextureLoader().load(
-            "texture/earthspec4k.jpg"
-          ),
-          specular: new THREE.Color(0x262626),
+          specularMap: new THREE.TextureLoader().load("texture/earthspec4k.jpg"),
+          specular:  new THREE.Color(0x262626),
         })
       );
-      scene.add(earth);
+          earth.position.set(25,0,0);
+     scene.add(earth);  
+      
+      
+      let earth1 = new THREE.Mesh(
+        new THREE.SphereGeometry(10, 32, 32),
+        new THREE.MeshPhongMaterial({
+          map: new THREE.TextureLoader().load("texture/earthmap4k.jpg"),
+          bumpMap: new THREE.TextureLoader().load("texture/earthbump4k.jpg"),
+          bumpScale: 1,         
+          specularMap: new THREE.TextureLoader().load("texture/earthspec4k.jpg"),
+          specular:  new THREE.Color(0x262626),
+        })
+      );
+      scene.add(earth1);
+      
+      
+let earth2 = new THREE.Mesh(
+  new THREE.SphereGeometry(10, 32, 32),
+  new THREE.MeshPhongMaterial({
+    map: new THREE.TextureLoader().load("texture/earthmap4k.jpg"),
+    normalMap: new THREE.TextureLoader().load("texture/earth_normalmap_flat4k.jpg"),
+    normalScale: new THREE.Vector2(0.5, 0.7),
+    specularMap: new THREE.TextureLoader().load("texture/earthspec4k.jpg"),
+    specular:  new THREE.Color(0x262626),
+  })
+);
+earth2.position.set(-25,0,0);
+scene.add(earth2);  
 
       let render = function () {
         requestAnimationFrame(render);
