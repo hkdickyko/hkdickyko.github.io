@@ -23,6 +23,7 @@
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
   //-----------------------------------------------------------------------------------
+  camera.position.set(-10, 10, 380);
   var uvTex = new THREE.TextureLoader().load("uvgrid.png");
   var materials = new THREE.MeshBasicMaterial({
     map: uvTex,

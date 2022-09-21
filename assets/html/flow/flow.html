@@ -22,8 +22,8 @@
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
     //-----------------------------------------------------------------------------------
-
     // 用箭頭製作紋理
+    camera.position.set(0, 50, -100);
     const ctx = document.createElement("canvas").getContext("2d");
     ctx.canvas.width = 64;
     ctx.canvas.height = 64;

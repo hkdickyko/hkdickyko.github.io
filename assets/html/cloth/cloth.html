@@ -23,6 +23,7 @@
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
   //-----------------------------------------------------------------------------------
+  camera.position.set(-20, 30, 100);
   var uvTex = new THREE.TextureLoader().load("waterlily.png");
   var materials = new THREE.MeshBasicMaterial({
     map: uvTex,
