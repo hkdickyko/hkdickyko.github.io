@@ -12,23 +12,19 @@
 	camera.position.set(0, 400, 500);
 	const light = new THREE.AmbientLight(0x404040);
 	scene.add(light);
-
 	var renderer = new THREE.WebGLRenderer({
 		antialias: true
 	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.setClearColor(0xdddddd, 1);
-
-	var container = document.createElement('div');
-	document.body.appendChild(container);
-	container.appendChild(renderer.domElement);
+	document.body.appendChild(renderer.domElement);
 
 	var controls = new THREE.OrbitControls(camera, renderer.domElement);
 	controls.enableZoom = true;
+	//-----------------------------------------------------------------------------------
 
 	var clock = new THREE.Clock(true);
 	var time;
-	//-----------------------------------------------------------------------------------
 	// material
 	var uvTex = new THREE.TextureLoader().load("uvgrid.png");
 	var materials = new THREE.MeshBasicMaterial({
@@ -57,14 +53,19 @@
 	var mesh06 = new THREE.Mesh(spring, materials);
 	scene.add(mesh06);
 
-	function animate() {
-		requestAnimationFrame(animate);
+	function core(){
 		time = clock.getElapsedTime();
 		spring.morphVertices(time);
+
+	}
+
+	//-----------------------------------------------------------------------------------
+	function animate() {
+		requestAnimationFrame(animate);
+		core();
 		renderer.render(scene, camera);
 		controls.update();
 	}
 	animate();
 </script>
-
 </html>
