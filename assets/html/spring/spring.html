@@ -1,71 +1,65 @@
 <!DOCTYPE html>
 <html>
+  <body></body>
+  <script src="../js/three.js"></script>
+  <script src="../js/OrbitControls.js"></script>
+  <script src="../js/MorphGeometry.js"></script>
+  <script>
+    let scene = new THREE.Scene();
 
-<body>
-</body>
-<script src="three.js"></script>
-<script src="OrbitControls.js"></script>
-<script src="MorphGeometry.js"></script>
-<script>
-	let scene = new THREE.Scene();
-	let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-	camera.position.set(0, 400, 500);
-	const light = new THREE.AmbientLight(0x404040);
-	scene.add(light);
-	var renderer = new THREE.WebGLRenderer({
-		antialias: true
-	});
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	renderer.setClearColor(0xdddddd, 1);
-	document.body.appendChild(renderer.domElement);
+    let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 400, 500);
 
-	var controls = new THREE.OrbitControls(camera, renderer.domElement);
-	controls.enableZoom = true;
-	//-----------------------------------------------------------------------------------
+    const light = new THREE.AmbientLight(0x404040);
+    scene.add(light);
 
-	var clock = new THREE.Clock(true);
-	var time;
-	// material
-	var uvTex = new THREE.TextureLoader().load("uvgrid.png");
-	var materials = new THREE.MeshBasicMaterial({
-		map: uvTex,
-		side: THREE.DoubleSide
-	});
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xdddddd, 1);
+    document.body.appendChild(renderer.domElement);
 
-	var spring = new THREE.BufferGeometry();
-	spring.createMorphGeometry = MorphGeometry.createMorphGeometry;
-	spring.createMorphGeometry({
-		radius: 5,
-		height: 160,
-		radiusSegments: 16,
-		heightSegments: 500,
-		centerX: function (v, t) {
-			return 0.5 * Math.sin(10 * Math.PI * v)
-		},
-		centerY: function (v, t) {
-			return v * (v + 0.4 * (1 + Math.sin(t)))
-		},
-		centerZ: function (v, t) {
-			return 0.5 * Math.cos(10 * Math.PI * v)
-		}
-	});
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = true;
+  //-----------------------------------------------------------------------------------
+  var uvTex = new THREE.TextureLoader().load("uvgrid.png");
+  var materials = new THREE.MeshBasicMaterial({
+    map: uvTex,
+    side: THREE.DoubleSide
+  });
 
-	var mesh06 = new THREE.Mesh(spring, materials);
-	scene.add(mesh06);
+  var spring = new THREE.BufferGeometry();
+  spring.createMorphGeometry = MorphGeometry.createMorphGeometry;
+  spring.createMorphGeometry({
+    radius: 5,
+    height: 160,
+    radiusSegments: 16,
+    heightSegments: 500,
+    centerX: function (v, t) {
+      return 0.5 * Math.sin(10 * Math.PI * v)
+    },
+    centerY: function (v, t) {
+      return v * (v + 0.4 * (1 + Math.sin(t)))
+    },
+    centerZ: function (v, t) {
+      return 0.5 * Math.cos(10 * Math.PI * v)
+    }
+  });
 
-	function core(){
-		time = clock.getElapsedTime();
-		spring.morphVertices(time);
+  var mesh06 = new THREE.Mesh(spring, materials);
+  scene.add(mesh06);
 
-	}
-
-	//-----------------------------------------------------------------------------------
-	function animate() {
-		requestAnimationFrame(animate);
-		core();
-		renderer.render(scene, camera);
-		controls.update();
-	}
-	animate();
+  function core(time){
+    spring.morphVertices(time/300);
+  }
+  //-----------------------------------------------------------------------------------
+  function animate(time) {
+    requestAnimationFrame(animate);
+    core(time);
+    renderer.render(scene, camera);
+    controls.update();
+  }
+  animate();
 </script>
 </html>

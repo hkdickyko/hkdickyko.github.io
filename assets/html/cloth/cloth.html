@@ -1,66 +1,61 @@
 <!DOCTYPE html>
 <html>
+  <body></body>
+  <script src="../js/three.js"></script>
+  <script src="../js/OrbitControls.js"></script>
+  <script src="../js/MorphGeometry.js"></script>
+  <script>
+    let scene = new THREE.Scene();
 
-<body>
-</body>
-<script src="three.js"></script>
-<script src="OrbitControls.js"></script>
-<script src="MorphGeometry.js"></script>
-<script>
-	let scene = new THREE.Scene();
-	let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-	camera.position.set(0, 400, 300);
-	const light = new THREE.AmbientLight(0x404040);
-	scene.add(light);
+    let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 400, 500);
 
-	var renderer = new THREE.WebGLRenderer({
-		antialias: true
-	});
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	renderer.setClearColor(0xdddddd, 1);
+    const light = new THREE.AmbientLight(0x404040);
+    scene.add(light);
 
-	var container = document.createElement('div');
-	document.body.appendChild(container);
-	container.appendChild(renderer.domElement);
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xdddddd, 1);
+    document.body.appendChild(renderer.domElement);
 
-	var controls = new THREE.OrbitControls(camera, renderer.domElement);
-	controls.enableZoom = true;
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = true;
+  //-----------------------------------------------------------------------------------
+  var uvTex = new THREE.TextureLoader().load("waterlily.png");
+  var materials = new THREE.MeshBasicMaterial({
+    map: uvTex,
+    side: THREE.DoubleSide
+  });
 
-	var clock = new THREE.Clock(true);
-	var time;
-	var uvTex = new THREE.TextureLoader().load("waterlily.png");
-	var materials = new THREE.MeshBasicMaterial({
-		map: uvTex,
-		side: THREE.DoubleSide
-	});
+  var cloth = new THREE.BufferGeometry();
+  cloth.createMorphGeometry = MorphGeometry.createMorphGeometry;
+  cloth.createMorphGeometry({
+    quadLine: true,
+    quadColor: 0xff00ff,
+    style: 'cover',
+    materialCover: function (u, v, t) {
+      return 0
+    },
+    rCircHeight: function (u, v, t) {
+      return Math.sin(t + 6.28 * u) + Math.sin(t + 6.28 * v)
+    },
+  });
 
-	//-----------------------------------------------------------------------------------
-	var cloth = new THREE.BufferGeometry();
-	cloth.createMorphGeometry = MorphGeometry.createMorphGeometry;
-	cloth.createMorphGeometry({
-		quadLine: true,
-		quadColor: 0xff00ff,
-		style: 'cover',
-		materialCover: function (u, v, t) {
-			return 0
-		},
-		rCircHeight: function (u, v, t) {
-			return Math.sin(t + 6.28 * u) + Math.sin(t + 6.28 * v)
-		},
-	});
+  var mesh09 = new THREE.Mesh(cloth, materials);
+  scene.add(mesh09);
 
-	var mesh09 = new THREE.Mesh(cloth, materials);
-	scene.add(mesh09);
-//	mesh09.add(cloth.quadLine);
-
-	function animate() {
-		requestAnimationFrame(animate);
-		time = clock.getElapsedTime();
-		cloth.morphVertices(time);
-		renderer.render(scene, camera);
-		controls.update();
-	}
-	animate();
+  function core(time){
+    cloth.morphVertices(time/300);
+  }
+  //-----------------------------------------------------------------------------------
+  function animate(time) {
+    requestAnimationFrame(animate);
+    core(time);
+    renderer.render(scene, camera);
+    controls.update();
+  }
+  animate();
 </script>
-
 </html>
