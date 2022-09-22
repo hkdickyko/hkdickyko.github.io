@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <body></body>
+  <script type="module">
+    import * as THREE from "../module/Three.js";
+    import { OrbitControls } from "../module/js/OrbitControls.js";
+    import { Water } from "../module/js/Water.js";
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const light = new THREE.AmbientLight(0x404040);
+    scene.add(light);
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true,
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xdddddd, 1);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = true;
+    //-----------------------------------------------------------------------------------
+    camera.position.set(0, 100, 200);
+    const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
+    let water = new Water(waterGeometry, {
+      textureWidth: 512,
+      textureHeight: 512,
+      waterNormals: new THREE.TextureLoader().load(
+        "../texture/waternormals.jpg",
+        function (texture) {
+          texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+        }
+      ),
+      sunDirection: new THREE.Vector3(),
+      sunColor: 0xffffff,
+      waterColor: 0x5FC7F3,
+      alpha: 0.8,
+      distortionScale: 6.7,
+      fog: scene.fog !== undefined,
+    });
+    water.rotation.x = -Math.PI / 2;
+    scene.add(water);
+    function core(time) {
+      water.material.uniforms["time"].value += 1.0 / 60.0;
+    }
+    //-----------------------------------------------------------------------------------
+    function animate(time) {
+      requestAnimationFrame(animate);
+      core(time);
+      renderer.render(scene, camera);
+      controls.update();
+    }
+    animate();
+  </script>
+</html>
