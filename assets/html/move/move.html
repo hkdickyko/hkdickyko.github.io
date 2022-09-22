@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <body></body>
+  <script src="../js/three.js"></script>
+  <script src="../js/OrbitControls.js"></script>
+  <script>
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const light = new THREE.AmbientLight(0x404040);
+    scene.add(light);
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true,
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xdddddd, 1);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = true;
+    //-----------------------------------------------------------------------------------
+    camera.position.set(0, 50, 200);
+    const directionalLight = new THREE.DirectionalLight(0x888888, 0.8);
+    scene.add(directionalLight);
+    const light1 = new THREE.AmbientLight(0xffffff);
+    scene.add(light1);
+
+    const curve = new THREE.CubicBezierCurve3(
+      new THREE.Vector3(-100, 0, 0),
+      new THREE.Vector3(-50, 150, 0),
+      new THREE.Vector3(200, 150, 0),
+      new THREE.Vector3(100, 0, 0)
+    );
+    const points = curve.getPoints(200);
+    const positions = [];
+    for (let j = 0; j < points.length; j++) {
+      positions.push(points[j].x, points[j].y, points[j].z);
+    }
+    var geometry = new THREE.BufferGeometry();
+    geometry.setFromPoints(points);
+    var material = new THREE.LineBasicMaterial({
+      color: 0xff0000,
+    });
+    var line = new THREE.Line(geometry, material);
+    scene.add(line);
+
+    var textureCube = new THREE.CubeTextureLoader()
+      .setPath("../texture")
+      .load([
+        "image.png",
+        "image.png",
+        "image.png",
+        "image.png",
+        "image.png",
+        "image.png",
+      ]);
+
+    material = new THREE.MeshPhysicalMaterial({
+      color: 0xffd700,
+      emissive: 0x000000,
+      metalness: 0.7,
+      flatShading: false,
+      roughness: 0.5,
+      envMap: textureCube,
+      reflectivity: 1,
+    });
+    geometry = new THREE.SphereGeometry(15, 32, 32);
+    let sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+
+    let i = 0;
+    function core(time) {
+      if (i == 200) j = -1;
+      if (i == 0) j = 1;
+      i = i + j;
+      sphere.position.set(points[i].x, points[i].y, points[i].z);
+    }
+    //-----------------------------------------------------------------------------------
+    function animate(time) {
+      requestAnimationFrame(animate);
+      core(time);
+      renderer.render(scene, camera);
+      controls.update();
+    }
+    animate();
+  </script>
+</html>
