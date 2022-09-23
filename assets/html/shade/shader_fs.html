@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <body></body>
+  <script type="module">
+    import * as THREE from "../module/Three.js";
+    import { OrbitControls } from "../module/js/OrbitControls.js";
+    import { TextureLoader } from "../module/loaders/TextureLoader.js";
+import {
+	FileLoader,
+	Loader,
+	ShapePath
+} from "../module/Three.js";
+
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const light = new THREE.AmbientLight(0x404040);
+    scene.add(light);
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true,
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xdddddd, 1);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = true;
+  //------------------------------
+    camera.position.set(-20, -20, 0);
+   
+class glsl extends Loader {
+   constructor( manager ) {
+   super( manager );
+   }
+   load(url,onLoad,onProgress,onError) {
+   const scope = this;
+   const loader = new FileLoader(this.manager);
+   loader.setPath(this.path);
+   loader.setRequestHeader(this.requestHeader);
+   loader.setWithCredentials(this.withCredentials);
+   loader.load(url, function(text) {
+   const content = text;
+   if(onLoad) onLoad(content);
+   },onProgress,onError);
+   }    
+}
+  
+    const sglsl = new glsl();  
+    sglsl.load("./vertex.glsl",function(content){
+       const vertexShader = content;
+    });
+    sglsl.load("./fragment.glsl",function(content){
+       const fragmentShader = content;
+    });
+    
+    
+    function createMatCap(texture) {
+    let Material = new THREE.ShaderMaterial({
+    uniforms: {
+    Matcap: { value: texture }
+    },
+    vertexShader,
+    fragmentShader
+    });
+    return Material;
+    }
+    let textureLoader = new TextureLoader();    
+    const sphere_geometry = new THREE.SphereGeometry(2, 30, 30);
+    const sphere_material = createMatCap(
+    textureLoader.load("../texture/metal.png")
+    );
+    const sphere = new THREE.Mesh(sphere_geometry, sphere_material);
+    sphere.position.set(-8, 2, 0);
+    sphere.castShadow = true;
+    scene.add(sphere);
+    
+    function core(time){
+    }
+	//----------------------------
+    function animate(time) {
+      requestAnimationFrame(animate);
+      core(time);
+      renderer.render(scene, camera);
+      controls.update();
+    }
+    animate();
+  </script>
+</html>

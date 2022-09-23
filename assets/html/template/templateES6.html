@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <body></body>
+  <script type="module">
+    import * as THREE from "../module/Three.js";
+    import { OrbitControls } from "../module/js/OrbitControls.js";
+    import { Water } from "../module/js/Water.js";
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const light = new THREE.AmbientLight(0x404040);
+    scene.add(light);
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true,
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xdddddd, 1);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = true;
+  //------------------------------
+    camera.position.set(0, 100, 200);
+
+    function core(time){
+
+    }
+	//----------------------------
+    function animate(time) {
+      requestAnimationFrame(animate);
+      core(time);
+      renderer.render(scene, camera);
+      controls.update();
+    }
+    animate();
+  </script>
+</html>
