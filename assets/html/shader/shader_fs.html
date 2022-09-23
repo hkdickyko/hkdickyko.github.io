@@ -10,11 +10,6 @@
     import * as THREE from "../module/Three.js";
     import { OrbitControls } from "../module/js/OrbitControls.js";
     import { TextureLoader } from "../module/loaders/TextureLoader.js";
-import {
-	FileLoader,
-	Loader,
-	ShapePath
-} from "../module/Three.js";
 
     let scene = new THREE.Scene();
     let camera = new THREE.PerspectiveCamera(
@@ -34,58 +29,49 @@ import {
     document.body.appendChild(renderer.domElement);
     var controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
-  //------------------------------
+    //------------------------------
     camera.position.set(-20, -20, 0);
-   
-class glsl extends Loader {
-   constructor( manager ) {
-   super( manager );
-   }
-   load(url,onLoad,onProgress,onError) {
-   const scope = this;
-   const loader = new FileLoader(this.manager);
-   loader.setPath(this.path);
-   loader.setRequestHeader(this.requestHeader);
-   loader.setWithCredentials(this.withCredentials);
-   loader.load(url, function(text) {
-   const content = text;
-   if(onLoad) onLoad(content);
-   },onProgress,onError);
-   }    
-}
-  
-    const sglsl = new glsl();  
-    sglsl.load("./vertex.glsl",function(content){
-       const vertexShader = content;
-    });
-    sglsl.load("./fragment.glsl",function(content){
-       const fragmentShader = content;
-    });
-    
-    
-    function createMatCap(texture) {
-    let Material = new THREE.ShaderMaterial({
-    uniforms: {
-    Matcap: { value: texture }
-    },
-    vertexShader,
-    fragmentShader
-    });
-    return Material;
+
+    function loadFile(filename) {
+      return new Promise((resolve, reject) => {
+        const loader = new THREE.FileLoader();
+        loader.load(filename, (data) => {
+          resolve(data);
+        });
+      });
     }
-    let textureLoader = new TextureLoader();    
+
+    class setMatCap {
+      constructor(geometry, textureFile, vertexFile, fragmentFile) {
+        const shadersPromises = [
+          loadFile(vertexFile),
+          loadFile(fragmentFile),
+          new TextureLoader().load(textureFile),
+        ];
+        this.loaded = Promise.all(shadersPromises).then(
+          ([vertexShader, fragmentShader, texture]) => {
+            this.material = new THREE.ShaderMaterial({
+              uniforms: {
+                Matcap: { value: texture },
+              },
+              vertexShader: vertexShader,
+              fragmentShader: fragmentShader,
+            });
+            this.material.extensions = {
+              derivatives: true,
+            };
+            this.mesh = new THREE.Mesh(geometry, this.material);
+            scene.add(this.mesh);
+          }
+        );
+      }
+    }
+
     const sphere_geometry = new THREE.SphereGeometry(2, 30, 30);
-    const sphere_material = createMatCap(
-    textureLoader.load("../texture/metal.png")
-    );
-    const sphere = new THREE.Mesh(sphere_geometry, sphere_material);
-    sphere.position.set(-8, 2, 0);
-    sphere.castShadow = true;
-    scene.add(sphere);
-    
-    function core(time){
-    }
-	//----------------------------
+    new setMatCap(sphere_geometry, "../texture/metal.png", "./vertex.glsl", "./fragment.glsl");
+
+    function core(time) {}
+    //----------------------------
     function animate(time) {
       requestAnimationFrame(animate);
       core(time);
