@@ -30,7 +30,7 @@
     var controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
   //------------------------------
-    camera.position.set(-20, -20, 0);
+    camera.position.set(0, 0, 10);
     let textureLoader = new TextureLoader();
     function createMatCap(texture) {
     let vertexShader = `
@@ -44,7 +44,7 @@
     gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
     }
     `;
-    
+
     let fragmentShader = `
     // Matcap纹理
     uniform sampler2D Matcap;      varying vec2 Point;
@@ -54,7 +54,7 @@
     gl_FragColor = color;
     }
     `;
-    
+
     let Material = new THREE.ShaderMaterial({
     uniforms: {
     Matcap: { value: texture }
@@ -64,16 +64,14 @@
     });
     return Material;
     }
-    
+
     const sphere_geometry = new THREE.SphereGeometry(2, 30, 30);
     const sphere_material = createMatCap(
     textureLoader.load("../texture/metal.png")
     );
     const sphere = new THREE.Mesh(sphere_geometry, sphere_material);
-    sphere.position.set(-8, 2, 0);
-    sphere.castShadow = true;
     scene.add(sphere);
-    
+
     function core(time){
     }
 	//----------------------------
