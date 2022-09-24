@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <body></body>
+  <script type="x-shader/x-vertex" id="vertexShader">
+    varying vec2 Point;
+    void main(){
+    vec3 vNormal = ( mat3( modelViewMatrix ) * normal );
+    vNormal = normalize(vNormal);
+    Point.x = vNormal.x * 0.5 + 0.5;
+    Point.y = vNormal.y * 0.5 + 0.5;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+    }
+  </script>
+  <script type="x-shader/x-fragment" id="fragmentShader">
+    uniform sampler2D Matcap;
+    varying vec2 Point;
+    void main(void){
+    vec4 color = texture2D(Matcap, Point);
+    gl_FragColor = color;
+    }
+  </script>
+  <script type="module">
+    import * as THREE from "../module/Three.js";
+    import { OrbitControls } from "../module/js/OrbitControls.js";
+    import { TextureLoader } from "../module/loaders/TextureLoader.js";
+
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const light = new THREE.AmbientLight(0x404040);
+    scene.add(light);
+    var renderer = new THREE.WebGLRenderer({antialias: true,});
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xdddddd, 1);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = true;
+    //------------------------------
+    camera.position.set(0, 0, 10);
+    let textureLoader = new TextureLoader();
+
+    function createMatCap(texture) {
+      let Material = new THREE.ShaderMaterial({
+      uniforms: {
+      Matcap: { value: texture }
+      },
+      vertexShader: document.getElementById('vertexShader').textContent,
+    	fragmentShader: document.getElementById('fragmentShader').textContent,
+      });
+      return Material;
+    }
+
+    const sphere_geometry = new THREE.SphereGeometry(2, 30, 30);
+    const sphere_material = createMatCap(textureLoader.load("../texture/metal-r.png"));
+    const sphere = new THREE.Mesh(sphere_geometry, sphere_material);
+    scene.add(sphere);
+    function core(time) {}
+    //----------------------------
+    function animate(time) {
+      requestAnimationFrame(animate);
+      core(time);
+      renderer.render(scene, camera);
+      controls.update();
+    }
+    animate();
+  </script>
+</html>
