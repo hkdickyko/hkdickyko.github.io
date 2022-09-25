@@ -15,8 +15,8 @@
   </script>
   <script type="x-shader/x-fragment" id="fragmentShader">
   #include <common>
-  #define TIMESCALE 0.25
-  #define TILES 8
+  #define TIMESCALE 0.2
+  #define TILES 32
   #define COLOR 0.7, 1.6, 2.8
     uniform vec3 iResolution;
     uniform float iTime;
@@ -62,7 +62,7 @@
     //------------------------------
     camera.position.set(0, 0, 50);
     let textureLoader = new TextureLoader();
-    const texture = textureLoader.load("../texture/bayer.png");
+    const texture = textureLoader.load("../texture/bayer_1.png");
     texture.minFilter = THREE.NearestFilter;
     texture.magFilter = THREE.NearestFilter;
     texture.wrapS = THREE.RepeatWrapping;
@@ -78,7 +78,7 @@
       fragmentShader: document.getElementById("fragmentShader").textContent,
     });
 
-    const sphere_geometry = new THREE.SphereGeometry(20, 100, 100);
+    const sphere_geometry = new THREE.SphereGeometry(20, 64, 64);
     const sphere = new THREE.Mesh(sphere_geometry, material);
     scene.add(sphere);
 
