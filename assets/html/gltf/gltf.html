@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <body></body>
+  <script type="module">
+    import * as THREE from "../module/Three.js";
+    import { OrbitControls } from "../module/js/OrbitControls.js";
+    import { GLTFLoader } from "../module/js/GLTFLoader.js";
+
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const light = new THREE.AmbientLight(0x808080);
+    scene.add(light);
+    const directionalLight = new THREE.DirectionalLight(0xffffff);
+    directionalLight.position.set(0, 10, 1);
+    const helper = new THREE.DirectionalLightHelper(directionalLight);
+    scene.add(helper);
+    const axesHelper = new THREE.AxesHelper(1);
+    scene.add(axesHelper);
+    let pointLight = new THREE.PointLight(0xffffff);
+    pointLight.position.set(0, 10, 1);
+    scene.add(pointLight);
+    const sphereSize = 1;
+    const pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
+    scene.add(pointLightHelper);
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true,
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xdddddd, 1);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = true;
+    //------------------------------
+    const mixers = [];
+    let actions = [];
+
+    camera.position.set(7.4, 6.9, 5.2);
+    const loader = new GLTFLoader();
+
+    let mixer;
+    let clock = new THREE.Clock();
+
+    loader.load("./wolf/Wolf.glb", function (gltf) {
+      let model = gltf.scene;
+      model.scale.set(10, 10, 10);
+      mixer = new THREE.AnimationMixer(gltf.scene);
+      gltf.animations.forEach((clip) => {
+        mixer.clipAction(clip).play();
+      });
+      scene.add(model);
+    });
+
+    function core(time) {
+      var delta = clock.getDelta();
+      if (mixer) mixer.update(delta);
+      console.log(camera.position);
+    }
+    //----------------------------
+    function animate(time) {
+      requestAnimationFrame(animate);
+      core(time);
+      renderer.render(scene, camera);
+      controls.update();
+    }
+    animate();
+  </script>
+</html>
