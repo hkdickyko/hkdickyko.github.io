@@ -54,7 +54,7 @@
     scene.add(light);
     var renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xFFFFFF, 1);
+    renderer.setClearColor(0xdddddd, 1);
     renderer.setPixelRatio(window.devicePixelRatio);
     document.body.appendChild(renderer.domElement);
     var controls = new OrbitControls(camera, renderer.domElement);
