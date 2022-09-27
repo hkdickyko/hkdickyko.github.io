@@ -18,23 +18,12 @@
       0.1,
       1000
     );
-    const light = new THREE.AmbientLight(0x808080);
+    const light = new THREE.AmbientLight(0x404040);
     scene.add(light);
-    const directionalLight = new THREE.DirectionalLight(0xffffff);
-    directionalLight.position.set(0, 10, 1);
-    const helper = new THREE.DirectionalLightHelper(directionalLight);
-    scene.add(helper);
-    const axesHelper = new THREE.AxesHelper(1);
-    scene.add(axesHelper);
-    let pointLight = new THREE.PointLight(0xffffff);
-    pointLight.position.set(0, 10, 1);
-    scene.add(pointLight);
-    const sphereSize = 1;
-    const pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
-    scene.add(pointLightHelper);
     var renderer = new THREE.WebGLRenderer({
       antialias: true,
     });
+
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0xdddddd, 1);
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -42,13 +31,19 @@
     var controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
     //------------------------------
-    camera.position.set(7.4, 6.9, 5.2);
+    camera.position.set(5.85,5.54,4.95);
 
+    const axesHelper = new THREE.AxesHelper(3);
+    scene.add(axesHelper);
+
+    let light_add = new THREE.AmbientLight(0x404040,10);
+    scene.add(light_add);
+
+    let clock = new THREE.Clock();
     const mixers = [];
     let actions = [];
-    const loader = new GLTFLoader();
     let mixer, model;
-    let clock = new THREE.Clock();
+    const loader = new GLTFLoader();
     loader.load("./wolf/Wolf.glb", function (gltf) {
       model = gltf.scene;
       model.scale.set(10, 10, 10);
@@ -58,6 +53,11 @@
       });
       scene.add(model);
     });
+
+    let lightp = new THREE.PointLight(0xffffff,10);
+    lightp.position.set(5, 5, 5);
+    scene.add(lightp);
+    lightp.target = model;
 
     function core(time) {
       var delta = clock.getDelta();
