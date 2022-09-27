@@ -23,79 +23,129 @@
     var renderer = new THREE.WebGLRenderer({
       antialias: true,
     });
+
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0xdddddd, 1);
     renderer.setPixelRatio(window.devicePixelRatio);
     document.body.appendChild(renderer.domElement);
     var controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
-  //------------------------------
+    //------------------------------
     camera.position.set(0, 10, 20);
-const gui = new dat.GUI();
-var icrt = new function () {
-    this.rotationSpeed = 0.02;
-    this.visible = false;
-    this.color = "#ffffff"; 
-    this.X = 1;
-    this.Y = 1;
-    this.Z = 1;
-    this.radius =1;
-    this.test = function() {
-        alert("Test function!");
-    }
-};
 
-gui.domElement.style = 'position:absolute;top:0px;left:0px';
-
-var f1 = gui.addFolder('Position');
-  let xV=f1.add(icrt,'X',-10,10.0);
-  let yV=f1.add(icrt,'Y',-10,10).step(1);
-  let zV=f1.add(icrt,'Z',-10,10).step(1);
-  f1.open();
-
-var f2 = gui.addFolder('Size');
-  let RC = f2.add(icrt, 'radius',1,10);
-  let co = f2.addColor(icrt, 'color');
-  f2.open();
-
-gui.add(icrt, 'visible').name("隱藏");
-gui.add(icrt, 'rotationSpeed', { Stopped: 0, Slow: 0.02, Fast: 5 }).name("轉速");
-gui.add(icrt, 'test').name("自定函數");
-
-co.onChange(function(colorV){
-  var cObj = new THREE.Color(colorV);
-  sphere.material.color = cObj;
-});
-
-RC.onChange(function(r){
-  sphere.scale.set(r,r,r);
-  console.log(r);
-});
-
-xV.onChange(function(x){
-  sphere.position.set(icrt.X,icrt.Y,icrt.Z);
-  console.log(icrt.X);
-});
-
-yV.onChange(function(y){
-  sphere.translateY(y);
-});
-
-zV.onChange(function(z){
-  sphere.translateZ(z);
-});
-
-
-
-
+    let lightp = new THREE.PointLight(0xffff00);
+    lightp.position.set(20, 20, 20);
+    scene.add(lightp);
 
     let geometry = new THREE.SphereGeometry(1, 32, 32);
-    let material = new THREE.MeshBasicMaterial({color: "#ffff00",wireframe:true});
+    let material = new THREE.MeshPhongMaterial({
+      color: "#ffff00",
+      wireframe: true,
+    });
     let sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
-    function core(time){
+
+    const gui = new dat.GUI();
+    var icrt = new (function () {
+      this.rotationSpeed = 0.02;
+      this.roX = 0;
+      this.roY = 0;
+      this.roZ = 0;
+      this.visible = false;
+      this.wireframe = true;
+      this.color = "#ffffff";
+      this.X = 0;
+      this.Y = 0;
+      this.Z = 0;
+      this.radius = 1;
+      this.test = function () {
+        alert("Test function!");
+      };
+    })();
+
+    function translate() {
+      sphere.position.set(icrt.X, icrt.Y, icrt.Z);
     }
-	//----------------------------
+
+    function rotation() {
+      sphere.rotation.set(icrt.roX, icrt.roY, icrt.roZ);
+    }
+
+    gui.domElement.style = "position:absolute;top:0px;right:0px";
+
+    var f1 = gui.addFolder("Position");
+    f1.add(icrt, "X", -10.0, 10.0)
+      .onChange(function (value) {
+        translate();
+      })
+      .step(0.001);
+    f1.add(icrt, "Y", -10.0, 10.0)
+      .onChange(function (value) {
+        translate();
+      })
+      .step(0.001);
+    f1.add(icrt, "Z", -10.0, 10.0)
+      .onChange(function (value) {
+        translate();
+      })
+      .step(0.001);
+    f1.open();
+
+    var f2 = gui.addFolder("Rotation");
+    f2.add(icrt, "roX", 0, Math.PI / 2)
+      .onChange(function (value) {
+        rotation();
+      })
+      .step(0.001);
+    f2.add(icrt, "roY", 0, Math.PI / 2)
+      .onChange(function (value) {
+        rotation();
+      })
+      .step(0.001);
+    f2.add(icrt, "roZ", 0, Math.PI / 2)
+      .onChange(function (value) {
+        rotation();
+      })
+      .step(0.001);
+    f2.open();
+
+    let fr = gui.add(icrt, "wireframe").name("線框");
+    let vi = gui.add(icrt, "visible").name("隱藏");
+    var f3 = gui.addFolder("Size");
+    let RC = f3.add(icrt, "radius", 1, 10);
+    let co = f3.addColor(icrt, "color");
+    f3.open();
+
+    gui
+      .add(icrt, "rotationSpeed", { Stopped: 0, Slow: 0.02, Fast: 3 })
+      .name("轉速");
+    gui.add(icrt, "test").name("自定函數");
+
+    fr.onChange(function (e) {
+      if (e) material.wireframe = true;
+      else material.wireframe = false;
+    });
+
+    vi.onChange(function (e) {
+      if (e) sphere.visible = false;
+      else sphere.visible = true;
+    });
+
+    co.onChange(function (colorV) {
+      var cObj = new THREE.Color(colorV);
+      sphere.material.color = cObj;
+    });
+
+    RC.onChange(function (r) {
+      sphere.scale.set(r, r, r);
+      console.log(r);
+    });
+
+    function core(time) {
+      sphere.rotation.y += 0.0125 * icrt.rotationSpeed;
+      sphere.rotation.x += 0.05 * icrt.rotationSpeed;
+    }
+    //----------------------------
     function animate(time) {
       requestAnimationFrame(animate);
       core(time);

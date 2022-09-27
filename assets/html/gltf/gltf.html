@@ -10,7 +10,6 @@
     import * as THREE from "../module/Three.js";
     import { OrbitControls } from "../module/js/OrbitControls.js";
     import { GLTFLoader } from "../module/js/GLTFLoader.js";
-    import * as dat from "../module/js/dat.gui.module.js";
 
     let scene = new THREE.Scene();
     let camera = new THREE.PerspectiveCamera(
@@ -45,19 +44,6 @@
     //------------------------------
     camera.position.set(7.4, 6.9, 5.2);
 
-    const gui = new dat.GUI();
-    var folder = gui.addFolder("Menu");
-    var guiControls = {
-      size: 1,
-      speed: 0.01,
-      color: [ 0, 128, 255, 0.3 ],
-    };
-    gui.domElement.style = "position:absolute;top:0px;right:0px";
-    folder.addColor(guiControls, "color");
-    folder.add(guiControls, "size", 1, 20);
-    folder.add(guiControls, "speed", { L: 0.005, M: 0.01, H: 0.1 });
-    folder.open();
-
     const mixers = [];
     let actions = [];
     const loader = new GLTFLoader();
@@ -76,7 +62,6 @@
     function core(time) {
       var delta = clock.getDelta();
       if (mixer) mixer.update(delta);
-      model.scale.set(guiControls.size, guiControls.size, guiControls.size);
       console.log(camera.position);
     }
     //----------------------------
