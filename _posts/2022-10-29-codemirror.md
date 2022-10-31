@@ -189,6 +189,7 @@ editor.getValue("value")
 
 ## 方法說明
 
+
 |函數|描述|
 |:---:|:---:|
 |getEditor()|獲取 CodeMirror 對像|
@@ -202,6 +203,9 @@ editor.getValue("value")
 
 
 ### 標選行數
+
+|函數|描述|
+|:---:|:---:|
 |lineCount()|獲取編輯器總行數|
 |firstLine()|獲取第一行行數，默認為0，從開始計數|
 |lastLine()|獲取最後一行行數|
@@ -209,10 +213,12 @@ editor.getValue("value")
 |getLineHandle(line)|根據行號獲取行句柄|
 
 ### 標選區域
+
+|函數|描述|
+|:---:|:---:|
 |getSelection()|獲取鼠標選中區域的代碼|
 |getRange({line,ch},{line,ch})|獲取指定範圍內的文本內容第一個對像是起始坐標，第二個是結束坐標|
 |setSelection({line:num,ch:num1},{line:num2,ch:num3})|設置一個區域被選中|
 |replaceRange(str1,{line,ch},{line,ch},str2)|替換 str1 中一部分代碼為 str2|
 |somethingSelected()|判斷是否被選擇|
 |replaceSelection(str1,str2)|替換所選內容|
-
