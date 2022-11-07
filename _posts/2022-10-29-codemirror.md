@@ -30,61 +30,6 @@ date: 2022-10-29 1:00:00
 
 Code Mirror 是由 javascript 寫的一款插件，其功能非常強大。不僅提供了高亮功能，其豐富的方法屬性也封裝了縮進、自動換行、獲取編輯文本、設置編輯文本、回退功能等多種實用效果。用來實現網頁端代碼編輯器非常方便。
 
-```html
-<html>
-  <link rel="stylesheet" href="codemirror-5.12/lib/codemirror.css">
-  <script src="codemirror-5.12/lib/codemirror.js"></script>
-  <script src="codemirror-5.12/clike.js"></script>
-  <link rel="stylesheet" href="codemirror-5.12/theme/seti.css">
-
-  <script src="/js/codemirror/mode/xml/xml.js"></script>
-  <script src="/js/codemirror/mode/javascript/javascript.js"></script>
-  <script src="/js/codemirror/mode/css/css.js"></script>
-  <script src="/js/codemirror/mode/htmlmixed/htmlmixed.js"></script>
-
-  <link rel="stylesheet" href="codemirror-5.12/addon/fold/foldgutter.css"/>
-  <script src="codemirror-5.12/addon/fold/foldcode.js"></script>
-  <script src="codemirror-5.12/addon/fold/foldgutter.js"></script>
-
-  <script src="codemirror-5.12/addon/fold/brace-fold.js"></script>
-  <script src="codemirror-5.12/addon/fold/comment-fold.js"></script>
-
-  <link rel="stylesheet" href="codemirror-5.12/addon/display/fullscreen.css">
-  <script src="codemirror-5.12/addon/display/fullscreen.js"></script>
-  <script src="codemirror-5.12/addon/edit/matchbrackets.js"></script>
-
-  <link rel="stylesheet" href="codemirror-5.12/addon/hint/show-hint.css">
-  <script src="codemirror-5.12/addon/hint/show-hint.js"></script>
-  <script src="codemirror-5.12/addon/hint/anyword-hint.js"></script>
-<head>
-<title>Code Mirror Test</title>
-</head>
-<body>
-<textarea id="code"></textarea>
-</body>
-<script type="text/javascript">
-  var editor=CodeMirror.fromTextArea(document.getElementById("code"),{
-    // Html, javascript css 高亮顯示
-    mode:"htmlmixed",
-    // 設置主題
-    theme:"seti",
-    // 顯示行號
-    lineNumbers:true,
-    // 代碼摺疊
-    lineWrapping:true,
-      foldGutter: true,
-      gutters:["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-    // 全屏模式
-    fullScreen:true,
-    // 括弧匹配
-    matchBrackets:true,
-    // 智能提示 ctrl-space喚起智能提示
-    extraKeys:{"Ctrl-Space":"autocomplete"}
-  });
-</script>
-</html>
-```
-
 Code Mirror 提供了很多種主題，在 codemirror-5.12/theme/seti.css 可以看到所有主題，如準備使用 seti 這個主題先需將其引入。
 
 其他功能的實現方法與之類似，稍微註意的是需要引入的文件不同，將實現各個功能所需的文件均寫在瞭如下代碼中：
@@ -222,3 +167,63 @@ editor.getValue("value")
 |replaceRange(str1,{line,ch},{line,ch},str2)|替換 str1 中一部分代碼為 str2|
 |somethingSelected()|判斷是否被選擇|
 |replaceSelection(str1,str2)|替換所選內容|
+
+
+## 基本應用例子
+
+### 程式碼加色
+
+```html
+<html>
+  <link rel="stylesheet" href="codemirror-5.12/lib/codemirror.css">
+  <script src="codemirror-5.12/lib/codemirror.js"></script>
+  <script src="codemirror-5.12/clike.js"></script>
+  <link rel="stylesheet" href="codemirror-5.12/theme/seti.css">
+
+  <script src="/js/codemirror/mode/xml/xml.js"></script>
+  <script src="/js/codemirror/mode/javascript/javascript.js"></script>
+  <script src="/js/codemirror/mode/css/css.js"></script>
+  <script src="/js/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+
+  <link rel="stylesheet" href="codemirror-5.12/addon/fold/foldgutter.css"/>
+  <script src="codemirror-5.12/addon/fold/foldcode.js"></script>
+  <script src="codemirror-5.12/addon/fold/foldgutter.js"></script>
+
+  <script src="codemirror-5.12/addon/fold/brace-fold.js"></script>
+  <script src="codemirror-5.12/addon/fold/comment-fold.js"></script>
+
+  <link rel="stylesheet" href="codemirror-5.12/addon/display/fullscreen.css">
+  <script src="codemirror-5.12/addon/display/fullscreen.js"></script>
+  <script src="codemirror-5.12/addon/edit/matchbrackets.js"></script>
+
+  <link rel="stylesheet" href="codemirror-5.12/addon/hint/show-hint.css">
+  <script src="codemirror-5.12/addon/hint/show-hint.js"></script>
+  <script src="codemirror-5.12/addon/hint/anyword-hint.js"></script>
+<head>
+<title>Code Mirror Test</title>
+</head>
+<body>
+<textarea id="code"></textarea>
+</body>
+<script type="text/javascript">
+  var editor=CodeMirror.fromTextArea(document.getElementById("code"),{
+    // Html, javascript css 高亮顯示
+    mode:"htmlmixed",
+    // 設置主題
+    theme:"seti",
+    // 顯示行號
+    lineNumbers:true,
+    // 代碼摺疊
+    lineWrapping:true,
+      foldGutter: true,
+      gutters:["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+    // 全屏模式
+    fullScreen:true,
+    // 括弧匹配
+    matchBrackets:true,
+    // 智能提示 ctrl-space喚起智能提示
+    extraKeys:{"Ctrl-Space":"autocomplete"}
+  });
+</script>
+</html>
+```
