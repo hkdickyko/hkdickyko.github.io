@@ -1,5 +1,5 @@
 ---
-category: [Android]
+category: [網頁]
 tags: [編程]
 title: CodeMirror
 date: 2022-10-29 1:00:00
@@ -396,6 +396,8 @@ function getDate(cm, format) {
 }
 ```
 
+### 句子中的第一個字母轉大寫
+
 ```js
 function ucfirst(cm) {
   let selection = cm.getSelection();
@@ -404,6 +406,8 @@ function ucfirst(cm) {
   cm.setSelections(selections);
 }
 ```
+
+### 文字中的第一個字母轉大寫
 
 ```js
 function ucwords(cm) {
@@ -414,6 +418,8 @@ function ucwords(cm) {
 }
 ```
 
+### 轉大寫
+
 ```js
 function uppercase(cm) {
   let selection = cm.getSelection();
@@ -422,6 +428,8 @@ function uppercase(cm) {
   cm.setSelections(selections);
 }
 ```
+
+### 轉小寫
 
 ```js
 function lowercase() {
@@ -432,6 +440,8 @@ function lowercase() {
   cm.setSelections(selections);
 }
 ```
+
+### 清除前後多餘的空格
 
 ```js
 function trim(str) {
