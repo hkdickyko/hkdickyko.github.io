@@ -122,8 +122,12 @@ editor.getValue("value")
 |value|設置編輯器的初始編輯值|
 |mode|指定編輯的模式，text/html，javascript 等|
 |theme|設定主題樣式|
-|indentUnit|設置縮進值，默認為 2 個單位|
-|smartIndent|是否使用上下文敏感縮進，默認為 true。設置一個製表符的寬度，默認為 4|
+|indentUnit|設置縮進值，默認為 2|
+|smartIndent|是否使用上下文智能縮進，默認為 true。默認為 4|
+|tabSize|tab字符的寬度，默認為 4|
+|dragDrop|是否允許拖放，默認為true|
+|readOnly|編輯器是否只讀。|
+|indentWithTabs|在縮進時，是否需要把 tab 寬度個空格替換成字符，默認為false|
 |electricChars|是否在當前行輸入時適當改變其縮進，默認為 true|
 |lineWrapping|是否可以滾動，默認為 false|
 |lineNumbers|是否顯示編輯器行數，默認為 false|
