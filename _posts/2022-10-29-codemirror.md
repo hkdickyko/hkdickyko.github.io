@@ -455,5 +455,4 @@ function trim(str) {
     ? str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "")
     : str.trim();
 }
->>>>>>> 153a0b88745099e39c3447cd66a30ae4b259a723
 ```
