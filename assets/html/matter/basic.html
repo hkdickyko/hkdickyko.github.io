@@ -33,9 +33,9 @@
             }
           });
           //  Rectangle 是在創建方形，基本上就是帶入位置、大小參數，以及以一些設置可選選項(如isStatic)等等。
-          var boxA = Bodies.rectangle(400, 200, 80, 80);
-          var boxB = Bodies.rectangle(450, 50, 80, 80);
-          var ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+          var boxA = Bodies.rectangle(400, 200, 60, 60);
+          var boxB = Bodies.rectangle(430, 50, 60, 60);
+          var ground = Bodies.rectangle(400, 290, 810, 10, { isStatic: true });
           // Composite 是一個組合的動作，把我們上面宣告的方形加入 world ，也就是engine中的世界。
           Composite.add(world, [boxA, boxB, ground]);
           // 運行渲染器 Render.run 會決定持續更新並渲染 Canvas 的幀數。
