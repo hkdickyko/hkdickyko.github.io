@@ -5,6 +5,8 @@
     <script src="./js/matter.min.js"></script>
     <style>
       body {
+        margin: 0px;
+        padding: 0px;
         background-color: white;
       }
     </style>
@@ -27,12 +29,12 @@
           const render = Render.create({
             element: document.body,
             engine: engine,
-            options:{
+            options: {
               wireframes: false,
-              background: 'rgb(255,255,255)',
-              width:500,
-              height:260,
-            }
+              background: "rgb(255,255,255)",
+              width: 500,
+              height: 295,
+            },
           });
           //  Rectangle 是在創建方形，基本上就是帶入位置、大小參數，以及以一些設置可選選項(如isStatic)等等。
           var boxA = Bodies.rectangle(200, 80, 50, 50);
