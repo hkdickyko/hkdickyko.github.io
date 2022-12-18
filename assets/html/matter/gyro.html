@@ -47,6 +47,7 @@ const Bodies = Matter.Bodies;
     Runner.run(runner, engine);
 
     // add bodies
+    
     var stack = Composites.stack(20, 20, 10, 5, 0, 0, function(x, y) {
         var sides = Math.round(Common.random(1, 8));
 
@@ -58,6 +59,7 @@ const Bodies = Matter.Bodies;
             };
         }
 
+var stack = Matter.Bodies.circle(0 ,0 ,10);
         switch (Math.round(Common.random(0, 1))) {
         case 0:
             if (Common.random() < 0.8) {
