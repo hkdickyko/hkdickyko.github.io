@@ -38,6 +38,7 @@ date: 2023-04-28 1:00:00
 
 ```java
 boolean doubleBackToExitPressedOnce = false;
+
 @Override
 public void onBackPressed(){
   if (doubleBackToExitPressedOnce)	{
@@ -93,14 +94,14 @@ public void javascriptCall(final String fName, final String cmd, final int index
 ```java
 private byte[] loadData(InputStream stream)
 {
-  try	{
+  try {
     int size = stream.available();
     byte[] buffer = new byte[size];
     stream.read(buffer);
     stream.close();
     return buffer;
   }
-  catch (IOException e){
+  catch (IOException e) {
     Log.e("ERROR", "loadData", e);
   }
   return null;
