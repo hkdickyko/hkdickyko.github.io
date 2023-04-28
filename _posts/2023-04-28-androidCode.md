@@ -62,29 +62,28 @@ fName:程序名稱，cmd:程序代碼，index: 回调序号。
 
 ```java
 public void javascriptCall(final String fName, final String cmd, final int index)
-  {
+{
   if (index > 0){
     runOnUiThread(new Runnable() {
-		    @Override
-		    public void run()
-		    {
-			      contentView.evaluateJavascript("javascript:" + fName + "(" + cmd + ");", 
-			      new ValueCallback<String>() {
-				       @Override
-		     	   	public void onReceiveValue(String s){
-				         contentView.evaluateJavascript("javascript:callback(" + index + " )", null);
-				       }
-			      }
-			    );
-		    }
-		  });
-  }	else	{
+      @Override
+      public void run(){
+        contentView.evaluateJavascript("javascript:" + fName + "(" + cmd + ");",
+          new ValueCallback<String>() {
+            @Override
+            public void onReceiveValue(String s){
+              contentView.evaluateJavascript("javascript:callback(" + index + " )", null);
+            }
+          }
+        );
+       }
+    });
+  } else {
     runOnUiThread(new Runnable() {
-		    @Override
-		    public void run(){
-			     contentView.evaluateJavascript("javascript:" + fName + "(" + cmd + ");", null);
-		    }
-		  });
+      @Override
+      public void run(){
+        contentView.evaluateJavascript("javascript:" + fName + "(" + cmd + ");", null);
+      }
+    });
   }
 }
 ```
