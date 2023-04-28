@@ -38,24 +38,22 @@ date: 2023-04-28 1:00:00
 
 ```java
 boolean doubleBackToExitPressedOnce = false;
-
-  @Override
-  public void onBackPressed()
-  {
-    if (doubleBackToExitPressedOnce)	{
-	     //super.onBackPressed();
-	     this.exitProgram();
-	     return;
-    }
-    this.doubleBackToExitPressedOnce = true;
-    Toast.makeText(this, "双击退出程序!", Toast.LENGTH_SHORT).show();
-    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-      @Override
-        public void run()	{
-		        doubleBackToExitPressedOnce = false;                       
-        }
-	     }, 2000);
+@Override
+public void onBackPressed(){
+  if (doubleBackToExitPressedOnce)	{
+    //super.onBackPressed();
+    this.exitProgram();
+    return;
   }
+  this.doubleBackToExitPressedOnce = true;
+  Toast.makeText(this, "双击退出程序!", Toast.LENGTH_SHORT).show();
+  new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+    @Override
+    public void run(){
+      doubleBackToExitPressedOnce = false;
+    }
+  }, 2000);
+}
 ```
 
 ## 呼叫 Javascript 程序
@@ -103,7 +101,7 @@ private byte[] loadData(InputStream stream)
     stream.close();
     return buffer;
   }
-	 catch (IOException e){
+  catch (IOException e){
     Log.e("ERROR", "loadData", e);
   }
   return null;
