@@ -1,0 +1,146 @@
+---
+category: [軟件]
+tags: [電腦]
+title: Docker 外挂程序制作
+date: 2023-06-04 1:00:00
+---
+
+<style>
+  table {
+    width: 100%
+    }
+  td {
+    vertical-align: center;
+    text-align: center;
+  }
+  table.inputT{
+    margin: 10px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+  }
+  input{
+    text-align: center;
+    padding: 0px 10px;
+  }
+  iframe{
+    width: 100%;
+    display: block;
+    border-style:none;
+    overflow:hidden;
+  }
+</style>
+
+# 制作 Docker 容器
+
+开始制作镜像，新建一个空白目录，创建一个名为 Dockerfile 的文本文件：
+
+```
+$ mkdir mynginx
+$ cd mynginx
+$ touch Dockerfile
+```
+
+编辑 Dockerfile，添加如下指令：
+
+```
+FROM nginx
+RUN echo '<h1>Hello, Nginx by Docker!</h1>' > /usr/share/nginx/html/index.html
+```
+
+这个 Dockerfile 非常简单，总共也就运用了两条指令：FROM 和 RUN 。
+
+### FROM 指定基础镜像
+
+制作镜像必须要先声明一个基础镜像，FROM 指令可以指定基础镜像是必备指令，且必须是第一条指令。表示后续操作都是基于這指定的基础镜像。
+
+通常情况下，基础镜像在 DockerHub 都能找到，如：
+
+- 中间件相关：nginx、kafka、mongodb、redis、tomcat 等；
+- 开发语言环境 ：openjdk、python、golang 等；
+- 操作系统：centos 、alpine 、ubuntu 等；
+
+
+除了这些常用的基础镜像外，还有个比较特殊的镜像 : scratch 。它表示一个空白的镜像：
+
+```
+FROM scratch
+```
+
+以 scratch 为基础镜像，表示你不以任何镜像为基础。
+
+
+### RUN 执行命令
+
+RUN 指令用于执行终端操作的 shell 命令，另外，RUN 指令也是编写 Dockerfile 最常用的指令之一。它支持的格式有如下两种：
+
+- shell 格式: RUN <命令>，这种格式好比在命令行中输入的命令一样。举个栗子，上面编写的 Dockerfile 中的 RUN 指令就是使用的这种格式：
+
+```
+RUN echo '<h1>Hello, Nginx by Docker!</h1>' > /usr/share/nginx/html/index.html
+```
+- exec 格式: RUN ["可执行文件", "参数1", "参数2"], 这种格式好比编程中调用函数一样，指定函数名，以及传入的参数。
+
+```
+RUN ["./test.php", "dev", "offline"] # 等价于 RUN ./test.php dev offline
+```
+
+Dockerfile 中每一个 RUN 指令都会新建一层，过多无意义的层导致很多运行时不需要的东西，都被打包进了镜像内，比如编译环境、更新的软件包等，这就导致了构建出来的镜像体积非常大。可用 && 将各个命令串联起来。简化 RUN 为一层，同时可删除了无用的压缩包。
+
+Dockerfile 支持 shell 格式命令末尾添加 空格及 \ 作换行，及首通过 # 进行注释。良好的编写习惯，如换行、注释、缩进等，可以让 Dockerfile 更易于维护。
+
+```
+FROM centos
+RUN yum -y install wget \
+    && wget -O redis.tar.gz "http://download.redis.io/releases/redis-5.0.3.tar.gz" \
+    && tar -xvf redis.tar.gz \
+    && rm redis.tar.gz
+```
+
+|选项 |说明|
+|---|---|
+|-a |stdin: 指定标准输入输出内容类型，可选 STDIN、STDOUT、STDERR 三项|
+|-d|<font color="#FF1000">后台运行容器</font>，并返回容器ID|
+|-i|使用時按<font color="#FF1000">键盘输入</font>会被容器接口接收，通常与 -t 同时使用|
+|-t|使用時容器的显示屏会<font color="#FF1000">连接到显示屏</font>上，通常与 -i 同时使用。形式为 仓库:标签|
+|-P|<font color="#FF1000">随机端口映射</font>，容器内部端口随机映射到主机的端口|
+|-p|<font color="#FF1000">指定端口映射</font>，格式为：主机(宿主)端口:容器端口|
+|--name|为容器<font color="#FF1000">指定名称</font>|
+|--dns|指定容器使用的 <font color="#FF2F00">DNS</font> 服务器，默认和宿主一致；
+|--dns-search|指定容器 DNS 搜索域名，默认和宿主一致|
+|-h|指定容器的 hostname|
+|-e|设置环境<font color="#FF1000">变量</font>|
+|--env-file|从指定文件读入环境变量|
+|--cpuset|"0-2" 绑定容器到指定CPU运行|
+|-m|设置容器使用内存最大值|
+|--net|指定容器的网络连接类型，支持 bridge、host、none、container 四种类型|
+|--link|添加链接到另一个容器|
+|--expose|开放一个端口或一组端口|
+|-v|绑定一个卷|
+
+### 构建镜像
+
+Dockerfile 文件编写好后，就可以通过它构建镜像。
+
+```
+docker build -t nginx:test .
+```
+
+注意：命令的最后有个点 **.** , 很多時不注意会漏掉，这是指定路径，<font color="#FF1000">代表生成的文件储存于当前目录下</font>。
+
+构建命令执行完成后，执行 docker images 命令查看本地镜像是否构建成功。如成功则有一個 TAG 为 test 的镜像文件。
+
+![docker](../assets/img/linux/docker.jpg)
+
+镜像构建成功后，运行 Nginx 容器：
+
+```
+docker run -d -p 80:80 --name nginx nginx:test
+```
+
+容器运行成功后，用网页浏览器访问 localhost:80, 可以看到首页已经被成功修改了如下。
+
+![docker 1](../assets/img/linux/docker1.jpg)
+
+注意：上下文路径下不要放置一些无用的文件，否则会导致打包发送的体积过大，速度缓慢而导致构建失败。当然，也可以编写一个 .dockerignore，通过它可以忽略上传一些不必要的文件给 Docker 引擎。
