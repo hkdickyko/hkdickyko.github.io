@@ -37,8 +37,8 @@ date: 2023-06-04 1:00:00
 开始制作镜像，新建一个空白目录，创建一个名为 Dockerfile 的文本文件：
 
 ```
-$ mkdir mynginx
-$ cd mynginx
+$ mkdir container
+$ cd container
 $ touch Dockerfile
 ```
 
@@ -57,10 +57,15 @@ RUN echo '<h1>Hello, Nginx by Docker!</h1>' > /usr/share/nginx/html/index.html
 
 通常情况下，基础镜像在 DockerHub 都能找到，如：
 
-- 中间件相关：nginx、kafka、mongodb、redis、tomcat 等；
+- 中间件相关：nginx、mongodb、redis、tomcat 等；
 - 开发语言环境 ：openjdk、python、golang 等；
 - 操作系统：centos 、alpine 、ubuntu 等；
 
+详细资料可参考，[DockerHub 官方网站](https://hub.docker.com/search?q=)。有关 image 之兼容问题。可用以下指令查阅 docker 安装版本與相关程序之兼容。
+
+```
+$ docker version
+```
 
 除了这些常用的基础镜像外，还有个比较特殊的镜像 : scratch 。它表示一个空白的镜像：
 
@@ -124,7 +129,7 @@ RUN yum -y install wget \
 Dockerfile 文件编写好后，就可以通过它构建镜像。
 
 ```
-docker build -t nginx:test .
+$ docker build -t container:test .
 ```
 
 注意：命令的最后有个点 **.** , 很多時不注意会漏掉，这是指定路径，<font color="#FF1000">代表生成的文件储存于当前目录下</font>。
@@ -136,7 +141,7 @@ docker build -t nginx:test .
 镜像构建成功后，运行 Nginx 容器：
 
 ```
-docker run -d -p 80:80 --name nginx nginx:test
+$ docker run -d -p 80:80 --name nginx nginx:test
 ```
 
 容器运行成功后，用网页浏览器访问 localhost:80, 可以看到首页已经被成功修改了如下。
@@ -144,6 +149,18 @@ docker run -d -p 80:80 --name nginx nginx:test
 ![docker 1](../assets/img/linux/docker1.jpg)
 
 注意：上下文路径下不要放置一些无用的文件，否则会导致打包发送的体积过大，速度缓慢而导致构建失败。当然，也可以编写一个 .dockerignore，通过它可以忽略上传一些不必要的文件给 Docker 引擎。
+
+### 查询 image 资料 
+
+```
+$ docker ps
+```
+
+### 停止 image
+
+```
+$ docker stop [Image ID]
+```
 
 ### 删除构建镜像
 
