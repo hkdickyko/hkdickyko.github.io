@@ -144,3 +144,46 @@ docker run -d -p 80:80 --name nginx nginx:test
 ![docker 1](../assets/img/linux/docker1.jpg)
 
 注意：上下文路径下不要放置一些无用的文件，否则会导致打包发送的体积过大，速度缓慢而导致构建失败。当然，也可以编写一个 .dockerignore，通过它可以忽略上传一些不必要的文件给 Docker 引擎。
+
+## 在 build 或 run 时传递变量
+
+![docker 1](../assets/img/linux/docker_env.png)
+
+### ENV
+
+ENV 是在 build 的時候，可以定義一些變數，讓後面指令在執行時候可以參考。
+
+
+```
+From nginx
+ENV NODE_VER=node-v5
+ADD ./${NODE_VER} /
+RUN ln -s /${NODE_VER} /node
+ENV PATH=/node/bin:$PATH
+CMD ["node"]
+```
+
+### ARG
+
+ARG在build時候是可以從外部以 --build-arg 帶入的變數，讓 build 的動作可結合外部的指令給定一些<font color="#FF1000">建構時</font>候所需的參數。
+
+
+```
+From nignx
+ARG NODE_VER
+ADD ./${NODE_VER:-node-v5} /
+RUN ln -s /${NODE_VER} /node
+ENV PATH=/node/bin:$PATH
+CMD ["node"]
+```
+
+### 预设参数
+
+在 ENV 與 ARG 參數的設定上，可以透過下面方式增加一些预设值。
+
+ - ${variable:-word} 代表，如果 variable 有給值，則以 variable 設定的文字為主，如未設定，則以 word 字串為主。
+ - ${variable:+word} 代表，如果 variable 有給值，則值為 word；如果 variable 未給值，則最後結果為空字串(empty)。
+
+
+注意: build image 過程可以看到 **ENV** 與 **ARG** 有正常取值，但 docker run 的時候，則只剩下 ENV 而 ARG 不見了。這代表 <font color="#FF1000">ARG 只能活在 build image 階段</font>而已。
+
