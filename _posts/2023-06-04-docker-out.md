@@ -145,6 +145,18 @@ docker run -d -p 80:80 --name nginx nginx:test
 
 注意：上下文路径下不要放置一些无用的文件，否则会导致打包发送的体积过大，速度缓慢而导致构建失败。当然，也可以编写一个 .dockerignore，通过它可以忽略上传一些不必要的文件给 Docker 引擎。
 
+### 删除构建镜像
+
+```
+$ docker image rm -f [Image ID]
+```
+
+### 列出 Image 资料
+
+```
+$ docker images
+```
+
 ## 在 build 或 run 时传递变量
 
 ![docker 1](../assets/img/linux/docker_env.png)
@@ -186,4 +198,3 @@ CMD ["node"]
 
 
 注意: build image 過程可以看到 **ENV** 與 **ARG** 有正常取值，但 docker run 的時候，則只剩下 ENV 而 ARG 不見了。這代表 <font color="#FF1000">ARG 只能活在 build image 階段</font>而已。
-
