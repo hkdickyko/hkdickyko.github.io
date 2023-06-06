@@ -103,8 +103,7 @@ RUN yum -y install wget \
     && tar -xvf redis.tar.gz \
     && rm redis.tar.gz
 ```
-
-
+<br/>
 
 |选项 |说明|
 |---|---|
