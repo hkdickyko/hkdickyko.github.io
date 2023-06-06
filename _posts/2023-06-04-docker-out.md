@@ -104,7 +104,6 @@ RUN yum -y install wget \
     && rm redis.tar.gz
 ```
 <br/>
-
 |选项 |说明|
 |---|---|
 |-a |stdin: 指定标准输入输出内容类型，可选 STDIN、STDOUT、STDERR 三项|
