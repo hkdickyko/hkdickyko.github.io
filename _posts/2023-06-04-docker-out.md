@@ -168,7 +168,7 @@ $ docker ps
 ### 停止 image
 
 ```
-$ docker stop [Image ID]
+$ docker stop [container ID]
 ```
 
 ### 删除构建镜像
