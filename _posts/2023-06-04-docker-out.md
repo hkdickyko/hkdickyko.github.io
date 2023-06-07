@@ -46,14 +46,16 @@ $ touch Dockerfile
 
 ```
 FROM nginx
-RUN echo '<h1>你好，Docker 的 Nginx 容器！</h1>' > /usr/share/nginx/html/index.html
+RUN echo '<html><head><meta charset="utf-8"></head><body> \
+          <h1>你好，Docker 的 Nginx 容器！</h1></body></html>' > \
+          /usr/share/nginx/html/index.html
 ```
 
 这个 Dockerfile 非常简单，总共也就运用了两条指令：FROM 和 RUN 。
 
 ### FROM 指定基础镜像
 
-制作镜像必须要先声明一个基础镜像，FROM 指令可以指定基础镜像是必备指令，且必须是第一条指令。表示后续操作都是基于這指定的基础镜像。
+制作镜像必须要先声明一个基本参考镜像（底层运行程序），FROM 指令可以指定基础镜像是必备指令，且必须是第一条指令。表示后续操作都是基于這指定的基础镜像。
 
 通常情况下，基础镜像在 DockerHub 都能找到，如：
 
@@ -93,7 +95,9 @@ RUN ["./test.php", "dev", "offline"] # 等价于 RUN ./test.php dev offline
 
 Dockerfile 中每一个 RUN 指令都会新建一层，过多无意义的层导致很多运行时不需要的东西，都被打包进了镜像内，比如编译环境、更新的软件包等，这就导致了构建出来的镜像体积非常大。可用 && 将各个命令串联起来。简化 RUN 为一层，同时可删除了无用的压缩包。
 
-Dockerfile 支持 shell 格式命令末尾添加 空格及 \ 作换行，及首通过 # 进行注释。良好的编写习惯，如换行、注释、缩进等，可以让 Dockerfile 更易于维护。例子如下：
+Dockerfile 支持 shell 格式命令末尾添加 空格及 \ 作换行，及首通过 # 进行注释。良好的编写习惯，如换行、注释、缩进等，可以让 Dockerfile 更易于维护。
+Linux shell 命令 <font color="#FF1000">&&</font> 解释为逻辑与。用此命令时，只有前一个命令成功执行后，才会执行这命令。
+例子如下：
 
 
 ```
@@ -142,42 +146,45 @@ $ docker build -t container:test .
 构建命令执行完成后，执行 docker images 命令查看本地镜像是否构建成功。如成功则有一個标签为 test 的镜像文件。image ID 也是相当有用请多注意。
 
 
-![docker](../assets/img/linux/docker.jpg)
+![docker](../assets/img/linux/docker_images.png)
 
 
 镜像构建成功后，运行 Nginx 容器：
 
 ```
-$ docker run -d -p 80:80 --name nginx nginx:test
+$ docker run -d -p 80:80 --name Dicky_KO container:test
 ```
 
 容器运行成功后，用网页浏览器访问 localhost:80, 可以看到首页已经被成功修改了如下。
 
 
-![docker 1](../assets/img/linux/docker1.jpg)
+![docker 1](../assets/img/linux/docker_out.png)
 
 
 注意：上下文路径下不要放置一些无用的文件，否则会导致打包发送的体积过大，速度缓慢而导致构建失败。当然，也可以编写一个 .dockerignore，通过它可以忽略上传一些不必要的文件给 Docker 引擎。
 
-### 查询 image 资料 
+### 查询运行情况资料 
 
 ```
 $ docker ps
 ```
 
-### 停止 image
+
+![docker](../assets/img/linux/docker_ps.png)
+
+### 停止运行程序
 
 ```
 $ docker stop [container ID]
 ```
 
-### 删除构建镜像
+### 强制删除构建镜像
 
 ```
 $ docker image rm -f [Image ID]
 ```
 
-### 列出 Image 资料
+### 列出全部 Image 资料
 
 ```
 $ docker images
