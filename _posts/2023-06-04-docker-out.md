@@ -190,6 +190,10 @@ $ docker image rm -f [Image ID]
 $ docker images
 ```
 
+### docker 指令关係表
+
+![command](../assets/img/linux/docker_c.png)
+
 ## 在 build 或 run 时传递变量
 
 
@@ -263,7 +267,6 @@ docker run -p 8000:80 -it ubuntu /bin/bash
 ```
 
 以上指令会将容器的 80 端口映射到宿主机的 8000 端口上。
-
 
 
 
