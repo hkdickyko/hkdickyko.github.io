@@ -293,3 +293,74 @@ $ sudo docker run -d -P --name web --link db:db training/webapp python app.py
 名称是连接容器的名字，别名是 link 的别名。连接的两个容器是父子关系。父容器是 db 可以访问子容器 web。为此 docker 在容器之间打开一个安全连接隧道不需要暴露任何端口在容器外部。注意到当启动 db 容器的时候没有使用 -P 或者 -p 标识。连接容器时不需要通过网络给 PostgreSQL 数据库开放端口。
 
 注意：可以使用一个父容器连接多个子容器。例如，可以有多个 web 容器连接到 db 数据库容器。
+
+
+## 日誌记录
+
+每个 Docker 守护程序有一个默认的日誌记录驱动程序，除非将其配置更改。預設日誌路徑如下：
+
+```
+/var/lib/docker/containers/<container-id>/<container-id>-json.log
+```
+
+可以利用下列指令進行清除日誌。
+
+```
+cat /dev/null > <container-id>-json.log
+```
+
+### 清理日誌档案
+
+如想使用 Log Script 清理 Log 档案，可將下列 Script 存成 sh 檔後執行。
+
+```
+path=/var/lib/docker/containers/
+echo ""
+echo "========== Clean Docker Containers Log =========="
+echo "Path: "$path
+cd $path
+for file in $(ls)
+do
+    if [ -d $file ];then
+        echo $file"-json.log"
+        cat /dev/null > $file/$file-json.log
+      else
+        echo 0
+    fi
+done
+echo "========== Clean Docker Containers Log =========="
+echo ""
+```
+
+### 設置日誌輪替
+
+也可以在 docker run 命令中指定日誌記錄驅動程式與其選項。例如：
+
+```
+$ docker run \
+    --log-driver json-file \
+    --log-opt max-size=10m \
+    --log-opt max-file=10 \
+    alpine echo hello world
+```
+
+或使用 docker-compose 日誌記錄驅動程式與其選項也可以使用 docker-compose 進行配置。例如：
+
+```
+version: '3.2'
+services:
+  nginx:
+    image: 'nginx:latest'
+    ports:
+      - '80:80'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1k"
+        max-file: "3"
+```
+
+
+
+
+
