@@ -228,7 +228,7 @@ ENV PATH=/node/bin:$PATH
 CMD ["node"]
 ```
 
-### 预设参数
+## 预设参数
 
 在 ENV 與 ARG 參數的設定上，可以透過下面方式增加一些预设值。
 
@@ -239,7 +239,7 @@ CMD ["node"]
 注意: build image 過程可以看到 **ENV** 與 **ARG** 有正常取值，但 docker run 的時候，則只剩下 ENV 而 ARG 不見了。這代表 <font color="#FF1000">ARG 只能活在 build image 階段</font>而已。
 
 
-## 隐式创建 Docker 卷 (volume)
+## 创建卷 (volume)
 
  创建和使用卷的最简单方法是使用 docker run 和 -v 或 --volume 标志。 此标志采用 2 个参数，由 : 分隔
 
@@ -256,9 +256,9 @@ $ docker run -it -v $(pwd):/storage
 - /home/storage 是宿主机的資料夾路徑映射到容器裡面的 /storage 資料夾路徑。
 - 目前目录 $(pwd) 是宿主机的資料夾路徑映射到容器裡面的 /storage 資料夾路徑。
 
-### 容器指定端口指定映射到宿主机的一个端口
+## 端口映射
 
-最简单方法是使用 docker run 和 -p 标志。 此标志采用 2 个参数，由 : 分隔
+容器指定端口指定映射到宿主机的一个端口，最简单方法是使用 docker run 和 -p 标志。 此标志采用 2 个参数，由 : 分隔
  
  -p <主机端口> : <docker 容器端口>
 
@@ -268,9 +268,28 @@ docker run -p 8000:80 -it ubuntu /bin/bash
 
 以上指令会将容器的 80 端口映射到宿主机的 8000 端口上。
 
+## 容器连接
 
 
+连接允许容器之间可见并且安全地进行通信。使用 --link 创建连接一个新容器，这个容器是数据库。
+
+```
+$ sudo docker run -d --name db training/postgres
+```
+
+这里使用 training/postgres 容器创建一个新的容器。容器是 PostgreSQL 数据库。
+
+现在创建一个web容器来连接 db 容器。
+
+```
+$ sudo docker run -d -P --name web --link db:db training/webapp python app.py
+```
+
+这将使 web 容器和 db 容器连接起以 --link 的形式
 
 
+--link 名称：别名
 
+名称是连接容器的名字，别名是 link 的别名。连接的两个容器是父子关系。父容器是 db 可以访问子容器 web。为此 docker 在容器之间打开一个安全连接隧道不需要暴露任何端口在容器外部。注意到当启动 db 容器的时候没有使用 -P 或者 -p 标识。连接容器时不需要通过网络给 PostgreSQL 数据库开放端口。
 
+注意：可以使用一个父容器连接多个子容器。例如，可以有多个 web 容器连接到 db 数据库容器。
