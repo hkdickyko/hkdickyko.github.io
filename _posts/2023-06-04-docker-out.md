@@ -235,11 +235,11 @@ CMD ["node"]
 注意: build image 過程可以看到 **ENV** 與 **ARG** 有正常取值，但 docker run 的時候，則只剩下 ENV 而 ARG 不見了。這代表 <font color="#FF1000">ARG 只能活在 build image 階段</font>而已。
 
 
-## 隐式创建 Docker 卷
+## 隐式创建 Docker 卷 (volume)
 
- 创建和使用卷的最简单方法是使用 docker run 和 -v 或 --volume 标志。 此标志采用三个参数，由 :: 分隔
+ 创建和使用卷的最简单方法是使用 docker run 和 -v 或 --volume 标志。 此标志采用 2 个参数，由 : 分隔
 
- -v <来源>:<目的地>
+ -v <主机卷>:<docker 容器卷>
 
  如果“源”是前面示例中使用的路径，Docker 将使用挂载绑定。 如果“源”是一个名称，那么 Docker 会尝试找到这个卷，如果找不到则创建一个。 下面，前面的示例已更新为使用卷而不是挂载绑定：
 
@@ -249,8 +249,23 @@ $ docker run -it -v /home/storage:/storage
 $ docker run -it -v $(pwd):/storage
 ```
 
-- /home/storage 是實體主機的資料夾路徑映射到 Container 裡面的 /storage 資料夾路徑。
-- 目前目录 $(pwd) 是實體主機的資料夾路徑映射到 Container 裡面的 /storage 資料夾路徑。
+- /home/storage 是宿主机的資料夾路徑映射到容器裡面的 /storage 資料夾路徑。
+- 目前目录 $(pwd) 是宿主机的資料夾路徑映射到容器裡面的 /storage 資料夾路徑。
+
+### 容器指定端口指定映射到宿主机的一个端口
+
+最简单方法是使用 docker run 和 -p 标志。 此标志采用 2 个参数，由 : 分隔
+ 
+ -p <主机端口>:<docker 容器端口>
+
+```
+docker run -p 8000:80 -it ubuntu /bin/bash
+```
+
+以上指令会将容器的 80 端口映射到宿主机的 8000 端口上。
+
+
+
 
 
 
