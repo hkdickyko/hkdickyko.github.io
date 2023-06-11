@@ -194,6 +194,26 @@ $ docker images
 
 ![command](../assets/img/linux/docker_c.png)
 
+
+Docker 是一种工具，通过使用容器更轻松地创建、部署和运行应用程序。
+
+|docker 命令|解释|
+|:---:|:---:|
+| version|显示 docker 版本|
+| stats|显示正在运行的容器的统计信息|
+| logs [container]|显示 [container] 的日志|
+| push [image]:[tag]|将 [image] 推送到存储库|
+| build|从中构建 docker 镜像文件|
+| images|列出所有镜像|
+| rmi [image]|删除 [image]|
+| pull [image]:[tag]|从 Docker Hub 拉取带有 [tag] 的 [image]|
+| rm [container]|删除 [容器]。 添加 -f 以删除正在运行的容器|
+| stop [container]|停止 docker [容器]|
+| start [container]|启动一个 docker [容器]|
+| run [image]|从 docker 镜像运行容器。 --name：指定容器名称 -p：指定端口映射 --hostname：指定主机名|
+| ps|列出所有正在运行的容器。添加 -a 标志以列出所有容器。|
+
+
 ## 在 build 或 run 时传递变量
 
 
@@ -359,8 +379,6 @@ services:
         max-size: "1k"
         max-file: "3"
 ```
-
-
 
 
 
