@@ -1,6 +1,6 @@
 ---
 category: [編程]
-tags: [編程]
+tags: [編程, JS]
 title: 前端元件
 date: 2022-07-20 06:00:00
 ---

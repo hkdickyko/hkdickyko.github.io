@@ -1,6 +1,6 @@
 ---
 category: 編程
-tags: [編程]
+tags: [編程, JS]
 title: Javascript
 date: 2021-02-07 22:34:36
 ---
@@ -313,4 +313,3 @@ $（函數（）{
     }）; 
 
 ```
-

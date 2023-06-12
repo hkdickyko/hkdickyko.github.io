@@ -1,6 +1,6 @@
 ---
 category: [系統]
-tags: [編程]
+tags: [系統, Linux]
 title: 開放麒麟 (Open Kylin) 使用技巧
 date: 2022-07-29 06:00:00
 ---
@@ -362,4 +362,3 @@ sudo apt-get install openprinting-ppds
 ### Krita : Krita 是一個專業的免費開源繪畫程序
 
 ![Alt text](../assets/img/kylin/krita.png)
-

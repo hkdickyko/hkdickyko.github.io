@@ -1,6 +1,6 @@
 ---
 category: [網頁]
-tags: [編程]
+tags: [編程, JS]
 title: CodeMirror
 date: 2022-10-29 1:00:00
 ---

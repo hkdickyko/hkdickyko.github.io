@@ -1,6 +1,6 @@
 ---
 category: [編程]
-tags: [編程]
+tags: [編程, JS]
 title: Javascript
 date: 2022-07-16 06:00:00
 ---

@@ -1,6 +1,6 @@
 ---
 category: [軟件]
-tags: [電腦]
+tags: [Linux, 系統, Docker]
 title: Docker 外挂程序制作
 date: 2023-06-04 1:00:00
 ---
@@ -379,6 +379,4 @@ services:
         max-size: "1k"
         max-file: "3"
 ```
-
-
 

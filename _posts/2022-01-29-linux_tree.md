@@ -1,6 +1,6 @@
 ---
 category: [編程]
-tags: [系統]
+tags: [系統, Linux]
 title: Linux 檔案結構
 date: 2022-01-29 12:00:00
 ---
@@ -48,7 +48,6 @@ date: 2022-01-29 12:00:00
 | /usr/share| 保存安裝在 Linux 中的應用程序的文檔文件|
 | /usr/src| 用戶的應用程序源文件|
 | /usr/tmp| 應用程序的臨時文件夾。 文件夾可能指向 /var/tmp 目錄|
-
 
 
 

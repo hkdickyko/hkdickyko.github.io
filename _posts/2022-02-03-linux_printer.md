@@ -1,6 +1,6 @@
 ---
 category: [編程]
-tags: [系統]
+tags: [系統, Linux]
 title: Linux 安裝打印機
 date: 2022-02-03 11:00:00
 ---
