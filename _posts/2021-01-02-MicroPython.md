@@ -1,6 +1,6 @@
 ---
 category: 編程 
-tags: [IoT]
+tags: [Python, IoT]
 title: MicroPython
 date: 2021-01-02 22:34:36
 ---
