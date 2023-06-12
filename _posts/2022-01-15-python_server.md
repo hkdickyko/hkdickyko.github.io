@@ -1,6 +1,6 @@
 ---
 category: [編程]
-tags: [IoT, 編程]
+tags: [Python]
 title: Python 網絡服務器
 date: 2022-01-15 12:00:00
 ---
@@ -240,5 +240,4 @@ app.run(debug=True, host="192.168.1.87")
 最後，我們將使用流編寫器的 awrite 方法發送其餘內容。 我們將發送一個簡單的 *歡迎來到 picoweb!"* 消息。
 
 但要注意一個重要的功能是在調用每個函數之前要使用關鍵字的 <font color="#FF1000">yield</font>。 yield 能夠創建一系列值，因為對於每次調用，函數都會從產生值的點繼續。 這種類型的函數稱為生成器。 這樣的函數創建了一個生成器迭代器，每次調用 next() 方法時，我們都會轉到下一個 yield ，這樣我們就能記下所有返回的值來再存取使用。詳細可參考相關的 [yield 的網絡資源](https://www.sitepoint.com/quick-tip-understanding-the-yield-keyword-in-python/)
-
 
