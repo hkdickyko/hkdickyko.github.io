@@ -1,8 +1,8 @@
 ---
 category: [軟件]
 tags: [系統, Linux]
-title: Sock Server
-date: 2023-06-16 1:00:00
+title: Sock Server（dante-server)
+date: 2023-06-22 1:00:00
 ---
 
 <style>
