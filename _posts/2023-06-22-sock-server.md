@@ -157,22 +157,61 @@ $ passwd dicky
 $ netstat -nap|grep 1080 
 ```
 
-### pass / block
+### 定义规则放行或者阻断
 
-定义 rules，放行或者阻断。在 dante 的配置中，有两个层面的 rules，一个是 client-rules，另一个是 socks-rules。
-client-rules 和 socks-rules 都由 pass 和 block 关键字组成，区别在于 client-rules 带有 client 前缀。
+在 dante 的配置中，有两个层面的规则
+ - client-rules
+ - socks-rules
 
-client-rules 会首先被检查，用来判别用户是否可以与 sockd 通讯，这些规则工作在 TCP 层。
+client-rules 和 socks-rules 都由 pass 和 block 关键字组成，区别在于 client-rules 带有 <font color="#FF1000">client 前缀</font>。区别在于 socks-rules 带有 <font color="#FF1000">socks 前缀</font>。
 
-socks-rules 是在通过 client-rules 判定，确认用户可以与 sockd 通讯以后，用来判别用户发送的连接的具体请求内容，并根据这些内容判定通过还是拒绝。
+client-rules 会首先被检查，用来判别用户是否可以与 sockd 通讯，这些规则工作在 TCP 层。socks-rules 是在通过 client-rules 判定，确认用户可以与 sockd 通讯以后，用来判别用户发送的连接的具体请求内容，并根据这些内容判定通过还是拒绝。
 
-client-rules 和 socks-rules 都遵循 first match is best match 原则，即如果有多条规则匹配，则第一个匹配指定 client 或 socket 的规则会被执行。
+client-rules 和 socks-rules 都遵循 <font color="#FF1000">最先被匹配是最优选</font> 的原则，即如果有多条规则匹配，则第一个匹配指定 client 或 socket 的规则会被执行。
 
-在以上两种 rules 中，针对 IP 地址这个值，还有一套可选的关键字，其中 client-rules 中的可选关键字是 socks-rules 中的一个子集。
+在以上两种规则中，针对 IP 地址这个值，还有一套可选的关键字。对于每条规则，规则中所有的条件类关键字都会被检查，如果匹配用户请求，则所有的动作都会被执行。
 
-对于每条规则，规则中所有的条件类关键字都会被检查，如果匹配用户请求，则所有的动作都会被执行。
+在这两种情况下，<font color="#FF1000">from</font> 都表示<font color="#FF1000">客户端</font>地址。 
+- 在 client-rules 文中，<font color="#FF1000">to</font> 表示接受请求的地址，即 Dante 服务器侦听的地址。 
+- 在 socks-rules 文中，<font color="#FF1000">to</font> 表示客户端的目标地址。 
+
+可选关键字，如下：
+
+#### client-rules 关键字
+
+|关键字|描述|
+|:---:|:---:|
+|from| 用于来自作为值给出的地址的请求| 
+|to| 用于发送至作为值给出的地址的请求| 
+|port| 参数 from、to 和 via。 接受关键字 eq/=, neq/!=, ge/>=, le/<=, gt/>, lt/< 后跟数字。 端口范围也可以指定为“port <start #> - <end #>”，它将匹配 <start #> 和 <end #> 范围内的所有端口号| 
+|libwrap| 服务器将把该行传递给 libwrap（TCP 服务的安全包装库）来执行|  
+|log| 用于控制日志记录。 接受的关键字有 connect、disconnect、data、<font color="#FF1000">error</font> 和 iooperation|  
+|user| 将仅接受值给出的的用户的连接。 如冇设定则所有人也可连接|
+|method| 要求给定方法连接进行身份验证|  
+|pam.servicename| 涉及 pam 时使用哪个服务名称。 默认为 sockd|
+
+
+#### socks-rules 关键字
+ 
+|关键字|描述|
+|:---:|:---:|
+|from |用于来自作为值给出的地址的请求| 
+|<font color="#FF1000">to</font>| 用于前往或使用作为值给出的地址的请求。 请注意，该地址的含义受命令影响|
+|port| 参数 from、to 和 via。 接受关键字 eq/=、neq/!=、ge/>=、le/<=、gt/>、lt/< 后跟数字。 端口范围也可以指定为“port <start #> - <end #>”，它将匹配 <start #> 和 <end #> 范围内的所有端口号|
+|libwrap |服务器将把该行传递给 libwrap（TCP 服务的安全包装库）来执行|
+|log |用于控制日志记录。 接受的关键字有 connect、disconnect、data 和 iooperation|
+|user| 服务器将接受来自给出的的用户的连接。 如冇设定则所有人也可连接|
+|<font color="#FF1000">method</font> |要求使用给定方法之一建立连接。 方法始终引用规则的源部分。 有效值与全局方法行中的相同|
+|pam.servicename| 涉及 pam 时使用什么服务名。 默认为“sockd”|
+|<font color="#FF1000">bandwidth</font> |匹配此规则的客户端都将共享此带宽量|
+|<font color="#FF1000">command</font> |用于给定的命令。 有效命令包括 bind、bindreply、connect、udpassociate 和 udpreply。 可以用来代替或补充协议|
+|<font color="#FF1000">protocol</font> |该规则适用于给定的协议。 有效值为 tcp 和 udp。 建议使用命令形式，因为它可以更准确地定义规则|
+|<font color="#FF1000">proxyprotocol</font>| 该规则适用于使用给定代理协议的请求。 有效的代理协议是 socks_v4 和 socks_v5 |
+|<font color="#FF1000">redirect</font>| 可以使用重定向语句重定向源和/或目标。 该语句的语法如下： <br/>redirect from: ADDRESS<br/>redirect to: ADDRESS<br/>from 和 to 的语义根据命令的不同而不同，应该足够直观|
+
 
 #### 例子
+
 
 ```
 client pass {
@@ -187,14 +226,19 @@ socks pass {
 
 
 client pass {
-        from: 192.0.2.0/24 to: 0.0.0.0/0
-	log: error # connect disconnect
-        method: authmethod
-	group: socksusers
+  from: 192.0.2.0/24 to: 0.0.0.0/0
+	 log: error # connect disconnect
+  method: authmethod
+	 group: socksusers
 }
 
 
 ```
+
+注意：其中 192.0.2.0 为客户方的 IP 地址。
+
+
+
 
 ### log 可設置值
 
@@ -211,7 +255,7 @@ client pass {
 
 ```
 # 開机自启服务
-$ systemctl enable danted
+$ sudo systemctl enable danted.service
 
 # 重启一下服务
 $ systemctl restart danted.service
