@@ -61,15 +61,20 @@ user.privileged: root
 user.unprivileged: sockd
  
 # 侦听网络接口或地址
+
+# 设定 socks 要 listen 的 ip & port
+# 0.0.0.0 就是全部都听，如果有固定要听哪一个 IP 在这边设定
 internal: eth0 port=10808
  
 # 代理网络接口或地址（要設置）
 external: eth0
  
 # socks 规则确定通过外部接口代理的内容
+# none 是允许匿名的 proxy 过来使用。如果是要对外服务的，这一段就要另外设定，避免被乱搞
 socksmethod: username
  
 # 客户端规则决定谁可以连接到内部接口
+# none 表示允许匿名访问
 clientmethod: none
 
 # 客户端通行规则可多個（要設置）
@@ -111,7 +116,7 @@ debug: 1
 
 ### 侦听网络接口或地址
 
-服务器在内部地址上接收来自 SOCKS 客户端的 SOCKS 请求
+服务器在内部地址上接收来自 SOCKS 客户端的 SOCKS 请求，0.0.0.0 就是全部都接收。
 
 internal: <font color="#FF1000">192.168.3.1</font> port = <font color="#FF1000">1080</font>
 
@@ -127,13 +132,13 @@ external: <font color="#FF1000">eth0</font>
 
 ### socksmethod
 
-socksmethod 为系统用户登录，**注意**使用其它时，务必创建不能登录系统的账户，可通过命令 useradd 添加用户及 passwd 设置密码。权限可以为 /bin/false 是最严格的禁止 login 选项。
+socksmethod 为系统用户登录，**注意**使用其它时，务必创建不能登录系统的账户，可通过命令 useradd 添加用户及 passwd 设置密码。权限可以为 /bin/false 是最严格的禁止 login 选项。none 是允许匿名的 proxy 使用。
 
 #### 控制用户认证的方法，可以是以下之一或组合。
 - none 不需要认证
 - username 用户名密码
 - gssapi kerberos 认证
-- rfc931 需要用户主机提供一个 rfc931 reply，这个reply必须匹配一个 /etc/passwd 中的用户名
+- rfc931 需要用户主机提供一个 rfc931 reply，这个 reply 必须匹配一个 /etc/passwd 中的用户名
 - pam 通过 PAM 方式认证
 - badauth 通过 BSD 认证系统
 
