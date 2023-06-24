@@ -177,6 +177,8 @@ client-rules 和 socks-rules 都遵循 <font color="#FF1000">最先被匹配是�
 
 可选关键字，如下：
 
+
+
 #### client-rules 关键字
 ---
 
@@ -190,6 +192,7 @@ client-rules 和 socks-rules 都遵循 <font color="#FF1000">最先被匹配是�
 |user| 将仅接受值给出的的用户的连接。 如冇设定则所有人也可连接|
 |method| 要求给定方法连接进行身份验证|  
 |pam.servicename| 涉及 pam 时使用哪个服务名称。 默认为 sockd|
+
 
 
 #### socks-rules 关键字
@@ -210,6 +213,7 @@ client-rules 和 socks-rules 都遵循 <font color="#FF1000">最先被匹配是�
 |<font color="#FF1000">protocol</font> |该规则适用于给定的协议。 有效值为 tcp 和 udp。 建议使用命令形式，因为它可以更准确地定义规则|
 |<font color="#FF1000">proxyprotocol</font>| 该规则适用于使用给定代理协议的请求。 有效的代理协议是 socks_v4 和 socks_v5 |
 |<font color="#FF1000">redirect</font>| 可以使用重定向语句重定向源和/或目标。 该语句的语法如下： <br/>redirect from: ADDRESS<br/>redirect to: ADDRESS<br/>from 和 to 的语义根据命令的不同而不同，应该足够直观|
+
 
 
 #### 例子
