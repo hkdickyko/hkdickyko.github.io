@@ -2,7 +2,7 @@
 category: [Docker]
 tags: [Linux, 系統]
 title: Docker 應用
-date: 2022-08-20 1:00:00
+date: 2023-06-26 1:00:00
 ---
 
 <style>
@@ -93,7 +93,6 @@ Docker 容器映像是一個輕量級、獨立的可執行軟件包，其中包�
 |docker commit container 映像名|从容器创建图像|
 |docker import url - [tag] | 从 tarball 创建图像|
 |docker rmi 映像名|删除图像|
-
 
 
 
