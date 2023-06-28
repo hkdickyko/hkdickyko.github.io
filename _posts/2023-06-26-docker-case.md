@@ -85,6 +85,20 @@ $ docker run --name blahblah debian true
 
 # 删除容器
 $ docker rm blahblah
+
+# 加載硬碟位置
+$ docker run -ti -v /tmp:/container/tmp debian
+
+# 加載设备位置
+$ docker run -ti --device /dev/sda debian 
+
+# -link 是导出服务的最基本方式
+$ docker run -ti --link my-server:srv debian
+
+ping srv
+
+# -p 为加 IP 地址及端口，如沒有加 IP 地址即为 0.0.0.0（所有接口），80 为本机端口，8080 为相對容器端口。
+$ docker run -p 127.0.0.1:80:8080 nginx
 ```
 
 ## 检查容器
@@ -114,19 +128,7 @@ $ docker rm blahblah
 ### 应用
 
 ```
-# 加載硬碟位置
-$ docker run -ti -v /tmp:/container/tmp debian
 
-# 加載设备位置
-$ docker run -ti --device /dev/sda debian 
-
-# -link 是导出服务的最基本方式
-$ docker run -ti --link my-server:srv debian
-
-ping srv
-
-# -p 为加 IP 地址及端口，如沒有加 IP 地址即为 0.0.0.0（所有接口），80 为本机端口，8080 为相對容器端口。
-$ docker run -p 127.0.0.1:80:8080 nginx
 
 
 ```
@@ -192,6 +194,5 @@ Docker 容器映像是一個輕量級、獨立的可執行軟件包，其中包�
 
 
 ```
-
 
 
