@@ -57,7 +57,6 @@ date: 2023-06-26 1:00:00
 
 ```
 $ docker create debian
-$ docker start debian 
 
 # -d 是分离模式，執行後立即分离
 $ docker run -d debian true ; echo $?
@@ -88,7 +87,7 @@ $ docker run --name blahblah debian true
 $ docker rm blahblah
 
 # 加載硬碟位置
-$ docker run -ti -v /tmp:/container/tmp debian
+$ docker run -ti -v /home/dicky/tmp:/storage/tmp debian
 
 # 加載设备位置
 $ docker run -ti --device /dev/sda debian 
