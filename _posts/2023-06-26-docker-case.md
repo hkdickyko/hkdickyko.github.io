@@ -90,9 +90,10 @@ $ docker rm blahblah
 $ docker run -ti -v /home/dicky/tmp:/storage/tmp debian
 
 # 加載设备位置
-$ docker run -ti --device /dev/sda debian 
+$ docker run -ti --device /dev/sda debian
+$ sudo fdisk -l /dev/sda
 
-# -link 是导出服务的最基本方式
+# -link 是导出服务的最基本方式，my-server 为网站接口。
 $ docker run -ti --link my-server:srv debian
 
 ping srv
@@ -132,7 +133,10 @@ $ docker ps -a
 
 CONTAINER ID   IMAGE        COMMAND      CREATED              STATUS 
 2b291251a415   debian:7.5   "hostname"   About a minute ago   Exited (0) 1 minutes 
-6d36a2f07e18   debian:7.5   "false"      2 minutes ago        Exited (1) 2 minutes 
+6d36a2f07e18   debian:7.5   "false"      2 minutes ago        Up 2 minutes 
+
+# 執行中的容器要先停止
+$ docker stop 6d36a2f07e18
 
 # 删除所有僵尸容器
 $ docker container prune
@@ -143,8 +147,6 @@ Deleted Containers:
 2b291251a415
 6d36a2f07e18
 0f563f110328
-
-
 ```
 
 
@@ -173,7 +175,6 @@ Docker 容器映像是一個輕量級、獨立的可執行軟件包，其中包�
 ```
 # 列出 Volume 在实体主机的真实路径
 $ docker inspect -f '{{.Mounts}}' 4c2a9ef663c2
-
 ```
 
 **注意**：4c2a9ef666c2 为容器 ID。为开启容器後能看的如：root@4c2a9ef666c2。
