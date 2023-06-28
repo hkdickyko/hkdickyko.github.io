@@ -239,9 +239,12 @@ $ docker load -i hello.tar
 |COPY path dst |将上下文中的路径复制到位置目標的容器中|
 |ADD src dst |与 COPY 相同，但会解压相关文档，并接受网络文件|
 |RUN|放 Linux 指令，用来执行安装和设定这个 Image 需要的东西|
+|ARG|编译的过程中，引入的参数作为后续的环境变数使用|
 |ENV|設定環境變數|
+|ENTRYPOINT|启动容器时最先执行的指令|
 |CMD|在 docker run 内執行的指令|
 |VOLUME|在容器內定义匿名数据卷|
+|WORKDIR|应用程式执行位置|
 
 ### Dockerfile
 
@@ -253,10 +256,10 @@ FROM debian:wheezy
 VOLUME ["/storage"]
 
 # 安装最新的升级
-RUN apt-get update && apt-get -y dist-upgrade
+RUN apt-get update && apt-get -qqy dist-upgrade
 
 # 安装 nginx
-RUN apt-get -y install nginx
+RUN apt-get -qqy install nginx
 
 # 设置默认容器命令 # -> 在前台运行 nginx
 CMD ["nginx", "-g", "daemon off;"]
@@ -264,7 +267,7 @@ CMD ["nginx", "-g", "daemon off;"]
 # 告诉将会监听 tcp 端口 80
 EXPOSE 80
 
-# RUN apt-get -y install nginx
+# RUN apt-get -qqy install nginx
 # 相当于 RUN [”/bin/sh”, ”−c”, ”apt-get -y install nginx”]
 
 ```
