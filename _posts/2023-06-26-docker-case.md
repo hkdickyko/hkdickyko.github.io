@@ -288,7 +288,9 @@ EXPOSE 80
 
 #### 使用 scratch 创建一个简单镜像
 
-- 文件內容
+- 用最少的资源制作一个可执行的文件，在 docker 下執行。
+
+[网上资源](https://github.com/docker-library/hello-world)
 
 ```
 # dockerfile
@@ -296,8 +298,6 @@ FROM scratch
 ADD hello /
 CMD ["/hello"]
 ```
-
-[网上资源](https://github.com/docker-library/hello-world)
 
 - 例子
 
@@ -307,7 +307,6 @@ $ docker build --tag hello .
 
 # 在编译是不用快取文件
 $ docker build --tag hello . --no-cache
-
 
 # 查阅映象文件内容
 $ docker inspect hello
