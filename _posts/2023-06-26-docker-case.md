@@ -71,6 +71,7 @@ nobody
 
 # -w 設置當前目錄
 $ docker run -w /opt debian pwd
+/opt
 
 # -e 設置當前環境參數， sh -c 为在 shell 內執行指今
 $ docker run -e FOO=foo -e BAR=bar debian sh -c 'echo $FOO $BAR'
@@ -128,7 +129,21 @@ $ docker run -p 127.0.0.1:80:8080 nginx
 ### 应用
 
 ```
+$ docker ps -a
 
+CONTAINER ID   IMAGE        COMMAND      CREATED              STATUS 
+2b291251a415   debian:7.5   "hostname"   About a minute ago   Exited (0) 1 minutes 
+6d36a2f07e18   debian:7.5   "false"      2 minutes ago        Exited (1) 2 minutes 
+
+# 删除所有僵尸容器
+$ docker container prune
+
+WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N] y 
+Deleted Containers:
+2b291251a415
+6d36a2f07e18
+0f563f110328
 
 
 ```
@@ -189,10 +204,49 @@ Docker 容器映像是一個輕量級、獨立的可執行軟件包，其中包�
 ### Dockerfile
 
 ```
+# 基础镜像：最新的 Debian 版本
+FROM debian:wheezy
 
+# 安装最新的升级
+RUN apt-get update && apt-get -y dist-upgrade
 
+# 安装 nginx
+RUN apt-get -y install nginx
 
+# 设置默认容器命令 # -> 在前台运行 nginx
+CMD ["nginx", "-g", "daemon off;"]
+
+# 告诉将会监听 tcp 端口 80
+EXPOSE 80
+
+# RUN apt-get -y install nginx
+# 相当于 RUN [”/bin/sh”, ”−c”, ”apt-get -y install nginx”]
 
 ```
 
 
+- 注释以 <font color="#FF1000">#</font> 开头
+- 命令可以用 <font color="#FF1000">＼</font> 继续換行
+- 第一句開始必须是 <font color="#FF1000">FROM</font>
+
+
+
+#### 使用 scratch 创建一个简单镜像
+
+- 文件內容
+
+```
+# dockerfile
+FROM scratch
+ADD hello /
+CMD ["/hello"]
+```
+
+[网上资源](https://github.com/docker-library/hello-world)
+
+- 例子
+
+```
+$ docker build --tag hello .
+$ docker run hello
+```
