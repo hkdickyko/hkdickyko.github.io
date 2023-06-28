@@ -225,7 +225,6 @@ $ docker save -o hello.tar hello
 
 # 将映像 hello.tar 解压为映像， -i 为解压档案
 $ docker load -i hello.tar
-
 ```
 
 
@@ -245,15 +244,23 @@ $ docker load -i hello.tar
 |CMD|在 docker run 内執行的指令|
 |VOLUME|在容器內定义匿名数据卷|
 |WORKDIR|应用程式执行位置|
+|LABEL|在映像中以键值形式添加元素|
 
 ### Dockerfile
 
 ```
 # 基础映像：最新的 Debian 版本
-FROM debian:wheezy
+FROM debian
 
 # 创建 storage 目錄到映像內
 VOLUME ["/storage"]
+
+# 維護人名稱
+MAINTAINER hkdickyko@gmail.com
+
+# 键值形式添加元素
+LABEL Owner="dicky"
+LABEL Version="1.0"
 
 # 安装最新的升级
 RUN apt-get update && apt-get -qqy dist-upgrade
@@ -295,6 +302,16 @@ CMD ["/hello"]
 - 例子
 
 ```
+# 编译目前档案为映像 hello
 $ docker build --tag hello .
+
+# 在编译是不用快取文件
+$ docker build --tag hello . --no-cache
+
+
+# 查阅映象文件内容
+$ docker inspect hello
+
+# 执行已编译的映像
 $ docker run hello
 ```
