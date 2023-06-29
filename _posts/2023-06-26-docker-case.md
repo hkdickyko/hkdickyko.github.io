@@ -333,12 +333,28 @@ $ docker run hello
 FROM debian
 
 # 安装最新的升级
-RUN apt-get install update
+RUN apt-get update
 
 # 安装 emacs 編寫器， -y 所有回答均为 Yes
 RUN apt-get install -y emacs
 
 # 安装阿帕奇服务器
 RUN apt-get install -y apache2
+RUN apt-get install -y apache2-utils
+RUN apt-get clean
+EXPOSE 80
+
+CMD ["apache2ctl", "-D", "FOREGUARD']
 
 ```
+
+- 每安裝一個映像就往上疊一個，但最多到只有 127 層。
+
+
+
+
+
+
+
+
+
