@@ -329,8 +329,16 @@ $ docker run hello
 ![层的概念](../assets/img/linux/imagelayer.jpg)
 
 ```
+# 基础映像：最新的 Debian 版本
 FROM debian
 
-RUN apt-get install emacs
+# 安装最新的升级
+RUN apt-get install update
+
+# 安装 emacs 編寫器， -y 所有回答均为 Yes
+RUN apt-get install -y emacs
+
+# 安装阿帕奇服务器
+RUN apt-get install -y apache2
 
 ```
