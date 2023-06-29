@@ -86,6 +86,9 @@ $ docker run --name blahblah debian true
 # 删除容器
 $ docker rm blahblah
 
+# 删除容器已关闭， ps -a -q 是只列出容器 ID 部分，-a 是加到列表。-f 为过滤规则。-q 为只列出 ID 部分
+$ docker rm $(docker ps -a -f status=exited -q)
+
 # 加載硬碟位置
 $ docker run -ti -v /home/dicky/tmp:/storage/tmp debian
 
@@ -175,6 +178,13 @@ Docker 容器映像是一個輕量級、獨立的可執行軟件包，其中包�
 ```
 # 列出 Volume 在实体主机的真实路径
 $ docker inspect -f '{{.Mounts}}' 4c2a9ef663c2
+
+
+# 拆除所有未被执行的映像档， images -a -q 是只列出映像 ID 部分，-a 是加到列表。-q 为只列出 ID 部分
+$ docker rmi $(docker images -a -q)
+
+
+
 ```
 
 **注意**：4c2a9ef666c2 为容器 ID。为开启容器後能看的如：root@4c2a9ef666c2。
@@ -226,7 +236,6 @@ $ docker save -o hello.tar hello
 # 将映像 hello.tar 解压为映像， -i 为解压档案
 $ docker load -i hello.tar
 ```
-
 
 
 ## 建構工具
