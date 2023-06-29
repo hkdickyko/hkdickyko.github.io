@@ -238,7 +238,7 @@ $ docker load -i hello.tar
 ```
 
 
-## 建構工具
+# 建構工具
 
 |命令|解釋|
 |:---|:---|
@@ -255,7 +255,7 @@ $ docker load -i hello.tar
 |WORKDIR|应用程式执行位置|
 |LABEL|在映像中以键值形式添加元素|
 
-### Dockerfile
+## Dockerfile
 
 ```
 # 基础映像：最新的 Debian 版本
@@ -295,7 +295,7 @@ EXPOSE 80
 
 
 
-#### 使用 scratch 创建一个简单镜像
+## 使用 scratch 创建一个简单镜像
 
 - 用最少的资源制作一个可执行的文件，在 docker 下執行。
 
@@ -322,4 +322,15 @@ $ docker inspect hello
 
 # 执行已编译的映像
 $ docker run hello
+```
+
+## Docker 层的概念
+
+![层的概念](../assets/img/linux/imagelayer.jpg)
+
+```
+FROM debian
+
+RUN apt-get install emacs
+
 ```
