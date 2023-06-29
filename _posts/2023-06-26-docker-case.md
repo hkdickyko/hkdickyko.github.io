@@ -153,7 +153,6 @@ Deleted Containers:
 ```
 
 
-
 # 映像基本要素
 
 Docker 容器映像是一個輕量級、獨立的可執行軟件包，其中包括運行應用程序所需的一切：代碼、運行時、系統工具、系統庫和設置。 容器鏡像在 docker 運行時即成為容器。
@@ -182,9 +181,6 @@ $ docker inspect -f '{{.Mounts}}' 4c2a9ef663c2
 
 # 拆除所有未被执行的映像档， images -a -q 是只列出映像 ID 部分，-a 是加到列表。-q 为只列出 ID 部分
 $ docker rmi $(docker images -a -q)
-
-
-
 ```
 
 **注意**：4c2a9ef666c2 为容器 ID。为开启容器後能看的如：root@4c2a9ef666c2。
@@ -285,7 +281,6 @@ EXPOSE 80
 
 # RUN apt-get -qqy install nginx
 # 相当于 RUN [”/bin/sh”, ”−c”, ”apt-get -y install nginx”]
-
 ```
 
 
@@ -340,17 +335,17 @@ RUN apt-get install -y emacs
 
 # 安装阿帕奇服务器
 RUN apt-get install -y apache2
+
 RUN apt-get install -y apache2-utils
+
 RUN apt-get clean
+
 EXPOSE 80
 
-CMD ["apache2ctl", "-D", "FOREGUARD']
-
+CMD ["apache2ctl", "-D", "FOREGROUND']
 ```
 
 - 每安裝一個映像就往上疊一個，但最多到只有 127 層。
-
-
 
 
 
