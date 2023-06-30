@@ -321,7 +321,7 @@ $ docker run hello
 
 ## Docker 层的概念
 
-![层的概念](../assets/img/linux/imagelayer.jpg)
+![层的概念](../assets/img/docker/imagelayer.jpg)
 
 ```
 # 基础映像：最新的 Debian 版本
@@ -346,7 +346,6 @@ CMD ["apache2ctl", "-D", "FOREGROUND']
 ```
 
 - 每安裝一個映像就往上疊一個，但最多到只有 127 層。
-
 
 
 

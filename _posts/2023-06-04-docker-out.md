@@ -146,7 +146,7 @@ $ docker build -t container:test .
 构建命令执行完成后，执行 docker images 命令查看本地镜像是否构建成功。如成功则有一個标签为 test 的镜像文件。image ID 也是相当有用请多注意。
 
 
-![docker](../assets/img/linux/docker_images.png)
+![docker](../assets/img/docker/docker_images.png)
 
 
 镜像构建成功后，运行 Nginx 容器：
@@ -158,7 +158,7 @@ $ docker run -d -p 80:80 --name Dicky_KO container:test
 容器运行成功后，用网页浏览器访问 localhost:80, 可以看到首页已经被成功修改了如下。
 
 
-![docker 1](../assets/img/linux/docker_out.png)
+![docker 1](../assets/img/docker/docker_out.png)
 
 
 注意：上下文路径下不要放置一些无用的文件，否则会导致打包发送的体积过大，速度缓慢而导致构建失败。当然，也可以编写一个 .dockerignore，通过它可以忽略上传一些不必要的文件给 Docker 引擎。
@@ -170,7 +170,7 @@ $ docker ps
 ```
 
 
-![docker](../assets/img/linux/docker_ps.png)
+![docker](../assets/img/docker/docker_ps.png)
 
 ### 停止运行程序
 
@@ -192,7 +192,7 @@ $ docker images
 
 ### docker 指令关係表
 
-![command](../assets/img/linux/docker_c.png)
+![command](../assets/img/docker/docker_c.png)
 
 
 Docker 是一种工具，通过使用容器更轻松地创建、部署和运行应用程序。
@@ -217,7 +217,7 @@ Docker 是一种工具，通过使用容器更轻松地创建、部署和运行�
 ## 在 build 或 run 时传递变量
 
 
-![docker 1](../assets/img/linux/docker_env.png)
+![docker 1](../assets/img/docker/docker_env.png)
 
 
 ### ENV
@@ -379,4 +379,3 @@ services:
         max-size: "1k"
         max-file: "3"
 ```
-
