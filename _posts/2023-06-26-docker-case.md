@@ -36,6 +36,7 @@ date: 2023-06-26 1:00:00
 
   容器化軟件可用於基於 Linux 和 Windows 的應用程序，無論基礎設施如何，都將始終以相同的方式運行。 容器將軟件與其環境隔離，並確保其統一工作，儘管開發和登台之間存在差異。 
 
+![命令集](../assets/img/docker/dockercmd.png)
 
 ## 容器管理命令
 
@@ -289,6 +290,7 @@ EXPOSE 80
 - 第一句開始必须是 <font color="#FF1000">FROM</font>
 
 
+![命令集](../assets/img/docker/dockercmda.png)
 
 ## 使用 scratch 创建一个简单镜像
 
@@ -346,8 +348,6 @@ CMD ["apache2ctl", "-D", "FOREGROUND']
 ```
 
 - 每安裝一個映像就往上疊一個，但最多到只有 127 層。
-
-
 
 
 
