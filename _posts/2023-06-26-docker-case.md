@@ -284,11 +284,37 @@ EXPOSE 80
 # 相当于 RUN [”/bin/sh”, ”−c”, ”apt-get -y install nginx”]
 ```
 
-
 - 注释以 <font color="#FF1000">#</font> 开头
 - 命令可以用 <font color="#FF1000">＼</font> 继续換行
 - 第一句開始必须是 <font color="#FF1000">FROM</font>
 
+- 例子
+
+```
+# 编译目前档案为映像 nginx
+$ docker build --tag nginx .
+
+# 在编译是不用快取文件
+$ docker build --tag nginx . --no-cache
+```
+
+### 查阅映象文件内容
+
+```
+$ docker inspect nginx
+```
+
+![标签](../assets/img/docker/dockerlabel.png)
+
+```
+# 执行已编译的映像
+$ docker run --name nginx -p 8080:80 -d nginx
+$ docker ps -a
+```
+
+![nginx 指令](../assets/img/docker/dockernginxcmd.png)
+
+![nginx 网页](../assets/img/docker/dockernginx.png)
 
 ![命令集](../assets/img/docker/dockercmda.png)
 
