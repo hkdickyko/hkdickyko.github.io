@@ -251,6 +251,7 @@ $ docker load -i hello.tar
 |VOLUME|在容器內定义匿名数据卷|
 |WORKDIR|应用程式执行位置|
 |LABEL|在映像中以键值形式添加元素|
+|EXPOSE|声明容器打算使用什么端口|
 
 ## Dockerfile
 
@@ -258,7 +259,7 @@ $ docker load -i hello.tar
 # 基础映像：最新的 Debian 版本
 FROM debian
 
-# 创建 storage 目錄到映像內
+# 创建 storage 目錄到映像內 - 很少使用 (服务器目录是随机创建)
 VOLUME ["/storage"]
 
 # 維護人名稱
@@ -272,16 +273,14 @@ LABEL Version="1.0"
 RUN apt-get update && apt-get -qqy dist-upgrade
 
 # 安装 nginx
+# 相当于 RUN [”/bin/sh”, ”−c”, ”apt-get -y install nginx”]
 RUN apt-get -qqy install nginx
 
 # 设置默认容器命令 # -> 在前台运行 nginx
 CMD ["nginx", "-g", "daemon off;"]
 
-# 告诉将会监听 tcp 端口 80
+# 设置容器监听自己的 tcp 端口为 80 - 很少使用 (服务器端口是随机创建)
 EXPOSE 80
-
-# RUN apt-get -qqy install nginx
-# 相当于 RUN [”/bin/sh”, ”−c”, ”apt-get -y install nginx”]
 ```
 
 - 注释以 <font color="#FF1000">#</font> 开头
@@ -307,8 +306,8 @@ $ docker inspect nginx
 ![标签](../assets/img/docker/dockerlabel.png)
 
 ```
-# 执行已编译的映像
-$ docker run --name nginx -p 8080:80 -d nginx
+# 执行已编译的映像,让它成为一个容器,将容器名称设置为 nginx, 将端口 -p 和目录 -v 与主服务器匹配
+$ docker run --name nginx1 -p 8080:80 -d -v /tmp/nginx:/storage nginx
 $ docker ps -a
 ```
 
