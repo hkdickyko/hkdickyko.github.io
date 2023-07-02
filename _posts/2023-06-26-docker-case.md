@@ -296,7 +296,7 @@ EXPOSE 80
 - 命令可以用 <font color="#FF1000">＼</font> 继续換行
 - 第一句開始必须是 <font color="#FF1000">FROM</font>
 
-- 例子
+### 构建镜像的命令
 
 ```
 # 编译目前档案为映像 nginx
