@@ -255,6 +255,15 @@ $ docker load -i hello.tar
 
 ## Dockerfile
 
+Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层，因此每一条指令的内容，就是描述该层应当如何构建。
+
+一般必须使用命令有 3 个, 如下
+ - FROM - 必须包含项目
+ - RUN - Linux 指令用来安装和设定 image
+ - CMD - docker 内執行的指令，从镜像构建为容器
+
+### docker 运行 nginx 服务器的示例
+
 ```
 # 基础映像：最新的 Debian 版本
 FROM debian
