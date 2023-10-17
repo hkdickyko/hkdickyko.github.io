@@ -70,3 +70,29 @@ JAVA_OPTS=-Dos.arch=amd64 sdkmanager emulator
 # 安装目标编译平台
 sdkmanager 'platforms;android-26'
 ```
+
+
+## 缩小文件 html、js、css
+
+```
+apt install nodejs npm
+apt install curl
+
+apt install tidy
+npm install html-minifier -g
+npm install uglify-js -g
+npm install clean-css-cli -g
+
+# 整洁的 html 网页
+find -type f -name *.html -exec bash -c 'tidy -f err.txt -m "$0"; ls "$0"' {} \;
+
+# 缩小 html 文件
+find -type f -name *.html -exec bash -c 'html-minifier "$0" -o "$0" --remove-comments --collapse-whitespace --minify-js --minify-css; ls "$0"' {} \;
+
+# 缩小 JavaScript 文件
+find -type f -name *.js -exec bash -c 'uglifyjs "$0" -m -o "$0"; ls "$0"' {} \;
+
+# 缩小 CSS 文件
+find -type f -name *.css -exec bash -c 'cleancss -o "$0" "$0"; ls "$0"' {} \;
+
+```
