@@ -83,16 +83,40 @@ npm install html-minifier -g
 npm install uglify-js -g
 npm install clean-css-cli -g
 
+## --- 目錄及子目錄下的所有文件 ---
+
 # 整洁的 html 网页
-find -type f -name *.html -exec bash -c 'tidy -f err.txt -m "$0"; ls "$0"' {} \;
+find -type f -name *.html -exec bash -c 'tidy -config htmlTidyCfg.txt -f err.txt -m "$0"; ls "$0"' {} \;
 
 # 缩小 html 文件
-find -type f -name *.html -exec bash -c 'html-minifier "$0" -o "$0" --remove-comments --collapse-whitespace --minify-js --minify-css; ls "$0"' {} \;
+find -type f -name *.html -exec bash -c 'html-minifier -o "$0" -c html-min.json "$0"; ls "$0"' {} \;
 
 # 缩小 JavaScript 文件
 find -type f -name *.js -exec bash -c 'uglifyjs "$0" -m -o "$0"; ls "$0"' {} \;
 
 # 缩小 CSS 文件
-find -type f -name *.css -exec bash -c 'cleancss -o "$0" "$0"; ls "$0"' {} \;
+find -type f -name *.css -exec bash -c 'cleancss -O2 -o "$0" "$0"; ls "$0"' {} \;
+
+
+## --- 单文件 ---
+
+html-minifier -o $0 -c html-min.json $0
+tidy -config htmlTidyCfg.txt -f err.txt -m $0
+
+# 缩小/恢复 JavaScript 文件
+uglifyjs $0 -m -o $0
+uglifyjs $0 -b -o $0
+
+# 缩小/恢复 CSS 文件
+cleancss -O2 -o "$0" "$0"
+cleancss --format beautify -o $0 $0
+
+
+# 
+npm install -g purify-css
+purifycss init.css *.html -i -o init.css
 
 ```
+
+
+[html tidy 互联资料网链接](http://api.html-tidy.org/tidy/tidylib_api_5.2.0/quick_ref.html)
