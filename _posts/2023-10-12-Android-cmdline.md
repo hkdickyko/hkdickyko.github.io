@@ -111,12 +111,9 @@ uglifyjs $0 -b -o $0
 cleancss -O2 -o "$0" "$0"
 cleancss --format beautify -o $0 $0
 
-
-# 
-npm install -g purify-css
-purifycss init.css *.html -i -o init.css
-
 ```
+
+注: $0 为文件名称，单文件要自设定，其它为find 输出的文件名称。
 
 [html tidy 互联资料网链接](http://api.html-tidy.org/tidy/tidylib_api_5.2.0/quick_ref.html)
 
@@ -187,4 +184,22 @@ char-encoding: utf8
   "trimCustomFragments": true,
   "useShortDoctype": true
 }
+```
+
+## 最佳CSS
+
+PurgeCSS 是一个可以自动删除未使用 CSS 內容的工具，可以大大减少网页文件的大小，提升网站的速度。
+
+
+```
+npm install -g purify-css
+
+# 安裝及使用
+npm install -g purify-css
+purifycss init.css *.html -i -o init.css
+
+# 列出已安裝的工具
+npm -g list
+
+
 ```
