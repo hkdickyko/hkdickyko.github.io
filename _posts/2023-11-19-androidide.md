@@ -40,13 +40,15 @@ date: 2023-11-19 1:00:00
 signingConfigs 加 <font color="#FF1000">release</font> 内容及 buildTypes 加上 <font color="#FF1000">signingConfig signingConfigs.release</font> 这句
 
 ```
-signingConfigs {    
-  release {
-    storeFile file('/storage/emulated/0/AndroidIDEProjects/mdnotes/keystore.jks')
-    storePassword 'password'
-    keyPassword 'password'
-    keyAlias 'mdnotes'
+android {
+  signingConfigs {    
+    release {
+      storeFile file('/storage/emulated/0/AndroidIDEProjects/mdnotes/keystore.jks')
+      storePassword 'password'
+      keyPassword 'password'
+      keyAlias 'mdnotes'
   }
+}
 
 buildTypes {
   release {
@@ -57,21 +59,25 @@ buildTypes {
     multiDexEnabled true
   }
 }
-
-dependencies {
-  implementation 'androidx.appcompat:appcompat:1.6.1'
-  implementation 'com.google.android.material:material:1.8.0'
-  implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-  // adding Admob SDK
-  implementation 'com.google.android.gms:play-services-ads:22.2.0'
-}
 ```
 
 ## Android 项目的一般目录结构
 
 ![Alt x](../assets/img/misc/androidide.png)
 
+## 创建 debug apk
+
+:app:assembleDebug
+
+## 创建 release apk
+
+:app:assembleRelease
+
+## 创建 AAB
+
+:app:bundle
 
 
+## 全部清理
 
-
+:app:clean
