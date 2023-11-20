@@ -5,6 +5,31 @@ title: Androidide
 date: 2023-11-19 1:00:00
 ---
 
+<style>
+  table {
+    width: 100%git clone https://github.com/hkdickyko/hkdickyko.github.io
+    }
+  td {
+    vertical-align: center;
+  }
+  table.inputT{
+    margin: 10px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+  }
+  input{
+    text-align: center;
+    padding: 0px 10px;
+  }
+  iframe{
+    width: 100%;
+    display: block;
+    border-style:none;
+  }
+</style>
+
 # Androidide
 
 从 [Androidide 网站](https://androidide.com) 下载 Android ide 工具
@@ -40,13 +65,11 @@ dependencies {
   // adding Admob SDK
   implementation 'com.google.android.gms:play-services-ads:22.2.0'
 }
-
 ```
 
+## Android 项目的一般目录结构
 
-
-
-
+![Alt x](../assets/img/misc/androidide.png)
 
 
 
