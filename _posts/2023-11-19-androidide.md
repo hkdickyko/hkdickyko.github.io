@@ -77,7 +77,11 @@ buildTypes {
 
 :app:bundle
 
-
-## 全部清理
+## 全部删除
 
 :app:clean
+
+## 製作报告
+
+:app:check
+
