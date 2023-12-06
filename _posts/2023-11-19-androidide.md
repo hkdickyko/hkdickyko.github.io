@@ -32,8 +32,23 @@ date: 2023-11-19 1:00:00
 
 # Androidide
 
-从 [Androidide 网站](https://androidide.com) 下载 Android ide 工具
+从 [Androidide 网站](https://androidide.com/docs/installation) 下载 Android ide 工具
 
+## 安装更正
+
+位置错误 '
+/data/data/com.itsaky.androidide/files/home/android-sdk/cmdline-tools/latest' (Expected '
+/data/data/com.itsaky.androidide/files/home/android-sdk/tools')
+
+cmdline-tools/latest 改为 tools 大至方法如下:
+
+```
+cd android-sdk/cmdline-tools
+mv latest ../
+cd ..
+mv latest tools
+rm -rf cmdline-tools
+```
 
 ## 使用 Gradle 创建发布签名的 apk 文件
 
@@ -84,4 +99,3 @@ buildTypes {
 ## 製作报告
 
 :app:check
-
