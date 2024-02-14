@@ -32,6 +32,34 @@ sed -Ei 's|(:/bin)(:/usr/bin):|\2\1:|' startubuntu.sh
 ./startubuntu.sh
 ```
 
+## 安装 Python
+
+```
+apt update
+apt upgrade
+apt install python3
+apt install python3-pip
+```
+
+## 安装 ffmpeg-python
+
+```
+pip install ffmpeg
+pip install ffmpeg-python
+```
+
+## 安装 whisper-openai
+
+```
+pip install -U openai-whisper
+```
+
+## whisper 认语音
+
+```
+whisper input.wav --model medium --language Chinese --fp16 False
+```
+
 ## 安装 Android SDK 构建工具
 
 ```
