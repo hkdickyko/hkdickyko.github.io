@@ -36,8 +36,7 @@ $ list(map(int, array))
 ```   
 ![map](../assets/img/python/map.png)
 
-![lamba](../assets/img/python/lambda.png)
-
+![lamba](../assets/img/python/lambda.gif)
 
 
 
