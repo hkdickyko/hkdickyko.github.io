@@ -2,7 +2,7 @@
 category: 電腦
 tags: [Python]
 title: Python Script
-date: 2024-02-23 22:34:36
+date: 2024-02-23 02:34:36
 ---
 
 # 經常使用的 Python 功能
