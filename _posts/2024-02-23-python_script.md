@@ -34,9 +34,7 @@ date: 2024-02-23 02:34:36
 ```
 $ list(map(int, array))
 ```   
-![map](../assets/img/python/map.png)
-
-![lamba](../assets/img/python/lambda.gif)
+![map](../assets/img/python/map.gif)
 
 
 
