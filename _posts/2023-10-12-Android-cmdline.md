@@ -1,7 +1,7 @@
 ---
 category: [ Android]
 tags: [Android]
-title: Android 命令行编程
+title: Android 命令行编程 (termux)
 date: 2023-10-14 1:00:00
 ---
 
@@ -30,9 +30,10 @@ cd ubuntu-in-termux
 bash ubuntu.sh -y
 sed -Ei 's|(:/bin)(:/usr/bin):|\2\1:|' startubuntu.sh
 ./startubuntu.sh
+PS1='\u:\W\$'
 ```
 
-## 安装 Python
+## Python
 
 ```
 apt update
@@ -41,12 +42,15 @@ apt install python3
 apt install python3-pip
 ```
 
-## 安装 ffmpeg-python
+## 安装 ffmpeg
 
 ```
 pip install ffmpeg
 pip install ffmpeg-python
 ```
+
+ffmpeg 是用于处理多媒体内容（例如音频、视频、字幕和相关元数据）的库和工具的集合。
+
 
 ## 安装 whisper-openai
 
@@ -54,11 +58,44 @@ pip install ffmpeg-python
 pip install -U openai-whisper
 ```
 
-## whisper 认语音
+Whisper 是一种通用语音识别模型。在大量不同音频数据集上进行训练的，也是一个多任务模型，可以执行多语言语音识别、语音翻译和语言识别。
 
 ```
 whisper input.wav --model medium --language Chinese --fp16 False
 ```
+
+## 安装 gTTS 文本转语音
+
+```
+pip install gTTS
+```
+
+gTTS (Google 文本转语音) 翻译的文本转语音 API 交互。 将语音 mp3 数据写入文件、类似文件的对象（字节串）以进行进一步的音频操作或标准输出。 
+
+## pysub-parser
+
+```
+pip install pysub-parser
+```
+
+用于提取字幕文件内容的实用程序。
+
+## pydub
+
+```
+pip install pydub
+```
+
+简单易用的高级界面来操作音频。
+
+## deep-translator
+
+```
+pip install deep-translator
+```
+
+Deep translator 可使用多个翻译器以简单的方式在不同语言之间进行翻译。
+
 
 ## 安装 Android SDK 构建工具
 
