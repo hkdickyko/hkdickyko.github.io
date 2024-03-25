@@ -27,14 +27,16 @@ date: 2024-02-23 02:34:36
 
  留意: **args** 可以是字符串，也可以是列表，如果是字符串的话，会被当做shell命令，必须指定 **shell=True**。
 
- ## list & map
+## list & map
 
- ### 将文本数组转换为整数
+### 将文本数组转换为整数
 
 ```
 $ list(map(int, array))
 ```   
-![map](../assets/img/python/map.gif)
 
+### list 及 lambda 的基本应用演示
+
+![map](../assets/img/python/map.gif)
 
 
