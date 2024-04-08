@@ -73,25 +73,25 @@ $$  i \times i = -1 $$
 对四元数的所有“虚部”取负数，即是四元数的共轭 <font color="#FF1000">q<sup>*</sup></font>：
 
 $$
-{q}^*={w}-{ix}-{jy}-{kz}
+q^*=w-ix-jy-kz
 $$
 
 ### 单位四元数
 
 四元数的模的定义跟复数是一致的：
 
-$$|{q}|=\sqrt{{w}^{\mathrm{2}} +{x}^{\mathrm{2}} +{y}^{\mathrm{2}} +{z}^{\mathrm{2}} }=\sqrt{{qq}^{*}}$$
+$$|q|=\sqrt{w^2+x^2+y^2 +z^2}=\sqrt{qq^*}$$
 
 而单位四元数的定义即是模为 1 的四元数：
 
 $$
-|{q}|=\sqrt{{w}^{\mathrm{2}} +{x}^{\mathrm{2}} +{y}^{\mathrm{2}} +{z}^{\mathrm{2}} }=1
+|q|=\sqrt{w^2+x^2+y^2 +z^2}=1
 $$
 
 如果给定的一个四元数不是单位四元数，那么我们可以对其进行规范化：
 
 $$
-{q}^{'} =\frac{{q}}{\sqrt{{w}^{\mathrm{2}} +{x}^{\mathrm{2}} +{y}^{\mathrm{2}} +{z}^{\mathrm{2}} }}
+q^{'} = \frac {q}{\sqrt{w^2+x^2+y^2+z^2}}
 $$
 
 ### 四元数的逆
@@ -123,7 +123,6 @@ $$ q^{-1}= \frac {q^*}{|q|^2} $$
 ### 四元数相乘
 
 ![Alt x](../assets/img/3d/qxq.png)
-
 
 
 
