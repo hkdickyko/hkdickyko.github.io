@@ -68,17 +68,6 @@ $$  i \times i = -1 $$
 （非常重要）。
 
 
-## 四元数与欧拉角的转化
-
-### 欧拉角转四元数
-
-![Alt x](../assets/img/3d/etoq.png)
-
-### 四元数转欧拉角
-
-![Alt x](../assets/img/3d/qtoe.png)
-
-
 ### 四元数共轭
 
 对四元数的所有“虚部”取负数，即是四元数的共轭 <font color="#FF1000">q<sup>*</sup></font>：
@@ -96,7 +85,7 @@ $$|{q}|=\sqrt{{w}^{\mathrm{2}} +{x}^{\mathrm{2}} +{y}^{\mathrm{2}} +{z}^{\mathrm
 而单位四元数的定义即是模为 1 的四元数：
 
 $$
-\sqrt{{w}^{\mathrm{2}} +{x}^{\mathrm{2}} +{y}^{\mathrm{2}} +{z}^{\mathrm{2}} }=1
+|{q}|=\sqrt{{w}^{\mathrm{2}} +{x}^{\mathrm{2}} +{y}^{\mathrm{2}} +{z}^{\mathrm{2}} }=1
 $$
 
 如果给定的一个四元数不是单位四元数，那么我们可以对其进行规范化：
@@ -119,5 +108,30 @@ $$ q^{-1}= q^* $$
 
 
 $$ q^{-1}= \frac {q^*}{|q|^2} $$
+
+## 四元数与欧拉角的转化
+
+### 欧拉角转四元数
+
+![Alt x](../assets/img/3d/etoq.png)
+
+### 四元数转欧拉角
+
+![Alt x](../assets/img/3d/qtoe.png)
+
+
+### 四元数相乘
+
+![Alt x](../assets/img/3d/qxq.png)
+
+
+
+
+
+
+
+
+
+
 
 
