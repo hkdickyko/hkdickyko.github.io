@@ -168,20 +168,20 @@ $$
 - 计算单位四元数
 
 $$
-q₁ = \frac {q}{\sqrt{w^2+x^2+y^2+z^2}} = \frac {q}{τ}
+q_1 = \frac {q}{\sqrt{w^2+x^2+y^2+z^2}} = \frac {q}{τ}
 $$
 $$
-q₁ = [\frac{1}{τ}cos \frac{θ}{2}, \frac{x}{τ} sin \frac{θ}{2},\frac{y}{τ} sin \frac{θ}{2},\frac{z}{τ} sin \frac{θ}{2}]
+q_1 = [\frac{1}{τ}cos \frac{θ}{2}, \frac{x}{τ} sin \frac{θ}{2},\frac{y}{τ} sin \frac{θ}{2},\frac{z}{τ} sin \frac{θ}{2}]
 $$
 $$
-q₁ = [\frac{1}{τ}cos \frac{θ}{2}, α sin \frac{θ}{2},β sin \frac{θ}{2},γ sin \frac{θ}{2}]
+q_1 = [\frac{1}{τ}cos \frac{θ}{2}, α sin \frac{θ}{2},β sin \frac{θ}{2},γ sin \frac{θ}{2}]
 $$
 
 - 计算起始向量旋转后的向量
     - 假设起始向量为 
 $$v=[0, x_1, y_1, z_1]$$
     - 計算转后向量
-$$v' = q₁  v  q₁^{-1}$$
+$$v' = q_1  v  q_1^{-1}$$
 $$q_1^{-1}=q_1^{*}=[\frac{1}{τ}cos \frac{θ}{2}, -α sin \frac{θ}{2},-β sin \frac{θ}{2},-γ sin \frac{θ}{2}]$$
 
 - 假设转后向量为
@@ -190,7 +190,6 @@ $$v'=[0, x₂, y₂, z₂]$$
 
 
 - 计算旋转后的坐标点
-
 
 
 
