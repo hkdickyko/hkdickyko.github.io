@@ -239,6 +239,12 @@ $$v_f=(x_2, y_2, z_2)$$
 
 ![Alt x](../assets/img/3d/etoq.png)
 
+转换为单位四元数，方便之后计算。
+
+$$
+q' = \frac {q}{\sqrt{w^2+x^2+y^2+z^2}}
+$$
+
 ### 四元数转欧拉角
 
 ![Alt x](../assets/img/3d/qtoe.png)
