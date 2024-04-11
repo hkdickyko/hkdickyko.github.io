@@ -183,7 +183,7 @@ $$ q^{-1}= \frac {q^*}{|q|^2} $$
 ![Alt x](../assets/img/3d/qrot.png)
 
 
-上图中的 point 即下图中的圆心 (0,0,0) 位置。axi2 则为轴心即红色箭咀部分。
+上图中的 point 即下图中的圆心 (0,0,0) 位置。axi2 则为轴心即红色箭咀部分。 θ 为以 axi2 为轴心的转量。
 
 ![Alt x](../assets/img/3d/qu.png)
 
