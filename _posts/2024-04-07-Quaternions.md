@@ -250,11 +250,11 @@ $$
 ![Alt x](../assets/img/3d/qtoe.png)
 
 
-## 四元数的球面线性插值(Slerp)
+## 四元数的球面线性插值 (Slerp)
+
+球面线性插值（Spherical linear interpolation，通常简称 Slerp），是四元数的一种线性插值运算，主要用于在两个表示旋转的四元数之间平滑差值。
 
 ![Alt x](../assets/img/3d/slerp.png)
-
-
 
 
 
