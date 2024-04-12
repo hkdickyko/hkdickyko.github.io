@@ -248,3 +248,19 @@ $$
 ### 四元数转欧拉角
 
 ![Alt x](../assets/img/3d/qtoe.png)
+
+
+## 四元数的球面线性插值(Slerp)
+
+![Alt x](../assets/img/3d/slerp.png)
+
+
+
+
+
+
+
+
+
+
+
