@@ -249,6 +249,11 @@ $$
 
 ![Alt x](../assets/img/3d/qtoe.png)
 
+### 四元数转矩阵
+
+![Alt x](../assets/img/3d/qtor.png)
+
+
 
 ## 四元数的球面线性插值 (Slerp)
 
