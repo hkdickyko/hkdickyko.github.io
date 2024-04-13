@@ -153,7 +153,11 @@ $$ q^{-1}= \frac {q^*}{|q|^2} $$
 
 $$ q_0 = q_1 \bullet q_2 $$
 
-$$ \begin{bmatrix} w_0 \\ x_0 \\ y_0 \\ z_0\end{bmatrix} ＝ \begin{bmatrix}{w_1 w_2 - x_1 x_2 - y_1 y_2 - z_1 z_2} \\ {w_1 x_2 + w_2 x_1 + y_1 z_2 - z_1 y_2} \\ {w_1 y_2 - x_1 z_2 - w_2 y_1 - z_1 x_2} \\ {w_1 z_2 + x_1 y_2 - y_1 x_2 + w_2 z_1} \end{bmatrix} 
+$$ \begin{bmatrix} w_0 \\ x_0 \\ y_0 \\ z_0\end{bmatrix} ＝ \begin{bmatrix}
+{w_1 w_2 - x_1 x_2 - y_1 y_2 - z_1 z_2} \\ 
+{w_1 x_2 + x_1 w_2 + y_1 z_2 - z_1 y_2} \\ 
+{w_1 y_2 - x_1 z_2 - y_1 w_2 - z_1 x_2} \\ 
+{w_1 z_2 + x_1 y_2 - y_1 x_2 + z_1 w_2} \end{bmatrix} 
 $$
 
 ![Alt x](../assets/img/3d/qxq.png)
@@ -241,6 +245,11 @@ $$v_f=(x_2, y_2, z_2)$$
 ### 欧拉角转四元数
 
 用以下公式计算多个轴心旋转的最终四元数
+
+$$ q = \begin{bmatrix} w \\ x \\ y \\ z\end{bmatrix} ＝ \begin{bmatrix}
+{} \\ {} \\ {} \\ {} 
+\end{bmatrix} 
+$$
 
 ![Alt x](../assets/img/3d/etoq.png)
 
