@@ -252,12 +252,6 @@ sin\frac{\varphi}{2}cos\frac{\theta}{2}cos\frac{\psi}{2}-cos\frac{\varphi}{2}sin
 \end{bmatrix} 
 $$
 
-转换为单位四元数，方便之后计算。
-
-$$
-q' = \frac {q}{\sqrt{w^2+x^2+y^2+z^2}}
-$$
-
 ### 四元数转欧拉角
 
 $$
@@ -325,6 +319,14 @@ r_{311} & r_{32} & r_{33}
 2xy+2wz & 1-2x^2-2z^2 & 2yz-2wx \\
 2xz-2wy & 2yz+2wx & 1-2x^2-2y^2 \\
 \end{bmatrix}
+$$
+
+## 转换为单位四元数
+
+将四元数转换为单位四元数，以避免输入累积错误，方便之后计算。
+
+$$
+q' = \frac {q}{\sqrt{w^2+x^2+y^2+z^2}}
 $$
 
 ## 四元数的球面线性插值 (Slerp)
