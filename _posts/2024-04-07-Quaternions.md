@@ -160,9 +160,6 @@ $$ \begin{bmatrix} w_0 \\ x_0 \\ y_0 \\ z_0\end{bmatrix} ＝ \begin{bmatrix}
 {w_1 z_2 + x_1 y_2 - y_1 x_2 + z_1 w_2} \end{bmatrix} 
 $$
 
-![Alt x](../assets/img/3d/qxq.png)
-
-
 ## 绕轴旋转详解
 
 基于已知旋转点、旋转轴、旋转角度，求旋转后的位置和朝向。
@@ -255,8 +252,6 @@ sin\frac{\varphi}{2}cos\frac{\theta}{2}cos\frac{\psi}{2}-cos\frac{\varphi}{2}sin
 \end{bmatrix} 
 $$
 
-![Alt x](../assets/img/3d/etoq.png)
-
 转换为单位四元数，方便之后计算。
 
 $$
@@ -268,7 +263,7 @@ $$
 $$
 \begin{bmatrix} \varphi \\ \theta \\ \psi \end{bmatrix} ＝ \begin{bmatrix}
 atan2(2(wz+xy), 1-2(z^2 + x^2)\\
-arcsin(2(sz-yz)) \\
+arcsin(2(wz-yz)) \\
 atan2(2(wy+zx), 1-2(x^2+y^2))
 \end{bmatrix} ， \begin{cases} \varphi：绕&x&轴旋转角度； \\ \theta：绕&y&轴旋转角度； \\ \psi：绕&z&轴旋转角度。 \end{cases}
 $$
@@ -287,11 +282,9 @@ y \geqslant 0, x < 0; \\
 y < 0 , x < 0; \\
 y > 0 , x = 0; \\
 y < 0 , x = 0; \\
-y = 0, x = 0;
+y = 0, x = 0。
 \end{matrix}
 $$
-
-![Alt x](../assets/img/3d/qtoe.png)
 
 ## 四元数与矩阵转换
 
@@ -334,10 +327,6 @@ r_{311} & r_{32} & r_{33}
 \end{bmatrix}
 $$
 
-![Alt x](../assets/img/3d/qtor.png)
-
-
-
 ## 四元数的球面线性插值 (Slerp)
 
 球面线性插值（Spherical linear interpolation，通常简称 Slerp），是四元数的一种线性插值运算，主要用于在两个表示旋转的四元数之间平滑差值。
@@ -360,7 +349,7 @@ $$
 q_t = \frac {sin((1-t)\theta)} {sin \theta} q_a + \frac {sin(t \theta)} {sin \theta} q_b
 $$
 
-t 的数值为 0-1 之间
+t 的数值为 0 至 1 之间的数值
 
 $$
 θ = arcCos(q_a \bullet q_b)
