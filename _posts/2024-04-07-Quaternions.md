@@ -356,6 +356,10 @@ $$
 q_b = [w,α,β,γ]
 $$
 
+$$
+q_t = \frac {sin((1-t)\theta)} {sin \theta} q_a + \frac {sin(t \theta)} {sin \theta} q_b
+$$
+
 t 的数值为 0-1 之间
 
 $$
