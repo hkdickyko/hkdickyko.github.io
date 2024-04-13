@@ -281,14 +281,14 @@ arctan \frac{y}{x} - \pi \\
 +\frac {\pi} {2} \\
 -\frac {\pi} {2} \\
 undefined
-\end{cases}， \begin{cases}
-arctan \frac{y}{x}， x > 0; \\
-arctan \frac{y}{x} + \pi , y \geqslant 0, x < 0; \\
-arctan \frac{y}{x} - \pi , y < 0 , x < 0; \\
-+\frac {\pi} {2} , y > 0 , x = 0; \\
--\frac {\pi} {2} , y < 0 , x = 0; \\
-undefined ,y = 0, x = 0;
-\end{cases}
+\end{cases}， \begin{matrix}
+x > 0; \\
+y \geqslant 0, x < 0; \\
+y < 0 , x < 0; \\
+y > 0 , x = 0; \\
+y < 0 , x = 0; \\
+y = 0, x = 0;
+\end{matrix}
 $$
 
 ![Alt x](../assets/img/3d/qtoe.png)
