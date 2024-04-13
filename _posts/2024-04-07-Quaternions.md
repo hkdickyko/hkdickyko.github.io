@@ -160,7 +160,7 @@ $$ \begin{bmatrix} w_0 \\ x_0 \\ y_0 \\ z_0\end{bmatrix} ＝ \begin{bmatrix}
 {w_1 z_2 + x_1 y_2 - y_1 x_2 + z_1 w_2} \end{bmatrix} 
 $$
 
-## 绕轴旋转详解
+## 四元数绕轴旋转详解
 
 基于已知旋转点、旋转轴、旋转角度，求旋转后的位置和朝向。
 
