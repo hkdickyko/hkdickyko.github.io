@@ -274,12 +274,12 @@ atan2(2(wy+zx), 1-2(x^2+y^2))
 $$
 
 $$
-atan2(y,x) = \begin{cases}  
-arctan \frac{y}{x}， x > 0
-arctan \frac{y}{x} + \pi , y \geqslant 0, x < 0;
-arctan \frac{y}{x} - \pi , y < 0 , x < 0;
-+\frac {\pi} {2} , y > 0 , x = 0;
--\frac {\pi} {2} , y < 0 , x = 0;
+atan2(y,x) = \begin{cases}
+arctan \frac{y}{x}， x > 0; \\
+arctan \frac{y}{x} + \pi , y \geqslant 0, x < 0; \\
+arctan \frac{y}{x} - \pi , y < 0 , x < 0; \\
++\frac {\pi} {2} , y > 0 , x = 0; \\
+-\frac {\pi} {2} , y < 0 , x = 0; \\
 undefined ,y = 0, x = 0;
 \end{cases}
 $$
