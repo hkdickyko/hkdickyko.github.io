@@ -156,7 +156,7 @@ $$ q_0 = q_1 \bullet q_2 $$
 $$ \begin{bmatrix} w_0 \\ x_0 \\ y_0 \\ z_0\end{bmatrix} ＝ \begin{bmatrix}
 {w_1 w_2 - x_1 x_2 - y_1 y_2 - z_1 z_2} \\ 
 {w_1 x_2 + x_1 w_2 + y_1 z_2 - z_1 y_2} \\ 
-{w_1 y_2 - x_1 z_2 - y_1 w_2 - z_1 x_2} \\ 
+{w_1 y_2 - x_1 z_2 + y_1 w_2 + z_1 x_2} \\ 
 {w_1 z_2 + x_1 y_2 - y_1 x_2 + z_1 w_2} \end{bmatrix} 
 $$
 
@@ -246,8 +246,12 @@ $$v_f=(x_2, y_2, z_2)$$
 
 用以下公式计算多个轴心旋转的最终四元数
 
-$$ q = \begin{bmatrix} w \\ x \\ y \\ z\end{bmatrix} ＝ \begin{bmatrix}
-{} \\ {} \\ {} \\ {} 
+$$
+q = \begin{bmatrix} w \\ x \\ y \\ z\end{bmatrix} ＝ \begin{bmatrix}
+cos\frac{\varphi}{2}cos\frac{\theta}{2}cos\frac{\psi}{2}+sin\frac{\varphi}{2}sin\frac{\theta}{2}sin\frac{\psi}{2} \\
+cos\frac{\varphi}{2}sin\frac{\theta}{2}cos\frac{\psi}{2}+sin\frac{\varphi}{2}cos\frac{\theta}{2}sin\frac{\psi}{2} \\
+cos\frac{\varphi}{2}cos\frac{\theta}{2}sin\frac{\psi}{2}-sin\frac{\varphi}{2}sin\frac{\theta}{2}cos\frac{\psi}{2} \\
+cos\frac{\varphi}{2}sin\frac{\theta}{2}cos\frac{\psi}{2}-cos\frac{\varphi}{2}sin\frac{\theta}{2}sin\frac{\psi}{2}
 \end{bmatrix} 
 $$
 
