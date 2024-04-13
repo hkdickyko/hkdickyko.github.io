@@ -140,7 +140,7 @@ $$
 
 $$ q q^∗=1 $$
 
-<font color="#FF1000">单位四元数的逆就是共轭四元数</font>。
+<font color="#FF1000">单位四元数的逆就是共轭四元数</font>
 
 $$ q^{-1}= q^* $$
 
@@ -153,7 +153,7 @@ $$ q^{-1}= \frac {q^*}{|q|^2} $$
 
 $$ q_0 = q_1 \bullet q_2 $$
 
-$$ \begin{bmatrix} w_0 \\ x_0 \\ y_0 \\ z_0\end{bmatrix} ＝ \begin{bmatrix}{w_1 w_2 - x_1 x_2 - y_1 y_2 - z_1 z_2} \\ {w_1 w_2 - x_1 x_2 - y_1 y_2 - z_1 z_2} \end{bmatrix} 
+$$ \begin{bmatrix} w_0 \\ x_0 \\ y_0 \\ z_0\end{bmatrix} ＝ \begin{bmatrix}{w_1 w_2 - x_1 x_2 - y_1 y_2 - z_1 z_2} \\ {w_1 x_2 + w_2 x_1 + y_1 z_2 - z_1 y_2} \\ {w_1 y_2 - x_1 z_2 - w_2 y_1 - z_1 x_2} \\ {w_1 z_2 + x_1 y_2 - y_1 x_2 + w_2 z_1} \end{bmatrix} 
 $$
 
 ![Alt x](../assets/img/3d/qxq.png)
