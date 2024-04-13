@@ -288,6 +288,35 @@ $$
 
 ## 四元数与矩阵转换
 
+$$
+R = \begin{bmatrix}
+r_{11} & r_{12} & r_{13} \\
+r_{21} & r_{22} & r_{23} \\
+r_{311} & r_{32} & r_{33}
+\end{bmatrix}
+$$
+
+$$
+R = \begin{bmatrix} w \\ x \\ y \\ z \end{bmatrix} ^ T
+$$
+
+### 矩阵转四元数
+
+$$
+R = \begin{bmatrix} w \\ x \\ y \\ z \end{bmatrix} ＝ 
+\begin{bmatrix} 
+\frac {\sqrt{r_{11} + r_{22} + r_{33} + 1}} {2} \\
+\frac {r_{32} - r_{23}}{4w} \\
+\frac {r_{13} - r_{31}}{4w} \\
+\frac {r_{21} - r_{12}}{4w}
+\end{bmatrix}
+$$
+
+
+
+
+
+
 ### 四元数转矩阵
 
 ![Alt x](../assets/img/3d/qtor.png)
