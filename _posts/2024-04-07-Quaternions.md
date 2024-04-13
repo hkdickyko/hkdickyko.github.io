@@ -270,7 +270,7 @@ $$
 atan2(2(wz+xy), 1-2(z^2 + x^2)\\
 arcsin(2(sz-yz)) \\
 atan2(2(wy+zx), 1-2(x^2+y^2))
-\end{bmatrix} ， \begin{cases} \varphi：绕&x&轴旋转； \\ \theta：绕&y&轴旋转； \\ \psi：绕&z&轴旋转。 \end{cases}
+\end{bmatrix} ， \begin{cases} \varphi：绕&x&轴旋转角度； \\ \theta：绕&y&轴旋转角度； \\ \psi：绕&z&轴旋转角度。 \end{cases}
 $$
 
 $$
