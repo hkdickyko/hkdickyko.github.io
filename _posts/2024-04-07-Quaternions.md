@@ -358,3 +358,17 @@ t 的数值为 0 至 1 之间的数值
 $$
 θ = arcCos(q_a \bullet q_b)
 $$
+
+
+## 3D 矩阵
+
+如果旋转由四即元数计算。则如下的放大及位移由矩阵計算即矩阵可设定如下:
+
+$$
+R = \begin{bmatrix}
+S_x & 0 & 0 & T_x \\
+0 & S_y & 0 & T_y \\
+0 & 0 & S_z & T_z \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}， \begin{cases} T 位移部份; \\ S 为缩放部份； \\ R 旋转部分省略。\end{cases}
+$$
