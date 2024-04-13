@@ -265,6 +265,15 @@ $$
 
 ### 四元数转欧拉角
 
+$$
+\begin{bmatrix} \varphi \\ \theta \\ \psi \end{bmatrix} ＝ \begin{bmatrix}
+atan2(2(wz+xy), 1-2(z^2 + x^2)\\
+arcsin(2(sz-yz)) \\
+atan2(2(wy+zx), 1-2(x^2+y^2))
+\end{bmatrix} 
+$$
+
+
 ![Alt x](../assets/img/3d/qtoe.png)
 
 ## 四元数与矩阵转换
