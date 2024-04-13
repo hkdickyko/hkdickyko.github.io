@@ -275,6 +275,13 @@ $$
 
 $$
 atan2(y,x) = \begin{cases}
+arctan \frac{y}{x} \\
+arctan \frac{y}{x} + \pi \\
+arctan \frac{y}{x} - \pi \\
++\frac {\pi} {2} \\
+-\frac {\pi} {2} \\
+undefined
+\end{cases}， \begin{cases}
 arctan \frac{y}{x}， x > 0; \\
 arctan \frac{y}{x} + \pi , y \geqslant 0, x < 0; \\
 arctan \frac{y}{x} - \pi , y < 0 , x < 0; \\
