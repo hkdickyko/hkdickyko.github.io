@@ -151,6 +151,11 @@ $$ q^{-1}= \frac {q^*}{|q|^2} $$
 
 ### 四元数相乘
 
+$$ q_0 = q_1 \bullet q_2 $$
+
+$$ \begin{bmatrix} w_0 \\ x_0 \\ y_0 \\ z_0\end{bmatrix} ＝ \begin{bmatrix}{w_1 w_2 - x_1 x_2 - y_1 y_2 - z_1 z_2} \\ {w_1 w_2 - x_1 x_2 - y_1 y_2 - z_1 z_2} \end{bmatrix} 
+$$
+
 ![Alt x](../assets/img/3d/qxq.png)
 
 
