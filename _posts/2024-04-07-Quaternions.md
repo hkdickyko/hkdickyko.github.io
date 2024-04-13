@@ -270,10 +270,20 @@ $$
 atan2(2(wz+xy), 1-2(z^2 + x^2)\\
 arcsin(2(sz-yz)) \\
 atan2(2(wy+zx), 1-2(x^2+y^2))
-\end{bmatrix} ， \begin{matrix} \varphi：绕&x&轴旋转； \\ \theta：绕&y&轴旋转； \\ \psi：绕&z&轴旋转。 \end{matrix}
+\end{bmatrix} ， \begin{cases} \varphi：绕&x&轴旋转； \\ \theta：绕&y&轴旋转； \\ \psi：绕&z&轴旋转。 \end{cases}
 $$
 
-
+$$
+atan2(y,x) = \begin{cases}  
+arctan \frac{y}{x}， x > 0
+arctan \frac{y}{x} + \pi , y \geqslant 0, x < 0;
+arctan \frac{y}{x} - \pi , y < 0 , x < 0;
++\frac {\pi} {2} , y > 0 , x = 0;
+-\frac {\pi} {2} , y < 0 , x = 0;
+undefined ,y = 0, x = 0;
+\end{cases}
+$$
+}\\{\mathrm{6}\leqslant
 ![Alt x](../assets/img/3d/qtoe.png)
 
 ## 四元数与矩阵转换
