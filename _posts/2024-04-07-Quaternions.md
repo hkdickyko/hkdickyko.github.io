@@ -347,6 +347,8 @@ $$
 q_b = [w,α,β,γ]
 $$
 
+球面线性插值公式
+
 $$
 q_t = \frac {sin((1-t)\theta)} {sin \theta} q_a + \frac {sin(t \theta)} {sin \theta} q_b
 $$
