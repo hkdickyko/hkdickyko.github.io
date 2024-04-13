@@ -283,7 +283,7 @@ arctan \frac{y}{x} - \pi , y < 0 , x < 0; \\
 undefined ,y = 0, x = 0;
 \end{cases}
 $$
-}\\{\mathrm{6}\leqslant
+
 ![Alt x](../assets/img/3d/qtoe.png)
 
 ## 四元数与矩阵转换
@@ -297,13 +297,13 @@ r_{311} & r_{32} & r_{33}
 $$
 
 $$
-R = \begin{bmatrix} w \\ x \\ y \\ z \end{bmatrix} ^ T
+q = \begin{bmatrix} w \\ x \\ y \\ z \end{bmatrix} ^ T
 $$
 
 ### 矩阵转四元数
 
 $$
-R = \begin{bmatrix} w \\ x \\ y \\ z \end{bmatrix} ＝ 
+q = \begin{bmatrix} w \\ x \\ y \\ z \end{bmatrix} ＝ 
 \begin{bmatrix} 
 \frac {\sqrt{r_{11} + r_{22} + r_{33} + 1}} {2} \\
 \frac {r_{32} - r_{23}}{4w} \\
@@ -312,12 +312,20 @@ R = \begin{bmatrix} w \\ x \\ y \\ z \end{bmatrix} ＝
 \end{bmatrix}
 $$
 
-
-
-
-
-
 ### 四元数转矩阵
+
+$$
+R = \begin{bmatrix}
+r_{11} & r_{12} & r_{13} \\
+r_{21} & r_{22} & r_{23} \\
+r_{311} & r_{32} & r_{33}
+\end{bmatrix} ＝ 
+\begin{bmatrix} 
+1-2y^2-2z^2 & 2xy-2wz & 2xz+2wy \\
+2xy+2wz & 1-2x^2-2z^2 & 2yz-2wx \\
+2xz-2wy & 2yz+2wx & 1-2x^2-2y^2 \\
+\end{bmatrix}
+$$
 
 ![Alt x](../assets/img/3d/qtor.png)
 
