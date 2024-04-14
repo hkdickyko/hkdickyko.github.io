@@ -261,6 +261,7 @@ arcsin(2(wz-yz)) \\
 atan2(2(wy+zx), 1-2(x^2+y^2))
 \end{bmatrix} ， \begin{cases} \varphi：绕&x&轴旋转角度； \\ \theta：绕&y&轴旋转角度； \\ \psi：绕&z&轴旋转角度。 \end{cases}
 \\
+\\
 atan2(y,x) = \begin{cases}
 arctan \frac{y}{x} \\
 arctan \frac{y}{x} + \pi \\
@@ -397,6 +398,5 @@ M=\begin{bmatrix}
 0 & 0 & 0 & 1 \\
 \end{bmatrix}
 $$
-
 
 
