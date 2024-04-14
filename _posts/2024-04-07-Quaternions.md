@@ -260,9 +260,7 @@ atan2(2(wz+xy), 1-2(z^2 + x^2)\\
 arcsin(2(wz-yz)) \\
 atan2(2(wy+zx), 1-2(x^2+y^2))
 \end{bmatrix} ， \begin{cases} \varphi：绕&x&轴旋转角度； \\ \theta：绕&y&轴旋转角度； \\ \psi：绕&z&轴旋转角度。 \end{cases}
-$$
-
-$$
+\\
 atan2(y,x) = \begin{cases}
 arctan \frac{y}{x} \\
 arctan \frac{y}{x} + \pi \\
@@ -370,7 +368,7 @@ S_x & 0 & 0 & T_x \\
 0 & S_y & 0 & T_y \\
 0 & 0 & S_z & T_z \\
 0 & 0 & 0 & 1 \\
-\end{bmatrix}， \begin{cases} T 位移部份; \\ S 为缩放部份； \\ R 旋转部分省略。\end{cases}
+\end{bmatrix}， \begin{cases} T：为位移部份; \\ S:为缩放部份； \\ R:为旋转部分省略。\end{cases}
 $$
 
 ## 3D 逆矩阵
@@ -386,7 +384,7 @@ $$
 $$
  M = T \times R(\varphi,\theta,\psi) \times T^{-1}
 \\
-\begin{bmatrix}
+M=\begin{bmatrix}
 1 & 0 & 0 & T_x \\
 0 & 1 & 0 & T_y \\
 0 & 0 & 1 & T_z \\
@@ -399,9 +397,6 @@ $$
 0 & 0 & 0 & 1 \\
 \end{bmatrix}
 $$
-
-
-
 
 
 
