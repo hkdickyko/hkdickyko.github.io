@@ -349,7 +349,7 @@ $$
 球面线性插值公式
 
 $$
-q_t = \frac {sin((1-t)\theta)} {sin \theta} q_a + \frac {sin(t \theta)} {sin \theta} q_b
+q_t = \frac {sin((1-t)\Omega)} {sin \Omega} q_a + \frac {sin(t \Omega)} {sin \Omega} q_b
 $$
 
 ![Alt x](../assets/img/3d/slerp-derivation.png)
@@ -357,7 +357,7 @@ $$
 t 的数值为 0 至 1 之间的数值
 
 $$
-θ = arcCos(q_a \bullet q_b)
+\Omega = arcCos(q_a \bullet q_b)
 $$
 
 
