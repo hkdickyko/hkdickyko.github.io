@@ -352,6 +352,8 @@ $$
 q_t = \frac {sin((1-t)\theta)} {sin \theta} q_a + \frac {sin(t \theta)} {sin \theta} q_b
 $$
 
+![Alt x](../assets/img/3d/slerp-derivation.png)
+
 t 的数值为 0 至 1 之间的数值
 
 $$
