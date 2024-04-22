@@ -247,8 +247,8 @@ $$
 q = \begin{bmatrix} w \\ x \\ y \\ z\end{bmatrix} ＝ \begin{bmatrix}
 cos\frac{\varphi}{2}cos\frac{\theta}{2}cos\frac{\psi}{2}+sin\frac{\varphi}{2}sin\frac{\theta}{2}sin\frac{\psi}{2} \\
 sin\frac{\varphi}{2}cos\frac{\theta}{2}cos\frac{\psi}{2}-cos\frac{\varphi}{2}sin\frac{\theta}{2}sin\frac{\psi}{2}\\
-cos\frac{\varphi}{2}cos\frac{\theta}{2}sin\frac{\psi}{2}-sin\frac{\varphi}{2}sin\frac{\theta}{2}cos\frac{\psi}{2} \\
-cos\frac{\varphi}{2}sin\frac{\theta}{2}cos\frac{\psi}{2}+sin\frac{\varphi}{2}cos\frac{\theta}{2}sin\frac{\psi}{2}
+cos\frac{\varphi}{2}sin\frac{\theta}{2}cos\frac{\psi}{2}+sin\frac{\varphi}{2}cos\frac{\theta}{2}sin\frac{\psi}{2}\\
+cos\frac{\varphi}{2}cos\frac{\theta}{2}sin\frac{\psi}{2}-sin\frac{\varphi}{2}sin\frac{\theta}{2}cos\frac{\psi}{2}
 \end{bmatrix} 
 $$
 
