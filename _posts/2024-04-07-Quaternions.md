@@ -288,6 +288,8 @@ $$
 \hat z = \frac {z}{sin(\frac {\theta}{2})}。
 $$
 
+Note: $ \theta 是用弧度单位，即角度 $ \frac {\pi} {180} $
+
 ## 四元数与矩阵转换
 
 $$
