@@ -279,6 +279,13 @@ y = 0, x = 0。
 \end{matrix}
 $$
 
+$$
+\theta = 2 cos^{-1}(w)， \\
+\hat x = \frac {x}{sin(\frac {\theta}{2})}， \\
+\hat y = \frac {y}{sin(\frac {\theta}{2})}， \\
+\hat z = \frac {z}{sin(\frac {\theta}{2})}。
+$$
+
 ## 四元数与矩阵转换
 
 $$
