@@ -279,6 +279,8 @@ y = 0, x = 0。
 \end{matrix}
 $$
 
+### 欧拉角-轴角表示法
+
 $$
 \theta = 2 cos^{-1}(w)， \\
 \hat x = \frac {x}{sin(\frac {\theta}{2})}， \\
