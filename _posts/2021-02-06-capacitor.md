@@ -80,3 +80,9 @@ $$Q=\frac{4}{2\times{R}}\times\sqrt{\frac{L}{C}}$$
 * -3dB衰減，相當於電壓從最大降低到70.7%或功率從最大降低到50.0%。
 
 ![Alt ](../assets/img/IC/ktoem.png)
+
+## RC 一般估计充放电时间常数
+
+常用的近似值，如有一个 RC 响应，则为 10%-90% 上升时间是 2.2 x RC 时间常数。即一般预计 RC 充电时间为 $ 2.2 \tau $。
+
+$$ \int_{0.1}^{0.9}上升时间 = RC \times ln \left(\frac {0.9}{0.1}\right) = \frac {1} {\omega} \times ln \left(\frac {0.9}{0.1}\right) = 2.2 \tau $$
