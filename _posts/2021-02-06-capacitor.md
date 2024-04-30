@@ -1,5 +1,5 @@
 ---
-category: 積體電路
+category: 電子
 tags: [IoT, 電子]
 title: Capacitor
 date: 2021-02-06 22:34:36
@@ -80,4 +80,3 @@ $$Q=\frac{4}{2\times{R}}\times\sqrt{\frac{L}{C}}$$
 * -3dB衰減，相當於電壓從最大降低到70.7%或功率從最大降低到50.0%。
 
 ![Alt ](../assets/img/IC/ktoem.png)
-
