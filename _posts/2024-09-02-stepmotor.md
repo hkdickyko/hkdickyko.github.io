@@ -80,21 +80,16 @@ $$ RPS = \frac {RPM}{60} $$
  
 - 取倒数可得到每转秒数 
 
-$$ \frac {1}{RPS} = \frac {60}{RPM}
-$$
+$$ \frac {1}{RPS} = \frac {60}{RPM} $$
 
 - 除以 360 可得到每度秒数 
 
-$$ \frac {60}{RPM \times 360} = \frac {1}{6 \times RPM}
-$$
+$$ \frac {60}{RPM \times 360} = \frac {1}{6 \times RPM} $$
 - 乘以 1.8 可得到每步秒数
 
-$$ \frac {1.8}{6 \times RPM}
-$$
+$$ \frac {1.8}{6 \times RPM} $$
 
-$$
-每步秒数 = \frac {0.3}{RPM}
-$$
+$$ 每步秒数 = \frac {0.3}{RPM} $$
 
 ### 示例代码
 
