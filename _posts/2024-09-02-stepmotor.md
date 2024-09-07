@@ -87,7 +87,7 @@ $$ \frac {1}{RPS} = \frac {60}{RPM} $$
 - 除以 360 可得到每度秒数 
 
 $$ \frac {60}{RPM \times 360} = \frac {1}{6 \times RPM} $$
+
 - 乘以 1.8 可得到<font color="#FF1000">每步秒数</font>
 
 $$ \frac {1.8}{6 \times RPM} = \frac {0.3}{RPM} $$
-
