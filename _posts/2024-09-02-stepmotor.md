@@ -113,6 +113,7 @@ struct stepper_pins{
 void stepper_init(struct stepper_pins *stepper_ptr);
 void step(struct stepper_pins *stepper_ptr, int step);
 void steps(struct stepper_pins *stepper_ptr,int steps, int direction, int speed, int ms);
+
 ```
 
 
@@ -177,4 +178,5 @@ void steps(struct stepper_pins *stepper_ptr, int steps, int direction, int speed
 		}
 	}
 }
+
 ```
