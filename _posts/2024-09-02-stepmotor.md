@@ -121,7 +121,7 @@ void steps(struct stepper_pins *stepper_ptr,int steps, int direction, int speed,
 
 #### steppers.c
 
-```cpp
+```
 #include "freertos/FreeRTOS.h"
 #include "esp_wifi.h"
 #include "esp_system.h"
