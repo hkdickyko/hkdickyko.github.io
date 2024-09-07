@@ -91,3 +91,27 @@ $$ \frac {60}{RPM \times 360} = \frac {1}{6 \times RPM} $$
 - 乘以 1.8 可得到<font color="#FF1000">每步秒数</font>
 
 $$ \frac {1.8}{6 \times RPM} = \frac {0.3}{RPM} $$
+
+### 示例代码
+
+```h
+#include <stdint.h>
+#include <stdbool.h>
+
+#define CW 1
+#define CCW 0
+#define FULLSPEED 0
+#define HALFSPEED 1
+#define HIGHTORQUE 2
+
+struct stepper_pins{
+    uint8_t pin1;
+    uint8_t pin2;
+    uint8_t pin3;
+    uint8_t pin4;
+};
+
+void stepper_init(struct stepper_pins *stepper_ptr);
+void step(struct stepper_pins *stepper_ptr, int step);
+void steps(struct stepper_pins *stepper_ptr,int steps, int direction, int speed, int ms);
+```
