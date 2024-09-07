@@ -94,7 +94,9 @@ $$ \frac {1.8}{6 \times RPM} = \frac {0.3}{RPM} $$
 
 ### 示例代码
 
+
 #### steppers.h
+
 
 ```h
 #include <stdint.h>
@@ -130,6 +132,11 @@ void steps(struct stepper_pins *stepper_ptr,int steps, int direction, int speed,
 #include "nvs_flash.h"
 #include "driver/gpio.h"
 #include "./include/stepper.h"
+
+const uint8_t steps_port[3][8] =
+		{{0x08, 0x04, 0x02, 0x01, 0x08, 0x04, 0x02, 0x01},
+		 {0x09, 0x01, 0x03, 0x02, 0x06, 0x04, 0x0c, 0x08},
+		 {0x0C, 0x06, 0x03, 0x09, 0x0C, 0x06, 0x03, 0x09}};
 
 
 
