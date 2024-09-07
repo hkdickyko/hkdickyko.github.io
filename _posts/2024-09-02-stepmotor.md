@@ -115,10 +115,15 @@ struct stepper_pins{
     uint8_t pin4;
 };
 
+const uint8_t steps_port[3][8] =
+		{{0x08, 0x04, 0x02, 0x01, 0x08, 0x04, 0x02, 0x01},
+		 {0x09, 0x01, 0x03, 0x02, 0x06, 0x04, 0x0c, 0x08},
+		 {0x0C, 0x06, 0x03, 0x09, 0x0C, 0x06, 0x03, 0x09}};
+         
 void stepper_init(struct stepper_pins *stepper_ptr);
 void step(struct stepper_pins *stepper_ptr, int step);
 void steps(struct stepper_pins *stepper_ptr,int steps, int direction, int speed, int ms);
-
+double delaytime(double maxRPM);
 ```
 
 #### steppers.c
@@ -133,11 +138,55 @@ void steps(struct stepper_pins *stepper_ptr,int steps, int direction, int speed,
 #include "driver/gpio.h"
 #include "./include/stepper.h"
 
-const uint8_t steps_port[3][8] =
-		{{0x08, 0x04, 0x02, 0x01, 0x08, 0x04, 0x02, 0x01},
-		 {0x09, 0x01, 0x03, 0x02, 0x06, 0x04, 0x0c, 0x08},
-		 {0x0C, 0x06, 0x03, 0x09, 0x0C, 0x06, 0x03, 0x09}};
+double delaytime(double maxRPM)
+{
+	return 0.3 * 1000 / maxRPM;
+}
 
+void stepper_init(struct stepper_pins *stepper_ptr)
+{
+	gpio_set_direction(stepper_ptr->pin1, GPIO_MODE_OUTPUT);
+	gpio_set_direction(stepper_ptr->pin2, GPIO_MODE_OUTPUT);
+	gpio_set_direction(stepper_ptr->pin3, GPIO_MODE_OUTPUT);
+	gpio_set_direction(stepper_ptr->pin4, GPIO_MODE_OUTPUT);
+}
 
+void step(struct stepper_pins *stepper_ptr, int step)
+{
+	gpio_set_level(stepper_ptr->pin1, step & 1);
+	gpio_set_level(stepper_ptr->pin2, (step & 2) >> 1);
+	gpio_set_level(stepper_ptr->pin3, (step & 4) >> 2);
+	gpio_set_level(stepper_ptr->pin4, (step & 8) >> 3);
+}
 
+void steps(struct stepper_pins *stepper_ptr, int steps, int direction, int speed, int ms)
+{
+	int n;
+	int i = 0;
+	int delay = ms / portTICK_PERIOD_MS;
+	switch (direction)
+	{
+	case CCW:
+		i = 7;
+		for (n = 0; n < steps; n++)
+		{
+			if (i < 0)
+				i = 7;
+			step(stepper_ptr, steps_port[speed][i]);
+			vTaskDelay(delay);
+			i--;
+		}
+		break;
+	default:
+		i = 0;
+		for (n = 0; n < steps; n++)
+		{
+			if (i > 7)
+				i = 0;
+			step(stepper_ptr, steps_port[speed][i]);
+			vTaskDelay(delay);
+			i++;
+		}
+	}
+}
 ```
