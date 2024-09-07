@@ -75,14 +75,20 @@ date: 2024-09-03 18:00:00
 ### 如何计算步进电机的步进延迟
 
 - 将电机的 RPM 转换为 RPS 
- $$ RPS =  \frac {RPM} {60} $$
+
+$$ RPS =  \frac {RPM} {60} $$
+ 
 - 取倒数可得到每转秒数 
+
 $$ \frac {1}{RPS} = \frac {60}{RPM}
 $$
+
 - 除以 360 可得到每度秒数 
+
 $$ \frac {60} {RPM \times 360} = \frac {1}{6 \times RPM}
 $$
 - 乘以 1.8 可得到每步秒数
+
 $$ \frac {1.8} {6 \times RPM}
 $$
 
@@ -90,7 +96,7 @@ $$
 每步秒数 = \frac {0.3} {RPM}
 $$
 
-示例代码
+### 示例代码
 
 ```h
 #include <stdint.h>
@@ -113,6 +119,7 @@ void stepper_init(struct stepper_pins *stepper_ptr);
 void step(struct stepper_pins *stepper_ptr, int step);
 void steps(struct stepper_pins *stepper_ptr,int steps, int direction, int speed, int ms);
 ```
+
 
 ```c
 #include "freertos/FreeRTOS.h"
