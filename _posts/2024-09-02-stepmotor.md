@@ -136,12 +136,5 @@ const uint8_t steps_port[3][8] =
 		 {0x09, 0x01, 0x03, 0x02, 0x06, 0x04, 0x0c, 0x08},
 		 {0x0C, 0x06, 0x03, 0x09, 0x0C, 0x06, 0x03, 0x09}};
 
-void stepper_init(struct stepper_pins *stepper_ptr)
-{
-	gpio_set_direction(stepper_ptr->pin1, GPIO_MODE_OUTPUT);
-	gpio_set_direction(stepper_ptr->pin2, GPIO_MODE_OUTPUT);
-	gpio_set_direction(stepper_ptr->pin3, GPIO_MODE_OUTPUT);
-	gpio_set_direction(stepper_ptr->pin4, GPIO_MODE_OUTPUT);
-}
 
 ```
