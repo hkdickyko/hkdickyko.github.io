@@ -98,7 +98,7 @@ $$ \frac {1.8}{6 \times RPM} = \frac {0.3}{RPM} $$
 #### steppers.h
 
 
-```h
+```c
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -123,7 +123,7 @@ double delaytime(double maxRPM);
 
 #### steppers.c
 
-```
+```c
 #include "freertos/FreeRTOS.h"
 #include "esp_wifi.h"
 #include "esp_system.h"
