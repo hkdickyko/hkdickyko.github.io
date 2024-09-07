@@ -60,7 +60,7 @@ date: 2024-09-03 18:00:00
 
 ### 标准驱动序列
 
-![Alt ESP32pin](../assets/img/esp/steps1.png)
+![Alt steps1](../assets/img/esp/steps1.png)
 
 电机每步都同时激活一个绕组。
 
@@ -68,7 +68,7 @@ date: 2024-09-03 18:00:00
 
 在高扭矩序列中，电机每步都同时激活两个绕组。这种双绕组组合产生的扭矩比标准序列高出约 1.5 倍，但消耗的电流是标准序列的两倍。
 
-![Alt ESP32pin](../assets/img/esp/steps2.png)
+![Alt steps2](../assets/img/esp/steps2.png)
 
 半步进是通过组合两个序列实现的。首先，激活其中一个绕组，然后激活两个绕组，然后激活一个绕组，等等。这实际上使电机轴每转一圈前进的步数加倍，并将每步的度数减半。
 
@@ -98,95 +98,8 @@ $$ \frac {1.8}{6 \times RPM} = \frac {0.3}{RPM} $$
 #### steppers.h
 
 
-```c
-#include <stdint.h>
-#include <stdbool.h>
-
-#define CW 1
-#define CCW 0
-#define FULLSPEED 0
-#define HALFSPEED 1
-#define HIGHTORQUE 2
-
-struct stepper_pins{
-    uint8_t pin1;
-    uint8_t pin2;
-    uint8_t pin3;
-    uint8_t pin4;
-};
-
-static uint8_t steps_port[3][8] =
-		{{0x08, 0x04, 0x02, 0x01, 0x08, 0x04, 0x02, 0x01},
-		 {0x09, 0x01, 0x03, 0x02, 0x06, 0x04, 0x0c, 0x08},
-		 {0x0C, 0x06, 0x03, 0x09, 0x0C, 0x06, 0x03, 0x09}};
-
-void stepper_init(struct stepper_pins *stepper_ptr);
-void step(struct stepper_pins *stepper_ptr, int step);
-void steps(struct stepper_pins *stepper_ptr,int steps, int direction, int speed, int ms);
-double delaytime(double maxRPM);
-```
+![Alt stepperh](../assets/img/esp/stepperh.png)
 
 #### steppers.c
 
-```c
-#include "freertos/FreeRTOS.h"
-#include "esp_wifi.h"
-#include "esp_system.h"
-#include "esp_event.h"
-#include "esp_event.h"
-#include "nvs_flash.h"
-#include "driver/gpio.h"
-#include "./include/stepper.h"
-
-double delaytime(double maxRPM)
-{
-	return 0.3 * 1000 / maxRPM;
-}
-
-void stepper_init(struct stepper_pins *stepper_ptr)
-{
-	gpio_set_direction(stepper_ptr->pin1, GPIO_MODE_OUTPUT);
-	gpio_set_direction(stepper_ptr->pin2, GPIO_MODE_OUTPUT);
-	gpio_set_direction(stepper_ptr->pin3, GPIO_MODE_OUTPUT);
-	gpio_set_direction(stepper_ptr->pin4, GPIO_MODE_OUTPUT);
-}
-
-void step(struct stepper_pins *stepper_ptr, int step)
-{
-	gpio_set_level(stepper_ptr->pin1, step & 1);
-	gpio_set_level(stepper_ptr->pin2, (step & 2) >> 1);
-	gpio_set_level(stepper_ptr->pin3, (step & 4) >> 2);
-	gpio_set_level(stepper_ptr->pin4, (step & 8) >> 3);
-}
-
-void steps(struct stepper_pins *stepper_ptr, int steps, int direction, int speed, int ms)
-{
-	int n;
-	int i = 0;
-	int delay = ms / portTICK_PERIOD_MS;
-	switch (direction)
-	{
-	case CCW:
-		i = 7;
-		for (n = 0; n < steps; n++)
-		{
-			if (i < 0)
-				i = 7;
-			step(stepper_ptr, steps_port[speed][i]);
-			vTaskDelay(delay);
-			i--;
-		}
-		break;
-	default:
-		i = 0;
-		for (n = 0; n < steps; n++)
-		{
-			if (i > 7)
-				i = 0;
-			step(stepper_ptr, steps_port[speed][i]);
-			vTaskDelay(delay);
-			i++;
-		}
-	}
-}
-```
+![Alt steppers](../assets/img/esp/steppers.png)
