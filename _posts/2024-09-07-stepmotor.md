@@ -297,6 +297,10 @@ $$
 
 由于 **FreeRTOS** 预设的 **portTICK_PERIOD_MS** 为 **100Hz** 即 <font color="#FF1000">100 PPS</font>，如果要比预设的运行速度更快的 **延迟秒数**，则需要更改 **CONFIG_FREERTOS_HZ** 参数，但该值最大只能改变为 **1kHz**。即 **延迟秒数** 最小为 <font color="#FF1000">1ms</font> 即 <font color="#FF1000">1000 PPS</font>。基于以上原因 vTaskDelay 只能用於最少为 1ms 的情况。
 
+可以通过 **idf.py menuvonfig** 更改 FreeRTOS 的预设值如下图：
+
+![Alt tb6600](../assets/img/esp/menuconfig.png)
+
 可用 ROM 函数 **ets_delay_us()**（rom/ets_sys.h）将等待指定数量增至微秒级。
 
 
