@@ -293,8 +293,11 @@ $$
 
 电机的动态力矩取决于电机运行时的平均电流（而非静态电流），平均电流越大，电机输出力矩越大，即电机的频率特性越硬。产生啸叫声可能是由于负载过大造成的，高速运转时电机的输出扭矩会下降，无法满足负载要求时电机发生堵转，并且啸叫声会随着频率的高低变化而变化，解决办法是降低转速或更换扭矩更大的电机。此外电机在高速运行停止后会出现短促的啸叫声，这是由对相电流进行斩波造成的，只需将步进驱动器面板上的自动半流设置为有效即可。
 
-## 注意 ESP32 的限制 CONFIG_FREERTOS_HZ
+## FreeRTOS 的限制
 
-由于 **ESP32** 预设的 **portTICK_PERIOD_MS** 为 **100Hz** 即 <font color="#FF1000">100 PPS</font>，如果要比预设的运行速度更快的 **延迟秒数**，则需要更改 **CONFIG_FREERTOS_HZ** 参数，但该值最大只能改变为 **1kHz**。即 **延迟秒数** 最小为 <font color="#FF1000">1ms</font> 即 <font color="#FF1000">1000 PPS</font>。
+由于 **FreeRTOS** 预设的 **portTICK_PERIOD_MS** 为 **100Hz** 即 <font color="#FF1000">100 PPS</font>，如果要比预设的运行速度更快的 **延迟秒数**，则需要更改 **CONFIG_FREERTOS_HZ** 参数，但该值最大只能改变为 **1kHz**。即 **延迟秒数** 最小为 <font color="#FF1000">1ms</font> 即 <font color="#FF1000">1000 PPS</font>。基于以上原因 vTaskDelay 只能用於最少为 1ms 的情况。
+
+可用 ROM 函数 **ets_delay_us()**（rom/ets_sys.h）将等待指定数量增至微秒级。
+
 
 ![Alt tb6600](../assets/img/esp/tb6600c.png)
