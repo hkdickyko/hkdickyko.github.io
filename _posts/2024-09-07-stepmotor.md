@@ -313,7 +313,8 @@ $$
 
 ## 解决方法
 
-[ESP 定时器](https://hkdickyko.github.io/2024-09-08-sleep)
+用定时器进入睡眠状态解决：
+[ESP 定时器](https://hkdickyko.github.io/%E7%B7%A8%E7%A8%8B/sleep)
 
-
-远程控制收发器
+用红外线发射器解决：
+[ESP 远程控制收发器](https://hkdickyko.github.io/%E7%B7%A8%E7%A8%8B/RMT)
