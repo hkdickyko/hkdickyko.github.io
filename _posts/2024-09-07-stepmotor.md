@@ -64,11 +64,11 @@ date: 2024-09-07 08:00:00
 
 步进电机低速转动时振动和噪声大是其固有的缺点，可采用以下方案来克服：
 
- - 如步进电机正好工作在共振区，可通过改变减速比等机械传动避开共振区；
- - 采用带有细分功能的驱动器，这是最常用、最简便的方法；
- - 换成步距角更小的步进电机，如三相或五相步进电机；
- - 换成交流伺服电机，几乎可以完全克服震动和噪声，但成本较高；
- - 在电机轴上加磁性阻尼器，市场上已有这种产品，但机械结构改变较大。
+- 如步进电机正好工作在共振区，可通过改变减速比等机械传动避开共振区；
+- 采用带有细分功能的驱动器，这是最常用、最简便的方法；
+- 换成步距角更小的步进电机，如三相或五相步进电机；
+- 换成交流伺服电机，几乎可以完全克服震动和噪声，但成本较高；
+- 在电机轴上加磁性阻尼器，市场上已有这种产品，但机械结构改变较大。
 
 ### 细分驱动器的细分数是否能代表精度
 
@@ -133,12 +133,12 @@ $$
 
 ## 28BYJ48步进马达+ULN2003驱动板
 
-28BYJ-48 是 5V 单极步进电机，有五个端子。在这种电机中，脉冲频率决定了它的速度，以获得精确的速度调节。此外，脉冲序列决定了它的旋转方向，而脉冲数控制了它的转动距离。电机在大约 **15RPM** 的速度下可提供 **34.3mN.m** 的扭矩。它即使在静止状态下也能提供良好的扭矩，只要向电机供电就​​可以保持这种扭矩。唯一的缺点是它有点耗电，即使它不移动也会消耗电力。工作电流大约 **240mA**（典型）
+28BYJ-48 是 5V 单极步进电机，有五个端子。在这种电机中，脉冲频率决定了它的速度，以获得精确的速度调节。此外，脉冲序列决定了它的旋转方向，而脉冲数控制了它的转动距离。电机在大约 **15RPM** 的速度下可提供 **34.3mN.m** 的扭矩。它即使在静止状态下也能提供良好的扭矩，只要向电机供电就可以保持这种扭矩。唯一的缺点是它有点耗电，即使它不移动也会消耗电力。工作电流大约 **240mA**（典型）
 
 注意，不能超过电机参数要求，如使用的电机（28BYJ-48）的参数：
 
-  - 最大空载牵出频率 > 900pps
-  - 最大空载牵入频率 > 500pps
+- 最大空载牵出频率 > 900pps
+- 最大空载牵入频率 > 500pps
 
 也就是说空载转动时，最快的驱动拍频率最好不要超过 **900Hz**；空载启动时，最快的驱动拍频率最好不要超过**500Hz**，因为启动时初始转速从零开始，驱动拍太快的话会失步，可能无法转动起来。所以程序里也设计成了**500Hz**（2ms延时）一拍。
 
@@ -149,7 +149,9 @@ $$
 最简单的步进电机驱动方式。电机在每个瞬间只有一个线圈导通，消耗电力小。但在切换瞬间时没有任何的电磁作用在转子上，容易造成振动，也容易因为惯性而失步。
 
 > 马达步进角 **11.25**度 再乘以减速比得到输出的解析度：
+>
 >> 每步旋转 11.25 x 1/64 = 0.17578125 度
+>>
 
 若要转一圈，需要  360/0.17578125 = **2048**步
 
@@ -158,7 +160,9 @@ $$
 使用单四拍和双四拍交替进行的方式，每传送一个励磁信号，步进电机前进半个步距角。其特点是分辨率高，运转更加平滑，是最常用的方式。
 
 > 马达步进角 **5.625**度 再乘以减速比得到输出的解析度：
+>
 >> 每步旋转 5.625 x 1/64 = 0.087890625 度
+>>
 
 若要转一圈，需要  360/0.087890625 = **4096**步
 
@@ -167,7 +171,9 @@ $$
 这方式输出的转矩较大且振动较少，切换过程中至少有一个线圈通电作用于转子，使得输出的转矩较大，振动较小，也比单四拍平稳，不易失步。
 
 > 马达步进角 **5.625**度 再乘以减速比得到输出的解析度：
+>
 >> 每步旋转 5.625 x 1/64 = 0.087890625 度
+>>
 
 若要转一圈，需要  360/0.087890625 = **4096**步
 
@@ -185,22 +191,22 @@ $$
 
 ![Alt steppersmain](../assets/img/esp/steppermotocmain.png)
 
-
 ## TB6600 驱动板
 
 一款專業的兩相步進馬達驅動。可實現正反轉控制，
- - 通過 **3** 位元撥碼開關選擇 **7** 檔細分控制 (<font color="#FF1000">1，2/A，2/B，4，8，16，32</font>)，
- - 通過 **3** 位元撥碼開關選擇 **8** 檔電流控制（<font color="#FF1000">0.5，1，1.5，2，2.5，2.8，3.0，3.5</font>）A。
+
+- 通過 **3** 位元撥碼開關選擇 **7** 檔細分控制 (<font color="#FF1000">1，2/A，2/B，4，8，16，32</font>)，
+- 通過 **3** 位元撥碼開關選擇 **8** 檔電流控制（<font color="#FF1000">0.5，1，1.5，2，2.5，2.8，3.0，3.5</font>）A。
 
 適合驅動 **57**、**42** 型兩相、四相混合式步進馬達。能達到低振動、小雜訊、高速度的效果驅動電機。
 
- - 工作溫度 : -10～45℃
- - 存放溫度 : -40℃～70℃
- - 最大功耗 : 160W
- - 峰值電流 : 4A
- - 輸出電流	: 0.5-4.0A
- - 供電電壓 : 9~42V 供電
- - 控制電壓 : 3.3~24V
+- 工作溫度 : -10～45℃
+- 存放溫度 : -40℃～70℃
+- 最大功耗 : 160W
+- 峰值電流 : 4A
+- 輸出電流	: 0.5-4.0A
+- 供電電壓 : 9~42V 供電
+- 控制電壓 : 3.3~24V
 
 ![Alt tb6600](../assets/img/esp/tb6600.png)
 
@@ -227,21 +233,21 @@ $$
 
 #### 引脚的作用
 
- - ENA（Enable）引脚用于使能或禁用驱动器：
-    - 当**ENA**信号为低电平时，驱动器被使能，电机可以根据PUL和DIR信号正常运转。
-    - 当**ENA**信号为高电平时，驱动器被禁用，电机不会响应PUL和DIR信号。
-    - 可以用来在不需要时关闭电机，以节省电力或防止电机过热。   如设为始终使能驱动器，可以将 ENA+ 和 ENA- 直接连接到 GND。
- - DIR（Direction）引脚的高低电平决定电机的顺时针或逆时针旋转。
- - PUL（Pulse）引脚的脉冲信号，每个脉冲推动电机转动一步。再通过 SW1、SW2、SW3 设置脉冲模式。来决定电动机的转速。
+- ENA（Enable）引脚用于使能或禁用驱动器：
+  - 当**ENA**信号为低电平时，驱动器被使能，电机可以根据PUL和DIR信号正常运转。
+  - 当**ENA**信号为高电平时，驱动器被禁用，电机不会响应PUL和DIR信号。
+  - 可以用来在不需要时关闭电机，以节省电力或防止电机过热。   如设为始终使能驱动器，可以将 ENA+ 和 ENA- 直接连接到 GND。
+- DIR（Direction）引脚的高低电平决定电机的顺时针或逆时针旋转。
+- PUL（Pulse）引脚的脉冲信号，每个脉冲推动电机转动一步。再通过 SW1、SW2、SW3 设置脉冲模式。来决定电动机的转速。
 
 ## 步进马达 (17HS4401S)
 
- - 电流: 直流1.5A/相
- - 保持扭矩: ≥ 420mN.m
- - 定位扭矩: 15mN.m REF
- - 步距角: 1.8° ± 0.09°
- - 最大空载启动频率: ≥ 1500 PPS
- - 最大空载工作频率: ≥ 1900 PPS
+- 电流: 直流1.5A/相
+- 保持扭矩: ≥ 420mN.m
+- 定位扭矩: 15mN.m REF
+- 步距角: 1.8° ± 0.09°
+- 最大空载启动频率: ≥ 1500 PPS
+- 最大空载工作频率: ≥ 1900 PPS
 
 ### 最大空载 **启动频率** 及 **工作频率**
 
@@ -250,22 +256,22 @@ $$
 如在有负载的情况下，启动频率应更低。如要使电机达到高速转动，脉冲频率应该有加速过程，即启动频率较低，然后按一定加速度升到所希望的高频（电机转速从低速升到高速）。启动频率公式如下:
 
 $$
-    启动频率 = 启动转速 × 每转多少步 = 启动转速 \times \frac {360}{步进角度}
+启动频率 = 启动转速 × 每转多少步 = 启动转速 \times \frac {360}{步进角度}
 $$
 
 ### 考虑减速器的计算
 
 如需要减速器的总的输出
 
- - 转矩是 **T**
- - 转速是 **N**
- - 减速比是 **5：1**
- - 步进角度是 **A**
+- 转矩是 **T**
+- 转速是 **N**
+- 减速比是 **5：1**
+- 步进角度是 **A**
 
 那么电机的转速是：**5N**，那么电机的输出转矩应该是 **T/5**，电机的工作频率应该是
 
 $$
-　　工作频率 = \color{red}{减速比} \times 启动转速 \times \frac {360}{步进角度} = 5 \times N \times \frac {360}{A}
+工作频率 = \color{red}{减速比} \times 启动转速 \times \frac {360}{步进角度} = 5 \times N \times \frac {360}{A}
 $$
 
 所以应该看矩频特性曲线：坐标点[转矩：T/5，脉冲频率：5xNx360/A]是不是在频特性曲线**自后动区域**內。如果是則可以选择这个电机，否则要选择其它型号，因为这个电机会失步，或者不能转动。
@@ -276,15 +282,15 @@ $$
 
 另外：步进电机在启动了以后，可以在负载不变的情况下，再提高频率，因为步进电机矩频曲线实际上应该有两条的，蓝色那条是最大空载启动频率曲线，红色那条是最大空载工作频率曲线，这条曲线代表的含义是：
 
- - 启动完成以后可以增加负载，但电机不会失步；或者
- - 启动完成以后在负载不变的情况下，可以适当增加运转速度，而电机不会失步。
+- 启动完成以后可以增加负载，但电机不会失步；或者
+- 启动完成以后在负载不变的情况下，可以适当增加运转速度，而电机不会失步。
 
 关于步距角，比如说你是 A-B-C-D-A 单四拍控制，那么步距角就是一个 *A* 走过的角度，关于最大启动频率，其指的是 **A-B** 之间的间隔频率，手册里给的都是 > 于某个值，但是在实际应用时应该给的值就是最大值，
 
 例如 最大空载启动频率 **> 250PPS**，在没有减速器的情况下。那么 **A** 到 **B** 之間的 **延迟秒数** 如下:
- 
+
 $$
- 间隔频率 = PPS = \frac {1}{延迟秒数} < 250, 延迟秒数 >= \color{red}{0.004s} = \color{red}{4ms}
+间隔频率 = PPS = \frac {1}{延迟秒数} < 250, 延迟秒数 >= \color{red}{0.004s} = \color{red}{4ms}
 $$
 
 所以小于 **4ms** 就不足够扭矩转动电机。
@@ -302,7 +308,6 @@ $$
 ![Alt tb6600](../assets/img/esp/menuconfig.png)
 
 可用 ROM 函数 **ets_delay_us()**（rom/ets_sys.h）将等待指定数量增至微秒级。
-
 
 ![Alt tb6600](../assets/img/esp/tb6600c.png)
 
@@ -327,26 +332,26 @@ esp_sleep_enable_timer_wakeup(time_in_us);
 ```c
 esp_deep_sleep_start();
 ```
+
 ![Alt tb6600](../assets/img/esp/espdeep.png)
 
- - esp_deep_sleep_start 关闭处理器，因此在此行下方编写的任何代码都不会被执行。
- - 当 ESP32 从深度睡眠中唤醒时，它将重新运行设置函数。
- - 進入 Deep-sleep 时，存储在内存中的所有数据都将丢失。
+- esp_deep_sleep_start 关闭处理器，因此在此行下方编写的任何代码都不会被执行。
+- 当 ESP32 从深度睡眠中唤醒时，它将重新运行设置函数。
+- 進入 Deep-sleep 时，存储在内存中的所有数据都将丢失。
 
 #### 轻度睡眠
 
 ```c
 esp_light_sleep_start();
 ```
+
 ![Alt tb6600](../assets/img/esp/esplight.png)
 
- - esp_light_sleep_start 暂停处理器，因此在此行下方编写的任何代码都暂停执行。
- - 当 ESP32 从轻度睡眠中唤醒时，它将继续运行设置函数。
- - 退出 Light-sleep 后，数字外设、RAM 和 CPU 将恢复运行，并且其内部状态将保留。
+- esp_light_sleep_start 暂停处理器，因此在此行下方编写的任何代码都暂停执行。
+- 当 ESP32 从轻度睡眠中唤醒时，它将继续运行设置函数。
+- 退出 Light-sleep 后，数字外设、RAM 和 CPU 将恢复运行，并且其内部状态将保留。
 
 ![Alt tb6600](../assets/img/esp/sleepscomp.png)
-
-
 
 ### RMT（远程控制收发器）
 
@@ -356,7 +361,7 @@ ESP32 模组中有个 RMT 类别可以扩展为多功能通用收发器，发送
 
 用 RMT 来设计 PWM。例子如下：
 
- - 製作 261Hz 的信号源, 可以计算出周期为：
+- 製作 261Hz 的信号源, 可以计算出周期为：
 
 $$
 \frac {1}{H_z} = \frac {1s}{261} = 3831.418 \mu s,
@@ -365,30 +370,242 @@ $$
 因为是方波信号，所以占空比为 **50%** 也就是
 
 $$
-\frac {3831.418\mu s}{2}  = 1915.709 \mu s 
+\frac {3831.418\mu s}{2}  = 1915.709 \mu s
 $$
 
 为高电位与低电位各自持续的时间。
 
 由於 RMT 有 **8** 個通道, 所以就等於有 **8** 個可隨意自訂頻率的 PWM 可以使用。
 
-时钟分频器，决定 RMT 发射器产生的脉冲长度范围或接收器的判别。通过设置 clk_div 为 **1** 至 **255** 范围内的一个值来选择。RMT的源时钟通常为APB CLK，默认为 **80Mhz**。
-
+时脉除频器 (clock divider)，决定 RMT 发射器产生的脉冲长度范围或接收器的判别。通过设置 clk_div 为 **1** 至 **255** 范围内的一个值来选择。RMT 的源时钟通常为APB CLK，默认为 **80Mhz**。
 
 注意，由于 RMT 选择的时钟分频器不同。因此每一個时间刻度为:
 
 $$
-一周期长度 = \frac {80MH_z}{时钟分频器的值_{[1..255]}}
+一脉冲长度 = \frac {1s} {80MH_z} \times {时脉除频器_{[1..255]}} = 0.0125 \mu s \approx  3.1875 \mu s
 $$
 
-而因一周期为两个脉冲长度
+预设指定交替高低电位的持续脉冲长度为 **0~32767**，一周期为两个脉冲长度
 
 $$
-脉冲长度 =  \frac {80MH_z}{时钟分频器的值_{[1..255]}\times 2}
+一周期长度 = 2 \times 32767 \times \frac {1 \mu s} {80} \times {时脉除频器_{[1..255]}} = 819.175 \mu s \approx  208889.625 \mu s
+$$
+
+频率带宽
+
+$$
+频率带宽 = \frac {80,000,000} {65534 \times 时脉除频器_{[1..255]}}
 $$
 
 $$
-最小频率 = \frac {1,000,000 \mu s}{80MH_z \times 时钟分频器的值_{[1..255]}} \times 2
+频率带宽 = \frac {1}{819.175} \mu s \approx  \frac {1}{208889.625} \mu s = 1.221 kH_z \approx 4.787 H_z
 $$
 
-1000000us / 65534us ≒ 16Hz。
+
+```c
+#include "freertos/FreeRTOS.h"
+#include "nvs_flash.h"
+#include "driver/gpio.h"
+#include "driver/rmt_tx.h"
+#include "esp_log.h"
+#include "esp_check.h"
+
+#define CW 0
+#define CCW 1
+#define ON 0
+#define OFF 1
+
+struct stepper_pins stepper0; // 步进电机的初始端口
+#define STEP_MOTOR_RESOLUTION_HZ 1000000 // 1MHz resolution
+static const char *TAG = "example";
+
+struct stepper_pins
+{
+  uint8_t ENA;
+  uint8_t DIR;
+  uint8_t PLU;
+};
+
+void setEnable(int value)
+{
+  gpio_set_level(stepper0.ENA, value);
+}
+
+void setDirection(int value)
+{
+  gpio_set_level(stepper0.DIR, value);
+}
+
+void setPlus(int steps, int ms)
+{
+  double delay = (double) ms / portTICK_PERIOD_MS;
+  printf("--%lf,%ld",delay, portTICK_PERIOD_MS);
+  for (int n = 0; n < steps; n++)
+  {
+    gpio_set_level(stepper0.PLU, OFF);
+    vTaskDelay(delay);
+    gpio_set_level(stepper0.PLU, ON);
+    vTaskDelay(delay);
+  }
+}
+
+typedef struct {
+    uint32_t resolution;    // Encoder resolution, in Hz
+    uint32_t sample_points; // Sample points used for deceleration phase. Note: |end_freq_hz - start_freq_hz| >= sample_points
+    uint32_t start_freq_hz; // Start frequency on the curve, in Hz
+    uint32_t end_freq_hz;   // End frequency on the curve, in Hz
+} stepper_motor_curve_encoder_config_t;
+
+typedef struct {
+    rmt_encoder_t base;
+    rmt_encoder_handle_t copy_encoder;
+    uint32_t sample_points;
+    struct {
+        uint32_t is_accel_curve: 1;
+    } flags;
+    rmt_symbol_word_t curve_table[];
+} rmt_stepper_curve_encoder_t;
+
+static float convert_to_smooth_freq(uint32_t freq1, uint32_t freq2, uint32_t freqx)
+{
+    float normalize_x = ((float)(freqx - freq1)) / (freq2 - freq1);
+    // third-order "smoothstep" function: https://en.wikipedia.org/wiki/Smoothstep
+    float smooth_x = normalize_x * normalize_x * (3 - 2 * normalize_x);
+    return smooth_x * (freq2 - freq1) + freq1;
+}
+
+static esp_err_t rmt_del_stepper_motor_curve_encoder(rmt_encoder_t *encoder)
+{
+    rmt_stepper_curve_encoder_t *motor_encoder = __containerof(encoder, rmt_stepper_curve_encoder_t, base);
+    rmt_del_encoder(motor_encoder->copy_encoder);
+    free(motor_encoder);
+    return ESP_OK;
+}
+
+static size_t rmt_encode_stepper_motor_curve(rmt_encoder_t *encoder, rmt_channel_handle_t channel, const void *primary_data, size_t data_size, rmt_encode_state_t *ret_state)
+{
+    rmt_stepper_curve_encoder_t *motor_encoder = __containerof(encoder, rmt_stepper_curve_encoder_t, base);
+    rmt_encoder_handle_t copy_encoder = motor_encoder->copy_encoder;
+    rmt_encode_state_t session_state = RMT_ENCODING_RESET;
+    uint32_t points_num = *(uint32_t *)primary_data;
+    size_t encoded_symbols = 0;
+    if (motor_encoder->flags.is_accel_curve) {
+        encoded_symbols = copy_encoder->encode(copy_encoder, channel, &motor_encoder->curve_table[0],
+                                               points_num * sizeof(rmt_symbol_word_t), &session_state);
+    } else {
+        encoded_symbols = copy_encoder->encode(copy_encoder, channel, &motor_encoder->curve_table[0] + motor_encoder->sample_points - points_num,
+                                               points_num * sizeof(rmt_symbol_word_t), &session_state);
+    }
+    *ret_state = session_state;
+    return encoded_symbols;
+}
+
+static esp_err_t rmt_reset_stepper_motor_curve_encoder(rmt_encoder_t *encoder)
+{
+    rmt_stepper_curve_encoder_t *motor_encoder = __containerof(encoder, rmt_stepper_curve_encoder_t, base);
+    rmt_encoder_reset(motor_encoder->copy_encoder);
+    return ESP_OK;
+}
+
+esp_err_t rmt_new_stepper_motor_curve_encoder(const stepper_motor_curve_encoder_config_t *config, rmt_encoder_handle_t *ret_encoder)
+{
+    esp_err_t ret = ESP_OK;
+    rmt_stepper_curve_encoder_t *step_encoder = NULL;
+    float smooth_freq;
+    uint32_t symbol_duration;
+    ESP_GOTO_ON_FALSE(config && ret_encoder, ESP_ERR_INVALID_ARG, err, TAG, "invalid arguments");
+    ESP_GOTO_ON_FALSE(config->sample_points, ESP_ERR_INVALID_ARG, err, TAG, "sample points number can't be zero");
+    ESP_GOTO_ON_FALSE(config->start_freq_hz != config->end_freq_hz, ESP_ERR_INVALID_ARG, err, TAG, "start freq can't equal to end freq");
+     step_encoder = rmt_alloc_encoder_mem(sizeof(rmt_stepper_curve_encoder_t) + config->sample_points * sizeof(rmt_symbol_word_t));
+     ESP_GOTO_ON_FALSE(step_encoder, ESP_ERR_NO_MEM, err, TAG, "no mem for stepper curve encoder");
+     rmt_copy_encoder_config_t copy_encoder_config = {};
+     ESP_GOTO_ON_ERROR(rmt_new_copy_encoder(&copy_encoder_config, &step_encoder->copy_encoder), err, TAG, "create copy encoder failed");
+     bool is_accel_curve = config->start_freq_hz < config->end_freq_hz;
+
+     // prepare the curve table, in RMT symbol format
+     uint32_t curve_step = 0;
+     if (is_accel_curve) {
+         curve_step = (config->end_freq_hz - config->start_freq_hz) / (config->sample_points - 1);
+        for (uint32_t i = 0; i < config->sample_points; i++) {
+            smooth_freq = convert_to_smooth_freq(config->start_freq_hz, config->end_freq_hz, config->start_freq_hz + curve_step * i);
+            symbol_duration = config->resolution / smooth_freq / 2;
+            step_encoder->curve_table[i].level0 = 0;
+            step_encoder->curve_table[i].duration0 = symbol_duration;
+            step_encoder->curve_table[i].level1 = 1;
+            step_encoder->curve_table[i].duration1 = symbol_duration;
+        }
+    } else {
+        curve_step = (config->start_freq_hz - config->end_freq_hz) / (config->sample_points - 1);
+        for (uint32_t i = 0; i < config->sample_points; i++) {
+            smooth_freq = convert_to_smooth_freq(config->end_freq_hz, config->start_freq_hz, config->end_freq_hz + curve_step * i);
+            symbol_duration = config->resolution / smooth_freq / 2;
+            step_encoder->curve_table[config->sample_points - i - 1].level0 = 0;
+            step_encoder->curve_table[config->sample_points - i - 1].duration0 = symbol_duration;
+            step_encoder->curve_table[config->sample_points - i - 1].level1 = 1;
+            step_encoder->curve_table[config->sample_points - i - 1].duration1 = symbol_duration;
+        }
+    }
+    ESP_GOTO_ON_FALSE(curve_step > 0, ESP_ERR_INVALID_ARG, err, TAG, "|end_freq_hz - start_freq_hz| can't be smaller than sample_points");
+
+    step_encoder->sample_points = config->sample_points;
+    step_encoder->flags.is_accel_curve = is_accel_curve;
+    step_encoder->base.del = rmt_del_stepper_motor_curve_encoder;
+    step_encoder->base.encode = rmt_encode_stepper_motor_curve;
+    step_encoder->base.reset = rmt_reset_stepper_motor_curve_encoder;
+    *ret_encoder = &(step_encoder->base);
+    return ESP_OK;
+ err:
+    if (step_encoder) {
+        if (step_encoder->copy_encoder) {
+            rmt_del_encoder(step_encoder->copy_encoder);
+        }
+        free(step_encoder);
+    }
+    return ret;
+}
+
+void app_main(void)
+{
+  nvs_flash_init();
+  stepper0.ENA = 27;
+  stepper0.DIR = 26;
+  stepper0.PLU = 25;
+  gpio_set_direction(stepper0.ENA, GPIO_MODE_OUTPUT);
+  gpio_set_direction(stepper0.DIR, GPIO_MODE_OUTPUT);
+  gpio_set_direction(stepper0.PLU, GPIO_MODE_OUTPUT);
+  setEnable(ON);
+  setDirection(CW);
+  int ms = 1;
+  printf("--->%d", ms);
+  setPlus(200, ms);
+
+  const static uint32_t accel_samples = 500;
+  rmt_channel_handle_t motor_chan = NULL;
+  rmt_tx_channel_config_t tx_chan_config = {
+      .clk_src = RMT_CLK_SRC_DEFAULT, 
+      .gpio_num = stepper0.PLU,
+      .mem_block_symbols = 64,
+      .resolution_hz = STEP_MOTOR_RESOLUTION_HZ,
+      .trans_queue_depth = 10, 
+  };
+  rmt_transmit_config_t tx_config = {
+      .loop_count = 0,
+  };
+
+  stepper_motor_curve_encoder_config_t accel_encoder_config = {
+      .resolution = STEP_MOTOR_RESOLUTION_HZ,
+      .sample_points = 500,
+      .start_freq_hz = 500,
+      .end_freq_hz = 1200,
+  };
+  rmt_encoder_handle_t accel_motor_encoder = NULL;
+
+  ESP_ERROR_CHECK(rmt_new_stepper_motor_curve_encoder(&accel_encoder_config, &accel_motor_encoder));
+  ESP_ERROR_CHECK(rmt_new_tx_channel(&tx_chan_config, &motor_chan));
+  ESP_ERROR_CHECK(rmt_enable(motor_chan));
+  ESP_ERROR_CHECK(rmt_transmit(motor_chan, accel_motor_encoder, &accel_samples, sizeof(accel_samples), &tx_config));    
+  ESP_ERROR_CHECK(rmt_tx_wait_all_done(motor_chan, -1));
+
+  vTaskDelay(pdMS_TO_TICKS(1000));
+}
+```
