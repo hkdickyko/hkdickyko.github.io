@@ -1,5 +1,5 @@
 ---
-category: [編程]
+category: [積體電路]
 tags: [Linux, IoT]
 title: ESP 步进电动机
 date: 2024-09-07 08:00:00
