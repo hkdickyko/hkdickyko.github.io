@@ -91,6 +91,8 @@ date: 2024-09-07 08:00:00
 
 ## 驱动序列永磁步进电机有几种子类型可供选择
 
+[下载 驱动序列永磁步进电机 的源文件](../assets/zip/stepmotor.zip)
+
 ### 标准驱动序列
 
 ![Alt steps1](../assets/img/esp/steps1.png)
