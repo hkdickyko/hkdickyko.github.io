@@ -17,7 +17,7 @@ I<sup>2</sup>C bus 的 pull-up 電阻設計，是一個兩難的局面：
 
 I<sup>2</sup>C 規格中定義的 V<sub>IL</sub>，也就是 0.3 V<sub>CC</sub>，才能讓其它裝置覺得 bus 的狀態是 low。
 
-根據 I<sup>2</sup>C 的規範，在 100 KH<sub>z</sub> 的 standard mode 和 400 KH<sub>z</sub> 的 fast mode 下，I<sup>2</sup>C 裝置最少要能驅動 3 mA 的電流。
+根據 I<sup>2</sup>C 的規範，在 100 KH<sub>z</sub> 的 standard mode 和 400 KH<sub>z</sub> 的 fast mode 下，I<sup>2</sup>C 裝置最少要能驅動 <font color="#FF1000">3 mA</font> 的電流。
 
 首先計算 V<sub>IL</sub>：
 
