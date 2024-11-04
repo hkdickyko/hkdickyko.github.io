@@ -128,3 +128,28 @@ Python 环境工具
     "editor.defaultFormatter": "ms-python.black-formatter"
   }
 ```
+
+## 備份已安裝的 library 和版本
+
+```
+pip freeze > requirements.txt
+```
+
+使用 pip 安装新的 library 前把现有的 libraries 列表汇出到 requirements.txt，那么如果新的 library 不兼容于现专案，可以使用 requirements.txt 还原专案
+
+
+## 还原已安裝的 library 和版本
+
+```
+pip install -r requirements.txt
+```
+
+requirements.txt 就是一個橋樑。透過先前匯出的 requirements.txt，可以用於還原所有在該虛擬環境已安裝的 Python library。
+
+## 更新已安裝的 library
+
+```
+pip install --upgrade [package]
+```
+
+留意當更新一個 Library 的時候，其實會同時把它的 dependencies 也更新至 Library 最新版的要求。
