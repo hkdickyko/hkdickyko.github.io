@@ -61,6 +61,8 @@ sudo chmod 777 /dev/i2c-x
 
 ![Alt X](../assets/img/esp/python.png)
 
+![Alt X](../assets/img/esp/pylint.png)
+
 ![Alt X](../assets/img/esp/bformat.png)
 
 ![Alt X](../assets/img/esp/pydebug.png)
