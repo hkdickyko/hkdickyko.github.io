@@ -61,9 +61,12 @@ sudo chmod 777 /dev/i2c-x
 
 ![Alt X](../assets/img/esp/python.png)
 
-![Alt X](../assets/img/esp/jupyter.png)
+![Alt X](../assets/img/esp/bformat.png)
 
 ![Alt X](../assets/img/esp/pydebug.png)
+
+![Alt X](../assets/img/esp/jupyter.png)
+
 
 #### 自动完成和 IntelliSense
 
@@ -111,4 +114,15 @@ Python 环境工具
 |venv|允许管理不同项目的单独软件包安装，并且默认与 Python 3 一起安装，如使用 Debian 的操作系统；请安装 python3-venv|
 |conda| 与 Miniconda 一起安装。它可用于管理软件包和虚拟环境。通常用于数据科学项目。|
 
-创建环境
+
+### 格式处理
+
+显示命令面板 <font color="#FF1000">Ctrl + Shift + p</font> 
+
+快捷格式化代码 <font color="#FF1000">Alt + Shift + F</font>
+ 
+```
+"[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
+```
