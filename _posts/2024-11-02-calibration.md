@@ -129,7 +129,31 @@ Python 环境工具
   }
 ```
 
-## 備份已安裝的 library 和版本
+
+## 安装虚拟环境
+
+在 vs code 创建一个空文件夹，选择该文件夹将成为“工作区”。然后打开 **命令面板** <font color="#FF1000">Ctrl + Shift + p</font>，键入 <font color="#FF1000">Create Environment</font> 命令进行搜索，然后选择该命令。该命令显示环境类型列表，Venv 或 Conda。
+
+![Alt X](../assets/img/esp/createpy.png)
+
+下面以 venv 为例，展示创建虚拟环境的过程，Venv 与 Conda 的过程基本一样：
+
+![Alt X](../assets/img/esp/venv.png)
+
+然后选择需要的解释器版本如下：
+
+![Alt X](../assets/img/esp/pyversion.png)
+
+
+## 安装套件
+
+回到 VS Code 命令面板。开启一个新的 Python Terminal。
+
+```
+pip install [package]
+```
+
+## 備份已安裝套件版本
 
 ```
 pip freeze > requirements.txt
@@ -138,7 +162,7 @@ pip freeze > requirements.txt
 使用 pip 安装新的 library 前把现有的 libraries 列表汇出到 requirements.txt，那么如果新的 library 不兼容于现专案，可以使用 requirements.txt 还原专案
 
 
-## 还原已安裝的 library 和版本
+## 还原已安裝套件版本
 
 ```
 pip install -r requirements.txt
@@ -146,10 +170,11 @@ pip install -r requirements.txt
 
 requirements.txt 就是一個橋樑。透過先前匯出的 requirements.txt，可以用於還原所有在該虛擬環境已安裝的 Python library。
 
-## 更新已安裝的 library
+## 更新已安裝套件
 
 ```
 pip install --upgrade [package]
 ```
 
 留意當更新一個 Library 的時候，其實會同時把它的 dependencies 也更新至 Library 最新版的要求。
+
