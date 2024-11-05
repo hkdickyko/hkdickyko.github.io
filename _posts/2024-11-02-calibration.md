@@ -182,14 +182,15 @@ pip install --upgrade [package]
 
 ## Black formatter
 
+打开 **命令面板** <font color="#FF1000">Ctrl + Shift + p</font>，直接修改 **setting.json**
 
+![Alt X](../assets/img/esp/vscsetting.png)
  
 ```
 "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   }
 ```
-
 
 
 
