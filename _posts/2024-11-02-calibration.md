@@ -116,19 +116,8 @@ Python 环境工具
 |venv|允许管理不同项目的单独软件包安装，并且默认与 Python 3 一起安装，如使用 Debian 的操作系统；请安装 python3-venv|
 |conda| 与 Miniconda 一起安装。它可用于管理软件包和虚拟环境。通常用于数据科学项目。|
 
-
-### 格式处理
-
-显示命令面板 <font color="#FF1000">Ctrl + Shift + p</font> 
-
-快捷格式化代码 <font color="#FF1000">Alt + Shift + F</font>
- 
-```
-"[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
-  }
-```
-
+ - 显示命令面板 <font color="#FF1000">Ctrl + Shift + p</font> 
+ - 快捷格式化代码 <font color="#FF1000">Alt + Shift + F</font>
 
 ## 安装虚拟环境
 
@@ -177,4 +166,32 @@ pip install --upgrade [package]
 ```
 
 留意當更新一個 Library 的時候，其實會同時把它的 dependencies 也更新至 Library 最新版的要求。
+
+
+## pylint
+
+打开 **命令面板** <font color="#FF1000">Ctrl + Shift + p</font>，启用 pylint:
+
+![Alt X](../assets/img/esp/pylint-1.png)
+
+![Alt X](../assets/img/esp/pylint-2.png)
+
+以上步骤相等于直接更改 setting.json 如下:
+
+![Alt X](../assets/img/esp/pylint-3.png)
+
+## Black formatter
+
+
+ 
+```
+"[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
+```
+
+
+
+
+
 
