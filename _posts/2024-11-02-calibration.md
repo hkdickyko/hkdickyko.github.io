@@ -192,7 +192,12 @@ pip install --upgrade [package]
   }
 ```
 
+## Schema 
 
+- Schema 描述文档的结构。XML Schema 语言也称为 XML Schema Definition（XSD）
 
+![Alt X](../assets/img/esp/schema.png)
 
+主要目的是定义资料结构。方便观察资料是否正确。例子如下。
 
+![Alt X](../assets/img/esp/schema-sample.png)
