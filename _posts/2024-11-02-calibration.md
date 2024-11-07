@@ -224,3 +224,66 @@ pip install --upgrade [package]
 ![Alt X](../assets/img/esp/pyloop-1.png)
 
 ![Alt X](../assets/img/esp/pybreak.png)
+
+## Python Array
+
+![Alt X](../assets/img/esp/pyarray.png)
+
+- find():
+
+```py
+let numbers = [4, 9, 16, 25];
+let firstSquareGreaterThan10 = numbers.find((number) => number > 10);
+console.log(firstSquareGreaterThan10); // Output: 16
+```
+
+ - filter():
+
+```py
+let ages = [18, 22, 15, 30];
+let adults = ages.filter((age) => age >= 18);
+console.log(adults); // Output: [18, 22, 30]
+```
+
+ - map():
+
+```py
+let numbers = [1, 2, 3, 4];
+let squares = numbers.map((number) => number * number);
+console.log(squares); // Output: [1, 4, 9, 16]
+```
+
+ - reduce():
+
+```py
+let numbers = [1, 2, 3, 4];
+let sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+console.log(sum); // Output: 10
+```
+
+- forEach():
+
+```py
+let fruits = ['apple', 'banana', 'orange'];
+fruits.forEach((fruit) => {
+    console.log(fruit);
+});
+// Output: apple, banana, orange
+```
+
+注意事项
+
+ - 使用 map() 转换数组
+ - 链式数组方法让代码更简洁
+ - 对于单元素搜索，优先使用 find 而不是 filter
+ - 使用 reduce() 聚合数据
+ 
+
+常见错误
+
+ - 修改 map() 中的原始数组
+ - 使用 forEach() 返回新数组
+ - 滥用 find() 查找多个元素
+ 
+
+
