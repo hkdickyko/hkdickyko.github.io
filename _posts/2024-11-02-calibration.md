@@ -219,9 +219,27 @@ pip install --upgrade [package]
 花括号 {}：
  - 代表 **dict** 字典数据类型，字典是Python中唯一内建的映射类型。字典中的值没有特殊的顺序，但都是存储在一个特定的键（key）下。键可以是数字、字符串甚至是元祖。
 
+## Python 组件
+
+![Alt X](../assets/img/esp/pypackage.png)
+
 ## Python 循环
 
 ![Alt X](../assets/img/esp/pyloop-1.png)
+
+- for
+
+![Alt X](../assets/img/esp/pylistc-1.png)
+
+-for 及 if
+
+![Alt X](../assets/img/esp/pylistc-2.png)
+
+- for 及 for
+
+![Alt X](../assets/img/esp/pylistc-3.png)
+
+- break
 
 ![Alt X](../assets/img/esp/pybreak.png)
 
@@ -285,5 +303,3 @@ fruits.forEach((fruit) => {
  - 使用 forEach() 返回新数组
  - 滥用 find() 查找多个元素
  
-
-
