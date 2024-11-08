@@ -223,6 +223,8 @@ pip install --upgrade [package]
 
 ![Alt X](../assets/img/esp/pypackage.png)
 
+![Alt X](../assets/img/esp/pylibrary.png)
+
 ## Python 循环
 
 ![Alt X](../assets/img/esp/pyloop-1.png)
