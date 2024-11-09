@@ -306,4 +306,7 @@ fruits.forEach((fruit) => {
  - 修改 map() 中的原始数组
  - 使用 forEach() 返回新数组
  - 滥用 find() 查找多个元素
- 
+
+## Python zip
+
+![Alt X](../assets/img/esp/pyzip.png)
