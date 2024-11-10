@@ -353,6 +353,8 @@ print('Full name:',full_name)
 
 ![Alt X](../assets/img/esp/pyformat.png)
 
+![Alt X](../assets/img/esp/pyformat-1.png)
+
  - format
 
 ```
