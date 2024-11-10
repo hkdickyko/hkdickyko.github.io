@@ -231,6 +231,19 @@ pip install --upgrade [package]
 
 ![Alt X](../assets/img/esp/pyloop-1.png)
 
+```
+# List Comprehension
+l = [i for i in range(10)]
+# List Comprehension with If Condtion
+l = [i for i in range(10) if i %2 = 0]
+# List Comprehension with If/Else Condition
+l = [i if i%2 = 0 else i*i for i in range(10)]
+# Nested Comprehension
+l = [(i, j) for i in range(10) for j in range(10)]
+# Dictionary Comprehension
+d = {key:value for (key,value) in dictonary.items()}
+```
+
 - for
 
 ![Alt X](../assets/img/esp/pylistc-1.png)
@@ -256,7 +269,9 @@ pip install --upgrade [package]
 ```py
 let numbers = [4, 9, 16, 25];
 let firstSquareGreaterThan10 = numbers.find((number) => number > 10);
-console.log(firstSquareGreaterThan10); // Output: 16
+console.log(firstSquareGreaterThan10); 
+
+# 输出：16
 ```
 
  - filter():
@@ -264,7 +279,9 @@ console.log(firstSquareGreaterThan10); // Output: 16
 ```py
 let ages = [18, 22, 15, 30];
 let adults = ages.filter((age) => age >= 18);
-console.log(adults); // Output: [18, 22, 30]
+console.log(adults); 
+
+# 输出：[18, 22, 30]
 ```
 
  - map():
@@ -272,7 +289,9 @@ console.log(adults); // Output: [18, 22, 30]
 ```py
 let numbers = [1, 2, 3, 4];
 let squares = numbers.map((number) => number * number);
-console.log(squares); // Output: [1, 4, 9, 16]
+console.log(squares); 
+
+# 输出：[1, 4, 9, 16]
 ```
 
  - reduce():
@@ -280,7 +299,9 @@ console.log(squares); // Output: [1, 4, 9, 16]
 ```py
 let numbers = [1, 2, 3, 4];
 let sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-console.log(sum); // Output: 10
+console.log(sum); 
+
+# 输出：10
 ```
 
 - forEach():
@@ -290,7 +311,8 @@ let fruits = ['apple', 'banana', 'orange'];
 fruits.forEach((fruit) => {
     console.log(fruit);
 });
-// Output: apple, banana, orange
+
+# 输出：apple, banana, orange
 ```
 
 注意事项
@@ -308,6 +330,8 @@ fruits.forEach((fruit) => {
  - 滥用 find() 查找多个元素
 
 ## Python zip
+
+zip() 函数用于将可迭代的对象作为参数，将对象中对应的元素打包成一个个元组，然后返回由这些元组组成的列表。
 
 ![Alt X](../assets/img/esp/pyzip.png)
 
