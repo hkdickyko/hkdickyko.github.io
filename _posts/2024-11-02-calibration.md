@@ -310,3 +310,67 @@ fruits.forEach((fruit) => {
 ## Python zip
 
 ![Alt X](../assets/img/esp/pyzip.png)
+
+## Python 文字处理
+
+![Alt X](../assets/img/esp/pystring.png)
+
+ - \+
+
+```
+str1 = 'Python'
+str2 = ' Programming'
+str3 = ' Language'
+concatenated_string = str1 + str2 + str3
+print('Joined string:',concatenated_string)
+
+# 输出：Joined string: Python Programming Language
+```
+
+
+ - join
+
+```
+first_name = 'Ivaan'
+middle_name = 'Vidya'
+last_name = 'Sagar'
+full_name = ' '.join((first_name, middle_name, last_name))
+print("Full name:",full_name)
+
+# 输出：Full name: Ivaan Vidya Sagar
+```
+
+ - %
+
+```
+first_name = 'John'
+last_name = 'Smith'
+full_name = "%s %s" % (first_name, last_name)
+print('Full name:',full_name)
+
+# 输出：Full name: John Smith
+```
+
+![Alt X](../assets/img/esp/pyformat.png)
+
+ - format
+
+```
+first_name = 'John'
+last_name = 'Smith'
+full_name = "{} {}".format(first_name, last_name)
+print('Full name:',full_name)
+
+# 输出：Full name: John Smith
+```
+
+ - f
+
+```
+fName = 'John'
+sName = 'Smith'
+fName = f'{fName} {sName}'
+print('Full name:', fName)
+
+# 输出：Full name: John Smith
+```
