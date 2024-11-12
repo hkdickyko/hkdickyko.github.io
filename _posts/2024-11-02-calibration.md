@@ -53,8 +53,9 @@ sudo chmod 777 /dev/i2c-x
 
 ## Python (Visual Studio Code)
 
-[Python 相关资料](https://hkdickyko.github.io/%E7%B7%A8%E7%A8%8B/python)
-
+ - [Python 相关资料](https://hkdickyko.github.io/%E7%B7%A8%E7%A8%8B/python)
+ - [NumPy 相关资料](https://hkdickyko.github.io/%E7%B7%A8%E7%A8%8B/numpy)
+ - [SciPy 相关资料](https://hkdickyko.github.io/%E7%B7%A8%E7%A8%8B/scipy)
 
 ## 检查 IMU 连接
 
