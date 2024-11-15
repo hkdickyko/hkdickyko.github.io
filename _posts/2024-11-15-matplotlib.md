@@ -70,4 +70,6 @@ plt.show()
 ```
 ![Alt X](../assets/img/python/matplot-1.png)
 
+![Alt X](../assets/img/python/mplotlinestyle.png)
+
 [Matplotlib 网上资源](https://medium.com/@hi-sushanta/master-matplotlib-a-step-by-step-guide-for-beginners-to-experts-e76195edff1f)
