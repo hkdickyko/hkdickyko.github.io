@@ -372,7 +372,7 @@ if __name__ == "__main__":
       time.sleep(0.25)
 ```
 
-## 陀螺仪校准图
+## 陀螺仪偏移校准
 
 ```py
 from icm20948 import ICM20948
@@ -399,7 +399,7 @@ def gyro_cal():
         try:
             wx, wy, wz = get_gyro()  # 获取陀螺仪值
         except:
-            continue
+            continue偏移
         mpu_array.append([wx, wy, wz])
         if np.shape(mpu_array)[0] == cal_size:
             for qq in range(0, 3):
@@ -436,6 +436,8 @@ fig.show()
 ```
 
 ![Alt X](../assets/img/esp/gyro-calibration-1.png)
+
+## 陀螺仪積分测量
 
 ```py
 from icm20948 import ICM20948
@@ -475,11 +477,11 @@ def gyro_cal():
 
 if __name__ == "__main__":
     gyro_labels = ["\omega_x", "\omega_y", "\omega_z"]
-    cal_size = 500  # 用于校准的点数量
-    gyro_offsets = gyro_cal()  # 计算陀螺仪偏移
+    cal_size = 500              # 用于校准的点数量
+    gyro_offsets = gyro_cal()   # 计算陀螺仪偏移
     input("按 Enter 并旋转陀螺 180 度")
     print("记录数据...")
-    record_time = 5  # 记录多长时间
+    record_time = 5             # 记录多长时间
     data, t_vec = [], []
     t0 = time.time()
     while time.time() - t0 < record_time:
@@ -520,5 +522,7 @@ if __name__ == "__main__":
     axs[0].set_title("陀螺仪積分 180$^\circ$ 旋转", fontproperties=font)
     plt.show()
 ```
+
 ![Alt X](../assets/img/esp/gyro-calibration-2.png)
+
 ![Alt X](../assets/img/esp/gyro-calibration-2a.png)
