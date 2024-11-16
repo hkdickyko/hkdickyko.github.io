@@ -37,8 +37,7 @@ date: 2024-11-10 3:00:00
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-def setText(plt, title, xlabel, ylabel, fontsize＝18):
+def setText(plt, title, xlabel, ylabel, fontsize=18):
     font1 = {"color": "blue", "size": fontsize}
     font2 = {"size": fontsize * 4 / 5}
     font3 = {"size": fontsize * 4 / 5}
@@ -46,15 +45,12 @@ def setText(plt, title, xlabel, ylabel, fontsize＝18):
     plt.xlabel(xlabel, fontdict=font2)
     plt.ylabel(ylabel, fontdict=font3)
 
-
-def plot(plt, x, y, legend, lwidth＝1, lstyle＝"-"):
+def plot(plt, x, y, legend, lwidth=1, lstyle="-"):
     plt.plot(x, y, linewidth=lwidth, ls=lstyle, label=legend)
-
 
 def setPlotView(plt, width, height):
     plt.figure().set_figwidth(width)
     plt.figure().set_figheight(height)
-
 
 x = [1, 2, 3, 4, 5, 6]
 y = [7, 8, 9, 10, 11, 12]
@@ -68,10 +64,11 @@ setText(plt, "Sample plot", "X axis", "Y axis")
 plot(plt, x, y, "data-1", 1)
 plot(plt, x, y1, "data-2", 2, "--")
 plot(plt, x, y2, "data-3", 3, "-.")
-plot(plt, x, y3, "data-4", 1, ":")
+plot(plt, x, y3, "data-4", 3, ":")
 
 plt.legend(bbox_to_anchor=(1, 1), fancybox=True, shadow=True)
-plt.grid()
+
+plt.grid(linestyle=":")
 plt.show()
 ```
 
