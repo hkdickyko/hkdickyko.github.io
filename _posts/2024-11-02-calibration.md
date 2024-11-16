@@ -435,5 +435,91 @@ axs[1].set_ylim([-2, 2])
 axs[0].set_title("ICM20948 陀螺仪偏移值校准", fontproperties=font)
 fig.show()
 ```
+
 ![Alt X](../assets/img/esp/gyro-calibration-1.png)
 
+```py
+from icm20948 import ICM20948
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
+import time
+from scipy.integrate import cumulative_trapezoid
+
+time.sleep(2)  # wait for MPU to load and settle
+imu = ICM20948()
+font = FontProperties(fname="./SimHei.ttf", size=20)
+font1 = FontProperties(fname="./SimHei.ttf", size=12)
+
+def get_gyro():
+    _, _, _, wx, wy, wz = imu.read_accelerometer_gyro_data()  # 阅读并转换陀螺数据
+    return wx, wy, wz
+
+def gyro_cal():
+    print("-" * 50)
+    print("陀螺仪校准 - 保持IMU稳定")
+    [get_gyro() for ii in range(0, cal_size)]  # 校准前清除缓冲
+    mpu_array = []
+    gyro_offsets = [0.0, 0.0, 0.0]
+    while True:
+        try:
+            wx, wy, wz = get_gyro()  # 获取陀螺仪值
+        except:
+            continue
+        mpu_array.append([wx, wy, wz])
+        if np.shape(mpu_array)[0] == cal_size:
+            for qq in range(0, 3):
+                gyro_offsets[qq] = np.mean(np.array(mpu_array)[:, qq])  # 平均的
+            break
+    print("陀螺仪校准完成")
+    return gyro_offsets
+
+if __name__ == "__main__":
+    gyro_labels = ["\omega_x", "\omega_y", "\omega_z"]
+    cal_size = 500  # 用于校准的点数量
+    gyro_offsets = gyro_cal()  # 计算陀螺仪偏移
+    input("按 Enter 并旋转陀螺 180 度")
+    print("记录数据...")
+    record_time = 5  # 记录多长时间
+    data, t_vec = [], []
+    t0 = time.time()
+    while time.time() - t0 < record_time:
+        data.append(get_gyro())
+        t_vec.append(time.time() - t0)
+    samp_rate = np.shape(data)[0] / (t_vec[-1] - t_vec[0])  # 样本率
+    print("停止记录\n采样率: {0:2.0f} Hz".format(samp_rate))
+
+    rot_axis = 2  # 轴旋转 (2 = z-axis)
+    data_offseted = np.array(data)[:, rot_axis] - gyro_offsets[rot_axis]
+    integ1_array = cumulative_trapezoid(data_offseted, x=t_vec)  # 積分一次
+    # 打印出结果
+    print(
+        "積分 {} in {}".format(
+            gyro_labels[rot_axis], gyro_labels[rot_axis].split("_")[1]
+        )
+        + "-dir: {0:2.2f}m".format(integ1_array[-1])
+    )
+    # 用角速度及積分打印图形
+    plt.style.use("ggplot")
+    fig, axs = plt.subplots(2, 1, figsize=(12, 9))
+    axs[0].plot(t_vec, data_offseted, label="$" + gyro_labels[rot_axis] + "$")
+    axs[1].plot(
+        t_vec[1:],
+        integ1_array,
+        label=r"$\theta_" + gyro_labels[rot_axis].split("_")[1] + "$",
+    )
+    [axs[ii].legend(prop=font1) for ii in range(0, len(axs))]
+    axs[0].set_ylabel(
+        "角速度, $\omega_{}$ [$^\circ/s$]".format(gyro_labels[rot_axis].split("_")[1]),
+        fontproperties=font,
+    )
+    axs[1].set_ylabel(
+        r"旋转, $\theta_{}$ [$^\circ$]".format(gyro_labels[rot_axis].split("_")[1]),
+        fontproperties=font,
+    )
+    axs[1].set_xlabel("时间 [s]", fontproperties=font)
+    axs[0].set_title("陀螺仪整合 180$^\circ$ 旋转", fontproperties=font)
+    plt.show()
+```
+
+![Alt X](../assets/img/esp/gyro-calibration-2.png)
