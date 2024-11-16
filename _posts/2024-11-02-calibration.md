@@ -372,7 +372,6 @@ if __name__ == "__main__":
       time.sleep(0.25)
 ```
 
-
 ## 陀螺仪校准图
 
 ```py
@@ -521,5 +520,5 @@ if __name__ == "__main__":
     axs[0].set_title("陀螺仪積分 180$^\circ$ 旋转", fontproperties=font)
     plt.show()
 ```
-
 ![Alt X](../assets/img/esp/gyro-calibration-2.png)
+![Alt X](../assets/img/esp/gyro-calibration-2a.png)
