@@ -518,7 +518,7 @@ if __name__ == "__main__":
         fontproperties=font,
     )
     axs[1].set_xlabel("时间 [s]", fontproperties=font)
-    axs[0].set_title("陀螺仪整合 180$^\circ$ 旋转", fontproperties=font)
+    axs[0].set_title("陀螺仪積分 180$^\circ$ 旋转", fontproperties=font)
     plt.show()
 ```
 
