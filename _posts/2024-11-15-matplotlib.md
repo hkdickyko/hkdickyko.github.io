@@ -63,7 +63,7 @@ setText(plt, "Sample plot", "X axis", "Y axis")
 
 plot(plt, x, y, "data-1", 1)
 plot(plt, x, y1, "data-2", 2, "--")
-plot(plt, x, y2, "data-3", 3, "-.")
+plot(plt, x, y2, "data-3", 1, "-.")
 plot(plt, x, y3, "data-4", 3, ":")
 
 plt.legend(bbox_to_anchor=(1, 1), fancybox=True, shadow=True)
