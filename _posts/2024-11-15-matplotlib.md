@@ -38,7 +38,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def setText(plt, title, xlabel, ylabel, fontsize):
+def setText(plt, title, xlabel, ylabel, fontsize＝18):
     font1 = {"color": "blue", "size": fontsize}
     font2 = {"size": fontsize * 4 / 5}
     font3 = {"size": fontsize * 4 / 5}
@@ -47,7 +47,7 @@ def setText(plt, title, xlabel, ylabel, fontsize):
     plt.ylabel(ylabel, fontdict=font3)
 
 
-def plot(plt, x, y, lwidth, lstyle, legend):
+def plot(plt, x, y, legend, lwidth＝1, lstyle＝"-"):
     plt.plot(x, y, linewidth=lwidth, ls=lstyle, label=legend)
 
 
@@ -63,16 +63,18 @@ y2 = [2, 5, 8, 6, 2, 5]
 y3 = [4, 6, 7, 5, 7, 10]
 
 setPlotView(plt, 5, 3)
-setText(plt, "Sample plot", "X axis", "Y axis", 18)
+setText(plt, "Sample plot", "X axis", "Y axis")
 
-plot(plt, x, y, 1, "-", "data-1")
-plot(plt, x, y1, 2, "--", "data-2")
-plot(plt, x, y2, 3, ":", "data-3")
-plot(plt, x, y3, 1, "-.", "data-4")
+plot(plt, x, y, "data-1", 1)
+plot(plt, x, y1, "data-2", 2, "--")
+plot(plt, x, y2, "data-3", 3, "-.")
+plot(plt, x, y3, "data-4", 1, ":")
 
 plt.legend(bbox_to_anchor=(1, 1), fancybox=True, shadow=True)
+plt.grid()
 plt.show()
 ```
+
 ![Alt X](../assets/img/python/matplot-1.png)
 
 ![Alt X](../assets/img/python/mplotlinestyle.png)
