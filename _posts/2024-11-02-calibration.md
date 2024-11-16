@@ -59,202 +59,360 @@ sudo chmod 777 /dev/i2c-x
 
 ## 检查 IMU 连接
 
-```py
-import time, sys
-sys.path.append("../")
-t0 = time.time()
-start_bool = False  # 如果 IMU 启动失败 - 停止校准
-while time.time() - t0 < 5:
-    try:
-        from mpu9250_i2c import *
-        start_bool = True
-        break
-    except:
-        continue
+在虚拟环境安装 smbus2 : **pip install smbus2**, 否则 IMU 不能连接成功
+
+```sh
+sudo insmod i2c-ch341-usb.ko
+sudo chmod 777 /dev/i2c-6
+sudo apt-get install i2c-tools
+sudo i2cdetect -y 6
 ```
 
-在虚拟环境安装 smbus : **pip install smbus**, 否则 IMU 不能连接成功
+![Alt X](../assets/img/esp/i2cdetectimu.png)
 
-## mpu9250_i2c.py
+## icm20948.py
 
 ```py
-def MPU6050_start():
-  # 重置所有传感器
-  bus.write_byte_data(MPU6050_ADDR,PWR_MGMT_1,0x80)
-  time.sleep(0.1)
-  bus.write_byte_data(MPU6050_ADDR,PWR_MGMT_1,0x00)
-  time.sleep(0.1)
-  # 电源管理和振动设置
-  bus.write_byte_data(MPU6050_ADDR, PWR_MGMT_1, 0x01)
-  time.sleep(0.1)
-  # 改变样本率（稳定性）
-  samp_rate_div = 0 # sample rate = 8 kHz/(1+samp_rate_div)
-  bus.write_byte_data(MPU6050_ADDR, SMPLRT_DIV, samp_rate_div)
-  time.sleep(0.1)
-  # 写入配置寄存器
-  bus.write_byte_data(MPU6050_ADDR, CONFIG, 0)
-  time.sleep(0.1)
-  # 写入陀螺式配置寄存器
-  gyro_config_sel = [0b00000,0b01000,0b10000,0b11000] # byte registers
-  gyro_config_vals = [250.0,500.0,1000.0,2000.0] # degrees/sec
-  gyro_indx = 0
-  bus.write_byte_data(MPU6050_ADDR, GYRO_CONFIG, int(gyro_config_sel[gyro_indx]))
-  time.sleep(0.1)
-  # 写入加速配置寄存器
-  accel_config_sel = [0b00000,0b01000,0b10000,0b11000] # byte registers
-  accel_config_vals = [2.0,4.0,8.0,16.0] # g (g = 9.81 m/s^2)
-  accel_indx = 0
-  bus.write_byte_data(MPU6050_ADDR, ACCEL_CONFIG, int(accel_config_sel[accel_indx]))
-  time.sleep(0.1)
-  # 中断寄存器（与数据溢出有关[FIFO]）
-  bus.write_byte_data(MPU6050_ADDR,INT_PIN_CFG,0x22)
-  time.sleep(0.1)
-  # 在通过模式下启用 AK8963 磁力计
-  bus.write_byte_data(MPU6050_ADDR, INT_ENABLE, 1)
-  time.sleep(0.1)
-  return gyro_config_vals[gyro_indx],accel_config_vals[accel_indx]
+import struct
+import time
 
+__version__ = "1.0.0"
 
-def read_raw_bits(register):
-  # 读取 ACCEL 和 陀螺仪值
-  high = bus.read_byte_data(MPU6050_ADDR, register)
-  low = bus.read_byte_data(MPU6050_ADDR, register+1)
-  # 结合高和低点以获得没有符号值
-  value = ((high << 8) | low)
-  # 转换为 + - 值
-  if(value > 32768):
-    value -= 65536
-  return value
+CHIP_ID = 0xEA
+I2C_ADDR = 0x68
+I2C_ADDR_ALT = 0x69
+ICM20948_BANK_SEL = 0x7F
 
-def mpu6050_conv():
-  # 原始加速位
-  acc_x = read_raw_bits(ACCEL_XOUT_H)
-  acc_y = read_raw_bits(ACCEL_YOUT_H)
-  acc_z = read_raw_bits(ACCEL_ZOUT_H)
-  # 原始陀螺仪位
-  gyro_x = read_raw_bits(GYRO_XOUT_H)
-  gyro_y = read_raw_bits(GYRO_YOUT_H)
-  gyro_z = read_raw_bits(GYRO_ZOUT_H)
-  # 转换为 G 和陀螺仪 DPS 的加速度
-  a_x = (acc_x/(2.0**15.0))*accel_sens
-  a_y = (acc_y/(2.0**15.0))*accel_sens
-  a_z = (acc_z/(2.0**15.0))*accel_sens
-  w_x = (gyro_x/(2.0**15.0))*gyro_sens
-  w_y = (gyro_y/(2.0**15.0))*gyro_sens
-  w_z = (gyro_z/(2.0**15.0))*gyro_sens
-  return a_x,a_y,a_z,w_x,w_y,w_z
+ICM20948_I2C_MST_ODR_CONFIG = 0x00
+ICM20948_I2C_MST_CTRL = 0x01
+ICM20948_I2C_MST_DELAY_CTRL = 0x02
+ICM20948_I2C_SLV0_ADDR = 0x03
+ICM20948_I2C_SLV0_REG = 0x04
+ICM20948_I2C_SLV0_CTRL = 0x05
+ICM20948_I2C_SLV0_DO = 0x06
+ICM20948_EXT_SLV_SENS_DATA_00 = 0x3B
 
-def AK8963_start():
-  bus.write_byte_data(AK8963_ADDR,AK8963_CNTL,0x00)
-  time.sleep(0.1)
-  bus.write_byte_data(AK8963_ADDR,AK8963_CNTL,0x0F)
-  time.sleep(0.1)
-  coeff_data = bus.read_i2c_block_data(AK8963_ADDR,AK8963_ASAX,3)
-  AK8963_coeffx = (0.5*(coeff_data[0]-128)) / 256.0 + 1.0
-  AK8963_coeffy = (0.5*(coeff_data[1]-128)) / 256.0 + 1.0
-  AK8963_coeffz = (0.5*(coeff_data[2]-128)) / 256.0 + 1.0
-  time.sleep(0.1)
-  bus.write_byte_data(AK8963_ADDR,AK8963_CNTL,0x00)
-  time.sleep(0.1)
-  AK8963_bit_res = 0b0001     # 0b0001 = 16-bit
-  AK8963_samp_rate = 0b0110   # 0b0010 = 8 Hz, 0b0110 = 100 Hz
-  AK8963_mode = (AK8963_bit_res <<4) + AK8963_samp_rate # 位转换
-  bus.write_byte_data(AK8963_ADDR,AK8963_CNTL,AK8963_mode)
-  time.sleep(0.1)
-  return [AK8963_coeffx,AK8963_coeffy,AK8963_coeffz] 
+ICM20948_GYRO_SMPLRT_DIV = 0x00
+ICM20948_GYRO_CONFIG_1 = 0x01
+ICM20948_GYRO_CONFIG_2 = 0x02
 
-def AK8963_reader(register):
-  # 读取磁力计值
-  low = bus.read_byte_data(AK8963_ADDR, register-1)
-  high = bus.read_byte_data(AK8963_ADDR, register)
-  # 将高和低点结合起
-  value = ((high << 8) | low)
-  # 转换为 + - 值
-  if(value > 32768):
-    value -= 65536
-  return value
+# Bank 0
+ICM20948_WHO_AM_I = 0x00
+ICM20948_USER_CTRL = 0x03
+ICM20948_PWR_MGMT_1 = 0x06
+ICM20948_PWR_MGMT_2 = 0x07
+ICM20948_INT_PIN_CFG = 0x0F
 
-def AK8963_conv():
-  # 原始磁力计位
-  while 1:
-    mag_x = AK8963_reader(HXH)
-    mag_y = AK8963_reader(HYH)
-    mag_z = AK8963_reader(HZH)
-    if (bus.read_byte_data(AK8963_ADDR,AK8963_ST2)) & 0x08!=0x08:
-      break
-  m_x = (mag_x/(2.0**15.0))*mag_sens
-  m_y = (mag_y/(2.0**15.0))*mag_sens
-  m_z = (mag_z/(2.0**15.0))*mag_sens
-  return m_x,m_y,m_z
-     
-# MPU6050 寄存器
-MPU6050_ADDR = 0x68
-PWR_MGMT_1   = 0x6B
-SMPLRT_DIV   = 0x19
-CONFIG       = 0x1A
-GYRO_CONFIG  = 0x1B
-ACCEL_CONFIG = 0x1C
-INT_PIN_CFG  = 0x37
-INT_ENABLE   = 0x38
-ACCEL_XOUT_H = 0x3B
-ACCEL_YOUT_H = 0x3D
-ACCEL_ZOUT_H = 0x3F
-TEMP_OUT_H   = 0x41
-GYRO_XOUT_H  = 0x43
-GYRO_YOUT_H  = 0x45
-GYRO_ZOUT_H  = 0x47
-# AK8963 寄存器
-AK8963_ADDR  = 0x0C
-AK8963_ST1   = 0x02
-HXH          = 0x04
-HYH          = 0x06
-HZH          = 0x08
-AK8963_ST1   = 0x02
-AK8963_ST2   = 0x09
-AK8963_CNTL  = 0x0A
-AK8963_ASAX  = 0x10
+ICM20948_ACCEL_SMPLRT_DIV_1 = 0x10
+ICM20948_ACCEL_SMPLRT_DIV_2 = 0x11
+ICM20948_ACCEL_INTEL_CTRL = 0x12
+ICM20948_ACCEL_WOM_THR = 0x13
+ICM20948_ACCEL_CONFIG = 0x14
+ICM20948_ACCEL_XOUT_H = 0x2D
+ICM20948_GRYO_XOUT_H = 0x33
 
-mag_sens = 4800.0    # 磁力计灵敏度：4800 UT
-# 启动 I2C 驱动程序
-bus = smbus.SMBus(6) # 使用I2C总线开始通信，应将其更改为实际连接端口ID
-time.sleep(0.1)
-gyro_sens,accel_sens = MPU6050_start()  # 实例化 陀螺仪/加速计
-time.sleep(0.1)
-AK8963_coeffs = AK8963_start()          # 实例化磁力计
-time.sleep(0.1)
+ICM20948_TEMP_OUT_H = 0x39
+ICM20948_TEMP_OUT_L = 0x3A
+
+# Offset and sensitivity - defined in electrical characteristics, and TEMP_OUT_H/L of datasheet
+ICM20948_TEMPERATURE_DEGREES_OFFSET = 21
+ICM20948_TEMPERATURE_SENSITIVITY = 333.87
+ICM20948_ROOM_TEMP_OFFSET = 21
+
+AK09916_I2C_ADDR = 0x0C
+AK09916_CHIP_ID = 0x09
+AK09916_WIA = 0x01
+AK09916_ST1 = 0x10
+AK09916_ST1_DOR = 0b00000010  # Data overflow bit
+AK09916_ST1_DRDY = 0b00000001  # Data self.ready bit
+AK09916_HXL = 0x11
+AK09916_ST2 = 0x18
+AK09916_ST2_HOFL = 0b00001000  # Magnetic sensor overflow bit
+AK09916_CNTL2 = 0x31
+AK09916_CNTL2_MODE = 0b00001111
+AK09916_CNTL2_MODE_OFF = 0
+AK09916_CNTL2_MODE_SINGLE = 1
+AK09916_CNTL2_MODE_CONT1 = 2
+AK09916_CNTL2_MODE_CONT2 = 4
+AK09916_CNTL2_MODE_CONT3 = 6
+AK09916_CNTL2_MODE_CONT4 = 8
+AK09916_CNTL2_MODE_TEST = 16
+AK09916_CNTL3 = 0x32
+
+class ICM20948:
+    def write(self, reg, value):
+        """Write byte to the sensor."""
+        self._bus.write_byte_data(self._addr, reg, value)
+        time.sleep(0.0001)
+
+    def read(self, reg):
+        """Read byte from the sensor."""
+        return self._bus.read_byte_data(self._addr, reg)
+
+    def trigger_mag_io(self):
+        user = self.read(ICM20948_USER_CTRL)
+        self.write(ICM20948_USER_CTRL, user | 0x20)
+        time.sleep(0.005)
+        self.write(ICM20948_USER_CTRL, user)
+
+    def read_bytes(self, reg, length=1):
+        """Read byte(s) from the sensor."""
+        return self._bus.read_i2c_block_data(self._addr, reg, length)
+
+    def bank(self, value):
+        """Switch register self.bank."""
+        if not self._bank == value:
+            self.write(ICM20948_BANK_SEL, value << 4)
+            self._bank = value
+
+    def mag_write(self, reg, value):
+        """Write a byte to the slave magnetometer."""
+        self.bank(3)
+        self.write(ICM20948_I2C_SLV0_ADDR, AK09916_I2C_ADDR)  # Write one byte
+        self.write(ICM20948_I2C_SLV0_REG, reg)
+        self.write(ICM20948_I2C_SLV0_DO, value)
+        self.bank(0)
+        self.trigger_mag_io()
+
+    def mag_read(self, reg):
+        """Read a byte from the slave magnetometer."""
+        self.bank(3)
+        self.write(ICM20948_I2C_SLV0_ADDR, AK09916_I2C_ADDR | 0x80)
+        self.write(ICM20948_I2C_SLV0_REG, reg)
+        self.write(ICM20948_I2C_SLV0_DO, 0xFF)
+        self.write(ICM20948_I2C_SLV0_CTRL, 0x80 | 1)  # Read 1 byte
+        self.bank(0)
+        self.trigger_mag_io()
+        return self.read(ICM20948_EXT_SLV_SENS_DATA_00)
+
+    def mag_read_bytes(self, reg, length=1):
+        """Read up to 24 bytes from the slave magnetometer."""
+        self.bank(3)
+        self.write(ICM20948_I2C_SLV0_CTRL, 0x80 | 0x08 | length)
+        self.write(ICM20948_I2C_SLV0_ADDR, AK09916_I2C_ADDR | 0x80)
+        self.write(ICM20948_I2C_SLV0_REG, reg)
+        self.write(ICM20948_I2C_SLV0_DO, 0xFF)
+        self.bank(0)
+        self.trigger_mag_io()
+        return self.read_bytes(ICM20948_EXT_SLV_SENS_DATA_00, length)
+
+    def magnetometer_ready(self):
+        """Check the magnetometer status self.ready bit."""
+        return self.mag_read(AK09916_ST1) & 0x01 > 0
+
+    def read_magnetometer_data(self, timeout=1.0):
+        self.mag_write(AK09916_CNTL2, 0x01)  # Trigger single measurement
+        t_start = time.time()
+        while not self.magnetometer_ready():
+            if time.time() - t_start > timeout:
+                raise RuntimeError("Timeout waiting for Magnetometer Ready")
+            time.sleep(0.00001)
+
+        data = self.mag_read_bytes(AK09916_HXL, 6)
+
+        # Read ST2 to confirm self.read finished,
+        # needed for continuous modes
+        # self.mag_read(AK09916_ST2)
+
+        x, y, z = struct.unpack("<hhh", bytearray(data))
+
+        # Scale for magnetic flux density "uT"
+        # from section 3.3 of the datasheet
+        # This value is constant
+        x *= 0.15
+        y *= 0.15
+        z *= 0.15
+
+        return x, y, z
+
+    def read_accelerometer_gyro_data(self):
+        self.bank(0)
+        data = self.read_bytes(ICM20948_ACCEL_XOUT_H, 12)
+
+        ax, ay, az, gx, gy, gz = struct.unpack(">hhhhhh", bytearray(data))
+
+        self.bank(2)
+
+        # Read accelerometer full scale range and
+        # use it to compensate the self.reading to gs
+        scale = (self.read(ICM20948_ACCEL_CONFIG) & 0x06) >> 1
+
+        # scale ranges from section 3.2 of the datasheet
+        gs = [16384.0, 8192.0, 4096.0, 2048.0][scale]
+
+        ax /= gs
+        ay /= gs
+        az /= gs
+
+        # Read back the degrees per second rate and
+        # use it to compensate the self.reading to dps
+        scale = (self.read(ICM20948_GYRO_CONFIG_1) & 0x06) >> 1
+
+        # scale ranges from section 3.1 of the datasheet
+        dps = [131, 65.5, 32.8, 16.4][scale]
+
+        gx /= dps
+        gy /= dps
+        gz /= dps
+
+        return ax, ay, az, gx, gy, gz
+
+    def set_accelerometer_sample_rate(self, rate=125):
+        """Set the accelerometer sample rate in Hz."""
+        self.bank(2)
+        # 125Hz - 1.125 kHz / (1 + rate)
+        rate = int((1125.0 / rate) - 1)
+        # TODO maybe use struct to pack and then write_bytes
+        self.write(ICM20948_ACCEL_SMPLRT_DIV_1, (rate >> 8) & 0xFF)
+        self.write(ICM20948_ACCEL_SMPLRT_DIV_2, rate & 0xFF)
+
+    def set_accelerometer_full_scale(self, scale=16):
+        """Set the accelerometer fulls cale range to +- the supplied value."""
+        self.bank(2)
+        value = self.read(ICM20948_ACCEL_CONFIG) & 0b11111001
+        value |= {2: 0b00, 4: 0b01, 8: 0b10, 16: 0b11}[scale] << 1
+        self.write(ICM20948_ACCEL_CONFIG, value)
+
+    def set_accelerometer_low_pass(self, enabled=True, mode=5):
+        """Configure the accelerometer low pass filter."""
+        self.bank(2)
+        value = self.read(ICM20948_ACCEL_CONFIG) & 0b10001110
+        if enabled:
+            value |= 0b1
+        value |= (mode & 0x07) << 4
+        self.write(ICM20948_ACCEL_CONFIG, value)
+
+    def set_gyro_sample_rate(self, rate=125):
+        """Set the gyro sample rate in Hz."""
+        self.bank(2)
+        # 125Hz sample rate - 1.125 kHz / (1 + rate)
+        rate = int((1125.0 / rate) - 1)
+        self.write(ICM20948_GYRO_SMPLRT_DIV, rate)
+
+    def set_gyro_full_scale(self, scale=250):
+        """Set the gyro full scale range to +- supplied value."""
+        self.bank(2)
+        value = self.read(ICM20948_GYRO_CONFIG_1) & 0b11111001
+        value |= {250: 0b00, 500: 0b01, 1000: 0b10, 2000: 0b11}[scale] << 1
+        self.write(ICM20948_GYRO_CONFIG_1, value)
+
+    def set_gyro_low_pass(self, enabled=True, mode=5):
+        """Configure the gyro low pass filter."""
+        self.bank(2)
+        value = self.read(ICM20948_GYRO_CONFIG_1) & 0b10001110
+        if enabled:
+            value |= 0b1
+        value |= (mode & 0x07) << 4
+        self.write(ICM20948_GYRO_CONFIG_1, value)
+
+    def read_temperature(self):
+        """Property to read the current IMU temperature"""
+        # PWR_MGMT_1 defaults to leave temperature enabled
+        self.bank(0)
+        temp_raw_bytes = self.read_bytes(ICM20948_TEMP_OUT_H, 2)
+        temp_raw = struct.unpack(">h", bytearray(temp_raw_bytes))[0]
+        temperature_deg_c = (
+            (temp_raw - ICM20948_ROOM_TEMP_OFFSET) / ICM20948_TEMPERATURE_SENSITIVITY
+        ) + ICM20948_TEMPERATURE_DEGREES_OFFSET
+        return temperature_deg_c
+
+    def __init__(self, i2c_addr=I2C_ADDR_ALT, i2c_bus=None):
+        self._bank = -1
+        self._addr = i2c_addr
+
+        if i2c_bus is None:
+            from smbus2 import SMBus
+
+            self._bus = SMBus(6)
+        else:
+            self._bus = i2c_bus
+
+        self.bank(0)
+        if not self.read(ICM20948_WHO_AM_I) == CHIP_ID:
+            raise RuntimeError("Unable to find ICM20948")
+
+        self.write(ICM20948_PWR_MGMT_1, 0x80)
+        time.sleep(0.01)
+        self.write(ICM20948_PWR_MGMT_1, 0x01)
+        self.write(ICM20948_PWR_MGMT_2, 0x00)
+
+        self.bank(2)
+
+        self.set_gyro_sample_rate(100)
+        self.set_gyro_low_pass(enabled=True, mode=5)
+        self.set_gyro_full_scale(250)
+
+        self.set_accelerometer_sample_rate(125)
+        self.set_accelerometer_low_pass(enabled=True, mode=5)
+        self.set_accelerometer_full_scale(16)
+
+        self.bank(0)
+        self.write(ICM20948_INT_PIN_CFG, 0x30)
+
+        self.bank(3)
+        self.write(ICM20948_I2C_MST_CTRL, 0x4D)
+        self.write(ICM20948_I2C_MST_DELAY_CTRL, 0x01)
+
+        if not self.mag_read(AK09916_WIA) == AK09916_CHIP_ID:
+            raise RuntimeError("Unable to find AK09916")
+
+        # Reset the magnetometer
+        self.mag_write(AK09916_CNTL3, 0x01)
+        while self.mag_read(AK09916_CNTL3) == 0x01:
+            time.sleep(0.0001)
+
+if __name__ == "__main__":
+    imu = ICM20948()
+  while True:
+      x, y, z = imu.read_magnetometer_data()
+      ax, ay, az, gx, gy, gz = imu.read_accelerometer_gyro_data()
+      print(
+          "Accel:{ax:05.2f} {ay:05.2f} {az:05.2f} Gyro:{gx:05.2f} {gy:05.2f} {gz:05.2f} Mag:{x:05.2f} {y:05.2f} {z:05.2f}"
+      )
+      time.sleep(0.25)
 ```
 
 
 ## 陀螺仪校准图
 
 ```py
+from icm20948 import ICM20948
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
+
+imu = ICM20948()
+font = FontProperties(fname="./SimHei.ttf", size=20)
+font1 = FontProperties(fname="./SimHei.ttf", size=12)
+
 def get_gyro():
-  _, _, _, wx, wy, wz = mpu6050_conv()        # 阅读并转换陀螺数据
-  return wx, wy, wz
+    _, _, _, wx, wy, wz = imu.read_accelerometer_gyro_data()  
+    # 阅读并转换陀螺数据
+    return wx, wy, wz
 
 def gyro_cal():
-  print("-" * 50)
-  print("陀螺仪校准 - 保持IMU稳定")
-  [get_gyro() for ii in range(0, cal_size)]   # 校准前清除缓冲
-  mpu_array = []
-  gyro_offsets = [0.0, 0.0, 0.0]
-  while True:
-    try:
-      wx, wy, wz = get_gyro()             # 获取陀螺仪值
-    except:
-      continue
-    mpu_array.append([wx, wy, wz])
-    if np.shape(mpu_array)[0] == cal_size:
-      for qq in range(0, 3):
-        gyro_offsets[qq] = np.mean(np.array(mpu_array)[:, qq])  # 平均的
-      break
-  print("陀螺仪校准完成")
-  return gyro_offsets
-
+    print("-" * 50)
+    print("陀螺仪校准 - 保持IMU稳定")
+    [get_gyro() for ii in range(0, cal_size)]  # 校准前清除缓冲
+    mpu_array = []
+    gyro_offsets = [0.0, 0.0, 0.0]
+    while True:
+        try:
+            wx, wy, wz = get_gyro()  # 获取陀螺仪值
+        except:
+            continue
+        mpu_array.append([wx, wy, wz])
+        if np.shape(mpu_array)[0] == cal_size:
+            for qq in range(0, 3):
+                gyro_offsets[qq] = np.mean(np.array(mpu_array)[:, qq])  # 平均的
+            break
+    print("陀螺仪校准完成")
+    return gyro_offsets
 
 # 陀螺仪抵消计算
-cal_size = 500  # points to use for calibration
-gyro_offsets = gyro_cal()  # 计算陀螺仪偏移
+gyro_labels = ["w_x", "w_y", "w_z"]
+cal_size = 500              # 用于校准的点数量
+gyro_offsets = gyro_cal()   # 计算陀螺仪偏移
 # 记录新数据
 data = np.array([get_gyro() for ii in range(0, cal_size)])  # 新值
 
@@ -262,24 +420,20 @@ data = np.array([get_gyro() for ii in range(0, cal_size)])  # 新值
 plt.style.use("ggplot")
 fig, axs = plt.subplots(2, 1, figsize=(12, 9))
 for ii in range(0, 3):
-  axs[0].plot(data[:, ii], label="${}$, Uncalibrated".format(gyro_labels[ii]))
-  axs[1].plot(
-    data[:, ii] - gyro_offsets[ii],
-    label="${}$, Calibrated".format(gyro_labels[ii]),
-  )
-axs[0].legend(fontsize=14)
-axs[1].legend(fontsize=14)
+    axs[0].plot(data[:, ii], label="${}$, 尚未校准".format(gyro_labels[ii]))
+    axs[1].plot(
+        data[:, ii] - gyro_offsets[ii],
+        label="${}$, 已经校准".format(gyro_labels[ii]),
+    )
+axs[0].legend(prop=font1)
+axs[1].legend(prop=font1)
 axs[0].set_ylabel("$w_{x,y,z}$ [$^{circ}/s$]", fontsize=18)
 axs[1].set_ylabel("$w_{x,y,z}$ [$^{circ}/s$]", fontsize=18)
-axs[1].set_xlabel("Sample", fontsize=18)
+axs[1].set_xlabel("样本", fontproperties=font)
 axs[0].set_ylim([-2, 2])
 axs[1].set_ylim([-2, 2])
-axs[0].set_title("Gyroscope Calibration Offset Correction", fontsize=22)
-fig.savefig(
-  "gyro_calibration_output.png",
-  dpi=300,
-  bbox_inches="tight",
-  facecolor="#FCFCFC",
-)
+axs[0].set_title("陀螺仪偏移值校准", fontproperties=font)
 fig.show()
 ```
+![Alt X](../assets/img/esp/gyro-calibration-1.png)
+
