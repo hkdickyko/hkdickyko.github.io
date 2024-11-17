@@ -37,12 +37,23 @@ date: 2024-11-03 1:00:00
 
 僅 I<sup>2</sup>C 驱动程序链接 : [allanbian1017/i2c-ch341-usb](https://github.com/allanbian1017/i2c-ch341-usb) 
 
+|命令|說明|
+|:---:|:---:|
+|depmod|生成模塊和映射文件|
+|insmod|將模塊插入Linux內核|
+|lsmod|顯示Linux內核中模塊的狀態|
+|modinfo|顯示有關Linux內核模塊的信息|
+|modprobe|從Linux內核中添加並刪除模塊|
+|rmmod|從Linux內核中刪除模塊|
+
 用以下方法编译及安装
 
 ```
+cd /home/dickyko/i2c-ch341-usb
 make
 sudo insmod i2c-ch341-usb.ko
 sudo chmod 777 /dev/i2c-x
+sudo apt-get install i2c-tools
 ```
 注 **x** 为 I<sup>2</sup>C 接口编号
 
@@ -62,9 +73,9 @@ sudo chmod 777 /dev/i2c-x
 在虚拟环境安装 smbus2 : **pip install smbus2**, 否则 IMU 不能连接成功
 
 ```sh
-sudo insmod i2c-ch341-usb.ko
+cd /home/dickyko/i2c-ch341-usb
+sudo modprobe i2c-ch341-usb.ko
 sudo chmod 777 /dev/i2c-6
-sudo apt-get install i2c-tools
 sudo i2cdetect -y 6
 ```
 
