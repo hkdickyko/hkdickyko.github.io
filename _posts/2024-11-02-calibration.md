@@ -486,52 +486,52 @@ def gyro_cal():
     print("陀螺仪校准完成")
     return gyro_offsets
 
-if __name__ == "__main__":
-    gyro_labels = ["\omega_x", "\omega_y", "\omega_z"]
-    cal_size = 500              # 用于校准的点数量
-    gyro_offsets = gyro_cal()   # 计算陀螺仪偏移
-    input("按 Enter 并旋转陀螺 180 度")
-    print("记录数据...")
-    record_time = 5             # 记录多长时间
-    data, t_vec = [], []
-    t0 = time.time()
-    while time.time() - t0 < record_time:
-        data.append(get_gyro())
-        t_vec.append(time.time() - t0)
-    samp_rate = np.shape(data)[0] / (t_vec[-1] - t_vec[0])  # 样本率
-    print("停止记录\n采样率: {0:2.0f} Hz".format(samp_rate))
+gyro_labels = ["\omega_x", "\omega_y", "\omega_z"]
+cal_size = 500              # 用于校准的点数量
+gyro_offsets = gyro_cal()   # 计算陀螺仪偏移
+input("按 Enter 并旋转陀螺 180 度")
+print("记录数据...")
+record_time = 5             # 记录多长时间
+data, t_vec = [], []
+t0 = time.time()
+while time.time() - t0 < record_time:
+    data.append(get_gyro())
+    t_vec.append(time.time() - t0)
+samp_rate = np.shape(data)[0] / (t_vec[-1] - t_vec[0])  # 样本率
+print("停止记录\n采样率: {0:2.0f} Hz".format(samp_rate))
 
-    rot_axis = 2  # 轴旋转 (2 = z-axis)
-    data_offseted = np.array(data)[:, rot_axis] - gyro_offsets[rot_axis]
-    integ1_array = cumulative_trapezoid(data_offseted, x=t_vec)  # 積分一次
-    # 打印出结果
-    print(
-        "積分 {} in {}".format(
-            gyro_labels[rot_axis], gyro_labels[rot_axis].split("_")[1]
-        )
-        + "-dir: {0:2.2f}m".format(integ1_array[-1])
+rot_axis = 2  # 轴旋转 (2 = z-axis)
+data_offseted = np.array(data)[:, rot_axis] - gyro_offsets[rot_axis]
+integ1_array = cumulative_trapezoid(data_offseted, x=t_vec)  # 積分一次
+# 打印出结果
+print(
+    "積分 {} in {}".format(
+        gyro_labels[rot_axis], gyro_labels[rot_axis].split("_")[1]
     )
-    # 用角速度及積分打印图形
-    plt.style.use("ggplot")
-    fig, axs = plt.subplots(2, 1, figsize=(12, 9))
-    axs[0].plot(t_vec, data_offseted, label="$" + gyro_labels[rot_axis] + "$")
-    axs[1].plot(
-        t_vec[1:],
-        integ1_array,
-        label=r"$\theta_" + gyro_labels[rot_axis].split("_")[1] + "$",
-    )
-    [axs[ii].legend(prop=font1) for ii in range(0, len(axs))]
-    axs[0].set_ylabel(
-        "角速度, $\omega_{}$ [$^\circ/s$]".format(gyro_labels[rot_axis].split("_")[1]),
-        fontproperties=font,
-    )
-    axs[1].set_ylabel(
-        r"旋转, $\theta_{}$ [$^\circ$]".format(gyro_labels[rot_axis].split("_")[1]),
-        fontproperties=font,
-    )
-    axs[1].set_xlabel("时间 [s]", fontproperties=font)
-    axs[0].set_title("陀螺仪積分 180$^\circ$ 旋转", fontproperties=font)
-    plt.show()
+    + "-dir: {0:2.2f}m".format(integ1_array[-1])
+)
+# 用角速度及積分打印图形
+plt.style.use("ggplot")
+fig, axs = plt.subplots(2, 1, figsize=(12, 9))
+axs[0].plot(t_vec, data_offseted, label="$" + gyro_labels[rot_axis] + "$")
+axs[1].plot(
+    t_vec[1:],
+    integ1_array,
+    label=r"$\theta_" + gyro_labels[rot_axis].split("_")[1] + "$",
+)
+[axs[ii].legend(prop=font1) for ii in range(0, len(axs))]
+axs[0].set_ylabel(
+    "角速度, $\omega_{}$ [$^\circ/s$]".format(gyro_labels[rot_axis].split("_")[1]),
+    fontproperties=font,
+)
+axs[1].set_ylabel(
+    r"旋转, $\theta_{}$ [$^\circ$]".format(gyro_labels[rot_axis].split("_")[1]),
+    fontproperties=font,
+)
+axs[1].set_xlabel("时间 [s]", fontproperties=font)
+axs[0].set_title("陀螺仪積分 180$^\circ$ 旋转", fontproperties=font)
+plt.show()
+imu.reset()
 ```
 
 ![Alt X](../assets/img/esp/gyro-calibration-2.png)
@@ -551,15 +551,12 @@ imu = ICM20948()
 font = FontProperties(fname="./SimHei.ttf", size=20)
 font1 = FontProperties(fname="./SimHei.ttf", size=12)
 
-
 def accel_fit(x_input, m_x, b):
     return (m_x * x_input) + b  # 加速校准方程
-
 
 def get_accel():
     ax, ay, az, _, _, _ = imu.read_accelerometer_gyro_data()  # 读取并转换加速数据
     return ax, ay, az
-
 
 def accel_cal():
     print("-" * 50)
@@ -612,11 +609,9 @@ def accel_cal():
     print("加速度计校准完成")
     return mpu_offsets
 
-
 accel_labels = ["a_x", "a_y", "a_z"]  # 陀螺式标签
 cal_size = 1000  # 用于校准的点数
 accel_coeffs = accel_cal()  # 获得加速系数
-
 data = np.array([get_accel() for ii in range(0, cal_size)])
 
 plt.style.use("ggplot")
@@ -636,6 +631,7 @@ axs[0].set_ylim([-2, 2])
 axs[1].set_ylim([-2, 2])
 axs[0].set_title("加速度计校准校准校正", fontproperties=font)
 fig.show()
+imu.reset()
 ```
 
 ![Alt X](../assets/img/esp/acc-calibration.png)
