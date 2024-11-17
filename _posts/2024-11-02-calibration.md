@@ -441,8 +441,9 @@ axs[1].set_ylabel("$w_{x,y,z}$ [$^{circ}/s$]", fontsize=18)
 axs[1].set_xlabel("样本", fontproperties=font)
 axs[0].set_ylim([-2, 2])
 axs[1].set_ylim([-2, 2])
-axs[0].set_title("ICM20948 陀螺仪偏移值校准", fontproperties=font)
+axs[0].set_title("陀螺仪偏移值校准", fontproperties=font)
 fig.show()
+imu.reset()
 ```
 
 ![Alt X](../assets/img/esp/gyro-calibration-1.png)
