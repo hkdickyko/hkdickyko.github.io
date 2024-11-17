@@ -536,3 +536,105 @@ if __name__ == "__main__":
 ![Alt X](../assets/img/esp/gyro-calibration-2.png)
 
 ![Alt X](../assets/img/esp/gyro-calibration-2a.png)
+
+## 加速度计偏移校准
+
+```py
+from icm20948 import ICM20948
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
+from scipy.optimize import curve_fit
+
+imu = ICM20948()
+font = FontProperties(fname="./SimHei.ttf", size=20)
+font1 = FontProperties(fname="./SimHei.ttf", size=12)
+
+
+def accel_fit(x_input, m_x, b):
+    return (m_x * x_input) + b  # 加速校准方程
+
+
+def get_accel():
+    ax, ay, az, _, _, _ = imu.read_accelerometer_gyro_data()  # 读取并转换加速数据
+    return ax, ay, az
+
+
+def accel_cal():
+    print("-" * 50)
+    print("加速度计校准")
+    mpu_offsets = [[], [], []]  # 偏移阵列打印
+    axis_vec = ["z", "y", "x"]  # 轴标签
+    cal_directions = [
+        "向上",
+        "向下",
+        "垂直于重力",
+    ]  # IMU 计算方向
+    cal_indices = [2, 1, 0]  # 轴指数
+    for qq, ax_qq in enumerate(axis_vec):
+        ax_offsets = [[], [], []]
+        print("-" * 50)
+        for direc_ii, direc in enumerate(cal_directions):
+            input(
+                "-" * 8
+                + "按Enter 并保持 IMU 稳定以校准加速度计 -"
+                + ax_qq
+                + "- 轴指向 "
+                + direc
+            )
+            # [
+            #     imu.read_accelerometer_gyro_data() for ii in range(0, cal_size)
+            # ]  # clear buffer between readings
+            mpu_array = []
+            while len(mpu_array) < cal_size:
+                try:
+                    ax, ay, az = get_accel()
+                    mpu_array.append([ax, ay, az])  # 加到数组
+                except:
+                    continue
+            ax_offsets[direc_ii] = np.array(mpu_array)[:, cal_indices[qq]]  # 偏移方向
+
+        # 使用三个校准（+1g，-1g，0g）进行线性拟合
+        popts, _ = curve_fit(
+            accel_fit,
+            np.append(np.append(ax_offsets[0], ax_offsets[1]), ax_offsets[2]),
+            np.append(
+                np.append(
+                    1.0 * np.ones(np.shape(ax_offsets[0])),
+                    -1.0 * np.ones(np.shape(ax_offsets[1])),
+                ),
+                0.0 * np.ones(np.shape(ax_offsets[2])),
+            ),
+            maxfev=10000,
+        )
+        mpu_offsets[cal_indices[qq]] = popts  # 将斜率放在偏移阵列中
+    print("加速度计校准完成")
+    return mpu_offsets
+
+
+accel_labels = ["a_x", "a_y", "a_z"]  # 陀螺式标签
+cal_size = 1000  # 用于校准的点数
+accel_coeffs = accel_cal()  # 获得加速系数
+
+data = np.array([get_accel() for ii in range(0, cal_size)])
+
+plt.style.use("ggplot")
+fig, axs = plt.subplots(2, 1, figsize=(12, 9))
+for ii in range(0, 3):
+    axs[0].plot(data[:, ii], label="${}$, 尚未校准".format(accel_labels[ii]))
+    axs[1].plot(
+        accel_fit(data[:, ii], *accel_coeffs[ii]),
+        label="${}$, 已经校准".format(accel_labels[ii]),
+    )
+axs[0].legend(prop=font1)
+axs[1].legend(prop=font1)
+axs[0].set_ylabel("$a_{x,y,z}$ [g]", fontsize=18)
+axs[1].set_ylabel("$a_{x,y,z}$ [g]", fontsize=18)
+axs[1].set_xlabel("样本", fontproperties=font)
+axs[0].set_ylim([-2, 2])
+axs[1].set_ylim([-2, 2])
+axs[0].set_title("加速度计校准校准校正", fontproperties=font)
+fig.show()
+```
+
+![Alt X](../assets/img/esp/acc-calibration.png)
