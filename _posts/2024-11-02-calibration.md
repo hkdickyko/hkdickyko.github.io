@@ -638,3 +638,167 @@ fig.show()
 ```
 
 ![Alt X](../assets/img/esp/acc-calibration.png)
+
+## 加速度计積分校准
+
+```py
+from icm20948 import ICM20948
+import time
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
+from scipy.optimize import curve_fit
+from scipy.integrate import cumulative_trapezoid
+from scipy import signal
+
+imu = ICM20948()
+font = FontProperties(fname="./SimHei.ttf", size=20)
+font1 = FontProperties(fname="./SimHei.ttf", size=12)
+
+time.sleep(2)  # 等待 MPU 加载并稳定
+
+def accel_fit(x_input, m_x, b):
+    return (m_x * x_input) + b  # 加速校准方程
+
+def get_accel():
+    ax, ay, az, _, _, _ = imu.read_accelerometer_gyro_data()  # 读取并转换加速数据
+    return ax, ay, az
+
+def accel_cal():
+    print("-" * 50)
+    print("加速度计校准")
+    mpu_offsets = [[], [], []]  # 偏移阵列打印
+    axis_vec = ["z", "y", "x"]  # 轴标签
+    cal_directions = [
+        "向上",
+        "向下",
+        "垂直于重力",
+    ]  # IMU 计算方向
+    cal_indices = [2, 1, 0]  # 轴指数
+    for qq, ax_qq in enumerate(axis_vec):
+        ax_offsets = [[], [], []]
+        print("-" * 50)
+        for direc_ii, direc in enumerate(cal_directions):
+            input(
+                "-" * 8
+                + "按Enter 并保持 IMU 稳定以校准加速度计 -"
+                + ax_qq
+                + "- 轴指向 "
+                + direc
+            )
+            mpu_array = []
+            while len(mpu_array) < cal_size:
+                try:
+                    ax, ay, az = get_accel()
+                    mpu_array.append([ax, ay, az])  # 加到数组
+                except:
+                    continue
+            ax_offsets[direc_ii] = np.array(mpu_array)[:, cal_indices[qq]]  # 偏移方向
+        # 使用三个校准（+1g，-1g，0g）进行线性拟合
+        popts, _ = curve_fit(
+            accel_fit,
+            np.append(np.append(ax_offsets[0], ax_offsets[1]), ax_offsets[2]),
+            np.append(
+                np.append(
+                    1.0 * np.ones(np.shape(ax_offsets[0])),
+                    -1.0 * np.ones(np.shape(ax_offsets[1])),
+                ),
+                0.0 * np.ones(np.shape(ax_offsets[2])),
+            ),
+            maxfev=10000,
+        )
+        mpu_offsets[cal_indices[qq]] = popts  # 将斜率放在偏移阵列中
+    print("加速度计校准完成")
+    return mpu_offsets
+
+def imu_integrator():
+    data_indx = 1  # 可变索引集成
+    dt_stop = 5  # 秒记录和集成的秒
+    plt.style.use("ggplot")
+    plt.ion()
+    fig, axs = plt.subplots(3, 1, figsize=(12, 9))
+    break_bool = False
+    accel_array, t_array = [], []
+    print("启动数据采集")
+    [axs[ii].clear() for ii in range(0, 3)]
+    t0 = time.time()
+    loop_bool = False
+    while True:
+        try:
+            ax, ay, az, wx, wy, wz = (
+                imu.read_accelerometer_gyro_data()
+            )  # 读取加速度计和陀螺仪数据并转换
+            mx, my, mz = imu.read_magnetometer_data()  # 读取和转换磁力计数据
+            t_array.append(time.time() - t0)
+            data_array = [ax, ay, az, wx, wy, wz, mx, my, mz]
+            accel_array.append(
+                accel_fit(data_array[data_indx], *accel_coeffs[data_indx])
+            )
+            if not loop_bool:
+                loop_bool = True
+                print("开始移动 IMU ...")
+        except:
+            continue
+        if time.time() - t0 > dt_stop:
+            print("数据采集​​停止了")
+            break
+
+    Fs_approx = len(accel_array) / dt_stop
+    b_filt, a_filt = signal.butter(4, 5, "low", fs=Fs_approx)
+    accel_array = signal.filtfilt(b_filt, a_filt, accel_array)
+    accel_array = np.multiply(accel_array, 9.80665)
+    print("样本率: {0:2.0f}Hz".format(len(accel_array) / dt_stop))
+    veloc_array = np.append(0.0, cumulative_trapezoid(accel_array, x=t_array))
+    dist_approx = np.trapz(veloc_array, x=t_array)
+    dist_array = np.append(0.0, cumulative_trapezoid(veloc_array, x=t_array))
+    print("位移 y-dir: {0:2.2f}m".format(dist_approx))
+    axs[0].plot(
+        t_array,
+        accel_array,
+        label="$" + mpu_labels[data_indx] + "$",
+        color=plt.cm.Set1(0),
+        linewidth=2.5,
+    )
+    axs[1].plot(
+        t_array,
+        veloc_array,
+        label="$v_" + mpu_labels[data_indx].split("_")[1] + "$",
+        color=plt.cm.Set1(1),
+        linewidth=2.5,
+    )
+    axs[2].plot(
+        t_array,
+        dist_array,
+        label="$d_" + mpu_labels[data_indx].split("_")[1] + "$",
+        color=plt.cm.Set1(2),
+        linewidth=2.5,
+    )
+    [axs[ii].legend(prop=font1) for ii in range(0, len(axs))]
+    axs[0].set_ylabel("加速度 [m$\cdot$s$^{-2}$]", fontproperties=font)
+    axs[1].set_ylabel("速度 [m$\cdot$s$^{-1}$]", fontproperties=font)
+    axs[2].set_ylabel("位移 [m]", fontproperties=font)
+    axs[2].set_xlabel("时间 [s]", fontproperties=font)
+    axs[0].set_title("加速度计集成", fontproperties=font)
+    plt.pause(0.01)
+    fig.show()
+
+
+if __name__ == "__main__":
+    mpu_labels = ["a_x", "a_y", "a_z"]  # 陀螺式标签
+    cal_size = 1000  # 用于校准的点数
+    old_vals_bool = True  # 真实使用另一个校准的值
+    if not old_vals_bool:
+        accel_coeffs = accel_cal()  # 获得加速系数
+        print(accel_coeffs)
+    else:
+        accel_coeffs = [
+            np.array([1.00000000e00, 9.77528185e-16]),
+            np.array([1.00000000e00, 9.77528185e-16]),
+            np.array([-1.63894632e04, -3.33444484e-04]),
+        ]
+    data = np.array([get_accel() for ii in range(0, cal_size)])  # 新值
+    imu_integrator()
+    imu.reset()
+```
+
+![Alt X](../assets/img/esp/acc-calibration-1.png)
