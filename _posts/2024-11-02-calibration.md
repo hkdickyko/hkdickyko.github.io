@@ -51,7 +51,7 @@ date: 2024-11-03 1:00:00
 ```
 cd /home/dickyko/i2c-ch341-usb
 make
-sudo insmod i2c-ch341-usb.ko
+sudo insmod /home/dickyko/i2c-ch341-usb/i2c-ch341-usb.ko
 sudo chmod 777 /dev/i2c-x
 sudo apt-get install i2c-tools
 ```
@@ -73,8 +73,7 @@ sudo apt-get install i2c-tools
 在虚拟环境安装 smbus2 : **pip install smbus2**, 否则 IMU 不能连接成功
 
 ```sh
-cd /home/dickyko/i2c-ch341-usb
-sudo modprobe i2c-ch341-usb.ko
+sudo modprobe /home/dickyko/i2c-ch341-usb/i2c-ch341-usb.ko
 sudo chmod 777 /dev/i2c-6
 sudo i2cdetect -y 6
 ```
