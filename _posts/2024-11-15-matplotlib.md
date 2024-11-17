@@ -36,14 +36,15 @@ date: 2024-11-10 3:00:00
 ```py
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
+
+font = FontProperties(fname="./SimHei.ttf", size=18)
+font1 = FontProperties(fname="./SimHei.ttf", size=12)
 
 def setText(plt, title, xlabel, ylabel, fontsize=18):
-    font1 = {"color": "blue", "size": fontsize}
-    font2 = {"size": fontsize * 4 / 5}
-    font3 = {"size": fontsize * 4 / 5}
-    plt.title(title, fontdict=font1)
-    plt.xlabel(xlabel, fontdict=font2)
-    plt.ylabel(ylabel, fontdict=font3)
+    plt.title(title, fontproperties=font, color="blue")
+    plt.xlabel(xlabel, fontproperties=font1)
+    plt.ylabel(ylabel, fontproperties=font1)
 
 def plot(plt, x, y, legend, lwidth=1, lstyle="-"):
     plt.plot(x, y, linewidth=lwidth, ls=lstyle, label=legend)
@@ -59,15 +60,12 @@ y2 = [2, 5, 8, 6, 2, 5]
 y3 = [4, 6, 7, 5, 7, 10]
 
 setPlotView(plt, 5, 3)
-setText(plt, "Sample plot", "X axis", "Y axis")
-
-plot(plt, x, y, "data-1", 1)
-plot(plt, x, y1, "data-2", 2, "--")
-plot(plt, x, y2, "data-3", 1, "-.")
-plot(plt, x, y3, "data-4", 3, ":")
-
-plt.legend(bbox_to_anchor=(1, 1), fancybox=True, shadow=True)
-
+setText(plt, "樣品圖", "X-軸", "Y-軸")
+plot(plt, x, y, "數據-1", 1)
+plot(plt, x, y1, "數據-2", 2, "--")
+plot(plt, x, y2, "數據-3", 1, "-.")
+plot(plt, x, y3, "數據-4", 3, ":")
+plt.legend(bbox_to_anchor=(1, 1), fancybox=True, shadow=True, prop=font1)
 plt.grid(linestyle=":")
 plt.show()
 ```
