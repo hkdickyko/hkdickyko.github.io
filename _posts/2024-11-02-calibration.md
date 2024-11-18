@@ -80,7 +80,10 @@ sudo i2cdetect -y 6
 
 ![Alt X](../assets/img/esp/i2cdetectimu.png)
 
+
 ## ICM20948 的 Python 源代码
+
+ - 一字节 (byte) 相等于八位元 (8 bits)
 
 ```py
 import struct
@@ -173,7 +176,7 @@ class ICM20948:
 
     def mag_write(self, reg, value): # 向从属磁力仪写入一个字节
         self.bank(3)
-        self.write(ICM20948_I2C_SLV0_ADDR, AK09916_I2C_ADDR)  # Write one byte
+        self.write(ICM20948_I2C_SLV0_ADDR, AK09916_I2C_ADDR)  # 写一字节
         self.write(ICM20948_I2C_SLV0_REG, reg)
         self.write(ICM20948_I2C_SLV0_DO, value)
         self.bank(0)
@@ -184,7 +187,7 @@ class ICM20948:
         self.write(ICM20948_I2C_SLV0_ADDR, AK09916_I2C_ADDR | 0x80)
         self.write(ICM20948_I2C_SLV0_REG, reg)
         self.write(ICM20948_I2C_SLV0_DO, 0xFF)
-        self.write(ICM20948_I2C_SLV0_CTRL, 0x80 | 1)  # Read 1 byte
+        self.write(ICM20948_I2C_SLV0_CTRL, 0x80 | 1)  # 读一字节
         self.bank(0)
         self.trigger_mag_io()
         return self.read(ICM20948_EXT_SLV_SENS_DATA_00)
@@ -368,6 +371,10 @@ if __name__ == "__main__":
       time.sleep(0.25)
 ```
 
+## 惯性测量传感器 **IMU** 校准
+
+[IMU 功作原理，数学知识](https://hkdickyko.github.io/%E7%A9%8D%E9%AB%94%E9%9B%BB%E8%B7%AF/imu)
+
 ## 陀螺仪偏移校准
 
 ```py
@@ -377,6 +384,7 @@ import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
 
 imu = ICM20948()
+time.sleep(2) # 等待 MPU 加载并稳定
 font = FontProperties(fname="./SimHei.ttf", size=20)
 font1 = FontProperties(fname="./SimHei.ttf", size=12)
 
@@ -444,8 +452,8 @@ from matplotlib.font_manager import FontProperties
 import time
 from scipy.integrate import cumulative_trapezoid
 
-time.sleep(2)  # wait for MPU to load and settle
 imu = ICM20948()
+time.sleep(2) # 等待 MPU 加载并稳定
 font = FontProperties(fname="./SimHei.ttf", size=20)
 font1 = FontProperties(fname="./SimHei.ttf", size=12)
 
@@ -534,6 +542,7 @@ from matplotlib.font_manager import FontProperties
 from scipy.optimize import curve_fit
 
 imu = ICM20948()
+time.sleep(2) # 等待 MPU 加载并稳定
 font = FontProperties(fname="./SimHei.ttf", size=20)
 font1 = FontProperties(fname="./SimHei.ttf", size=12)
 
@@ -635,10 +644,9 @@ from scipy.integrate import cumulative_trapezoid
 from scipy import signal
 
 imu = ICM20948()
+time.sleep(2)  # 等待 MPU 加载并稳定
 font = FontProperties(fname="./SimHei.ttf", size=20)
 font1 = FontProperties(fname="./SimHei.ttf", size=12)
-
-time.sleep(2)  # 等待 MPU 加载并稳定
 
 def accel_fit(x_input, m_x, b):
     return (m_x * x_input) + b  # 加速校准方程
