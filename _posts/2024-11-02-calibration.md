@@ -203,24 +203,21 @@ class ICM20948:
         return self.mag_read(AK09916_ST1) & 0x01 > 0
 
     def read_magnetometer_data(self, timeout=1.0):
-        self.mag_write(AK09916_CNTL2, 0x01)  # 触发单次测量
+        # 触发单次测量
+        self.mag_write(AK09916_CNTL2, 0x01)  
         t_start = time.time()
         while not self.magnetometer_ready():
             if time.time() - t_start > timeout:
                 raise RuntimeError("等待磁力计就绪超时")
             time.sleep(0.00001)
-
+            
         data = self.mag_read_bytes(AK09916_HXL, 6)
-
-        # 读取 ST2 确认自我读取完成,
-        # 需要连续模式
-        # self.mag_read(AK09916_ST2)
+        # 读取 ST2 确认自我读取完成，需要连续模式
+        self.mag_read(AK09916_ST2)
 
         x, y, z = struct.unpack("<hhh", bytearray(data))
 
-        # 磁通密度标尺 "uT"
-        # 来自数据表第 3.3 节
-        # 此值是恒定的
+        # 磁通密度标尺 "uT" 来自数据表第 3.3 节。此值是恒定的
         x *= 0.15
         y *= 0.15
         z *= 0.15
@@ -235,8 +232,7 @@ class ICM20948:
 
         self.bank(2)
 
-        # 读取加速度计满量程范围和
-        # 用它来补偿 gs 的读数
+        # 读取加速度计满量程范围和用它来补偿 gs 的读数
         scale = (self.read(ICM20948_ACCEL_CONFIG) & 0x06) >> 1
 
         # 比例范围取自数据表第 3.2 节
@@ -246,8 +242,7 @@ class ICM20948:
         ay /= gs
         az /= gs
 
-        # 读回每秒度数和
-        # 用它来补偿 dps 的读数
+        # 读回每秒度数和用它来补偿 dps 的读数
         scale = (self.read(ICM20948_GYRO_CONFIG_1) & 0x06) >> 1
 
         # 比例范围取自数据表第 3.1 节
@@ -259,7 +254,8 @@ class ICM20948:
 
         return ax, ay, az, gx, gy, gz
 
-    def set_accelerometer_sample_rate(self, rate=125): # 设置加速度计采样率（单位为 Hz) 
+    def set_accelerometer_sample_rate(self, rate=125): 
+        # 设置加速度计采样率（单位为 Hz) 
         self.bank(2)
         # 125Hz - 1.125 kHz / (1 + rate)
         rate = int((1125.0 / rate) - 1)
@@ -307,8 +303,7 @@ class ICM20948:
         self.write(ICM20948_GYRO_CONFIG_1, value)
 
     def read_temperature(self):
-        # 属性来读取当前 IMU 温度
-        # PWR_MGMT_1 默认保持温度启用
+        # 属性来读取当前 IMU 温度，PWR_MGMT_1 默认保持温度启用
         self.bank(0)
         temp_raw_bytes = self.read_bytes(ICM20948_TEMP_OUT_H, 2)
         temp_raw = struct.unpack(">h", bytearray(temp_raw_bytes))[0]
