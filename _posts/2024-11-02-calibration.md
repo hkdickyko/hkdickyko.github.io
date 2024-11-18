@@ -80,7 +80,7 @@ sudo i2cdetect -y 6
 
 ![Alt X](../assets/img/esp/i2cdetectimu.png)
 
-## icm20948.py
+## ICM20948 的 Python 源代码
 
 ```py
 import struct
@@ -124,7 +124,7 @@ ICM20948_GRYO_XOUT_H = 0x33
 ICM20948_TEMP_OUT_H = 0x39
 ICM20948_TEMP_OUT_L = 0x3A
 
-# Offset and sensitivity - defined in electrical characteristics, and TEMP_OUT_H/L of datasheet
+# 偏移量，灵敏度及温度测量设定
 ICM20948_TEMPERATURE_DEGREES_OFFSET = 21
 ICM20948_TEMPERATURE_SENSITIVITY = 333.87
 ICM20948_ROOM_TEMP_OFFSET = 21
@@ -133,11 +133,11 @@ AK09916_I2C_ADDR = 0x0C
 AK09916_CHIP_ID = 0x09
 AK09916_WIA = 0x01
 AK09916_ST1 = 0x10
-AK09916_ST1_DOR = 0b00000010  # Data overflow bit
-AK09916_ST1_DRDY = 0b00000001  # Data self.ready bit
+AK09916_ST1_DOR = 0b00000010  # 资料溢出位
+AK09916_ST1_DRDY = 0b00000001  # 数据就绪位
 AK09916_HXL = 0x11
 AK09916_ST2 = 0x18
-AK09916_ST2_HOFL = 0b00001000  # Magnetic sensor overflow bit
+AK09916_ST2_HOFL = 0b00001000  # 磁场溢出位
 AK09916_CNTL2 = 0x31
 AK09916_CNTL2_MODE = 0b00001111
 AK09916_CNTL2_MODE_OFF = 0
@@ -150,13 +150,11 @@ AK09916_CNTL2_MODE_TEST = 16
 AK09916_CNTL3 = 0x32
 
 class ICM20948:
-    def write(self, reg, value):
-        """Write byte to the sensor."""
+    def write(self, reg, value): # 写一字节数据资传感器
         self._bus.write_byte_data(self._addr, reg, value)
         time.sleep(0.0001)
 
-    def read(self, reg):
-        """Read byte from the sensor."""
+    def read(self, reg): # 读传感器一字节数据
         return self._bus.read_byte_data(self._addr, reg)
 
     def trigger_mag_io(self):
@@ -165,18 +163,15 @@ class ICM20948:
         time.sleep(0.005)
         self.write(ICM20948_USER_CTRL, user)
 
-    def read_bytes(self, reg, length=1):
-        """Read byte(s) from the sensor."""
+    def read_bytes(self, reg, length=1): # 读传感器字节数据
         return self._bus.read_i2c_block_data(self._addr, reg, length)
 
-    def bank(self, value):
-        """Switch register self.bank."""
+    def bank(self, value): # 切换寄存器 self.bank
         if not self._bank == value:
             self.write(ICM20948_BANK_SEL, value << 4)
             self._bank = value
 
-    def mag_write(self, reg, value):
-        """Write a byte to the slave magnetometer."""
+    def mag_write(self, reg, value): # 向从属磁力仪写入一个字节
         self.bank(3)
         self.write(ICM20948_I2C_SLV0_ADDR, AK09916_I2C_ADDR)  # Write one byte
         self.write(ICM20948_I2C_SLV0_REG, reg)
@@ -184,8 +179,7 @@ class ICM20948:
         self.bank(0)
         self.trigger_mag_io()
 
-    def mag_read(self, reg):
-        """Read a byte from the slave magnetometer."""
+    def mag_read(self, reg): # 由从属磁力仪读取一个字节
         self.bank(3)
         self.write(ICM20948_I2C_SLV0_ADDR, AK09916_I2C_ADDR | 0x80)
         self.write(ICM20948_I2C_SLV0_REG, reg)
@@ -195,8 +189,7 @@ class ICM20948:
         self.trigger_mag_io()
         return self.read(ICM20948_EXT_SLV_SENS_DATA_00)
 
-    def mag_read_bytes(self, reg, length=1):
-        """Read up to 24 bytes from the slave magnetometer."""
+    def mag_read_bytes(self, reg, length=1): # 由从属磁力仪读取最多 24 个字节
         self.bank(3)
         self.write(ICM20948_I2C_SLV0_CTRL, 0x80 | 0x08 | length)
         self.write(ICM20948_I2C_SLV0_ADDR, AK09916_I2C_ADDR | 0x80)
@@ -206,29 +199,28 @@ class ICM20948:
         self.trigger_mag_io()
         return self.read_bytes(ICM20948_EXT_SLV_SENS_DATA_00, length)
 
-    def magnetometer_ready(self):
-        """Check the magnetometer status self.ready bit."""
+    def magnetometer_ready(self): #检查磁力计状态就绪位
         return self.mag_read(AK09916_ST1) & 0x01 > 0
 
     def read_magnetometer_data(self, timeout=1.0):
-        self.mag_write(AK09916_CNTL2, 0x01)  # Trigger single measurement
+        self.mag_write(AK09916_CNTL2, 0x01)  # 触发单次测量
         t_start = time.time()
         while not self.magnetometer_ready():
             if time.time() - t_start > timeout:
-                raise RuntimeError("Timeout waiting for Magnetometer Ready")
+                raise RuntimeError("等待磁力计就绪超时")
             time.sleep(0.00001)
 
         data = self.mag_read_bytes(AK09916_HXL, 6)
 
-        # Read ST2 to confirm self.read finished,
-        # needed for continuous modes
+        # 读取 ST2 确认自我读取完成,
+        # 需要连续模式
         # self.mag_read(AK09916_ST2)
 
         x, y, z = struct.unpack("<hhh", bytearray(data))
 
-        # Scale for magnetic flux density "uT"
-        # from section 3.3 of the datasheet
-        # This value is constant
+        # 磁通密度标尺 "uT"
+        # 来自数据表第 3.3 节
+        # 此值是恒定的
         x *= 0.15
         y *= 0.15
         z *= 0.15
@@ -243,22 +235,22 @@ class ICM20948:
 
         self.bank(2)
 
-        # Read accelerometer full scale range and
-        # use it to compensate the self.reading to gs
+        # 读取加速度计满量程范围和
+        # 用它来补偿 gs 的读数
         scale = (self.read(ICM20948_ACCEL_CONFIG) & 0x06) >> 1
 
-        # scale ranges from section 3.2 of the datasheet
+        # 比例范围取自数据表第 3.2 节
         gs = [16384.0, 8192.0, 4096.0, 2048.0][scale]
 
         ax /= gs
         ay /= gs
         az /= gs
 
-        # Read back the degrees per second rate and
-        # use it to compensate the self.reading to dps
+        # 读回每秒度数和
+        # 用它来补偿 dps 的读数
         scale = (self.read(ICM20948_GYRO_CONFIG_1) & 0x06) >> 1
 
-        # scale ranges from section 3.1 of the datasheet
+        # 比例范围取自数据表第 3.1 节
         dps = [131, 65.5, 32.8, 16.4][scale]
 
         gx /= dps
@@ -267,24 +259,23 @@ class ICM20948:
 
         return ax, ay, az, gx, gy, gz
 
-    def set_accelerometer_sample_rate(self, rate=125):
-        """Set the accelerometer sample rate in Hz."""
+    def set_accelerometer_sample_rate(self, rate=125): # 设置加速度计采样率（单位为 Hz) 
         self.bank(2)
         # 125Hz - 1.125 kHz / (1 + rate)
         rate = int((1125.0 / rate) - 1)
-        # TODO maybe use struct to pack and then write_bytes
+        # 用结构来打包然后写入字节
         self.write(ICM20948_ACCEL_SMPLRT_DIV_1, (rate >> 8) & 0xFF)
         self.write(ICM20948_ACCEL_SMPLRT_DIV_2, rate & 0xFF)
 
     def set_accelerometer_full_scale(self, scale=16):
-        """Set the accelerometer fulls cale range to +- the supplied value."""
+        # 将加速度计满量程范围设置为 +/- 提供的值
         self.bank(2)
         value = self.read(ICM20948_ACCEL_CONFIG) & 0b11111001
         value |= {2: 0b00, 4: 0b01, 8: 0b10, 16: 0b11}[scale] << 1
         self.write(ICM20948_ACCEL_CONFIG, value)
 
-    def set_accelerometer_low_pass(self, enabled=True, mode=5):
-        """Configure the accelerometer low pass filter."""
+    def set_accelerometer_low_pass(self, enabled=True, mode=5): 
+        # 配置加速度计低通滤波器
         self.bank(2)
         value = self.read(ICM20948_ACCEL_CONFIG) & 0b10001110
         if enabled:
@@ -293,21 +284,21 @@ class ICM20948:
         self.write(ICM20948_ACCEL_CONFIG, value)
 
     def set_gyro_sample_rate(self, rate=125):
-        """Set the gyro sample rate in Hz."""
+        # 设置陀螺仪采样率（单位：赫兹）
         self.bank(2)
         # 125Hz sample rate - 1.125 kHz / (1 + rate)
         rate = int((1125.0 / rate) - 1)
         self.write(ICM20948_GYRO_SMPLRT_DIV, rate)
 
     def set_gyro_full_scale(self, scale=250):
-        """Set the gyro full scale range to +- supplied value."""
+        # 将陀螺仪满量程范围设置为 +/- 提供的值
         self.bank(2)
         value = self.read(ICM20948_GYRO_CONFIG_1) & 0b11111001
         value |= {250: 0b00, 500: 0b01, 1000: 0b10, 2000: 0b11}[scale] << 1
         self.write(ICM20948_GYRO_CONFIG_1, value)
 
     def set_gyro_low_pass(self, enabled=True, mode=5):
-        """Configure the gyro low pass filter."""
+        # 配置陀螺仪低通滤波器
         self.bank(2)
         value = self.read(ICM20948_GYRO_CONFIG_1) & 0b10001110
         if enabled:
@@ -316,8 +307,8 @@ class ICM20948:
         self.write(ICM20948_GYRO_CONFIG_1, value)
 
     def read_temperature(self):
-        """Property to read the current IMU temperature"""
-        # PWR_MGMT_1 defaults to leave temperature enabled
+        # 属性来读取当前 IMU 温度
+        # PWR_MGMT_1 默认保持温度启用
         self.bank(0)
         temp_raw_bytes = self.read_bytes(ICM20948_TEMP_OUT_H, 2)
         temp_raw = struct.unpack(">h", bytearray(temp_raw_bytes))[0]
@@ -366,7 +357,7 @@ class ICM20948:
         if not self.mag_read(AK09916_WIA) == AK09916_CHIP_ID:
             raise RuntimeError("Unable to find AK09916")
 
-        # Reset the magnetometer
+        # 重置磁力计
         self.mag_write(AK09916_CNTL3, 0x01)
         while self.mag_read(AK09916_CNTL3) == 0x01:
             time.sleep(0.0001)
