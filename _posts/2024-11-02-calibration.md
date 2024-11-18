@@ -375,6 +375,8 @@ if __name__ == "__main__":
 
 [IMU 功作原理，数学知识](https://hkdickyko.github.io/%E7%A9%8D%E9%AB%94%E9%9B%BB%E8%B7%AF/imu)
 
+以下程序只需修改读取及写入数据部分。即可對不同传感器进行校准。
+
 ## 陀螺仪偏移校准
 
 ```py
