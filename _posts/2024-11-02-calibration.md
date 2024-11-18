@@ -1,7 +1,7 @@
 ---
 category: [積體電路]
 tags: [IoT, 電子]
-title: IMU 芯片校正
+title: 惯性测量传感器 IMU 校准
 date: 2024-11-03 1:00:00
 ---
 
@@ -31,7 +31,7 @@ date: 2024-11-03 1:00:00
   }
 </style>
 
-# IMU 芯片校正 (I<sup>2</sup>C 接口)
+# 惯性测量传感器 IMU 校准 (I<sup>2</sup>C 接口)
 
 ## 工具
 
