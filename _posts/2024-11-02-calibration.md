@@ -70,7 +70,11 @@ sudo apt-get install i2c-tools
 
 ## 检查 IMU 连接
 
+### 在虚拟环境 **venv** 中安装附加套件
+
 在虚拟环境安装 smbus2 : **pip install smbus2**, 否则 IMU 不能连接成功
+
+### 在主环境中安装 USB I<sup>2</sup>C 接口，并更新到所有人能用的权限
 
 ```sh
 sudo modprobe /home/dickyko/i2c-ch341-usb/i2c-ch341-usb.ko
