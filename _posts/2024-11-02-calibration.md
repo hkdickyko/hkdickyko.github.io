@@ -319,6 +319,15 @@ class ICM20948:
         ) + ICM20948_TEMPERATURE_DEGREES_OFFSET
         return temperature_deg_c
 
+    def reset(self):
+        self.bank(0)
+        if not self.read(ICM20948_WHO_AM_I) == CHIP_ID:
+            raise RuntimeError("找不到 ICM20948")
+        self.write(ICM20948_PWR_MGMT_1, 0x80)
+        time.sleep(0.01)
+        self.write(ICM20948_PWR_MGMT_1, 0x01)
+        self.write(ICM20948_PWR_MGMT_2, 0x00)
+
     def __init__(self, i2c_addr=I2C_ADDR_ALT, i2c_bus=None):
         self._bank = -1
         self._addr = i2c_addr
@@ -332,7 +341,7 @@ class ICM20948:
 
         self.bank(0)
         if not self.read(ICM20948_WHO_AM_I) == CHIP_ID:
-            raise RuntimeError("Unable to find ICM20948")
+            raise RuntimeError("找不到 ICM20948")
 
         self.write(ICM20948_PWR_MGMT_1, 0x80)
         time.sleep(0.01)
@@ -357,22 +366,23 @@ class ICM20948:
         self.write(ICM20948_I2C_MST_DELAY_CTRL, 0x01)
 
         if not self.mag_read(AK09916_WIA) == AK09916_CHIP_ID:
-            raise RuntimeError("Unable to find AK09916")
+            raise RuntimeError("找不到 AK09916")
 
         # 重置磁力计
         self.mag_write(AK09916_CNTL3, 0x01)
         while self.mag_read(AK09916_CNTL3) == 0x01:
             time.sleep(0.0001)
 
+
 if __name__ == "__main__":
     imu = ICM20948()
-  while True:
-      x, y, z = imu.read_magnetometer_data()
-      ax, ay, az, gx, gy, gz = imu.read_accelerometer_gyro_data()
-      print(
-          "Accel:{ax:05.2f} {ay:05.2f} {az:05.2f} Gyro:{gx:05.2f} {gy:05.2f} {gz:05.2f} Mag:{x:05.2f} {y:05.2f} {z:05.2f}"
-      )
-      time.sleep(0.25)
+    while True:
+        x, y, z = imu.read_magnetometer_data()
+        ax, ay, az, gx, gy, gz = imu.read_accelerometer_gyro_data()
+        print(
+            "Accel:{ax:05.2f} {ay:05.2f} {az:05.2f} Gyro:{gx:05.2f} {gy:05.2f} {gz:05.2f} Mag:{x:05.2f} {y:05.2f} {z:05.2f}"
+        )
+        time.sleep(0.25)
 ```
 
 ## 惯性测量传感器 **IMU** 校准
