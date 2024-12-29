@@ -85,9 +85,11 @@ sudo i2cdetect -y 6
 ![Alt X](../assets/img/esp/i2cdetectimu.png)
 
 
-## ICM20948 的 Python 源代码
+## ICM20948 内部架构
 
 ![Alt X](../assets/img/esp/icm_20948.png)
+
+## ICM20948 的 Python 源代码
 
  - 一字节 (byte) 相等于八位元 (8 bits)
 
@@ -397,6 +399,8 @@ if __name__ == "__main__":
 
 ## 陀螺仪偏移校准
 
+陀螺仪是单轴角度传感器。用以纪录传感器在一个单轴的角度倾斜的表现。也就是 XYZ 三轴，任取一轴做测量。
+
 ```py
 import time
 from icm20948 import ICM20948
@@ -536,6 +540,8 @@ if __name__ == "__main__":
 ![Alt X](../assets/img/esp/gyro_integration.png)
 
 ## 加速度计偏移校准
+
+加速度计是测量物体的加速度及计算瞬时姿态。
 
 ```py
 from icm20948 import ICM20948
@@ -739,8 +745,10 @@ if __name__ == "__main__":
 
 ![Alt X](../assets/img/esp/acc_integration.png)
 
-
 ## 磁力计
+
+地球磁场的极点和地理的极点之间并不重合，大概 11°左右的偏差。磁场计算最大的麻烦就是干扰，这个干扰比加速度和陀螺仪大很多，况且还要探知这么微小的地球磁场。地球的磁场在 0.4-0.6 高斯， 而平时用手机里面扬声器就差不多 4 高斯，微动马达都至少 6 高斯。所以基本上都需要做现场的矫正。磁场矫正方法是测量值减去本地的偏移量。
+
 
 ```py
 import time
