@@ -384,7 +384,9 @@ if __name__ == "__main__":
         x, y, z = imu.read_magnetometer_data()
         ax, ay, az, gx, gy, gz = imu.read_accelerometer_gyro_data()
         print(
-            "Accel:{ax:05.2f} {ay:05.2f} {az:05.2f} Gyro:{gx:05.2f} {gy:05.2f} {gz:05.2f} Mag:{x:05.2f} {y:05.2f} {z:05.2f}"
+            "Accel:{ax:05.2f} {ay:05.2f} {az:05.2f} \
+            Gyro:{gx:05.2f} {gy:05.2f} {gz:05.2f} \
+            Mag:{x:05.2f} {y:05.2f} {z:05.2f}"
         )
         time.sleep(0.25)
 ```
@@ -642,7 +644,8 @@ if __name__ == "__main__":
   cal_size = 10  # 用于校准的点数
   accel_coeffs = accel_cal()  # 获得加速系数
   accel_calibration()
-  print("------> 加速度计係數: {:9.5f}, {:9.5f}, {:9.5f}".format(accel_coeffs[0], accel_coeffs[1], accel_coeffs[2]))
+  print("------> 加速度计係數: {:9.5f}, {:9.5f}, {:9.5f}".format(accel_coeffs[0], \
+     accel_coeffs[1], accel_coeffs[2]))
 ```
 ### 图形显示加速度计係數修正前后分别
 
@@ -685,8 +688,8 @@ def imu_integrator():
       data_array = [ax, ay, az, wx, wy, wz, mx, my, mz]
       accel_array.append(accel_fit(data_array[data_indx], *accel_coeffs[data_indx]))
       print(
-          "IMU:{:9.5f} {:9.5f} {:9.5f},Gyro:{:9.5f} {:9.5f} {:9.5f} ,Mag:{:9.5f} {:9.5f} {:9.5f}".format(
-              ax, ay, az, wx, wy, wz, mx, my, mz)
+          "IMU:{:9.5f} {:9.5f} {:9.5f},Gyro:{:9.5f} {:9.5f} {:9.5f} ,\
+           Mag:{:9.5f} {:9.5f} {:9.5f}".format(ax, ay, az, wx, wy, wz, mx, my, mz)
           )            
     except:
         continue
@@ -813,7 +816,8 @@ def mag_cal():
   indices_to_save = [0, 0, 1]  # 索引保存為偏移
   for mag_ii, mags in enumerate(mag_cal_rotation_vec):
     mags = np.array(mags)
-    x, y = mags[:, cal_rot_indices[mag_ii][0]], mags[:, cal_rot_indices[mag_ii][1]] # 傳感器要分析
+    # 傳感器要分析
+    x, y = mags[:, cal_rot_indices[mag_ii][0]], mags[:, cal_rot_indices[mag_ii][1]] 
     x, y = outlier_removal(x, y)  # 離群拆除
     y_0 = (np.nanmax(y) + np.nanmin(y)) / 2.0  # y-偏移值
     x_0 = (np.nanmax(x) + np.nanmin(x)) / 2.0  # x-偏移值
