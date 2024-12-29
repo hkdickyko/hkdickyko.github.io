@@ -467,6 +467,8 @@ if __name__ == "__main__":
   print("------> 陀螺仪偏移係數: {:9.5f}".format(gyro_offsets))  
 ```
 
+### 图形显示陀螺仪偏移係數修正前后分别
+
 ![Alt X](../assets/img/esp/gyro_calibration.png)
 
 ## 陀螺仪積分测量检查评估
@@ -536,6 +538,8 @@ if __name__ == "__main__":
   gyro_offsets = [0.027557251908396953, 0.8496946564885495, -0.21557251908396943]
   gyro_integration()
 ```
+
+### 图形显示陀螺仪積分效果
 
 ![Alt X](../assets/img/esp/gyro_integration.png)
 
@@ -640,6 +644,7 @@ if __name__ == "__main__":
   accel_calibration()
   print("------> 加速度计係數: {:9.5f}, {:9.5f}, {:9.5f}".format(accel_coeffs[0], accel_coeffs[1], accel_coeffs[2]))
 ```
+### 图形显示加速度计係數修正前后分别
 
 ![Alt X](../assets/img/esp/acc_calibration.png)
 
@@ -742,6 +747,8 @@ if __name__ == "__main__":
   ] # 加速度计係數来自 accel_calibration.py
   imu_integrator()
 ```
+
+### 图形显示加速度计係數積分效果
 
 ![Alt X](../assets/img/esp/acc_integration.png)
 
@@ -868,9 +875,11 @@ if __name__ == "__main__":
                             mag_coeffs[0], mag_coeffs[2]))
 ```
 
+### 硬鐵偏移係數修正前后分别
+
 ![Alt X](../assets/img/esp/mag_hard_calibration.png)
 
-### 数据融合
+## 数据融合
 
 因为加速度、磁力计具有高频噪声，需要低通滤波，将加速度、磁力计的信号看成是音频信号，它们的信号会有很多“毛刺“，也就是说它们的瞬时值不够精确，解算出来的姿态会震荡，但长期来看姿态方向是对的。
 
