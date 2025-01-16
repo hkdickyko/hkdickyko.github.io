@@ -892,6 +892,8 @@ if __name__ == "__main__":
                             mag_coeffs[0], mag_coeffs[2]))
 ```
 
+![Alt X](../assets/img/esp/magmatrix.png)
+
 ### 硬鐵偏移係數修正前后分别
 
 ![Alt X](../assets/img/esp/mag_hard_calibration.png)
