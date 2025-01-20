@@ -427,6 +427,17 @@ $$
 
 **偏差**是输出值相对于输入值的恒定偏移。可以测量多种不同类型的偏置参数，包括运行中偏置稳定性、开启偏置稳定性或可重复性以及温度偏置。
 
+个别测试可以忽略错位矩阵如下：
+
+$$
+\begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix}
+S_x & 0 & 0 \\ 0 & S_y & 0 \\ 0 & 0 & S_z\end{bmatrix}  \left(
+\begin{bmatrix} \tilde{x}\\ \tilde{y}\\ \tilde{z} \end{bmatrix}-\begin{bmatrix} b_x\\ b_y \\ b_z \end{bmatrix}
+\right)
+$$
+
+从而简化成线性方程，用最小二乘法求解。
+
 
 ## 陀螺仪偏移校准
 
