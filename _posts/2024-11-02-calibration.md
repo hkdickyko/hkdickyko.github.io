@@ -402,6 +402,13 @@ if __name__ == "__main__":
 
 ![Alt X](../assets/img/esp/orientation_20948.png)
 
+$$
+\begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix}
+S_x & 0 & 0 \\ 0 & S_y & 0 \\ 0 & 0 & S_z\end{bmatrix} \begin{bmatrix} 1 & \alpha_1 & \alpha_2 \\ \alpha_3 & 1 & \alpha_4  \\ \alpha_5 & \alpha_6 & 1 \end{bmatrix} \left(
+\begin{bmatrix} \tilde{x}\\ \tilde{y}\\ \tilde{z} \end{bmatrix}-\begin{bmatrix} b_x\\ b_y \\ b_z \end{bmatrix}
+\right)
+$$
+
 ## 陀螺仪偏移校准
 
 陀螺仪是单轴角度传感器。用以纪录传感器在一个单轴的角度倾斜的表现。也就是 XYZ 三轴，任取一轴做测量。
@@ -667,14 +674,16 @@ if __name__ == "__main__":
 
 最少测量次数为六次如下:
 
+![Alt X](../assets/img/esp/acc_direction.png)
+
 |测量方法|次数|X平面|Y平面|Z平面|
 |:---:|:---:|:---:|:---:|:---:|
-|Z向上|1|1|1||
-|Z向下|1|1|1||
-|X向上|1||1|1|
 |X向下|1||1|1|
-|Y向上|1|1||1|
+|X向上|1||1|1|
 |Y向下|1|1||1|
+|Y向上|1|1||1|
+|Z向下|1|1|1||
+|Z向上|1|1|1||
 
 
 由以上结果，在每個面上取平均最大值，平均最少值。
