@@ -402,12 +402,22 @@ if __name__ == "__main__":
 
 ![Alt X](../assets/img/esp/orientation_20948.png)
 
+每个 IMU 传感器都可使用以下公式校准。此公式适用于陀螺仪、加速度计和磁力计。对校准过程中收集的数据进行最小二乘拟合，以确定模型中每个参数的值。
+
 $$
 \begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix}
 S_x & 0 & 0 \\ 0 & S_y & 0 \\ 0 & 0 & S_z\end{bmatrix} \begin{bmatrix} 1 & \alpha_1 & \alpha_2 \\ \alpha_3 & 1 & \alpha_4  \\ \alpha_5 & \alpha_6 & 1 \end{bmatrix} \left(
 \begin{bmatrix} \tilde{x}\\ \tilde{y}\\ \tilde{z} \end{bmatrix}-\begin{bmatrix} b_x\\ b_y \\ b_z \end{bmatrix}
 \right)
 $$
+
+左侧向量是传感器的输出，该输出已针对任何**比例因子误差**、**错位误差**和**偏差**进行了校准，并且应在校准后与真实数据相匹配。
+
+右侧的两个矩阵分别称为**比例因子矩阵**和**错位矩阵**，其中包含传感器的比例因子和错位校准参数。上面的比例因子矩阵和错位矩阵也可以组合成一个矩阵，而不会失去通用性。最后一项由未校准的测量值和传感器偏差组成。
+
+通常，**偏差**是传感器模型方程中唯一在部件使用寿命内发生显著变化的参数，可能需要用户偶尔进行校准。
+
+
 
 ## 陀螺仪偏移校准
 
