@@ -544,7 +544,7 @@ def gyro_integration():
   gyro_labels = ["\omega_x", "\omega_y", "\omega_z"]
   input("按 Enter 并旋转陀螺 360 度")
   print("记录数据...")
-  record_time = 5  # 记录多长时间
+  record_time = 5秒 # 记录多长时间
   data, t_vec = [], []
   t0 = time.time()
   while time.time() - t0 < record_time:
@@ -554,7 +554,7 @@ def gyro_integration():
   print("停止记录\n采样率: {0:2.0f} Hz".format(samp_rate))
   rot_axis = 2  # 轴旋转 (2 = z-axis)
   data_offseted = np.array(data)[:, rot_axis] - gyro_offsets[rot_axis]
-  integ1_array = cumulative_trapezoid(data_offseted, x=t_vec)  # 積分一次
+  integ1_array = cumulative_trapezoid(data_offseted, x=t_vec)  # 積分以上5秒內數據
   # 打印出结果
   print(
     "積分 {} in {}".format(gyro_labels[rot_axis], gyro_labels[rot_axis].split("_")[1])
@@ -653,7 +653,7 @@ def accel_cal():
         except:
           continue
       ax_offsets[direc_ii] = np.array(mpu_array)[:, cal_indices[qq]]  # 偏移方向
-    # 使用三个校准（+1g，-1g，0g）进行线性拟合
+    # 使用三个校准（+1g，-1g，0g）进行线性拟合。用最少二乘法求解。
     popts, _ = curve_fit(
       accel_fit,
       np.append(np.append(ax_offsets[0], ax_offsets[1]), ax_offsets[2]),
@@ -706,14 +706,14 @@ if __name__ == "__main__":
 
 ![Alt X](../assets/img/esp/acc_direction.png)
 
-|测量方法|次数|X平面|Y平面|Z平面|
-|:---:|:---:|:---:|:---:|:---:|
-|X向下|1||1|1|
-|X向上|1||1|1|
-|Y向下|1|1||1|
-|Y向上|1|1||1|
-|Z向下|1|1|1||
-|Z向上|1|1|1||
+|测量方法|X平面(重力)|Y平面(重力)|Z平面(重力)|
+|:---:|:---:|:---:|:---:|
+|X向下|9.81|0|0|
+|X向上|-9.81|0|0|
+|Y向下|0|9.81|0|
+|Y向上|0|-9.81|0|
+|Z向下|0|0|9.81|
+|Z向上|0|0|-9.81|
 
 
 由以上结果，在每個面上取平均最大值，平均最少值。
