@@ -515,7 +515,7 @@ if __name__ == "__main__":
 
 ![Alt X](../assets/img/esp/gyro_calibration.png)
 
-## 陀螺仪積分测量检查评估
+## 陀螺仪的积分测量检查评估
 
 <font color="#FF1000">注意：旋转 360 度，以测量陀螺仪的准确程度。
 
@@ -554,13 +554,13 @@ def gyro_integration():
   print("停止记录\n采样率: {0:2.0f} Hz".format(samp_rate))
   rot_axis = 2  # 轴旋转 (2 = z-axis)
   data_offseted = np.array(data)[:, rot_axis] - gyro_offsets[rot_axis]
-  integ1_array = cumulative_trapezoid(data_offseted, x=t_vec)  # 積分以上5秒內數據
+  integ1_array = cumulative_trapezoid(data_offseted, x=t_vec)  # 积分以上5秒內数据
   # 打印出结果
   print(
-    "積分 {} in {}".format(gyro_labels[rot_axis], gyro_labels[rot_axis].split("_")[1])
+    "积分 {} in {}".format(gyro_labels[rot_axis], gyro_labels[rot_axis].split("_")[1])
     + "-dir: {0:2.2f}度".format(integ1_array[-1])
   )
-  # 用角速度及積分打印图形
+  # 用角速度及积分打印图形
   plt.style.use("ggplot")
   fig, axs = plt.subplots(2, 1, figsize=(12, 9))
   axs[0].plot(t_vec, data_offseted, label="$" + gyro_labels[rot_axis] + "$")
@@ -716,15 +716,10 @@ if __name__ == "__main__":
 |Z向上|0|0|9.81|
 
 
-由以上结果，在每個面上取平均最大值，平均最少值。
+注同重力方向法為 <font color="#FF1000">-g</font>，不同重力方向法為 <font color="#FF1000">g</font>，垂直重力方向法為 <font color="#FF1000">0</font>。
 
-$$
-校准后的零值 = \frac {平均最大值 + 平均最少值}{2}
-$$
+用测量的结果及最少二进乘求法解。
 
-$$
-灵敏度调整 = \frac {平均最大值-平均最少值}{IMU 分辨率}
-$$
 
 ## 加速度计積分检查评估
 
@@ -834,11 +829,11 @@ if __name__ == "__main__":
 
 ## 磁力计
 
-地球磁场的极点和地理的极点之间并不重合，大概 11°左右的偏差。磁场计算最大的麻烦就是干扰，这个干扰比加速度和陀螺仪大很多，况且还要探知这么微小的地球磁场。地球的磁场在 0.4-0.6 高斯， 而平时用手机里面扬声器就差不多 4 高斯，微动马达都至少 6 高斯。所以基本上都需要做现场的矫正。磁场矫正方法是测量值减去本地的偏移量。
+地球磁场的极点和地理的极点之间并不重合，大概 11° 左右的偏差。磁场计算最大的麻烦就是干扰，这个干扰比加速度和陀螺仪大很多，况且还要探知这么微小的地球磁场。地球的磁场在 0.4-0.6 高斯， 而平时用手机里面扬声器就差不多 4 高斯，微动马达都至少 6 高斯。所以基本上都需要做现场的矫正。磁场矫正方法是测量值减去本地的偏移量。
 
 ![Alt X](../assets/img/esp/magearth.png)
 
-<font color="#FF0010">注意：将磁力计各轴心以多次 360 度旋转，用以测量附近相对磁干扰的影响。**硬鉄干扰**只会影响轴心中心偏移量。**软铁干扰**比硬鉄干扰小很多，会影响圆形圆度。使测量结果变成椭圆形。</font>
+<font color="#FF0010">注意</font>：将磁力计各轴心以多次 360 度旋转，用以测量附近相对磁干扰的影响。**硬鉄干扰**只会影响轴心中心偏移量。**软铁干扰**比硬鉄干扰小很多，会影响圆形圆度。使测量结果变成椭圆形。
 
 
 ```py
@@ -960,9 +955,17 @@ if __name__ == "__main__":
                             mag_coeffs[0], mag_coeffs[2]))
 ```
 
+由以上结果，在每個轴上取平均最大值，平均最少值。
+
 $$
-各轴的硬鉄偏移量 = \frac {各轴的平均最大值 + 各轴的平均最少值}{2}
+各轴的硬鉄偏移量校准 = \frac {各轴的平均最大值 + 各轴的平均最少值}{2}
 $$
+
+
+$$
+灵敏度调整 = \frac {平均最大值-平均最少值}{IMU 分辨率}
+$$
+
 
 注意：多过五个标准差的数值需要移除。以消除硬鉄量度误差。
 
