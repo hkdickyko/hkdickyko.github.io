@@ -474,8 +474,8 @@ def gyro_cal():
         continue
       mpu_array.append([wx, wy, wz])
       if np.shape(mpu_array)[0] == cal_size:
-        for qq in range(0, 3):
-          gyro_offsets[qq] = np.mean(np.array(mpu_array)[:, qq])  # 平均的
+        for qq in range(0, 3): # 平均值，[:,qq] : 為所有列， qq 為行數 即 [R,C] 格式
+          gyro_offsets[qq] = np.mean(np.array(mpu_array)[:, qq])  
         break
     print("陀螺仪校准完成")
     return gyro_offsets
