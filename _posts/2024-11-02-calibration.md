@@ -966,6 +966,17 @@ $$
 灵敏度调整 = \frac {平均最大值-平均最少值}{IMU 分辨率}
 $$
 
+#### 硬鉄偏移量偽程式碼
+
+```py
+offset_x = (max(x) + min(x)) / 2
+offset_y = (max(y) + min(y)) / 2
+offset_z = (max(z) + min(z)) / 2
+
+corrected_x = sensor_x - offset_x
+corrected_y = sensor_y - offset_y
+corrected_z = sensor_z - offset_z
+```
 
 注意：多过五个标准差的数值需要移除。以消除硬鉄量度误差。
 
@@ -980,6 +991,30 @@ $$
 ### 硬鐵偏移係數修正前后分别
 
 ![Alt X](../assets/img/esp/mag_hard_calibration.png)
+
+### 軟鐵失真
+
+軟鐵失真不能透過簡單地消除常量偏移來消除。校正軟鐵畸變通常計算成本較高，並涉及 3x3 變換矩陣。
+
+有一種計算成本更便宜的方法，即使用尺度偏差。這種方法也應該給出相當好的結果。下面的範例偽程式碼還包括上一個步驟中的硬鐵偏移。
+
+#### 硬鉄偏移量和軟鐵失真偽程式碼
+
+```py
+avg_delta_x = (max(x) - min(x)) / 2
+avg_delta_y = (max(y) - min(y)) / 2
+avg_delta_z = (max(z) - min(z)) / 2
+
+avg_delta = (avg_delta_x + avg_delta_y + avg_delta_z) / 3
+
+scale_x = avg_delta / avg_delta_x
+scale_y = avg_delta / avg_delta_y
+scale_z = avg_delta / avg_delta_z
+
+corrected_x = (sensor_x - offset_x) * scale_x
+corrected_y = (sensor_y - offset_y) * scale_y
+corrected_z = (sensor_z - offset_z) * scale_z
+```
 
 ## 数据融合
 
