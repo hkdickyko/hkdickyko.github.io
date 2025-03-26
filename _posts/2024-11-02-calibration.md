@@ -1022,6 +1022,9 @@ corrected_z = (sensor_z - offset_z) * scale_z
 
 [磁偏角估計值 - 網路資源](https://www.ngdc.noaa.gov/geomag/calculators/magcalc.shtml#declination)
 
+
+#### 香港磁偏角估計值樣本
+
 ![Alt X](../assets/img/esp/hk_declination.png)
 
 ## 数据融合
