@@ -848,26 +848,26 @@ font = FontProperties(fname="./SimHei.ttf", size=20)
 font1 = FontProperties(fname="./SimHei.ttf", size=12)
 
 def outlier_removal(x_ii, y_ii):
-  x_diff = np.append(0.0, np.diff(x_ii))  # 尋找異常值
-  stdev_amt = 5.0  # 標準偏差乘數
+  x_diff = np.append(0.0, np.diff(x_ii))  # 寻找异常值
+  stdev_amt = 5.0  # 标准偏差乘数
   x_outliers = np.where(
     np.abs(x_diff) > np.abs(np.mean(x_diff)) + (stdev_amt * np.std(x_diff))
   )
-  y_diff = np.append(0.0, np.diff(y_ii))  # 尋找異常值
+  y_diff = np.append(0.0, np.diff(y_ii))  # 找不到离群值
   y_outliers = np.where(
     np.abs(y_diff) > np.abs(np.mean(y_diff)) + (stdev_amt * np.std(y_diff))
   )
   if len(x_outliers) != 0:
-      x_ii[x_outliers] = np.nan  # 找不到離群值
-      y_ii[x_outliers] = np.nan  # 找不到離群值
+      x_ii[x_outliers] = np.nan  # 找不到离群值
+      y_ii[x_outliers] = np.nan  # 找不到离群值
   if len(y_outliers) != 0:
-      y_ii[y_outliers] = np.nan  # 找不到離群值
-      x_ii[y_outliers] = np.nan  # 找不到離群值
+      y_ii[y_outliers] = np.nan  # 找不到离群值
+      x_ii[y_outliers] = np.nan  # 找不到离群值
   return x_ii, y_ii
 
 def mag_cal():
   print("磁力計校準")
-  mag_cal_rotation_vec = []  # 校準計算的變量
+  mag_cal_rotation_vec = []  # 校准计算的变量
   for qq, ax_qq in enumerate(mag_cal_axes):
     input("按 Enter 並開始將 IMU 旋轉在 " + ax_qq + "-axis")
     mag_array = []
@@ -883,18 +883,18 @@ def mag_cal():
       index = index + 1
       if index == cal_size:
         break
-    mag_array = mag_array[20:]  # 扔掉前幾個點（緩衝區清除）
-    mag_cal_rotation_vec.append(mag_array)  # 校準陣列
+    mag_array = mag_array[20:]  # 扔掉前几个点（缓冲区清除）
+    mag_cal_rotation_vec.append(mag_array)  # 校准阵列
     print("Sample Rate: {0:2.0f} Hz".format(len(mag_array) / (time.time() - t0)))
 
   mag_cal_rotation_vec = np.array(mag_cal_rotation_vec)
   ak_fit_coeffs = []
-  indices_to_save = [0, 0, 1]  # 索引保存為偏移
+  indices_to_save = [0, 0, 1]  # 索引保存为偏移
   for mag_ii, mags in enumerate(mag_cal_rotation_vec):
     mags = np.array(mags)
-    # 傳感器要分析
+    # 传感器要分析
     x, y = mags[:, cal_rot_indices[mag_ii][0]], mags[:, cal_rot_indices[mag_ii][1]] 
-    x, y = outlier_removal(x, y)  # 離群拆除
+    x, y = outlier_removal(x, y)  # 離群拆离群拆除除
     y_0 = (np.nanmax(y) + np.nanmin(y)) / 2.0  # y-偏移值
     x_0 = (np.nanmax(x) + np.nanmin(x)) / 2.0  # x-偏移值
     ak_fit_coeffs.append([x_0, y_0][indices_to_save[mag_ii]])  # 附加以偏移值
@@ -904,9 +904,9 @@ def mag_cal_plot():
   plt.style.use("ggplot")
   fig, axs = plt.subplots(1, 2, figsize=(12, 7))
   for mag_ii, mags in enumerate(mag_cal_rotation_vec):
-    mags = np.array(mags)  # 磁力計陣列
+    mags = np.array(mags)  # 磁力计阵列
     x, y = mags[:, cal_rot_indices[mag_ii][0]], mags[:, cal_rot_indices[mag_ii][1]]
-    x, y = outlier_removal(x, y)  # 離群拆除
+    x, y = outlier_removal(x, y)  # 离群拆除
     axs[0].scatter(
       x,
       y,
@@ -925,18 +925,18 @@ def mag_cal_plot():
         mag_labels[cal_rot_indices[mag_ii][1]],
       ),
     )
-  axs[0].set_title("硬鐵偏移之前", fontproperties=font)
-  axs[1].set_title("硬鐵偏移後", fontproperties=font)
+  axs[0].set_title("硬铁偏移之前", fontproperties=font)
+  axs[1].set_title("硬铁偏移后", fontproperties=font)
   mag_lims = [
     np.nanmin(np.nanmin(mag_cal_rotation_vec)),
     np.nanmax(np.nanmax(mag_cal_rotation_vec)),
   ]
   mag_lims = [-1.1 * np.max(mag_lims), 1.1 * np.max(mag_lims)]
   for jj in range(0, 2):
-    axs[jj].set_ylim(mag_lims)  # 設置限制範圍
-    axs[jj].set_xlim(mag_lims)  # 設置限制範圍
+    axs[jj].set_ylim(mag_lims)  # 设置限制范围
+    axs[jj].set_xlim(mag_lims)  # 设置限制范围
     axs[jj].legend(prop=font1)
-    axs[jj].set_aspect("equal", adjustable="box")  # 方形軸
+    axs[jj].set_aspect("equal", adjustable="box")  # 方形轴
   plt.show()
 
 if __name__ == "__main__":
@@ -944,10 +944,10 @@ if __name__ == "__main__":
   cal_size = 100
   mag_labels = ["m_x", "m_y", "m_z"]
   mag_cal_axes = ["z", "x", "y"]
-  cal_rot_indices = [[0, 1], [1, 2], [0, 2]]  # 每個軸的標題索引
-  mag_coeffs, mag_cal_rotation_vec = mag_cal()  # 獲取磁力計係數
+  cal_rot_indices = [[0, 1], [1, 2], [0, 2]]  # 每个轴的标题索引
+  mag_coeffs, mag_cal_rotation_vec = mag_cal()  # 获取磁力计系数
   mag_cal_plot()
-  print("------> 硬鐵偏移係數\nz: {:9.5f}, {:9.5f} \
+  print("------> 硬铁偏移系数 \nz: {:9.5f}, {:9.5f} \
                             \nx: {:9.5f}, {:9.5f} \
                             \ny: {:9.5f}, {:9.5f}.".format( \
                             mag_coeffs[0], mag_coeffs[1], \
@@ -987,21 +987,21 @@ corrected_z = sensor_z - offset_z
 
 ![Alt X](../assets/img/esp/magdistortion.png)
 
-### 硬鐵偏移係數修正前后分别
+### 硬铁偏移系数修正前后分别
 
-硬鐵變形是由附近的永久磁鐵引起的。這些附近的磁場會對我們的讀數產生簡單的附加偏移，並且相對容易修正。在向各個方向移動磁力計的同時獲取大量 X、Y 和 Z 原始讀數。我們可以繪製 X/Y、Y/Z 和 Z/X 值，它們將顯示為 3 個獨立的圓圈。透過硬鐵變形，這些圓圈將出現在樣本圖的不同區域。
+硬铁变形是由附近的永久磁铁引起的。这些附近的磁场会对我们的读数产生简单的附加偏移，并且相对容易修正。在向各个方向移动磁力计的同时获取大量 X、Y 和 Z 原始读数。我们可以绘制 X/Y、Y/Z 和 Z/X 值，它们将显示为 3 个独立的圆圈。透过硬铁变形，这些圆圈将出现在样本图的不同区域。
 
-接下來，找到每個軸的最小值和最大值之間的中點。使其成為偏移值。當未來的原始讀數中減去這些偏移時值，就成功地修正了硬鐵扭曲。如果取得一系列新的讀數並繪製結果，則圓圈應該會相互重疊。如下圖所示：
+接下来，找到每个轴的最小值和最大值之间的中点。使其成为偏移值。当未来的原始读数中减去这些偏移时值，就成功地修正了硬铁扭曲。如果取得一系列新的读数并绘制结果，则圆圈应该会相互重叠。如下图所示：
 
 ![Alt X](../assets/img/esp/mag_hard_calibration.png)
 
-### 軟鐵失真
+### 软铁失真
 
-軟鐵失真不能透過簡單地消除常量偏移來消除。校正軟鐵畸變通常計算成本較高，並涉及 3x3 變換矩陣。
+软铁失真不能透过简单地消除常量偏移来消除。校正软铁畸变通常计算成本较高，并涉及 3x3 变换矩阵。
 
-有一種計算成本更便宜的方法，即使用尺度偏差。這種方法也應該給出相當好的結果。下面的範例偽程式碼還包括上一個步驟中的硬鐵偏移。
+有一种计算成本更便宜的方法，即使用尺度偏差。这种方法也应该给出相当好的结果。下面的范例伪程式码还包括上一个步骤中的硬铁偏移。
 
-#### 硬鉄偏移量和軟鐵失真偽程式碼
+#### 硬鉄偏移量和软铁失真伪程式码
 
 ```py
 avg_delta_x = (max(x) - min(x)) / 2
@@ -1019,22 +1019,25 @@ corrected_y = (sensor_y - offset_y) * scale_y
 corrected_z = (sensor_z - offset_z) * scale_z
 ```
 
-### 磁偏角估計值
+### 磁偏角估计值
 
-地磁偏角是指地球上任一處的磁北方向和正北方向之間的夾角。當地磁北向實際偏東時，地磁偏角為正，反之為負。
+地磁偏角是指地球上任一处的磁北方向和正北方向之间的夹角。当地磁北向实际偏东时，地磁偏角为正，反之为负。
 
-[磁偏角估計值 - 網路資源](https://www.ngdc.noaa.gov/geomag/calculators/magcalc.shtml#declination)
+[磁偏角估计值 - 网路资源](https://www.ngdc.noaa.gov/geomag/calculators/magcalc.shtml#declination)
 
+### 运动传感器校准工具
 
-#### 香港磁偏角估計值樣本
+[运动传感器校准工具 - MotionCal](https://www.pjrc.com/store/prop_shield.html)
+
+#### 香港磁偏角估计值样本
 
 ![Alt X](../assets/img/esp/hk_declination.png)
 
 ```
-磁偏角估計值(香港) = 3 + 17 / 60 = 3.2833
+磁偏角估计值(香港) = 3 + 17 / 60 = 3.2833
 ```
 
-注意：如果偏移量是向東，則該數字應該為正。如果偏移量是向西，則該數字應為負數。
+注意：如果偏移量是向东，则该数字应该为正。如果偏移量是向西，则该数字应为负数。
 
 ## 数据融合
 
