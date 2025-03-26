@@ -1016,6 +1016,12 @@ corrected_y = (sensor_y - offset_y) * scale_y
 corrected_z = (sensor_z - offset_z) * scale_z
 ```
 
+### 磁偏角估計值
+
+地磁偏角是指地球上任一處的磁北方向和正北方向之間的夾角。當地磁北向實際偏東時，地磁偏角為正，反之為負。
+
+[磁偏角估計值 - 網路資源](https://www.ngdc.noaa.gov/geomag/calculators/magcalc.shtml#declination)
+
 ## 数据融合
 
 因为加速度、磁力计具有高频噪声，需要低通滤波，将加速度、磁力计的信号看成是音频信号，它们的信号会有很多“毛刺“，也就是说它们的瞬时值不够精确，解算出来的姿态会震荡，但长期来看姿态方向是对的。
