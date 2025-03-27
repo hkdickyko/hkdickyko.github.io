@@ -126,7 +126,7 @@ $ make install    # 注：运行这个要有足够的权限
 $ make clean
 ```
 
-到此时，就可以运行 make 进行编译，在运行 make install 进行安装了，最后运行 make clean 删除![Alt X](../assets/img/linux/wxposter.png)临时文件。
+到此时，就可以运行 make 进行编译，在运行 make install 进行安装了，最后运行 make clean 删除临时文件。
 
 利用 **configure** 所产生的 **Makefile** 文件有几个预设的目标可供使用，其中几个重要的简述如下：
 
@@ -311,7 +311,7 @@ aclocal
 autoconf
 ```
 
-**autoconf** 从 **configure.in** 这个列举编译软件时所需要各种参数的模板文件中创建 configure。autoconf 需要 GNU m4 宏处理器来处理 aclocal.m4，生成 configure 脚本。
+**autoconf** 从 **configure.ac** 这个列举编译软件时所需要各种参数的模板文件中创建 configure。autoconf 需要 GNU m4 宏处理器来处理 aclocal.m4，生成 configure 脚本。
 
 
 ```sh
