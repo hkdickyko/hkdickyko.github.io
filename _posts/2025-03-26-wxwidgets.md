@@ -76,3 +76,7 @@ sudo ldconfig               # 并非每个系统都要求
 wx-config --version  # 3.2.7
 wx-config --list     # gtk3-unicode-3.21
 ```
+
+## wxWidgets 类层次
+
+![Alt X](../assets/img/linux/wxposter.png)
