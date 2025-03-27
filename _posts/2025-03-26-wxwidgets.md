@@ -374,9 +374,10 @@ config.status: executing depfiles commands
   类似 make clean，但同时也将 configure 生成的文件全部删除掉，包括 Makefile。
 
 
+### 尝试运行执行文件以确认输出创建成功
 
-
-
-
-
-
+```sh
+make
+./helloworld
+>> Hello, Linux World!
+```
