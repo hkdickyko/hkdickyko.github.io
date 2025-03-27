@@ -164,3 +164,219 @@ $ make clean
 
 ![Alt X](../assets/img/linux/configure.png)
 
+## 一个简单 Makefile 例子
+
+以下将介绍如何使用 **autoconf** 和 **automake** 两个工具来帮助自动地生成符合自由软件惯例的 **Makefile**，这样就可以象常见的 GNU 程序一样，只要使用 **./configure**，**make**，**make instal** 就可以把程序安装到 Linux 系统中去了。这将特别适合想做开放源代码软件的程序开发人员，如果写些小的程序，那么以下文章会有很大的帮助。
+
+### 基本例子设置 (helloworld)
+
+```sh
+mkdir helloword
+cd helloworld
+touch helloworld.c
+tourch Makefile.am
+```
+
+### helloworld.c 内容
+
+```c
+#include <stdio.h>
+int main(int argc, char** argv)
+{
+printf("Hello, Linux World! ");
+return 0;
+}
+```
+
+### Makefile.am 内容
+
+```
+AUTOMAKE_OPTIONS=foreign        # 只检测必须的文件
+bin_PROGRAMS=helloworld         # 要生成的可执行文件名，如多个可用空格隔开
+helloworld_SOURCES=helloworld.c # 要生成程序所需要的原始文件，如多个可用空格隔开
+```
+
+## 创建如下过程
+
+```sh
+autoscan
+```
+
+**autoscan** 用于创建 configure.scan 后，需要修改内容如下并重命名为 configure.ac 如下
+
+```
+# -*- Autoconf -*-
+# 使用 autoconf 处理此文件以生成配置脚本.
+
+AC_PREREQ(2.69)                 # 需要的最低autoconf版本
+AC_INIT(helloworld, 1.0)        # 这个宏用来检查源代码所在的路径
+AC_CONFIG_SRCDIR(helloworld.c)  # 确认某些关键文件在正确的目录
+AC_CONFIG_HEADERS(config.h)     # 创建头文件
+AM_INIT_AUTOMAKE                # 必须要的，指定编译参数
+AC_PROG_CC                      # 这个宏将检查系统所用的 C 编译器
+AC_CONFIG_FILES(Makefile)       # 这个宏是输出 Makefile 的名字
+AC_OUTPUT                       # 必须的宏,用以输出需要产生的文件
+
+# 检查库.
+# 检查头文件
+# 检查类型定义、结构和编译器特性
+# 检查库函数
+
+```
+
+注意：**文件末尾必须添加一行**
+ 
+### configure.ac 常用宏总结 
+
+<table>
+    <thead>
+        <tr>
+            <th>标签名</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>AC_PREREQ</td>
+            <td>声明 autoconf 要求的版本号</td>
+        </tr>
+        <tr>
+            <td>AC_INIT</td>
+            <td>定义软件名称、版本号、联系方式</td>
+        </tr>
+        <tr>
+            <td>AM_INIT_AUTOMAKE</td>
+            <td>必须要的, 指定编译参数</td>
+        </tr>
+        <tr>
+            <td>AC_CONFIG_SRCDIR</td>
+            <td>用来侦测所指定的源码文件是否存在, 来确定源码目录的有效性</td>
+        </tr>
+        <tr>
+            <td>AC_CONFIG_HEADER</td>
+            <td>指定产生的配置文件名称(一般是 config.h),用于生成 config.h 文件, 以便 autoheader 命令使用</td>
+        </tr>
+        <tr>
+            <td>AC_PROG_CC</td>
+            <td>用以探测当前系统的C编译器</td>
+        </tr>
+        <tr>
+            <td>AC_PROG_RANLIB</td>
+            <td>用于生成静态库</td>
+        </tr>
+        <tr>
+            <td>AC_PROG_LIBTOOL</td>
+            <td>用于生成动态库</td>
+        </tr>
+        <tr>
+            <td>AM_PROG_AR</td>
+            <td>生成静态库时使用, 用于指定打包工具, 一般指ar</td>
+        </tr>
+        <tr>
+            <td>AC_CONFIG_FILES</td>
+            <td>告知 autoconf 本工程生成哪些相应的 Makefile 文件, 不同文件夹下的 Makefile 通过空格分隔</td>
+        </tr>
+        <tr>
+            <td>AC_OUTPUT</td>
+            <td>最后一个必须的宏, 用以输出需要产生的文件</td>
+        </tr>
+        <tr>
+            <td>AC_PROG_CXX</td>
+            <td>用于探测系统的 c++ 编译器</td>
+        </tr>
+        <tr>
+            <td>AC_CHECK_LIB</td>
+            <td>探测工程中出现的库文件及库文件中的方法</td>
+        </tr>
+        <tr>
+            <td>PKG_CHECK_MODULES</td>
+            <td>利用 pkg-config 生成 _CFLAGS _LIBS</td>
+        </tr>
+        <tr>
+            <td>AC_SUBST</td>
+            <td>输出能够被 Makefile.am 使用的变量</td>
+        </tr>
+    </tbody>
+</table>
+
+```sh
+aclocal
+```
+
+**aclocal** 用于创建 **aclocal.m4**。如果要生成 configure 文件，必须告诉 autoconf 如何找到所用的宏。方式是使用 aclocal 程序来生成 aclocal.m4。
+
+```sh
+autoconf
+```
+
+**autoconf** 从 **configure.in** 这个列举编译软件时所需要各种参数的模板文件中创建 configure。autoconf 需要 GNU m4 宏处理器来处理 aclocal.m4，生成 configure 脚本。
+
+
+```sh
+autoheader
+```
+
+**autoheader** 命令用于从 **configure.ac** 文件中生成 **config.h.in** 文件。config.h.in 是一个模板文件，它包含了在编译时可能需要根据平台或配置选项进行调整的宏定义。当 configure 脚本运行时，它会根据用户的配置选项和平台特性，从 config.h.in 生成最终的 config.h 文件。
+
+
+**automake** 会根据写的 **Makefile.am** 来自动生成 Makefile.in 。Makefile.am 中定义的宏和目标,会指导 automake 生成指定的代码。例如，宏bin_PROGRAMS 将导致编译和连接的目标被生成。
+
+```sh
+automake --add-missing
+configure.ac:9: installing './compile'
+configure.ac:8: installing './install-sh'
+configure.ac:8: installing './missing'
+Makefile.am: installing './depcomp'
+```
+
+**configure** 生成 **Makefile**
+
+```sh
+./configure
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating config.h
+config.status: executing depfiles commands
+```
+
+在符合 **GNU Makefie** 惯例的 Makefile 中，包含了一些基本的预先定义的操作：
+
+ - make
+  根据 Makefile 编译源代码，连接，生成目标文件，可执行文件。
+ - make clean　　
+  清除上次的 make 命令所产生的 object 文件（后缀为 .o 的文件）及可执行文件。
+ - make install
+  将编译成功的可执行文件安装到系统目录中，一般为 /usr/local/bin 目录。
+ - make dist
+  产生发布软件包文件(即 distribution package)。这个命令将会将可执行文件及相关文件打包成一个 tar.gz 压缩的文件用来作为发布软件的软件包。它会在当前目录下生成一个名字类似 PACKAGE-VERSION.tar.gz 的文件。PACKAGE和 VERSION，是我们在 configure.in 中定义的 AM_INIT_AUTOMAKE(PACKAGE, VERSION)。
+ - make distcheck
+  生成发布软件包并对其进行测试检查，以确定发布包的正确性。这个操作将自动把压缩包文件解开，然后执行 configure 命令，并且执行 make，来确认编译不出现错误，最后提示你软件包已经准备好，可以发布了。
+ - make distclean
+  类似 make clean，但同时也将 configure 生成的文件全部删除掉，包括 Makefile。
+
+
+
+
+
+
+
+
