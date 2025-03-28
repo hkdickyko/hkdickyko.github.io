@@ -79,7 +79,9 @@ wx-config --list     # gtk3-unicode-3.21
 
 ## wxWidgets 类层次
 
-![Alt X](../assets/img/linux/wxposter.png)
+![Alt X](../assets/img/linux/wxposter1.png)
+
+![Alt X](../assets/img/linux/wxposter2.png)
 
 
 # Linux ./configure、make、make install 命令详解 
