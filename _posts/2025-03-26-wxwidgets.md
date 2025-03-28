@@ -87,6 +87,8 @@ wx-config --list     # gtk3-unicode-3.21
 
 ![Alt X](../assets/img/linux/wxposter4.png)
 
+输入 **wx-config --cxxflags**，检查 **wxGTK** 是否正确配置安装，如果能看到 **wx-config** 头文件的路径就说明已经配置成功了。
+
 # Linux ./configure、make、make install 命令详解 
 
 这些都是典型使用 **GNU** 的 **AUTOCONF** 和 **AUTOMAKE** 产生的程序的安装步骤
