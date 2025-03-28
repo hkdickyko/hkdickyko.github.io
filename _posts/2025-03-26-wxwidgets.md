@@ -83,6 +83,9 @@ wx-config --list     # gtk3-unicode-3.21
 
 ![Alt X](../assets/img/linux/wxposter2.png)
 
+![Alt X](../assets/img/linux/wxposter3.png)
+
+![Alt X](../assets/img/linux/wxposter4.png)
 
 # Linux ./configure、make、make install 命令详解 
 
