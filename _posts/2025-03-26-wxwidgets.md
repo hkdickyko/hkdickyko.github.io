@@ -476,4 +476,31 @@ quality.o: quality.c imuread.h Makefile
 mahony.o: mahony.c imuread.h Makefile
 ```
 
-[下载 MotionCal 压缩文件](../assets/zip/MotionCal.zip)
+[下载 MotionCal 压缩软件](../assets/zip/MotionCal.zip)
+
+### 使用 MotionCal 软件
+
+**第一步**，需要把磁力计连接到 MCU 在串口打印传感器的原始数据，这里不管是使用 Arduino，RT-Thread, Zephyr, Rust Embassy, RIOT 都不太重要，只要能按照下面的格式串口打印数据就能对接 MotionCal ：
+
+Raw: gx, gy, gz, ax, ay, az, mx, my, mz
+这里 gx, gy, gz 分别是陀螺仪的数据，ax, ay, az 是加速度计的数据，mx, my, mz 则是磁力计的数据。当然，校正磁力计只需要打印磁力计的数据就足够了，所以我打印出来的数据长这样，陀螺仪和加速度计设置为 0。
+
+Raw: 0, 0, 0, 0, 0, 0, -416, -314, 672
+这里注意磁力计数据是3位整数，所以可能需要单位换算，比如原始数据 x1000。
+
+**第二步**，把开发板连接到电脑，MotionCal 连上串口后，接下来不停地摇晃、倾斜磁力计的角度，尽量画出一个球测出不同方向的磁场强度，软件右边会实时更新校正的矩阵，感觉测量点差不多了就可以断开连接，保存矩阵参数。
+
+![Alt X](../assets/img/linux/motioncal.gif)
+
+现在应该理解为什么要校正磁力计，以及校正磁力计需要的三个参数了。
+
+ - Magnetic Declination (磁偏角)
+ - Hard-Iron Calibration (硬铁校准) 
+ - Soft-Iron Calibration (软铁校准)
+
+然而这里还没有介绍另一个很重要的校正：
+
+Tilt Calibration
+这里校正完后，如果把磁力计 **水平** 放在桌面上，应当会很准确了，然而不幸的是飞控或者机械臂上的磁力计并不一定水平，所以还需要根据传感器的倾斜角度，校正 x, y, z 各个方向的磁场分量。
+
+至于传感器的角度估计，当然可以用之前文章介绍的 **互补滤波器** 来估计了，再结合磁力计的方向，就能精准得到开发板的 roll, pitch, yaw 姿态了，不过后面还会介绍更新的 Kalman Filter，Mahony Filter 和 Madgwick Filter。
