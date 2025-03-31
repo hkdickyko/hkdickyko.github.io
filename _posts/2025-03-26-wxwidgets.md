@@ -427,4 +427,53 @@ gcc -I需附加目录 <其他标志>
 ![Alt X](../assets/img/linux/selection_sort.png)
 
 
+## MotionCal
 
+在 deepin 中为 MotionCal 制作运行文件的 **Makefile**
+
+```make
+OS = LINUX
+
+ALL = MotionCal imuread
+CC = gcc
+CXX = g++
+CFLAGS = -O2 -Wall -D$(OS)
+
+WXFLAGS = `wx-config --cppflags`
+CXXFLAGS = $(CFLAGS) $(WXFLAGS)
+OPENGL = `wx-config --cppflags --libs all,opengl`
+LDFLAGS = -lglut -lGLU -lGL -lm
+SFLAG = -s
+
+OBJS = visualize.o serialdata.o rawdata.o magcal.o matrix.o fusion.o quality.o mahony.o
+IMGS = checkgreen.png checkempty.png checkemptygray.png
+
+all: $(ALL)
+
+MotionCal: gui.o portlist.o images.o $(OBJS)
+	$(CXX) $(SFLAG) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(OPENGL)
+
+images.cpp: $(IMGS) png2c.pl
+	perl png2c.pl $(IMGS) > images.cpp
+
+imuread: imuread.o $(OBJS)
+	$(CC) -s $(CFLAGS) $(LDFLAGS) -o $@ $^ 
+
+clean:
+	rm -f gui MotionCal imuread *.o *.exe *.sign? images.cpp
+	rm -rf MotionCal.app MotionCal.dmg .DS_Store dmg_tmpdir
+
+gui.o: gui.cpp gui.h imuread.h Makefile
+portlist.o: portlist.cpp gui.h Makefile
+imuread.o: imuread.c imuread.h Makefile
+visualize.o: visualize.c imuread.h Makefile
+serialdata.o: serialdata.c imuread.h Makefile
+rawdata.o: rawdata.c imuread.h Makefile
+magcal.o: magcal.c imuread.h Makefile
+matrix.o: matrix.c imuread.h Makefile
+fusion.o: fusion.c imuread.h Makefile
+quality.o: quality.c imuread.h Makefile
+mahony.o: mahony.c imuread.h Makefile
+```
+
+[下载 MotionCal 压缩文件](../assets/zip/MotionCal.zip)
