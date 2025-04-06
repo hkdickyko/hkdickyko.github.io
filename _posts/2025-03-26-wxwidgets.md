@@ -427,6 +427,95 @@ gcc -I需附加目录 <其他标志>
 ![Alt X](../assets/img/linux/selection_sort.png)
 
 
+## wxWidgets 的基本应用程序代码
+
+基本示例代码的 Makefile，注意：**:** 的下一行必须是 **\tab** 否则编译过程中会出错。
+
+```make
+CC = gcc
+CXX = g++
+CFLAGS = -O2 -Wall -DLINUX
+WXFLAGS = `wx-config --cppflags --libs`
+basic:
+	$(CXX) $@.cpp $(WXFLAGS) -o $@
+clean:
+	rm -rf basic *.o 
+```
+
+basic.cpp 基本示例代码如下
+
+```cpp
+#include "wx/wx.h" 
+ 
+class MyApp: public wxApp
+{
+    virtual bool OnInit();
+};
+ 
+class MyFrame: public wxFrame
+{
+public:
+    MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
+    void OnQuit(wxCommandEvent& event);
+    void OnAbout(wxCommandEvent& event);
+    DECLARE_EVENT_TABLE()
+};
+
+enum
+{
+    ID_Quit = 1,
+    ID_About,
+};
+ 
+BEGIN_EVENT_TABLE(MyFrame, wxFrame)
+    EVT_MENU(ID_Quit, MyFrame::OnQuit)
+    EVT_MENU(ID_About, MyFrame::OnAbout)
+END_EVENT_TABLE()
+ 
+IMPLEMENT_APP(MyApp)
+
+bool MyApp::OnInit()
+{
+    MyFrame *frame = new MyFrame(wxT("wxWidgets 的基本应用程序"), wxPoint(50,50), wxSize(450,340) );
+    frame->Show(TRUE);
+    SetTopWindow(frame);
+    return TRUE;
+} 
+ 
+MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
+: wxFrame((wxFrame *)NULL, -1, title, pos, size)
+{
+// 创建菜单内容
+    wxMenu *menuFile = new wxMenu;
+    menuFile->Append(ID_About, "&About...");
+    menuFile->AppendSeparator();
+    menuFile->Append(ID_Quit, "E&xit" );
+ // 创建菜单栏
+    wxMenuBar *menuBar = new wxMenuBar;
+    menuBar->Append(menuFile, "&File");
+    menuBar->SetBackgroundColour(wxColour(* wxLIGHT_GREY));
+    SetMenuBar( menuBar );
+// 创建状态栏
+    CreateStatusBar();
+    SetStatusText(wxT("欢迎来到 wxWindows"));
+    SetBackgroundColour(wxColour(* wxLIGHT_GREY));
+}
+ 
+void MyFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
+{
+    Close(TRUE);
+}
+ 
+void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
+{
+  wxMessageBox(wxT("wxWidgets 中的基本应用程序"), wxT("关于消息框"), wxOK | wxICON_INFORMATION, this);
+}
+```
+
+执行程序如下所示。
+
+![Alt X](../assets/img/linux/basic_win.png)
+
 ## MotionCal
 
 在 deepin 中为 MotionCal 制作运行文件的 **Makefile**
