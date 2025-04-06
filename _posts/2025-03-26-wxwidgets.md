@@ -498,8 +498,8 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 // 创建状态栏
   CreateStatusBar();
   SetStatusText(wxT("欢迎来到 wxWindows"));
-	SetForegroundColour(wxColor(*wxBLACK));
-	SetBackgroundColour(wxColour(*wxLIGHT_GREY));    
+  SetForegroundColour(wxColor(*wxBLACK));
+  SetBackgroundColour(wxColour(*wxLIGHT_GREY));    
 }
  
 void MyFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
