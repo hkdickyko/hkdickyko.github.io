@@ -13,6 +13,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jemoji
+  - jekyll-mermaid
 
 paginate: 7
 paginate_path: "page:num"
