@@ -165,8 +165,8 @@ A^{+}=A^{T}(D)^{-1}
 $$
 
 $$
-A.X=B \\
-A^{+}A.X = A^{+}.B \\
+A.X=B \Rightarrow
+A^{+}A.X = A^{+}.B \Rightarrow
 I.X = A^{+}.B
 $$
 
