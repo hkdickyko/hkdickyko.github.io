@@ -223,14 +223,14 @@ int determinant(float matrix[MAX_SIZE][MAX_SIZE], int n) {
   int det = 0;
   if (n == 1)
     return matrix[0][0];
-    float temp[MAX_SIZE][MAX_SIZE];
-    int sign = 1;
-    for (int f = 0; f < n; f++) {
-      getCofactor(matrix, temp, 0, f, n);
-      det += sign * matrix[0][f] * determinant(temp, n - 1);
-      sign = -sign;
-    }
-  return det;
+  float temp[MAX_SIZE][MAX_SIZE];
+  int sign = 1;
+  for (int f = 0; f < n; f++) {
+    getCofactor(matrix, temp, 0, f, n);
+    det += sign * matrix[0][f] * determinant(temp, n - 1);
+    sign = -sign;
+  }
+return det;
 }
 
 // 計算转置矩阵的函數
@@ -280,7 +280,7 @@ int inverse(float matrix[MAX_SIZE][MAX_SIZE], float inverse[MAX_SIZE][MAX_SIZE],
       inverse[i][j] = adj[i][j] / (float)det;
     }
   }
-  return 1;
+return 1;
 }
 
 // 顯示整數矩陣的函數
@@ -329,7 +329,7 @@ int main() {
     printf("\nInverse Matrix:\n");
     displayFloatMatrix(inv, size);
   }
-  return 0;
+return 0;
 }
 ```
 
