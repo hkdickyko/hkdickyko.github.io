@@ -192,18 +192,18 @@ $$
 #define MAX_SIZE 10
 
 // 讀取矩陣元素的函數
-void readMatrix(int matrix[MAX_SIZE][MAX_SIZE], int size) {
+void readMatrix(float matrix[MAX_SIZE][MAX_SIZE], int size) {
   printf("Enter the elements of the %dx%d matrix:\n", size, size);
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
       printf("Enter element [%d][%d]: ", i, j);
-      scanf("%d", &matrix[i][j]);
+      scanf("%f", &matrix[i][j]);
     }
   }
 }
 
 // 獲取函數餘因子 matrix[p][q] in temp[][]
-void getCofactor(int matrix[MAX_SIZE][MAX_SIZE], int temp[MAX_SIZE][MAX_SIZE], int p, int q, int n) {
+void getCofactor(float matrix[MAX_SIZE][MAX_SIZE], float temp[MAX_SIZE][MAX_SIZE], int p, int q, int n) {
   int i = 0, j = 0;
   for (int row = 0; row < n; row++) {
     for (int col = 0; col < n; col++) {
@@ -219,11 +219,11 @@ void getCofactor(int matrix[MAX_SIZE][MAX_SIZE], int temp[MAX_SIZE][MAX_SIZE], i
 }
 
 // 遞歸函數找出矩陣的行列式
-int determinant(int matrix[MAX_SIZE][MAX_SIZE], int n) {
+int determinant(float matrix[MAX_SIZE][MAX_SIZE], int n) {
   int det = 0;
   if (n == 1)
     return matrix[0][0];
-    int temp[MAX_SIZE][MAX_SIZE];
+    float temp[MAX_SIZE][MAX_SIZE];
     int sign = 1;
     for (int f = 0; f < n; f++) {
       getCofactor(matrix, temp, 0, f, n);
@@ -234,7 +234,7 @@ int determinant(int matrix[MAX_SIZE][MAX_SIZE], int n) {
 }
 
 // 計算转置矩阵的函數
-void transpose(int matrix[MAX_SIZE][MAX_SIZE], int tr[MAX_SIZE][MAX_SIZE], int n)
+void transpose(float matrix[MAX_SIZE][MAX_SIZE], float tr[MAX_SIZE][MAX_SIZE], int n) {
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
       tr[j][i] = matrix[i][j];
@@ -243,13 +243,13 @@ void transpose(int matrix[MAX_SIZE][MAX_SIZE], int tr[MAX_SIZE][MAX_SIZE], int n
 }
 
 // 計算矩陣伴隨的函數
-void adjoint(int matrix[MAX_SIZE][MAX_SIZE], int adj[MAX_SIZE][MAX_SIZE], int n) {
+void adjoint(float matrix[MAX_SIZE][MAX_SIZE], float adj[MAX_SIZE][MAX_SIZE], int n) {
   if (n == 1) {
     adj[0][0] = 1;
     return;
   }
   int sign = 1;
-  int temp[MAX_SIZE][MAX_SIZE];
+  float temp[MAX_SIZE][MAX_SIZE];
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
     // 獲取的餘因子 matrix[i][j]
@@ -263,7 +263,7 @@ void adjoint(int matrix[MAX_SIZE][MAX_SIZE], int adj[MAX_SIZE][MAX_SIZE], int n)
 }
 
 // 計算矩陣逆的函數
-int inverse(int matrix[MAX_SIZE][MAX_SIZE], float inverse[MAX_SIZE][MAX_SIZE], int n) {
+int inverse(float matrix[MAX_SIZE][MAX_SIZE], float inverse[MAX_SIZE][MAX_SIZE], int n) {
   // 求矩陣的行列式
   int det = determinant(matrix, n);
   // 如果行列式為零，則矩陣不可逆
@@ -272,7 +272,7 @@ int inverse(int matrix[MAX_SIZE][MAX_SIZE], float inverse[MAX_SIZE][MAX_SIZE], i
     return 0;
   }
   // 求矩陣的伴隨
-  int adj[MAX_SIZE][MAX_SIZE];
+  float adj[MAX_SIZE][MAX_SIZE];
   adjoint(matrix, adj, n);
   // 將伴隨式除以行列式來求逆
   for (int i = 0; i < n; i++) {
@@ -284,10 +284,10 @@ int inverse(int matrix[MAX_SIZE][MAX_SIZE], float inverse[MAX_SIZE][MAX_SIZE], i
 }
 
 // 顯示整數矩陣的函數
-void displayMatrix(int matrix[MAX_SIZE][MAX_SIZE], int size) {
+void displayMatrix(float matrix[MAX_SIZE][MAX_SIZE], int size) {
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
-      printf("%d\t", matrix[i][j]);
+      printf("%f\t", matrix[i][j]);
     }
     printf("\n");
   }
@@ -304,7 +304,7 @@ void displayFloatMatrix(float matrix[MAX_SIZE][MAX_SIZE], int size) {
 }
 
 int main() {
-  int matrix[MAX_SIZE][MAX_SIZE];
+  float matrix[MAX_SIZE][MAX_SIZE];
   float inv[MAX_SIZE][MAX_SIZE];
   int size;
     // 取得矩陣大小
