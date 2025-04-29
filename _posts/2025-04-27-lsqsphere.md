@@ -2,7 +2,7 @@
 category: [積體電路]
 tags: [数学]
 title: 的最小平方法(球體)
-date: 2024-05-27 1:00:00
+date: 2024-04-27 1:00:00
 ---
 
 <style>
@@ -139,7 +139,6 @@ x_c = \dfrac{a}{2}, y_c = \dfrac{b}{2},z_c = \dfrac{c}{2}, r = \dfrac{ \sqrt{4d 
 $$
 
 并获取球体的参数：
-
 
 
 
