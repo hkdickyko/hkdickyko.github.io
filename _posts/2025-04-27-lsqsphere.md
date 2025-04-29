@@ -132,6 +132,166 @@ $$
 A^{+}=A^{T}(A.A^{T})^{-1}
 $$
 
+
+以上偽逆是非奇異方陣逆的概念向奇異矩陣和矩形矩陣的擴展。它是眾多廣義逆之一，但由於它具有許多特殊性質，因此在實踐中最有用。
+
+如下動畫說明 $A$ 转换至 $A^{T}$ 可源自透過主對角線的反射。
+
+![Alt X](../assets/img/math/mtranspose.gif)
+
+逆距陣求法：
+
+$$
+C=A.A^{T}
+$$
+
+
+$$
+C^{-1}= \frac {1}{|C|} \cdot Adj  C
+$$
+
+
+## 求逆距陣 C 源代码
+
+```c
+#include <stdio.h>
+#define MAX_SIZE 10
+
+// 讀取矩陣元素的函數
+void readMatrix(int matrix[MAX_SIZE][MAX_SIZE], int size) {
+  printf("Enter the elements of the %dx%d matrix:\n", size, size);
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      printf("Enter element [%d][%d]: ", i, j);
+      scanf("%d", &matrix[i][j]);
+    }
+  }
+}
+
+// 獲取函數餘因子 matrix[p][q] in temp[][]
+void getCofactor(int matrix[MAX_SIZE][MAX_SIZE], int temp[MAX_SIZE][MAX_SIZE], int p, int q, int n) {
+  int i = 0, j = 0;
+  for (int row = 0; row < n; row++) {
+    for (int col = 0; col < n; col++) {
+      if (row != p && col != q) {
+        temp[i][j++] = matrix[row][col];
+        if (j == n - 1) {
+           j = 0;
+           i++;
+        }
+      }
+    }
+  }
+}
+
+// 遞歸函數找出矩陣的行列式
+int determinant(int matrix[MAX_SIZE][MAX_SIZE], int n) {
+  int det = 0;
+  if (n == 1)
+    return matrix[0][0];
+    int temp[MAX_SIZE][MAX_SIZE];
+    int sign = 1;
+    for (int f = 0; f < n; f++) {
+      getCofactor(matrix, temp, 0, f, n);
+      det += sign * matrix[0][f] * determinant(temp, n - 1);
+      sign = -sign;
+    }
+  return det;
+}
+
+// 計算矩陣伴隨的函數
+void adjoint(int matrix[MAX_SIZE][MAX_SIZE], int adj[MAX_SIZE][MAX_SIZE], int n) {
+  if (n == 1) {
+    adj[0][0] = 1;
+    return;
+  }
+  int sign = 1;
+  int temp[MAX_SIZE][MAX_SIZE];
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+    // 獲取的餘因子 matrix[i][j]
+    getCofactor(matrix, temp, i, j, n);
+    // 若行和列索引之和為偶數，則 adj[j][i] 的符號為正
+    sign = ((i + j) % 2 == 0) ? 1 : -1;
+    // 交換行和列以獲得餘因子矩陣的轉置
+    adj[j][i] = sign * determinant(temp, n - 1);
+    }
+  }
+}
+
+// 計算矩陣逆的函數
+int inverse(int matrix[MAX_SIZE][MAX_SIZE], float inverse[MAX_SIZE][MAX_SIZE], int n) {
+  // 求矩陣的行列式
+  int det = determinant(matrix, n);
+  // 如果行列式為零，則矩陣不可逆
+  if (det == 0) {
+    printf("Matrix is not invertible as determinant is zero.\n");
+    return 0;
+  }
+  // 求矩陣的伴隨
+  int adj[MAX_SIZE][MAX_SIZE];
+  adjoint(matrix, adj, n);
+  // 將伴隨式除以行列式來求逆
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      inverse[i][j] = adj[i][j] / (float)det;
+    }
+  }
+  return 1;
+}
+
+// 顯示整數矩陣的函數
+void displayMatrix(int matrix[MAX_SIZE][MAX_SIZE], int size) {
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      printf("%d\t", matrix[i][j]);
+    }
+    printf("\n");
+  }
+}
+
+// 顯示浮點矩陣的函數（用於逆）
+void displayFloatMatrix(float matrix[MAX_SIZE][MAX_SIZE], int size) {
+  for (int i = 0; i <   size; i++) {
+    for (int j = 0; j < size; j++) {
+      printf("%.4f\t", matrix[i][j]);
+    }
+    printf("\n");
+  }
+}
+
+int main() {
+  int matrix[MAX_SIZE][MAX_SIZE];
+  float inv[MAX_SIZE][MAX_SIZE];
+  int size;
+    // 取得矩陣大小
+  printf("Matrix Inverse Calculator\n"); printf("=========================\n");
+  printf("Enter the size of the square matrix (1-%d): ", MAX_SIZE);
+  scanf("%d", &size);
+  // 驗證矩陣大小
+  if (size <= 0 || size > MAX_SIZE) {
+    printf("Invalid matrix size. Please enter a size between 1 and %d.\n", MAX_SIZE);
+    return 1;
+  }
+  // 讀取矩陣元素
+  readMatrix(matrix, size);
+  // 顯示原始矩陣
+  printf("\nOriginal Matrix:\n");
+  displayMatrix(matrix, size);
+  // 計算並顯示行列式
+  int det = determinant(matrix, size);
+  printf("\nDeterminant of the matrix is: %d\n", det);
+  // 計算並顯示逆
+  if (inverse(matrix, inv, size)) {
+    printf("\nInverse Matrix:\n");
+    displayFloatMatrix(inv, size);
+  }
+  return 0;
+}
+```
+
+
+
 由於變數發生了變化，因此只需計算 $x_c、y_c、z_c$ 和 $r$：
 
 $$ x_c = \dfrac{a}{2} $$
@@ -145,17 +305,6 @@ $$ r = \dfrac{ \sqrt{4d + a^2 + b^2 + c^2}}{2} $$
 并获取球体的参数：
 
 ![Alt X](../assets/img/math/lsqsphere.png)
-
-
-
-
-
-
-
-
-
-
-
 
 
 
