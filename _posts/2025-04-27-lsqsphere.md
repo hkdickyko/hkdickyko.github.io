@@ -166,6 +166,14 @@ d
 \end{matrix} \right] = \hat{x}=A^{+}.B = A^{T}D^{-1}.B
 $$
 
+$$
+AA^{-1}=\left[ \begin{matrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+... & ... & ... \\
+0 & 0 & 0 & 1 \\
+\end{matrix} \right]
+$$
 
 ## 求逆距陣 **D** 的 C 源代码
 
@@ -320,7 +328,6 @@ $$ r = \dfrac{ \sqrt{4d + a^2 + b^2 + c^2}}{2} $$
 并获取球体的参数：
 
 ![Alt X](../assets/img/math/lsqsphere.png)
-
 
 
 
