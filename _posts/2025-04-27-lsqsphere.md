@@ -142,16 +142,16 @@ $$
 逆距陣求法：
 
 $$
-C=A.A^{T}
+D=A.A^{T}
 $$
 
 
 $$
-C^{-1}= \frac {1}{|C|} \cdot Adj  C
+D^{-1}= \frac {1}{|D|} \cdot Adj  D
 $$
 
 
-## 求逆距陣 C 源代码
+## 求逆距陣 **D** 的 C 源代码
 
 ```c
 #include <stdio.h>
@@ -291,6 +291,19 @@ int main() {
 ```
 
 
+$$
+A^{+}=A^{T}(D)^{-1}
+$$
+
+
+$$
+\left[ \begin{matrix}
+a \\
+b \\
+c \\
+d
+\end{matrix} \right] = \hat{x}=A^{+}.B = A^{T}D^{-1}.B
+$$
 
 由於變數發生了變化，因此只需計算 $x_c、y_c、z_c$ 和 $r$：
 
@@ -305,7 +318,6 @@ $$ r = \dfrac{ \sqrt{4d + a^2 + b^2 + c^2}}{2} $$
 并获取球体的参数：
 
 ![Alt X](../assets/img/math/lsqsphere.png)
-
 
 
 
