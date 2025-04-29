@@ -135,7 +135,9 @@ $$
 
 ### 对角矩阵 
 
-如果 $ A_{n \cdot m} $ 为对角矩阵
+如果 $ A_{n \cdot m} $ 为对角矩阵，则所计算出来的 $A^{+}$ 乘的位置取决于矩阵 行($n$) 和 列($m$) 小的那边。
+
+![Alt X](../assets/img/math/rowcol.png)
 
 $$
 m \ge n \Rightarrow A^{+}A=I_{n}, \\
