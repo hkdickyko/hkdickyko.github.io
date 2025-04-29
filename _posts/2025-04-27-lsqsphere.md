@@ -233,6 +233,15 @@ int determinant(int matrix[MAX_SIZE][MAX_SIZE], int n) {
   return det;
 }
 
+// 計算转置矩阵的函數
+void transpose(int matrix[MAX_SIZE][MAX_SIZE], int tr[MAX_SIZE][MAX_SIZE], int n)
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      tr[j][i] = matrix[i][j];
+    }
+  }
+}
+
 // 計算矩陣伴隨的函數
 void adjoint(int matrix[MAX_SIZE][MAX_SIZE], int adj[MAX_SIZE][MAX_SIZE], int n) {
   if (n == 1) {
