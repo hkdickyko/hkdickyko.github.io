@@ -47,6 +47,8 @@ $$
 
 $$\sum \limits_{i=1}^n{(y_i-y(x_i))^2}$$
 
+该系统的矩阵形式为：
+
 $$
 \left[ \begin{matrix} {x_1}^2 & x_1 & 1 \\
 {x_2}^2 & x_2 & 1 \\
@@ -62,6 +64,8 @@ y_2 \\
 y_n \\
 \end{matrix} \right]
 $$
+
+定義 $A$、$B$ 和 $X$：
 
 $$
 \begin{matrix}
