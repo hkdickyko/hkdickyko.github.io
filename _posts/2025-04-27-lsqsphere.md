@@ -397,12 +397,6 @@ void readMatrix(float matrix[MAX_SIZE][MAX_SIZE], int n, int m)
   }
 }
 
-/* 
-   // 顯示整數矩陣的函數 void displayMatrix(float
-   matrix[MAX_SIZE][MAX_SIZE], int n, int m) { for (int i = 0; i < n; i++) {
-   for (int j = 0; j < m; j++) { printf("%f\t", matrix[i][j]); } printf("\n");
-   } printf("\n"); } */
-
 // 顯示浮點矩陣的函數（用於逆）
 void displayMatrix(float matrix[MAX_SIZE][MAX_SIZE], int n, int m)
 {
@@ -416,7 +410,6 @@ void displayMatrix(float matrix[MAX_SIZE][MAX_SIZE], int n, int m)
   }
   printf("\n");
 }
-
 
 // 將矩陣元素初始化為 0
 void init(float result[MAX_SIZE][MAX_SIZE], int n, int m)
