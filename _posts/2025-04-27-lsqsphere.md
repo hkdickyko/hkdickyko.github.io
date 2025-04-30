@@ -78,15 +78,108 @@ B=\left[ \begin{matrix} y_1 \\ y_2 \\...  \\ y_n \\ \end{matrix} \right]
 \end{matrix}
 $$
 
+该系统现在由以下公式给出：
+
+
 $$
-A.\hat{x}=B
+A.X=B
 $$
 
 ![Alt X](../assets/img/math/polynomial.png)
 
 ## 圆形
 
+点云由 $n$ 个点组成，坐标分别为 $x_i$，$y_i$。目标是估算与这些点最匹配的圆的参数 $x_c$，$y_c$ 和 $r$：
 
+ - $x_c$ 是圆心的 $x$ 坐标
+ - $y_c$ 是圆心的 $y$ 坐标
+ - $r$ 是圆的半径
+
+理想圆的方程如下：
+
+$$
+(x_i-x_c)^2 + (y_i-y_c)^2 = r^2
+$$
+
+上述方程重写为：
+
+$$
+x_i^2 + x_c^2 - 2x_ix_c + y_i^2 + y_c^2 - 2y_iy_c = r^2
+$$
+
+$$
+2x_cx_i + 2y_cy_i + r^2 - x_c^2 - y_c^2 = x_i^2 + y_i^2
+$$
+
+$$
+ax_i + by_i + c  = x_i^2 + y_i^2
+$$
+
+$$
+a = 2x_c, b = 2y_c, c = r^2 -  x_c^2 - y_c^2
+$$
+
+整个系统所有点可以重写为：
+
+$$
+\begin{array}{rcl}
+ax_1 + by_1 + c & = & x_1^2 + y_1^2 \\
+ax_2 + by_2 + c & = & x_2^2 + y_2^2 \\
+& ... & \\
+ax_n + by_n + c & = & x_n^2 + y_n^2 \\
+\end{array}
+$$
+
+该系统的矩阵形式为：
+
+$$
+\left[ \begin{matrix}
+x_1 & y_1 & 1 \\
+x_2 & y_2 & 1 \\
+... & ... & ... \\
+x_n & y_n & 1 \\
+\end{matrix} \right].
+\left[ \begin{matrix}
+a \\
+b \\
+c
+\end{matrix} \right] =
+\left[ \begin{matrix}
+x_1^2 + y_1^2 \\
+x_2^2 + y_2^2 \\
+... \\
+x_n^2 + y_n^2 \\
+\end{matrix} \right]
+$$
+
+定義 $A$、$B$ 和 $X$：
+
+$$
+\begin{matrix}
+A=\left[ \begin{matrix}
+x_1 & y_1 & 1 \\
+x_2 & y_2 & 1 \\
+... & ... & ... \\
+x_n & y_n & 1 \\
+\end{matrix} \right]
+&
+B=\left[ \begin{matrix} x_1^2 + y_1^2 \\  x_2^2 + y_2^2  \\...  \\  x_n^2 + y_n^2  \\ \end{matrix} \right]
+&
+X=\left[ \begin{matrix} a \\ b \\ c \end{matrix} \right]
+\end{matrix}
+$$
+
+
+该系统现在由以下公式给出：
+
+$$
+A.X=B
+$$
+
+由於變數發生了變化，因此只需計算
+
+
+![Alt X](../assets/img/math/circle.png)
 
 ## 球體
 
@@ -118,11 +211,10 @@ ax_i + by_i + cz_i + d  = x_i^2 + y_i^2  + z_i^2
 $$
 
 $$
-a = 2x_c,b = 2y_c,c = 2z_c,,d = r^2 - x_c^2 - y_c^2 - z_c^2
+a = 2x_c, b = 2y_c, c = 2z_c, d = r^2 - x_c^2 - y_c^2 - z_c^2
 $$
 
-整个系统（针对所有点）可以重写为：
-
+整个系统所有点可以重写为：
 
 $$
 \begin{array}{rcl} ax_1 + by_1 + cz_1 + d & = & x_1^2 + y_1^2 + z_1^2 \\
@@ -152,7 +244,7 @@ x_n^2 + y_n^2 + z_n^2 \\
 \end{matrix} \right]
 $$
 
-讓我們定義 A、B 和 X：
+定義 $A$、$B$ 和 $X$：
 
 $$
 \begin{matrix}
@@ -187,7 +279,7 @@ $$ r = \dfrac{ \sqrt{4d + a^2 + b^2 + c^2}}{2} $$
 
 并获取球体的参数：
 
-![Alt X](../assets/img/math/lsqsphere.png)
+![Alt X](../assets/img/math/sphere.png)
 
 
 # 求解以上系统公式 (伪逆)
