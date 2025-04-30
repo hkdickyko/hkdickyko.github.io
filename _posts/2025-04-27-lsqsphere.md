@@ -176,7 +176,23 @@ $$
 A.X=B
 $$
 
-由於變數發生了變化，因此只需計算
+由於變數發生了變化，因此只需計算 $x_c$、$y_c$、和 $r$ ：
+
+$$
+x_c = \dfrac{a}{2}
+$$
+
+
+$$
+y_c = \dfrac{b}{2}
+$$
+
+$$
+r = \dfrac{ \sqrt{4c + a^2 + b^2 }}{2}
+$$
+
+
+
 
 
 ![Alt X](../assets/img/math/circle.png)
