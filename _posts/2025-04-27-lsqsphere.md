@@ -42,7 +42,7 @@ $$
 y(x)=ax^2+bx+c
 $$
 
-点云由坐标为 $x_i$ ， $y_i$ 的 $n$ 个点给出。目标是估计 $\hat{a}$、$\hat{b}$ 和 $\hat{c}$，其中 $y(x)=\hat{a}x^2+\hat{b}x+\hat{c}$ 尽可能拟合点云。我们希望最小化每个点 $x_i$ 的 $y_i$ 和 $y(x_i)$ 之间的差异，即最小化 
+点云由坐标为 $x_i$ ， $y_i$ 的 $n$ 个点给出。目标是估计 $a$、$b$ 和 $c$，其中 $y(x)=ax^2+bx+c$ 尽可能拟合点云。我们希望最小化每个点 $x_i$ 的 $y_i$ 和 $y(x_i)$ 之间的差异，即最小化 
 
 
 $$\sum \limits_{i=1}^n{(y_i-y(x_i))^2}$$
@@ -54,9 +54,9 @@ $$
 {x_n}^2 & x_n & 1 \\
 \end{matrix} \right].
 \left[ \begin{matrix}
-\hat{a} \\
-\hat{b} \\
-\hat{c} \end{matrix} \right] = \left[ \begin{matrix} y_1 \\
+a \\
+b \\
+c \end{matrix} \right] = \left[ \begin{matrix} y_1 \\
 y_2 \\
 ... \\
 y_n \\
@@ -74,7 +74,7 @@ A=\left[ \begin{matrix}
 &
 B=\left[ \begin{matrix} y_1 \\ y_2 \\...  \\ y_n \\ \end{matrix} \right]
 &
-\hat{x}=\left[ \begin{matrix} \hat{a} \\ \hat{b} \\ \hat{c} \end{matrix} \right]
+\hat{x}=\left[ \begin{matrix} a \\ b\\ c \end{matrix} \right]
 \end{matrix}
 $$
 
