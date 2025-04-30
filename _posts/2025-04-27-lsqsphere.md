@@ -74,7 +74,7 @@ A=\left[ \begin{matrix}
 &
 B=\left[ \begin{matrix} y_1 \\ y_2 \\...  \\ y_n \\ \end{matrix} \right]
 &
-\hat{x}=\left[ \begin{matrix} a \\ b\\ c \end{matrix} \right]
+X=\left[ \begin{matrix} a \\ b\\ c \end{matrix} \right]
 \end{matrix}
 $$
 
