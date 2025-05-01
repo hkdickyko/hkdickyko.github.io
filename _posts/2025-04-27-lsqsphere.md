@@ -1,4 +1,4 @@
----
+11---
 category: [編程]
 tags: [數學]
 title: 最小平方法(伪逆)
@@ -591,5 +591,191 @@ int main()
   pseudo(A, n, m, result);
   displayMatrix(result, m, n);
   return 0;
+}
+```
+
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+float **createMatrix(int r, int c)
+{
+	float **matrix = (float **)malloc(r * sizeof(float *));
+	for (int i = 0; i < r; i++)
+		matrix[i] = (float *)malloc(c * sizeof(float));
+	return matrix;
+}
+
+void freeMatrix(float **matrix, int r)
+{
+	for (int i = 0; i < r; i++)
+		free(matrix[i]);
+	free(matrix);
+}
+
+// 讀取矩陣元素的函數
+void readMatrix(float **matrix, int r, int c)
+{
+	printf("Enter the elements row of the %dx%d matrix:\n", r, c);
+	for (int j = 0; j < c; j++)
+		for (int i = 0; i < r; i++)
+		{
+			printf("Enter element [%d][%d]: ", i, j);
+			float value;
+			scanf("%f", &value);
+			matrix[i][j] = value;
+		}
+}
+
+// 顯示浮點矩陣的函數（用於逆）
+void displayMatrix(float **matrix, int r, int c)
+{
+	for (int i = 0; i < r; i++)
+	{
+		for (int j = 0; j < c; j++)
+			printf("%.6f\t", matrix[i][j]);
+		printf("\n");
+	}
+	printf("\n");
+}
+
+// 計算转置矩阵的函數 
+void transpose(float **matrix, int n, int m, float **tr)
+{
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			tr[j][i] = matrix[i][j];
+}
+
+// 獲取函數餘因子 matrix[p][q] in temp[][] 
+void getCofactor(float **matrix, float **temp, int p, int q, int n)
+{
+	int i = 0, j = 0;
+	for (int row = 0; row < n; row++)
+		for (int col = 0; col < n; col++)
+			if (row != p && col != q)
+			{
+				temp[i][j++] = matrix[row][col];
+				if (j == n - 1)
+				{
+					j = 0;
+					i++;
+				}
+			}
+}
+
+// 遞歸函數找出矩陣的行列式 
+int determinant(float **matrix, int n)
+{
+	float det = 0;
+	if (n == 1)
+		return matrix[0][0];
+	float **temp = createMatrix(n, n);
+	int sign = 1;
+	for (int f = 0; f < n; f++)
+	{
+		getCofactor(matrix, temp, 0, f, n);
+		det += sign * matrix[0][f] * determinant(temp, n - 1);
+		sign = -sign;
+	}
+	freeMatrix(temp, n);
+	return det;
+}
+
+// 計算矩陣伴隨的函數 
+void adjoint(float **matrix, float **adj, int n)
+{
+	if (n == 1)
+	{
+		adj[0][0] = 1;
+		return;
+	}
+	int sign = 1;
+	float **temp = createMatrix(n, n);
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+		{
+			// 獲取的餘因子 matrix[i][j]
+			getCofactor(matrix, temp, i, j, n);
+			// 若行和列索引之和為偶數，符號為正 adj[j][i] 
+			sign = ((i + j) % 2 == 0) ? 1 : -1;
+			// 交換行和列以獲得餘因子矩陣的轉置
+			adj[j][i] = sign * determinant(temp, n - 1);
+		}
+	freeMatrix(temp, n);
+}
+
+// 計算矩陣逆的函數 
+int inverse(float **matrix, float **inv, int n)
+{
+	// 求矩陣的行列式
+	float det = determinant(matrix, n);
+	// 如果行列式為零，則矩陣不可逆
+	if (det == 0)
+	{
+		printf("Matrix is not invertible as determinant is zero.\n");
+		return 0;
+	}
+	// 求矩陣的伴隨 
+	float **adj = createMatrix(n, n);
+	adjoint(matrix, adj, n);
+	// 將伴隨式除以行列式來求逆 
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			inv[i][j] = adj[i][j] / det;
+	freeMatrix(adj, n);
+	return 1;
+}
+
+void mult(float **A, int n0, int m0, float **B, int n1, int m1, float **D)
+{
+	for (int i = 0; i < n0; ++i)
+		for (int j = 0; j < m1; ++j)
+			for (int k = 0; k < m0; ++k)
+				D[i][j] += A[i][k] * B[k][j];
+}
+
+void pseudo(float **A, int r, int c, float **result)
+{
+	int min = (r > c ? c : r);
+	float **tr = createMatrix(c, r);
+	float **D = createMatrix(min, min);
+	float **inv = createMatrix(min, min);
+	transpose(A, r, c, tr);
+	displayMatrix(tr, c, r);
+	mult(tr, c, r, A, r, c, D);
+	displayMatrix(D, min, min);
+	inverse(D, inv, min);
+	displayMatrix(inv, min, min);
+	mult(inv, min, min, tr, c, r, result);
+	displayMatrix(result, c, r);
+	freeMatrix(inv, min);
+	freeMatrix(D, min);
+	freeMatrix(tr, c);
+}
+
+int main()
+{
+	int r, c;
+	printf("Pseudo Inverse Calculator\n");
+	printf("=========\n");
+	printf("Enter the size of the  matrix in R,C: ");
+	scanf("%d,%d", &r, &c);
+
+	float **A = createMatrix(r, c);
+	float **result = createMatrix(c, r);
+	float **out = createMatrix(c, c);
+
+	readMatrix(A, r, c);
+	displayMatrix(A, r, c);
+	pseudo(A, r, c, result);
+	mult(result, c, r, A, r, c, out);
+	displayMatrix(out, c, c);
+	
+	freeMatrix(A, r);
+	freeMatrix(result, c);
+	freeMatrix(out, c);
+	return 0;
 }
 ```
