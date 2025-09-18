@@ -76,16 +76,13 @@ plt.show()
 
 [Matplotlib 网上资源](https://medium.com/@hi-sushanta/master-matplotlib-a-step-by-step-guide-for-beginners-to-experts-e76195edff1f)
 
+# Python Pandas 介绍
 
-# Tidy data (长表) vs Messy data (宽表)
+## Tidy data (长表) vs Messy data (宽表)
 
 **长表** 行多列少，每行代表一个观测值。由于灵活性，长表通常更适合用于分析和数据库使用。
 
 **宽表** 列多行少，每行代表一条完整记录或一系列相关数据点。宽表则更方便在电子表格中输入数据和快速查找。
-
-## pandas
-
-
 
 ### 宽表转换至长表
 
