@@ -134,7 +134,7 @@ plt.show()
 
 ## 资料聚合计算 (groupby)
 
-Pandas 的 **groupby** 方法是一个非常强大的工具，可以帮助你有效且深入地洞察数据集。只需几行简单易懂的代码，你就能以极其简单直接且强大的方式聚合数据。
+Pandas 中的 **groupby** 方法是一个非常强大的工具，可以帮助你有效且深入地洞察数据集。只需几行简单易懂的代码，你就能以极其简单直接且强大的方式聚合数据。
 
 
 ![Alt X](../assets/img/pandas/apply.png)
@@ -155,7 +155,7 @@ mode()|组中最常见的值|
 
 ## 移动窗口计算 (rolling)
 
-在 Python 中，**rolling** 主要指滚动窗口计算，尤其是在 Pandas 库中，用于分析序列数据。以下介绍移动平均法加入高斯窗及应用方法。
+Pandas 中的 **rolling** 方法主要指滚动窗口计算，尤其是在 Pandas 库中，用于分析序列数据。以下介绍移动平均法加入高斯窗及应用方法。
 
 $$
 \text{new_values}_{\text{mean}} = \text{values} \times \text{normalized_weights} \tag{1}\label{1}
@@ -169,3 +169,16 @@ $$
 $$
 
 ![Alt X](../assets/img/pandas/rollingsum.png)
+
+## 删除资料 (drop)
+
+
+Pandas 中的 **drop** 从行或列中删除指定的标签。通过指定标签名称和相应的轴，或直接指定索引或列名称来删除行或列。使用多索引时，可以通过指定级别来删除不同级别的标签。
+
+![Alt X](../assets/img/pandas/drop.png)
+
+## 匿名函数 (lambda)
+
+Pandas 中的 **assign** 方法用于在 DataFrame 中创建新列或修改现有列。它返回一个包含所有原始列以及新分配的列的新 DataFrame 对象，而原始 DataFrame 保持不变。这使得它适合方法链和函数式编程范式。
+
+![Alt X](../assets/img/pandas/lambda.png)
