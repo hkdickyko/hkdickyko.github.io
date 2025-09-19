@@ -153,4 +153,19 @@ mode()|组中最常见的值|
 |std()|组的标准差|
 |var()|组的方差|
 
+## 移动窗口计算 (rolling)
 
+在 Python 中，“滚动”主要指滚动窗口计算，尤其是在 Pandas 库中，用于分析序列数据。以下介绍移动平均法加入高斯窗及应用方法。
+
+$$
+\text{new_values}_{\text{mean}} = \text{values} \times \text{normalized_weights} \tag{1}\label{1}
+$$
+
+![Alt X](../assets/img/pandas/rollingmean.png)
+
+
+$$
+\text{new_values}_{\text{mean}} = \text{values} \times \text{weights} \tag{2}\label{2}
+$$
+
+![Alt X](../assets/img/pandas/rollingsum.png)
