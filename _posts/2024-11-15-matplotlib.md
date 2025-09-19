@@ -130,3 +130,27 @@ plt.show()
 
 
 ![Alt X](../assets/img/pandas/pivot.png)
+
+
+## 资料聚合计算 (groupby)
+
+Pandas 的 groupby 方法是一个非常强大的工具，可以帮助你有效且深入地洞察数据集。只需几行简单易懂的代码，你就能以极其简单直接且强大的方式聚合数据。
+
+
+![Alt X](../assets/img/pandas/apply.png)
+
+### 聚合数据方法
+
+|聚合方法|描述|
+|:---:|:---|
+|count()|	非空记录的数量|
+|sum()|值的总和|
+|mean()	|值的算术平均值|
+|median()|	值的中位数|
+|min()|该组的最小值|
+|max()|该组的最大值|
+mode()|组中最常见的值|
+|std()|组的标准差|
+|var()|组的方差|
+
+
