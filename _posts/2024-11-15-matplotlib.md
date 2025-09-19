@@ -95,7 +95,7 @@ plt.show()
  
 ![Alt X](../assets/img/pandas/sstack.png)
 
-![Alt X](../assets/img/pandas/stack.png)
+![Alt X](../assets/img/pandas/mstack.png)
 
 **melt**
 
@@ -117,7 +117,7 @@ plt.show()
 
 ![Alt X](../assets/img/pandas/sunstack.png)
 
-![Alt X](../assets/img/pandas/unstack.png)
+![Alt X](../assets/img/pandas/munstack.png)
 
 **pivot** & **pivot_table**
 
