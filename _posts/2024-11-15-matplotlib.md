@@ -93,6 +93,7 @@ plt.show()
  - reset_index()：将 index column 转换为一般的 column。
  - rename()：把栏位名改成需要的名称。
  
+![Alt X](../assets/img/pandas/sstack.png)
 
 ![Alt X](../assets/img/pandas/stack.png)
 
@@ -114,6 +115,7 @@ plt.show()
  - reset_index()：把 index 重置回原始样态（取消 ‘flight_count’ 这个 index）。
  - rename_axis()：设置索引或列的轴名称（在此为把 index 栏位名称设定为 None）。
 
+![Alt X](../assets/img/pandas/sunstack.png)
 
 ![Alt X](../assets/img/pandas/unstack.png)
 
