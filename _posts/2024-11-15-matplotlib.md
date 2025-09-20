@@ -1,7 +1,7 @@
 ---
 category: [編程]
 tags: [IoT, 電子]
-title: Python Matplotlib
+title: Python Matplotlib， Pandas & Seaborn
 date: 2024-11-15 20:00:00
 ---
 
@@ -31,7 +31,7 @@ date: 2024-11-15 20:00:00
   }
 </style>
 
-# Python Matplotlib 介绍
+# Matplotlib 介绍
 
 ```py
 import numpy as np
@@ -76,7 +76,7 @@ plt.show()
 
 [Matplotlib 网上资源](https://medium.com/@hi-sushanta/master-matplotlib-a-step-by-step-guide-for-beginners-to-experts-e76195edff1f)
 
-# Python Pandas 介绍
+# Pandas 介绍
 
 ## Tidy data (长表) vs Messy data (宽表)
 
