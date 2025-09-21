@@ -209,6 +209,8 @@ plt.show()
 plt.savefig('/storage/emulated/0/Documents/psyc/sample.png')
 ```
 
+![Alt X](../assets/img/pandas/sample.png)
+
 ### 绘图参数
 
 除了 x 和 y 之外，plot 方法还有几个参数，可以通过调整这些参数来改变绘图效果。
