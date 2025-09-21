@@ -259,7 +259,7 @@ plt.savefig('/storage/emulated/0/Documents/psyc/sample.png')
     - hexbin：表示六边形箱线图
     - hist：表示直方图
     - kde：表示核密度估计图
-    - density：是 “kde” 的别名
+    - density：是 kde 的别名
     - line：表示折线图
     - pie：表示饼图
     - scatter：表示散点图
