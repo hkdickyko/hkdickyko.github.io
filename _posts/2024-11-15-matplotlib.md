@@ -170,6 +170,28 @@ $$
 
 ![Alt X](../assets/img/pandas/rollingsum.png)
 
+
+ - win_type (scipy.signal 库提供的加权非矩形窗口)
+
+|函数格式|功能说明|
+|:---:|:---|
+|boxcar(M[, sym, xp, device])|箱型（boxcar）或矩形窗。|
+|triang(M[, sym, xp, device])|三角窗。|
+|blackman(M[, sym, xp, device])|Blackman窗。|
+|hamming(M[, sym, xp, device])|Hamming窗。|
+|bartlett(M[, sym, xp, device])|Bartlett窗。|
+|parzen(M[, sym, xp, device])|Parzen窗。|
+|bohman(M[, sym, xp, device])|Bohman窗。|
+|blackmanharris(M[, sym, xp, device])|最小4项的Blackman-Harris窗。|
+|nuttall(M[, sym, xp, device])|根据Nuttall最小4项的Blackman-Harris窗。|
+|barthann(M[, sym, xp, device])|修正的Bartlett-Hann窗。|
+|cosine(M[, sym, xp, device])|简单余弦形状的窗。|
+|flattop(M[, sym, xp, device])|平顶窗。|
+|hann(M[, sym, xp, device])|Hann窗。|
+|kaiser(M, beta[, sym, xp, device])|Kaiser窗。|
+|gaussian(M, std[, sym, xp, device])|高斯窗。|
+|general_gaussian(M, p, sig[, sym, xp, device])|广义高斯形状的窗。|
+
 ## 删除资料 (drop)
 
 
