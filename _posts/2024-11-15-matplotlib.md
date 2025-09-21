@@ -1,7 +1,7 @@
 ---
 category: [編程]
 tags: [IoT, 電子]
-title: Python Matplotlib， Pandas & Seaborn
+title: Python Matplotlib, Pandas & Seaborn
 date: 2024-11-15 20:00:00
 ---
 
