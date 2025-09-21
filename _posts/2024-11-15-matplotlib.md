@@ -230,11 +230,12 @@ df3 = pd.DataFrame({'Frame 3':np.arange(5)*.8},index=np.arange(5))
 ax = df1.plot(label='df1', figsize=(10,5))
 df2.plot(ax=ax)
 df3.plot(ax=ax)
+ax.grid(axis = 'y')
+plt.grid(color = 'green', linestyle = '--', linewidth = 0.5)
 plt.title("Multi-Line Plot of Series")
 plt.xlabel("Date")
 plt.ylabel("Value")
 plt.show()
-plt.savefig('/storage/emulated/0/Documents/psyc/sample.png')
 ```
 
 ![Alt X](../assets/img/pandas/sample.png)
