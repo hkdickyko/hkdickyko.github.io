@@ -182,3 +182,54 @@ Pandas 中的 **drop** 从行或列中删除指定的标签。通过指定标签
 Pandas 中的 **assign** 方法用于在 DataFrame 中创建新列或修改现有列。它返回一个包含所有原始列以及新分配的列的新 DataFrame 对象，而原始 DataFrame 保持不变。这使得它适合方法链和函数式编程范式。
 
 ![Alt X](../assets/img/pandas/lambda.png)
+
+
+## 制图函数 （Plot）
+
+Pandas 中的 **plot** 方法提供了一种直接从 Series 和 DataFrames 可视化数据的便捷方法，充当 Matplotlib 的包装器。
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 使用随机数据和日期索引创建制图
+df1 = pd.DataFrame({'Frame 1,':np.arange(5)*2},index=np.arange(5))
+df2 = pd.DataFrame({'Frame 2':np.arange(5)*.5},index=np.arange(5))
+df3 = pd.DataFrame({'Frame 3':np.arange(5)*.8},index=np.arange(5))
+
+# 绘制数据
+ax = df1.plot(label='df1', figsize=(10,5))
+df2.plot(ax=ax)
+df3.plot(ax=ax)
+plt.title("Multi-Line Plot of Series")
+plt.xlabel("Date")
+plt.ylabel("Value")
+plt.show()
+plt.savefig('/storage/emulated/0/Documents/psyc/sample.png')
+```
+
+### 绘图参数
+
+除了 x 和 y 之外，plot 方法还有几个参数，可以通过调整这些参数来改变绘图效果。
+
+ - x 和 y：参数指定 x 和 y 列所需的值。
+ - figsize：指定图形对象的大小。
+ - title：图表使用的标题。
+ - legend：放置在轴心子图上。
+ - Title：放置在轴子图上的图例。
+ - Style：每列的 matplotlib 线条样式。
+ - xlabel 和 ylabel：x 轴和 y 轴标签的名称。
+ - Subplots：为每列创建单独的子图。
+ - Kind：要生成的绘图类型。
+    - area：表示面积图
+    - bar：表示垂直条形图
+    - barh：表示水平条形图
+    - box：表示箱线图
+    - hexbin：表示六边形箱线图
+    - hist：表示直方图
+    - kde：表示核密度估计图
+    - density：是 “kde” 的别名
+    - line：表示折线图
+    - pie：表示饼图
+    - scatter：表示散点图
