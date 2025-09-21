@@ -264,3 +264,12 @@ plt.show()
     - line：表示折线图
     - pie：表示饼图
     - scatter：表示散点图
+
+
+## 绘图参数
+
+Python 对于 loc、iloc、at、iat、ix 有点混乱，针对这几种用法进行整理如下所示:
+
+![Alt X](../assets/img/pandas/index.png)
+
+![Alt X](../assets/img/pandas/index_slice.png)
