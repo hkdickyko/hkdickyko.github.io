@@ -170,27 +170,33 @@ $$
 
 ![Alt X](../assets/img/pandas/rollingsum.png)
 
-
  - win_type (scipy.signal 库提供的加权非矩形窗口)
+    - 以下函数中的输入参数 M[, sym, xp, device]
 
 |函数格式|功能说明|
 |:---:|:---|
-|boxcar(M[, sym, xp, device])|箱型（boxcar）或矩形窗。|
-|triang(M[, sym, xp, device])|三角窗。|
-|blackman(M[, sym, xp, device])|Blackman窗。|
-|hamming(M[, sym, xp, device])|Hamming窗。|
-|bartlett(M[, sym, xp, device])|Bartlett窗。|
-|parzen(M[, sym, xp, device])|Parzen窗。|
-|bohman(M[, sym, xp, device])|Bohman窗。|
-|blackmanharris(M[, sym, xp, device])|最小4项的Blackman-Harris窗。|
-|nuttall(M[, sym, xp, device])|根据Nuttall最小4项的Blackman-Harris窗。|
-|barthann(M[, sym, xp, device])|修正的Bartlett-Hann窗。|
-|cosine(M[, sym, xp, device])|简单余弦形状的窗。|
-|flattop(M[, sym, xp, device])|平顶窗。|
-|hann(M[, sym, xp, device])|Hann窗。|
-|kaiser(M, beta[, sym, xp, device])|Kaiser窗。|
-|gaussian(M, std[, sym, xp, device])|高斯窗。|
-|general_gaussian(M, p, sig[, sym, xp, device])|广义高斯形状的窗。|
+|bartlett()|Bartlett 窗|
+|barthann()|修正的 Bartlett-Hann 窗|
+|blackman()|Blackman 窗|
+|blackmanharris()|最小 4 项的 Blackman-Harris 窗|
+|bohman()|Bohman 窗|
+|boxcar()|箱型 boxcar 或矩形窗|
+|cosine()|简单余弦形状的窗|
+|flattop()|平顶窗|
+|hamming()|Hamming 窗|
+|hann()|Hann窗|
+|nuttall()|根据 Nuttall 最小 4 项的 Blackman-Harris 窗|
+|parzen()|Parzen 窗|
+|triang()|三角窗|
+
+ - win_type (scipy.signal 特殊功能)
+
+|函数格式|功能说明|
+|:---:|:---|
+|gaussian(M, std[, sym, xp, device])|高斯窗, 应包括 std 内容|
+|general_gaussian(M, p, sig[, sym, xp, device])|广义高斯形状的窗, 应包括 sig 内容|
+|kaiser(M, beta[, sym, xp, device])|Kaiser 窗, 应包括 beta 内容|
+|slepian(M, width[, sym, xp, device])|slepian 窗, 应包括 width 内容|
 
 ## 删除资料 (drop)
 
