@@ -203,6 +203,13 @@ $$
 
 Pandas 中的 **drop** 从行或列中删除指定的标签。通过指定标签名称和相应的轴，或直接指定索引或列名称来删除行或列。使用多索引时，可以通过指定级别来删除不同级别的标签。
 
+### 用名称选择
+
+![Alt X](../assets/img/pandas/drop_info.png)
+
+
+### 用索引选择
+
 ![Alt X](../assets/img/pandas/drop.png)
 
 ## 匿名函数 (lambda)
