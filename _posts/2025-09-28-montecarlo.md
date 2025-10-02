@@ -109,10 +109,20 @@ $$
 F = \int ^b _a f(x)dx \approx \frac {1}{N} \sum ^N _{i=1} \frac {f(x_i)}{pdf(x_i)}
 $$
 
-pdf 为函数的机率密度函数，当然这边都先以均匀分布为主，也就是 $\frac{1}{b-a}$。
+$pdf$ 为函数的机率密度函数，当然先以均匀分布为主，也就是 
+
+
+$$
+pdf(x_i) = \frac {1}{(b-a)}
+$$
 
 
 $$
 F = \int ^b _a f(x)dx \approx \frac {1}{N} \sum ^N _{i=1} \frac {f(x_i)}{pdf(x_i)}
 $$
 
+
+
+$$
+F = (b-a) \int ^b _a \frac {f(x)dx}{(b-a)} \approx (b-a) \frac {1}{N} \sum ^N _{i=1} f(x_i)
+$$
