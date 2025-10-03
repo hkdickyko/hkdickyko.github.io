@@ -109,7 +109,7 @@ $$
 F = \int ^b _a f(x)dx \approx \frac {1}{N} \sum ^N _{i=1} \frac {f(x_i)}{pdf(x_i)}
 $$
 
-$pdf$ 为函数的机率密度函数，当然先以均匀分布为主，也就是 
+$pdf$ 为函数的机率密度函数，当然先以<font color="#FF1000">均匀分布</font>为主，也就是 
 
 
 $$
@@ -126,3 +126,34 @@ $$
 $$
 F = (b-a) \int ^b _a \frac {f(x)dx}{(b-a)} \approx (b-a) \frac {1}{N} \sum ^N _{i=1} f(x_i)
 $$
+
+以下透过蒙地卡罗积分来估计一下指数分布在闭区间 0~5 的积分值是多少。
+
+
+$$
+\lambda \cdot e^{-\lambda \cdot x}
+$$
+
+```py
+### 估計指數分布 (lambda = 1) 於閉區間 0 ~ 5 積分
+### 指數分布公式 : lambda * e^(-lambda*x)
+### 積分公式解  1-e^(-lambda*x) | (0~5) : 0.993262053
+
+import numpy as np
+    
+def target_exp_function(x, lb=1):
+  return lb*np.exp(-lb*x)  
+
+def simple_monte_carlo(a, b, m=100000):
+  X = np.random.uniform(low=a, high=b, size=m)
+  return (b-a)*sum(target_exp_function(X))/m
+
+if __name__ == "__main__":
+  for m in (100, 1000, 10000, 100000):
+    answer = simple_monte_carlo(0, 5, m=m)
+    print('Estimation Sample Number : ', m)
+    print('Monte Carlo Answer : ', answer)
+    print('Diff(%) with real answer : ',  (answer-0.993262053)/0.993262053)
+```
+
+当然可以不要以均匀分布作为取样分布，而是选择认为比较合适的分布，但一般以简单原因，均匀分布的模拟还是很常见使用。但 $pdf$ 函数的机率密度函数需要作出相应调整。
