@@ -136,13 +136,17 @@ $$
 
 
 $$
-F = \int ^b _a f(x)dx \approx \frac {1}{N} \sum ^N _{i=1} \frac {f(x_i)}{pdf(x_i)}
+F \approx \frac {1}{N} \sum ^N _{i=1} \frac {f(x_i)}{\frac {1}{(b-a)}} \approx
+\frac {(b-a)}{N} \sum ^N _{i=1} f(x_i)
 $$
 
 
+$$
+常态分布下的常数 = \frac {(b-a)}{N}
+$$
 
 $$
-F = (b-a) \int ^b _a \frac {f(x)dx}{(b-a)} \approx (b-a) \frac {1}{N} \sum ^N _{i=1} f(x_i)
+函数积分总和 = \sum ^N _{i=1} f(x_i)
 $$
 
 以下透过蒙地卡罗积分来估计一下指数分布在闭区间 0~5 的积分值是多少。
