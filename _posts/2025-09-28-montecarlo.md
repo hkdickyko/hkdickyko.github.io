@@ -113,6 +113,12 @@ $$ X \sim N(\mu,\sigma^2) $$
 
 如下需要计算 $a$ 到 $b$ 的面积
 
+
+$$
+F = \int ^b _a f(x)dx
+$$
+
+
 ![Alt X](../assets/img/math/mcintegration.png)
 
 蒙地卡罗积分方法，换算成数学的概念写成：
