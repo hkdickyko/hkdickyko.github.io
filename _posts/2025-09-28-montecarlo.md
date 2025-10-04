@@ -100,7 +100,16 @@ $$
 
 ## 蒙特卡罗采样方法
 
-根据中央极限定理(Central Limit Theorem，CLT)，只要随机独立地取样够多的样本，这些相互独立的随机变数会依照分布收敛成**常态分布**。
+根据中央极限定理(Central Limit Theorem，CLT)，无论总体分布如何，只要随机独立样本量够多，这些相互独立的随机变数会依照分布收敛成**常态分布**。
+
+![Alt X](../assets/img/math/ndistribution.png)
+
+若随机变量X服从一个位置参数为 $\mu$ 、变异数 (尺度参数) 为 $\sigma$ 的机率分布，
+
+$$ X \sim N(\mu,\sigma^2) $$
+
+![Alt X](../assets/img/math/nd_pdf.png)
+
 
 如下需要计算 $a$ 到 $b$ 的面积
 
