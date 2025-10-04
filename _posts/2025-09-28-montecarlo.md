@@ -166,16 +166,18 @@ import numpy as np
 def target_exp_function(x, lb=1):
   return lb*np.exp(-lb*x)  
 
-def simple_monte_carlo(a, b, m=100000):
-  X = np.random.uniform(low=a, high=b, size=m)
-  return (b-a)*sum(target_exp_function(X))/m
+def simple_monte_carlo(a, b, N=100000):
+  X = np.random.uniform(low=a, high=b, size=N)
+  C = (b-a) / N
+  return C * sum(target_exp_function(X))
 
 if __name__ == "__main__":
   for m in (100, 1000, 10000, 100000):
-    answer = simple_monte_carlo(0, 5, m=m)
-    print('Estimation Sample Number : ', m)
-    print('Monte Carlo Answer : ', answer)
-    print('Diff(%) with real answer : ',  (answer-0.993262053)/0.993262053)
+    answer = simple_monte_carlo(0, 5, N=m)
+    print('估计样本数量 : ', m)
+    print('蒙特卡罗计算的答案 : ', answer)
+    delta = (answer-0.993262053)/0.993262053
+    print('积分相差的百分比(%) : ', delta)
 ```
 
 当然可以不要以均匀分布作为取样分布，而是选择认为比较合适的分布，但一般以简单原因，均匀分布的模拟还是很常见使用。但 $pdf$ 函数的机率密度函数需要作出相应调整。
