@@ -141,11 +141,11 @@ $$
 
 
 $$
-常态分布下的常数 = \frac {(b-a)}{N}
+常态分布下的常数 = C = \frac {(b-a)}{N}
 $$
 
 $$
-函数积分总和 = \sum ^N _{i=1} f(x_i)
+函数积分总和 = X= \sum ^N _{i=1} f(x_i)
 $$
 
 ## 应用例子
@@ -168,8 +168,8 @@ def target_exp_function(x, lb=1):
   return lb*np.exp(-lb*x)  
 
 def simple_monte_carlo(a, b, N=100000):
-  X = np.random.uniform(low=a, high=b, size=N)
   C = (b-a) / N
+  X = np.random.uniform(low=a, high=b, size=N)
   return C * sum(target_exp_function(X))
 
 if __name__ == "__main__":
