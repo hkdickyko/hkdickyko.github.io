@@ -126,7 +126,7 @@ delta = 100 - estimated_pi *100 / math.pi
 print(f"估计的 π 值相差：{delta:.3f}%")
 ```
 
-## 采样方法
+## 采样方法（中央极限定理）
 
 根据中央极限定理(Central Limit Theorem，CLT)，无论总体分布如何，只要随机独立样本量够多，这些相互独立的随机变数会依照分布收敛成<font color="#FF1000">常态分布</font>。
 
@@ -148,9 +148,11 @@ $$
 
 ![Alt X](../assets/img/math/mcintegration.png)
 
-## 积分方法
+## 积分方法（Monte Carlo integration）
 
-蒙地卡罗积分方法，换算成数学的概念写成：
+蒙地卡罗积分（Monte Carlo integration）是一种使用乱数进行数值积分的技术。它是一种特殊的蒙地卡罗方法，可对定积分进行数值计算。其他演算法通常在规则网格上评估被积函数，而蒙地卡罗随机选择被积函数评估的点。该方法对于高维积分特别有用。
+
+以下例子介绍蒙地卡罗积分方法，换算成数学的概念可以写成：
 
 $$
 F = \int ^b _a f(x)dx \approx \frac {1}{N} \sum ^N _{i=1} \frac {f(x_i)}{pdf(x_i)}
