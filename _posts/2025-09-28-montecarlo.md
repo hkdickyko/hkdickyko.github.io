@@ -98,9 +98,37 @@ $$
 随机点数的增加，近似度逐渐增大。
 
 
+
+```py
+import random
+import math
+
+def estimate_pi_monte_carlo(num_points):
+  inside_circle = 0
+  for _ in range(num_points):
+    # 生成介于 0 和 1 之间的随机 x 和 y 坐标
+    x = random.uniform(0, 1)
+    y = random.uniform(0, 1) 
+    distance = x**2 + y**2
+    if distance <= 1: # 检查点是否落在单位圆内 (半径 = 1)
+      inside_circle += 1
+  # 四分之一圆内点数与总点数之比近似于圆面积与正方形面积之比。
+  # 四分之一圆面积 = πr²/4。当 r=1，圆面积 = π/4。正方形面积 = 1。
+  # 圆内点数/总点数 约为 π/4，所以 π 约为 4*(圆内点数/总点数)。
+  pi_estimate = 4 * (inside_circle / num_points)
+  return pi_estimate
+
+num_simulations = 1000000
+estimated_pi = estimate_pi_monte_carlo(num_simulations)
+print(f"用 {num_simulations} 点估计的 π 值：{estimated_pi}")
+delta = 100 - estimated_pi *100 / math.pi
+print(f"估计的 π 值相差：{delta:.3f}%")
+```
+
+
 ## 蒙特卡罗采样方法
 
-根据中央极限定理(Central Limit Theorem，CLT)，无论总体分布如何，只要随机独立样本量够多，这些相互独立的随机变数会依照分布收敛成**常态分布**。
+根据中央极限定理(Central Limit Theorem，CLT)，无论总体分布如何，只要随机独立样本量够多，这些相互独立的随机变数会依照分布收敛成<font color="#FF1000">常态分布</font>。
 
 ![Alt X](../assets/img/math/ndistribution.png)
 
@@ -120,7 +148,9 @@ $$
 
 ![Alt X](../assets/img/math/mcintegration.png)
 
-蒙地卡罗积分方法，换算成数学的概念写成：
+## 蒙地卡罗积分方法
+
+<font color="#FF1000">蒙地卡罗积分方法</font>，换算成数学的概念写成：
 
 $$
 F = \int ^b _a f(x)dx \approx \frac {1}{N} \sum ^N _{i=1} \frac {f(x_i)}{pdf(x_i)}
@@ -181,4 +211,4 @@ if __name__ == "__main__":
     print('积分相差的百分比(%) : ', delta)
 ```
 
-注意：当然可以不用**常态分布**作为取样分布，而是选择认为比较合适的分布，但一般以简单原因，**常态分布**的模拟还是很常见使用。但如不使用**常态分布**， $pdf$ 函数的机率密度函数需要作出相应调整。
+注意：当然可以不用**常态分布**作为取样分布，而是选择认为比较合适的分布，但一般以简单原因，<font color="#FF1000">常态分布</font>的模拟还是很常见使用。但如不使用**常态分布**， $pdf$ 函数的机率密度函数需要作出相应调整。
