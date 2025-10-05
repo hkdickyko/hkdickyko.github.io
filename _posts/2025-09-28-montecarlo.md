@@ -150,7 +150,7 @@ $$
 
 ## 积分方法
 
-<font color="#FF1000">蒙地卡罗积分方法</font>，换算成数学的概念写成：
+蒙地卡罗积分方法，换算成数学的概念写成：
 
 $$
 F = \int ^b _a f(x)dx \approx \frac {1}{N} \sum ^N _{i=1} \frac {f(x_i)}{pdf(x_i)}
