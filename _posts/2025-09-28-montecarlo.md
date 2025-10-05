@@ -178,7 +178,9 @@ $$
 函数积分总和 = X= \sum ^N _{i=1} f(x_i)
 $$
 
-## 应用例子（积分公式）
+## 应用例子
+
+### 积分公式
 
 以下例子是透过蒙地卡罗积分来估计一下指数分布在闭区间 0~5 的积分值是多少。
 
@@ -212,3 +214,30 @@ if __name__ == "__main__":
 ```
 
 注意：当然可以不用**常态分布**作为取样分布，而是选择认为比较合适的分布，但一般以简单原因，<font color="#FF1000">常态分布</font>的模拟还是很常见使用。但如不使用**常态分布**， $pdf$ 函数的机率密度函数需要作出相应调整。
+
+
+### 圆周率
+
+以下例子用积分方法，计算圆周率用作比较之前部份介紹的基本蒙地卡罗算法。随著以下的 **Python** 代码，能看到蒙地卡罗算法代码基本步骤是固定不变。
+
+
+```py
+import numpy as np
+import math
+    
+def target_exp_function(x):
+   return np.sqrt(1-x*x)
+
+def simple_monte_carlo(N=100000):
+  C = 1/ N
+  X = np.random.uniform(low=0, high=1, size=N)
+  return C * sum(target_exp_function(X))
+
+if __name__ == "__main__":
+  for m in (100, 10000, 1000000):
+    answer = 4*simple_monte_carlo(N=m)
+    print('估计样本数量 : ', m)
+    print('蒙特卡罗计算的答案 : ', answer)
+    delta = (answer-math.pi)*100/math.pi
+    print(f'积分相差的百分比(%) : {delta:.3f}%')
+```
