@@ -240,5 +240,5 @@ if __name__ == "__main__":
     print('估计样本数量 : ', m)
     print('蒙特卡罗计算的答案 : ', answer)
     delta = (answer-math.pi)*100/math.pi
-    print(f'积分相差的百分比(%) : {delta:.3f}%')
+    print(f'积分相差的百分比(%) : {delta:.3f}%\n')
 ```
