@@ -105,4 +105,44 @@ f-string 和 format() 的用法有以下几个优点：
 
 注意 SendCommand 可以用 ' ' 空格或者 \n 作为输入 **Enter** 的功能键。   
 
- 
+```py
+def main():
+# Connect to an AutoCAD instance
+    lines = []
+    with open('d:/acad.dat', 'r') as file:
+        for line in file:
+            lines.append(line.strip())
+    inpath = lines[0]
+    outpath = lines[1]
+    filename = lines[2]
+    plotname = lines[3]
+    print(f"Src directory = {inpath}")
+    print(f"Output directory = {outpath}")
+    print(f"ref Filename = {filename}")
+    print(f"Name plot Style = {plotname}")
+    lines = lines[4:]
+    print(lines)
+    acad = Autocad()
+    file_path = inpath + filename + ".dwg"
+    for curfilename in lines:
+        cfile_path =  inpath + curfilename + ".dwg"
+        acad.app.Documents.Open(cfile_path)
+        doc = acad.doc
+        doc.SetVariable('REGENMODE', 0) # 重新绘图模式关闭
+        doc.SetVariable('PROXYNOTICE', 0) # 重新绘图模式关闭
+        doc.SendCommand('filedia\n0\n') # 禁用对话框
+        doc.SendCommand(f'_-PSETUPIN\n{file_path}\n{plotname}\n\n')
+        plotset = "DWG To PDF.pc3"
+        for layout in doc.Layouts:
+            if layout.Name != "Model" :
+                lname = outpath + layout.Name
+                acad.doc.SetVariable('BACKGROUNDPLOT', 0)
+                acad.doc.SendCommand("\n")
+                acad.doc.SendCommand(f'_-PLOT\nN\n{layout.Name}\n{plotname}\n{plotset}\n{lname}\nN\nY\n')
+                print(f"------\n{lname} is printing to pdf.")
+                time.sleep(10)
+                print(f"{lname} was printed to pdf.")      
+        time.sleep(1)
+        doc.Close(False)
+       
+```
