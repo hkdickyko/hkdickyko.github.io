@@ -1,5 +1,5 @@
 ---
-category: [編程]
+category: [绘图]
 tags: [IoT, 電子]
 title: Python AutoCAD
 date: 2025-10-05 20:00:00
