@@ -1,6 +1,6 @@
 ---
-category: [編程]
-tags: [IoT, 電子]
+category: [编程]
+tags: [IoT, Linux]
 title: wxWidgets
 date: 2025-03-26 1:00:00
 ---
@@ -31,7 +31,7 @@ date: 2025-03-26 1:00:00
   }
 </style>
 
-# wxWidgets 
+# wxWidgets (MotionCal)
 
 ## 下载
 
