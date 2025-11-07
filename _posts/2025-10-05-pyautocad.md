@@ -1,6 +1,6 @@
 ---
 category: [绘图]
-tags: [IoT, 電子]
+tags: [绘图, 电子]
 title: Python AutoCAD
 date: 2025-10-05 20:00:00
 ---

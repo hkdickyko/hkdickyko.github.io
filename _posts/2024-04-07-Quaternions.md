@@ -1,6 +1,6 @@
 ---
-category: 數學
-tags: [3D, 數學]
+category: [数学]
+tags: [3D, 数学]
 title: 四元数
 date: 2024-04-07 06:34:36
 ---

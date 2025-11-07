@@ -1,6 +1,6 @@
 ---
-category: [積體電路]
-tags: [IoT, 電子]
+category: [MPU]
+tags: [IoT, 电子]
 title: 惯性测量传感器 IMU 检测
 date: 2024-11-03 1:00:00
 ---

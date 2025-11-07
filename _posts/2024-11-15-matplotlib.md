@@ -1,6 +1,6 @@
 ---
 category: [編程]
-tags: [IoT, 图表]
+tags: [Python, 图表]
 title: Python Matplotlib & Pandas
 date: 2024-11-15 20:00:00
 ---

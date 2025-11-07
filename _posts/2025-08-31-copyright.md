@@ -1,6 +1,6 @@
 ---
 category: [版权]
-tags: [编程, 電子]
+tags: [编程, 版权]
 title: Copyright (版权)
 date: 2025-08-30 1:00:00
 ---

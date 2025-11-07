@@ -1,5 +1,5 @@
 ---
-category: 編程
+category: [编程]
 tags: [Python]
 title: Python Script
 date: 2024-02-23 02:34:36
@@ -38,5 +38,4 @@ $ list(map(int, array))
 ### list 及 lambda 的基本应用演示
 
 ![map](../assets/img/python/map.gif)
-
 

@@ -1,6 +1,6 @@
 ---
-category: 電子
-tags: [IoT,電子]
+category: [MPU]
+tags: [IoT, 电子]
 title: 电容及火牛计算
 date: 2024-08-17 00:34:36
 ---

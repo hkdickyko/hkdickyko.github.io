@@ -1,6 +1,6 @@
 ---
-category: 積體電路 
-tags: [IoT]
+category: [MPU] 
+tags: [IoT, 电子]
 title: pull-up 電阻設計
 date: 2021-01-16 22:34:36
 ---
