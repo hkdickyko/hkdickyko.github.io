@@ -1,6 +1,6 @@
 ---
 category: [软件]
-tags: [系統, Linux]
+tags: [Linux, 系统]
 title: Sock Server（dante-server)
 date: 2023-06-22 1:00:00
 ---
