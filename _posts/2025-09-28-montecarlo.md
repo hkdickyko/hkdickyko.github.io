@@ -1,6 +1,6 @@
 ---
 category: [数学]
-tags: [数学, 編程]
+tags: [数学, 编程]
 title: Monte Carlo Algorithm (蒙地卡罗算法)
 date: 2025-09-28 00:00:01
 ---
