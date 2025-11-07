@@ -1,6 +1,6 @@
 ---
-category: [ Android]
-tags: [Android]
+category: [软件]
+tags: [Android, 编程]
 title: Android 命令行编程 (termux)
 date: 2023-10-14 1:00:00
 ---

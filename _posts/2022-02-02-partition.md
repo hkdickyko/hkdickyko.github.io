@@ -1,6 +1,6 @@
 ---
-category: [編程]
-tags: [系統, Linux]
+category: [软件]
+tags: [Linux]
 title: Linux 硬盤分區編輯器
 date: 2022-02-02 18:00:00
 ---

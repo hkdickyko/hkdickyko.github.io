@@ -1,5 +1,5 @@
 ---
-category: 工程
+category: [工程]
 tags: [工程]
 title: 振動
 date: 2021-11-12 12:34:36

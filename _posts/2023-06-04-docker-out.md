@@ -1,6 +1,6 @@
 ---
-category: [軟件]
-tags: [Linux, 系統, Docker]
+category: [软件]
+tags: [Linux, 系统]
 title: Docker 外挂程序制作
 date: 2023-06-04 1:00:00
 ---

@@ -1,6 +1,6 @@
 ---
-category: [編程]
-tags: [編程, IoT, Python]
+category: [MPU]
+tags: [IoT, Python]
 title: MicroPython 移植
 date: 2022-02-12 18:00:00
 ---

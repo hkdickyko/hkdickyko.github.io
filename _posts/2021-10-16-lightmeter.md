@@ -1,6 +1,6 @@
 ---
-category: [積體電路]
-tags: [IoT, 編程]
+category: [MPU]
+tags: [IoT, 编程]
 title: 光強度傳感器
 date: 2021-10-17 18:00:00
 ---

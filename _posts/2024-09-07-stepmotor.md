@@ -1,6 +1,6 @@
 ---
 category: [MPU]
-tags: [IoT, 电子]
+tags: [IoT, 编程]
 title: ESP 步进电动机
 date: 2024-09-07 08:00:00
 ---

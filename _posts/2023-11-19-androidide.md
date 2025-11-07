@@ -1,5 +1,5 @@
 ---
-category: [编程]
+category: [软件]
 tags: [Android]
 title: Androidide
 date: 2023-11-19 1:00:00

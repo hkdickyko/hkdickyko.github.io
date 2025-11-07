@@ -1,6 +1,6 @@
 ---
-category: [ Android]
-tags: [Android]
+category: [软件]
+tags: [Android, 编程]
 title: Android 代碼技巧
 date: 2023-04-28 1:00:00
 ---

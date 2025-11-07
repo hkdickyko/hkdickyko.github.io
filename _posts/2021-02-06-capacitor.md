@@ -1,6 +1,6 @@
 ---
-category: 電子
-tags: [IoT, 電子]
+category: [电子]
+tags: [IoT, 电子]
 title: Capacitor
 date: 2021-02-06 22:34:36
 ---

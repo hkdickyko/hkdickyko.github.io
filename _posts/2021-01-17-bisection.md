@@ -1,6 +1,6 @@
 ---
-category: 編程 
-tags: [編程, 數學]
+category: [数学]
+tags: [编程, 数学]
 title: 二等分法
 date: 2021-01-17 22:34:36
 ---

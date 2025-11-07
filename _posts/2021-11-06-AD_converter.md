@@ -1,6 +1,6 @@
 ---
-category: [積體電路]
-tags: [IoT, 編程]
+category: [MPU]
+tags: [IoT, 编程]
 title: 模數轉換器
 date: 2021-11-06 12:00:00
 ---

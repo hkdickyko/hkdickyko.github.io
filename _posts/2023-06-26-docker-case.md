@@ -1,6 +1,6 @@
 ---
-category: [Docker]
-tags: [系統, Linux]
+category: [软件]
+tags: [Linux, 系统]
 title: Docker 應用
 date: 2023-06-26 1:00:00
 ---
@@ -382,5 +382,3 @@ CMD ["apache2ctl", "-D", "FOREGROUND']
 ```
 
 - 每安裝一個映像就往上疊一個，但最多到只有 127 層。
-
-
