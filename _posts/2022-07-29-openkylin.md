@@ -1,6 +1,6 @@
 ---
-category: [系統]
-tags: [系統, Linux]
+category: [系统]
+tags: [系统, Linux]
 title: 開放麒麟 (Open Kylin) 使用技巧
 date: 2022-07-29 06:00:00
 ---
