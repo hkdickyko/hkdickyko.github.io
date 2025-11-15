@@ -2,7 +2,7 @@
 category: [MPU]
 tags: [IoT, 电子]
 title: 惯性测量传感器 IMU 检测
-date: 2024-11-03 1:00:00
+date: 2024-11-02 1:00:00
 ---
 
 <style>
@@ -1059,4 +1059,4 @@ ICM-20948内的嵌入式数字运动处理器（**DMP**）从主处理器卸载�
 
 ## 使用 MotionCal 软件校正惯性测量传感器 IMU
 
-[MotionCal IMU 校正](https://hkdickyko.github.io/%E7%B7%A8%E7%A8%8B/wxwidgets)
+[MotionCal IMU 校正](https://hkdickyko.github.io/%E7%BC%96%E7%A8%8B/wxwidgets)
