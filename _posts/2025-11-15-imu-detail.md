@@ -490,6 +490,257 @@ $$
 
 其中 $\begin{bmatrix}A_x \\ A_y \\ A_z \end{bmatrix}$ 为原始测量值，$\begin{bmatrix}b_x \\ b_y \\ b_z\end{bmatrix}$ 为校准值。校准值的单位为 G。
 
+
+## 求解灵敏度矩阵的 C 代码
+
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+double **createMatrix(int r, int c) {
+  double ** matrix = (double **) calloc(r, sizeof(double *));
+  if (matrix == NULL)
+  return NULL;
+  for (int i = 0; i < r; i++) {
+    matrix[i] = (double *) calloc(c, sizeof(double));
+    if (matrix[i] == NULL) {
+      for (int j = 0; j < i; j++)
+      free(matrix[j]);
+      free(matrix);
+      return NULL;
+    }
+  }
+  return matrix;
+}
+
+double** inverseMatrix(double **A, int n) {
+  int i, j, k;
+  double **augmentedMatrix = (double **)malloc(n * sizeof(double *));
+  for (int i = 0; i < n; i++) {
+    augmentedMatrix[i] = (double *)malloc(2 * n * sizeof(double));
+    for (int j = 0; j < n; j++) 
+      augmentedMatrix[i][j] = A[i][j];
+    for (int j = n; j < 2 * n; j++)
+      augmentedMatrix[i][j] = (i == (j - n)) ? 1.0: 0.0;
+  }
+  for (int i = 0; i < n; i++) {
+    int pivotRow = i;
+    for (int k = i + 1; k < n; k++) 
+      if (fabs(augmentedMatrix[k][i]) > fabs(augmentedMatrix[pivotRow][i]))
+        pivotRow = k;
+    if (pivotRow != i) {
+      double *temp = augmentedMatrix[i];
+      augmentedMatrix[i] = augmentedMatrix[pivotRow];
+      augmentedMatrix[pivotRow] = temp;
+    }
+    if (augmentedMatrix[i][i] == 0) {
+      for (k = 0; k < n; k++)
+        free(augmentedMatrix[k]);
+      free(augmentedMatrix);
+      return NULL;
+    }
+    double pivot = augmentedMatrix[i][i];
+    for (int j = i; j < 2 * n; j++)
+      augmentedMatrix[i][j] /= pivot;
+    for (int k = 0; k < n; k++) 
+      if (k != i) {
+        double factor = augmentedMatrix[k][i];
+        for (int j = i; j < 2 * n; j++)
+          augmentedMatrix[k][j] -= factor * augmentedMatrix[i][j];
+      }
+  }
+  double ** Inv = createMatrix(n, n);
+  for (int i = 0; i < n; i++) 
+    for (int j = 0; j < n; j++) 
+      Inv[i][j] = augmentedMatrix[i][j + n];
+  for (int i = 0; i < n; i++) 
+    free(augmentedMatrix[i]);
+  free(augmentedMatrix);
+  return Inv;
+}
+
+void freeMatrix(double ** matrix, int r) {
+  for (int i = 0; i < r; i++)
+    free(matrix[i]);
+  free(matrix);
+}
+
+double **stringTodoubleMatrix(const char * matrixString, int * rows, int * cols) {
+  char *saveptr1, *saveptr2;
+  char * tempString = strdup(matrixString);
+  if (tempString == NULL)
+    return NULL;
+  * rows = 0;
+  * cols = 0;
+  char * rowPtr = strtok_r(tempString, "\n", &saveptr1);
+  while (rowPtr != NULL) {
+    (* rows) ++;
+    if (* cols == 0) {
+      char * colPtr = strtok_r(rowPtr, ",", &saveptr2);
+      while (colPtr != NULL) {
+        (* cols) ++;
+        colPtr = strtok_r(NULL, ",", &saveptr2);
+      }
+    }
+    rowPtr = strtok_r(NULL, "\n", &saveptr1);
+  }
+  free(tempString);
+  double ** matrix = createMatrix(*rows, *cols);
+  char * stringCopy = strdup(matrixString);
+  if (stringCopy == NULL)
+    return NULL;
+  char * currentRow = strtok_r(stringCopy, "\n", &saveptr1);
+  int r = 0;
+  while (currentRow != NULL && r < * rows) {
+    char * currentVal = strtok_r(currentRow, ",", &saveptr2);
+    int c = 0;
+    while (currentVal != NULL && c < * cols) {
+      char * endPtr;
+      matrix[r][c] = (double) strtod(currentVal, & endPtr);
+      if (* endPtr != '\0' && * endPtr != ',' && * endPtr != '\n')
+        return NULL;
+      c++;
+      currentVal = strtok_r(NULL, ",", &saveptr2);
+    }
+    r++;
+    currentRow = strtok_r(NULL, "\n", &saveptr1);
+  }
+  free(stringCopy);
+  return matrix;
+}
+
+double** multiplyMatrices(double ** T, int r1, int c1, double ** A, int r2, int c2) {
+  double ** M = createMatrix(r1, c2);
+  for (int i = 0; i < r1; i++)
+      for (int j = 0; j < c2; j++) {
+        M[i][j] = 0.0;
+        for (int k = 0; k < c1; k++)
+          M[i][j] += T[i][k] * A[k][j];
+      }
+  return M;
+}
+
+double* conVector(double ** T, int r1) {
+  double* M = (double *) calloc(r1, sizeof(double));
+  for (int i = 0; i < r1; i++)
+    M[i] = T[i][0];
+  return M;
+}
+
+void normalMatrix(double ** M, int r, int c){
+  double factor = M[0][0];
+  for (int i = 0; i < r; i++)
+    for (int j = 0; j < c; j++) 
+      M[i][j] = M[i][j] / factor;
+}
+
+double** transposeMatrix(double** M, int r, int c){
+  double ** T = createMatrix(c, r);
+  for (int i = 0; i < r; i++)
+    for (int j = 0; j < c; j++)
+      T[j][i] = M[i][j];
+  return T;
+}
+
+double* pInverse(const char* mStr, const char* vStr, int* n) {
+  int r, c, i, j, r1, c1;
+  double* result = NULL;
+  double** A = stringTodoubleMatrix(mStr, &r, &c);
+  double** T = transposeMatrix(A, r, c);
+  double** S;
+  double** I;
+  if(c <= r){
+    S = multiplyMatrices(T, c, r, A, r, c);
+    I = inverseMatrix(S, c);
+    freeMatrix(S, c);
+  }else{
+    S = multiplyMatrices(A, r, c, T, c, r);
+    I = inverseMatrix(S, r);
+    freeMatrix(S, r);
+  }
+  freeMatrix(A, r);
+  if(I!= NULL){
+     double **O;
+     if(c <= r){
+       O = multiplyMatrices(I, c, c, T, c, r);
+       freeMatrix(I, c);
+     }else{
+       O = multiplyMatrices(T, c, r, I, r, r);
+       freeMatrix(I, r);
+     }
+    double **b = stringTodoubleMatrix(vStr, &r1, &c1);
+    double **R = multiplyMatrices(O, c, r, b, r1, c1);
+    result = conVector(R, c);
+    freeMatrix(O, c);
+    freeMatrix(b, r1);
+    freeMatrix(R, c);
+    *n = c;
+  }
+  freeMatrix(T, c);
+  return result;
+}
+
+void printMatrix(double ** matrix, int r, int c) {
+  for (int i = 0; i < r; i++) {
+    for (int j = 0; j < c; j++)
+      printf("%12.8lf   ", matrix[i][j]);
+    printf("\n");
+  }
+  printf("\n");
+}
+
+long get_file_size_fseek_ftell(const char *filename) {
+  FILE *file = fopen(filename, "rb");
+  if (file == NULL)
+    return -1;
+  fseek(file, 0, SEEK_END);
+  long size = ftell(file);
+  fclose(file);
+  return size;
+}
+
+char* readFile(const char* filename) {
+  int size = get_file_size_fseek_ftell(filename);
+  if (size > 0) {
+    FILE *fptr = fopen(filename, "r");
+    char *buffer = (char *) calloc(size+1, sizeof(char));
+    fread(buffer, 1, size, fptr);
+    fclose(fptr);
+    buffer[size] = '\0';
+    return buffer;
+  }
+  return NULL;
+}
+
+int main() {
+  char* matrixStr = readFile("src.dat");
+  char* varStr = readFile("vector.dat");
+  int n=0;
+  double* result = pInverse(matrixStr, varStr, &n);
+  if(result != NULL){
+    for (int i = 0; i < n; i++)
+      printf("%12.8lf \n", result[i]);
+  }else
+     printf("奇异矩阵\n");
+  free(result);
+  free(matrixStr);
+  free(varStr);
+  return 0;
+}
+```
+
+以上代码为 <font color="#FF1000">pseudo.c</font> 以测试没有内存泄漏。可在 Linux 下用 GCC 编译並加上内存泄漏测试参数。方法如下：
+
+```sh
+clear
+gcc -fsanitize=address -g pseudo.c -o pseudo -lm
+./pseudo
+```
+
+
 ## 校准方法的局限性
 
 - 仅适用于低重力加速度计
