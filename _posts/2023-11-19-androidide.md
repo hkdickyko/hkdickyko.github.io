@@ -36,10 +36,6 @@ date: 2023-11-19 1:00:00
 
 ## 安装更正
 
-位置错误 '
-/data/data/com.itsaky.androidide/files/home/android-sdk/cmdline-tools/latest' (Expected '
-/data/data/com.itsaky.androidide/files/home/android-sdk/tools')
-
 cmdline-tools/latest 改为 tools 大至方法如下:
 
 ```
