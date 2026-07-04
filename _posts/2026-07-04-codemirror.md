@@ -18,20 +18,18 @@ CodeMirror 6 是以独立的 ES Modules (**ESM**) 原生模块形式发布的，
 - 安装工具： 在项目目录中安装 Rollup 及需要的 CodeMirror 模块：
   - npm init -y 指令，意思是自动同意所有设定提示并跳过互动问。
   - npm install -D <package-name> 的意思是將指定的套件下載並安裝為「開發時依賴項」（Development Dependency）。
-  - npm install --save <包名> 命令用于在项目中安装指定模块。还会把该模块的名称及版本号自动记录到项目的 package.json 文件中的 dependencies（生产环境依赖）字段内。即使省略 --save 也会默认保存，但显式使用该标志可确保代码向后兼容。
 
 ```sh
 mkdir cm6-iife
 cd cm6-iife
 npm init -y
-npm install -D rollup @rollup/plugin-node-resolve @rollup/plugin-commonjs
+npm install -D rollup 
+npm install -D @rollup/plugin-node-resolve 
+npm install -D @rollup/plugin-commonjs
 npm install @codemirror/state @codemirror/view
 npm install @codemirror/basic-setup
 npm install @codemirror/language
 npm install @codemirror/lang-javascript
-npm install @codemirror/lang-markdown @codemirror/language-data
-npm install --save @babel/runtime
-npm install @uiw/codemirror-extensions-color
 ```
 
 - 编写打包入口文件 **main.js** 如下
@@ -46,14 +44,14 @@ touch main.js
 import { EditorView, basicSetup } from "@codemirror/basic-setup";
 import { javascript } from "@codemirror/lang-javascript";
 import { EditorState } from "@codemirror/state";
-import { color } from '@uiw/codemirror-extensions-color';
+
 // 将设置导出为一个函数，以便在 HTML 中调用
 export function createEditor(element) {
   return new EditorView({
     state: EditorState.create({
-      extensions: [basicSetup, javascript(), color],
+      extensions: [basicSetup, javascript()],
     }),
-    parent: element, state
+    parent: element
   });
 }
 ```
@@ -127,4 +125,40 @@ touch index.html
     </script>
   </body>
 </html>
+```
+
+## 安装额外插件
+
+```sh
+npm install @codemirror/lang-markdown 
+npm install @codemirror/language-data
+npm install --save @babel/runtime
+npm install @uiw/codemirror-extensions-color
+```
+
+  - npm install --save <包名> 命令用于在项目中安装指定模块。还会把该模块的名称及版本号自动记录到项目的 package.json 文件中的 dependencies（生产环境依赖）字段内。即使省略 --save 也会默认保存，但显式使用该标志可确保代码向后兼容。
+
+
+- 更新文件 **main.js**
+
+```js
+import { EditorView, basicSetup } from "@codemirror/basic-setup";
+import { javascript } from "@codemirror/lang-javascript";
+import { EditorState } from "@codemirror/state";
+import { color } from '@uiw/codemirror-extensions-color';
+// 将设置导出为一个函数，以便在 HTML 中调用
+export function createEditor(element) {
+  return new EditorView({
+    state: EditorState.create({
+      extensions: [basicSetup, javascript(), color],
+    }),
+    parent: element
+  });
+}
+```
+
+- 执行打包
+
+```sh
+npx rollup -c --bundleConfigAsCjs
 ```
