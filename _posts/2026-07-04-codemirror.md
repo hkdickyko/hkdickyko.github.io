@@ -2,7 +2,7 @@
 category: [软件]
 tags: [Linux, 系统]
 title: CodeMirror
-date: 2026-07-04 00:00:01
+date: 2026-07-03 00:00:01
 ---
 
 # CodeMirror 6
