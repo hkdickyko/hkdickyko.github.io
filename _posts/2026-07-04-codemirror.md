@@ -126,14 +126,80 @@ touch index.html
   </body>
 </html>
 ```
+## 查找和搜索
+
+如果编辑器画布之外构建自己的 UI 按钮，则可以通过导入特定的命令函数并将 EditorView 实例直接传递给它们来切换内置的搜索/替换面板如下：
+
+- 文件 **main.js**
+
+```js
+import { EditorView, basicSetup } from "@codemirror/basic-setup";
+import { javascript } from "@codemirror/lang-javascript";
+import { EditorState } from "@codemirror/state";
+import { search, searchKeymap } from "@codemirror/search";
+import { openSearchPanel, closeSearchPanel } from "@codemirror/search";
+import { keymap } from "@codemirror/view";
+
+// 将设置导出为一个函数，以便在 HTML 中调用
+export function createEditor(element) {
+  return new EditorView({
+    state: EditorState.create({
+      extensions: [basicSetup, javascript(), basicSetup,search({ top: true }),keymap.of(searchKeymap)]
+    }),
+    parent: element
+  });
+}
+
+export function openSearch(view){
+  return openSearchPanel(view);
+}
+
+export function closeSearch(view){
+  return closeSearchPanel(view);
+}
+```
+
+- 执行打包
+
+```sh
+npx rollup -c --bundleConfigAsCjs
+```
+
+- 文件 **index.html**
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>CodeMirror 6 IIFE Example</title>
+  </head>
+  <body>
+    <button id="open-find" type="button">Open Search</button>
+    <button id="close-find" type="button">Close Search</button>
+    <div id="editor-container"></div>
+    <script src="dist/codemirror-bundle.js"></script>
+    <script>
+      // 调用 main.js 中导出的函数
+      const container = document.getElementById("editor-container");
+      const editor = CodeMirrorBundle.createEditor(container);
+      document.getElementById("open-find").addEventListener("click", () => {
+        CodeMirrorBundle.openSearch(editor);
+      });
+      document.getElementById("close-find").addEventListener("click", () => {
+        CodeMirrorBundle.closeSearch(editor);
+      });
+    </script>
+  </body>
+</html>
+```
 
 ## 安装额外插件
 
 ```sh
 npm install @codemirror/lang-markdown 
 npm install @codemirror/language-data
-npm install --save @babel/runtime
 npm install @uiw/codemirror-extensions-color
+npm install --save @babel/runtime
 ```
 
   - npm install --save <包名> 命令用于在项目中安装指定模块。还会把该模块的名称及版本号自动记录到项目的 package.json 文件中的 dependencies（生产环境依赖）字段内。即使省略 --save 也会默认保存，但显式使用该标志可确保代码向后兼容。
