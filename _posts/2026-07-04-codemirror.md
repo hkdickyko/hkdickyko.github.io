@@ -36,11 +36,13 @@ npm install @codemirror/lang-markdown @codemirror/language-data
 touch main.js
 ```
 
+- 文件 **main.js**
+
 ```js
 import { EditorView, basicSetup } from "@codemirror/basic-setup";
 import { javascript } from "@codemirror/lang-javascript";
 import { EditorState } from "@codemirror/state";
-// Export the setup as a function to be called in your HTML
+// 将设置导出为一个函数，以便在 HTML 中调用
 export function createEditor(element) {
   return new EditorView({
     state: EditorState.create({
@@ -56,6 +58,8 @@ export function createEditor(element) {
 ```sh
 touch rollup.config.js
 ```
+
+- 文件 **rollup.config.js**
 
 ```js
 import { nodeResolve } from "@rollup/plugin-node-resolve";
@@ -99,7 +103,7 @@ npx rollup -c --bundleConfigAsCjs
     <div id="editor-container"></div>
     <script src="bundle.js"></script>
     <script>
-      // 调用我们在 main.js 中导出的函数。
+      // 调用 main.js 中导出的函数
       const container = document.getElementById("editor-container");
       const editor = CodeMirrorBundle.createEditor(container);
     </script>
