@@ -18,6 +18,7 @@ CodeMirror 6 是以独立的 ES Modules (**ESM**) 原生模块形式发布的，
 - 安装工具： 在项目目录中安装 Rollup 及需要的 CodeMirror 模块：
   - npm init -y 指令，意思是自动同意所有设定提示并跳过互动问。
   - npm install -D <package-name> 的意思是將指定的套件下載並安裝為「開發時依賴項」（Development Dependency）。
+  - npm install --save <包名> 命令用于在项目中安装指定模块。还会把该模块的名称及版本号自动记录到项目的 package.json 文件中的 dependencies（生产环境依赖）字段内。即使省略 --save 也会默认保存，但显式使用该标志可确保代码向后兼容。
 
 ```sh
 mkdir cm6-iife
@@ -25,9 +26,12 @@ cd cm6-iife
 npm init -y
 npm install -D rollup @rollup/plugin-node-resolve @rollup/plugin-commonjs
 npm install @codemirror/state @codemirror/view
+npm install @codemirror/basic-setup
 npm install @codemirror/language
 npm install @codemirror/lang-javascript
 npm install @codemirror/lang-markdown @codemirror/language-data
+npm install --save @babel/runtime
+npm install @uiw/codemirror-extensions-color
 ```
 
 - 编写打包入口文件 **main.js** 如下
@@ -42,13 +46,14 @@ touch main.js
 import { EditorView, basicSetup } from "@codemirror/basic-setup";
 import { javascript } from "@codemirror/lang-javascript";
 import { EditorState } from "@codemirror/state";
+import { color } from '@uiw/codemirror-extensions-color';
 // 将设置导出为一个函数，以便在 HTML 中调用
 export function createEditor(element) {
   return new EditorView({
     state: EditorState.create({
-      extensions: [basicSetup, javascript()],
+      extensions: [basicSetup, javascript(), color],
     }),
-    parent: element,
+    parent: element, state
   });
 }
 ```
@@ -73,11 +78,18 @@ export default {
   },
   plugins: [
     nodeResolve({
-      dedupe: ["@codemirror/state"],
+      dedupe: ["@codemirror/state", "@codemirror/view"],
     }),
   ],
 };
 ```
+
+ - @rollup/plugin-node-resolve 外掛的 dedupe 功能：
+   - 強制單一化（De-duplication）
+      - 它會告訴打包工具：「不論在任何套件或路徑中看到 @codemirror/state 及 @codemirror/view，都只能將它解析（resolve）為同一個本機複本。」
+   - 預防衝突
+      - 這能確保整個應用程式在執行時，所有使用的都是同一個實例，從而徹底解決 instanceof 失效的問題。
+
 
 - 执行打包：运行 Rollup 后，就会在 dist/ 目录下生成一个 **codemirror-bundle.js** 的 IIFE 包。
   - npx rollup -c --bundleConfigAsCjs 是一个用于执行 Rollup 打包的指令。其主要功能是强制将 ES 模组（ESM）格式的 rollup.config.js 设定档，在载入时先编译为 CommonJS（CJS）格式再执行
@@ -93,6 +105,12 @@ npx rollup -c --bundleConfigAsCjs
 
 将生成的 codemirror-bundle.js 文件包含到 HTML 页面中。可以使用全局的 CodeMirrorBundle 将编辑器附加到任何 HTML 元素。
 
+```sh
+touch index.html
+```
+
+- 文件 **index.html**
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -101,7 +119,7 @@ npx rollup -c --bundleConfigAsCjs
   </head>
   <body>
     <div id="editor-container"></div>
-    <script src="bundle.js"></script>
+    <script src="dist/codemirror-bundle.js"></script>
     <script>
       // 调用 main.js 中导出的函数
       const container = document.getElementById("editor-container");
