@@ -144,7 +144,7 @@ import { keymap } from "@codemirror/view";
 export function createEditor(element) {
   return new EditorView({
     state: EditorState.create({
-      extensions: [basicSetup, javascript(), basicSetup,search({ top: true }),keymap.of(searchKeymap)]
+      extensions: [basicSetup, javascript(), search({ top: true }), keymap.of(searchKeymap)]
     }),
     parent: element
   });
@@ -227,4 +227,118 @@ export function createEditor(element) {
 
 ```sh
 npx rollup -c --bundleConfigAsCjs
+```
+
+
+## 直接输出 CodeMirror
+
+- 更新文件 **main.js**
+
+```js
+export { EditorView, Decoration, ViewPlugin, WidgetType } from "@codemirror/view";
+export { EditorState, StateEffect } from "@codemirror/state";
+export { basicSetup } from "codemirror";
+```
+
+- 文件 **rollup.config.js**
+
+```js
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+export default {
+  input: "main.js", // 编写打包入口文件
+  output: {
+    file: "dist/codemirror-bundle.js",
+    format: "iife", // 这会将代码转换为 IIFE
+    name: "cm", // 全局变量名称
+    sourcemap: true,
+  },
+  plugins: [
+    nodeResolve({
+      dedupe: ["@codemirror/state", "@codemirror/view"],
+    }),
+  ],
+};
+```
+
+- 文件 **index.html**
+
+```html
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CodeMirror ColorPicker</title>
+
+<!-- Ensure editor fits content correctly -->
+<style>
+  #editor { border: 1px solid #ccc; height: 300px; }
+  .cm-editor { height: 100%; }
+</style>
+
+<div id="editor"></div>
+
+<script src="dist/codemirror-bundle.js"></script>
+
+<script>
+  // main.js (Compiled to IIFE)
+const { EditorView, Decoration, ViewPlugin, WidgetType } = cm.EditorView;
+const { EditorState, StateEffect } = cm.EditorState;
+const container = document.getElementById("editor");
+const startState = cm.EditorState.create({
+  doc: "console.log('Hello, CodeMirror v6!');\n",
+  extensions: [
+    cm.EditorView.updateListener.of((update) => {
+      if (update.docChanged) {
+        const currentText = update.state.doc.toString()
+        console.log("Editor content changed to:", currentText)
+      }
+    })
+  ]
+})
+
+// 3. Mount the editor view onto the DOM
+const view = new cm.EditorView({
+  state: startState,
+  parent: container
+})
+
+class ColorWidget extends cm.WidgetType {
+  constructor(color) {
+    super();
+    this.color = color;
+  }
+
+  toDOM() {
+    let input = document.createElement("input");
+    input.type = "color";
+    input.value = this.color;
+    
+    // Update CM editor text when color changes
+    input.addEventListener("change", (e) => {
+      // Find the widget's position to dispatch a document update here...
+    });
+    
+    return input;
+  }
+}
+
+// Create decorator for color hex codes
+const colorMatcher = /\#([0-9A-F]{3}){1,2}/gi;
+
+function colorPickerPlugin(view) {
+  let decorations = [];
+  // Loop document to find colors and build decoration map
+  // Return Decoration.widget({ widget: new ColorWidget(color) }).range(from, to)
+  return Decoration.set(decorations);
+}
+
+const colorPickerExtension = cm.ViewPlugin.fromClass({
+  update(update) {
+    if (update.docChanged || update.viewportChanged) {
+      this.decorations = colorPickerPlugin(update.view);
+    }
+  }
+}, {
+  decorations: v => v.decorations
+});
+
+</script>
 ```
