@@ -193,32 +193,40 @@ npx rollup -c --bundleConfigAsCjs
 </html>
 ```
 
-## 安装额外插件
+## 安装 replit/codemirror-css-color-picker 额外插件
 
 ```sh
-npm install @codemirror/lang-markdown 
-npm install @codemirror/language-data
-npm install @uiw/codemirror-extensions-color
-npm install --save @babel/runtime
+npm install @codemirror/lang-css
+npm install -save @replit/codemirror-css-color-picker
 ```
 
-  - npm install --save <包名> 命令用于在项目中安装指定模块。还会把该模块的名称及版本号自动记录到项目的 package.json 文件中的 dependencies（生产环境依赖）字段内。即使省略 --save 也会默认保存，但显式使用该标志可确保代码向后兼容。
-
+- npm install --save <包名> 命令用于在项目中安装指定模块。还会把该模块的名称及版本号自动记录到项目的 package.json 文件中的 dependencies（生产环境依赖）字段内。即使省略 --save 也会默认保存，但显式使用该标志可确保代码向后兼容。
 
 - 更新文件 **main.js**
 
 ```js
-import { EditorView, basicSetup } from "@codemirror/basic-setup";
-import { javascript } from "@codemirror/lang-javascript";
-import { EditorState } from "@codemirror/state";
-import { color } from '@uiw/codemirror-extensions-color';
-// 将设置导出为一个函数，以便在 HTML 中调用
-export function createEditor(element) {
+import { basicSetup } from 'codemirror';
+import { EditorState } from '@codemirror/state';
+import { EditorView } from '@codemirror/view';
+import { css } from '@codemirror/lang-css';
+import { colorPicker, wrapperClassName } from '@replit/codemirror-css-color-picker';
+
+export function createEditor(idName) {
   return new EditorView({
+    parent: document.querySelector('#' + idName),
     state: EditorState.create({
-      extensions: [basicSetup, javascript(), color],
+      doc: '.wow {\n  color: #fff;\n}',
+      extensions: [
+        basicSetup,
+        css(),
+        colorPicker,
+        EditorView.theme({
+          [`.${wrapperClassName}`]: {
+            outlineColor: 'transparent',
+          },
+        }),
+      ],
     }),
-    parent: element
   });
 }
 ```
@@ -229,15 +237,35 @@ export function createEditor(element) {
 npx rollup -c --bundleConfigAsCjs
 ```
 
+- 文件 **index.html**
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CodeMirror 6 IIFE Example</title>
+  </head>
+  <body>
+    <div id="editor-container"></div>
+    <script src="dist/codemirror-bundle.js"></script>
+    <script>
+      const editor = CodeMirrorBundle.createEditor("editor-container");
+    </script>
+  </body>
+</html>
+```
 
 ## 直接输出 CodeMirror
+
+将 codemirror 函数打开为 **IIFE**
 
 - 更新文件 **main.js**
 
 ```js
-export { EditorView, Decoration, ViewPlugin, WidgetType } from "@codemirror/view";
-export { EditorState, StateEffect } from "@codemirror/state";
-export { basicSetup } from "codemirror";
+import { EditorView, basicSetup } from "codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+
+export { EditorView, basicSetup, javascript };
 ```
 
 - 文件 **rollup.config.js**
@@ -249,8 +277,7 @@ export default {
   output: {
     file: "dist/codemirror-bundle.js",
     format: "iife", // 这会将代码转换为 IIFE
-    name: "cm", // 全局变量名称
-    sourcemap: true,
+    name: "cm",     // 全局变量名称为 cm
   },
   plugins: [
     nodeResolve({
@@ -263,82 +290,44 @@ export default {
 - 文件 **index.html**
 
 ```html
-<!DOCTYPE html>
-<meta charset="utf-8">
-<title>CodeMirror ColorPicker</title>
-
-<!-- Ensure editor fits content correctly -->
-<style>
-  #editor { border: 1px solid #ccc; height: 300px; }
-  .cm-editor { height: 100%; }
-</style>
-
+<!doctype html>
+<meta charset="utf8" />
 <div id="editor"></div>
 
 <script src="dist/codemirror-bundle.js"></script>
-
 <script>
-  // main.js (Compiled to IIFE)
-const { EditorView, Decoration, ViewPlugin, WidgetType } = cm.EditorView;
-const { EditorState, StateEffect } = cm.EditorState;
-const container = document.getElementById("editor");
-const startState = cm.EditorState.create({
-  doc: "console.log('Hello, CodeMirror v6!');\n",
-  extensions: [
-    cm.EditorView.updateListener.of((update) => {
-      if (update.docChanged) {
-        const currentText = update.state.doc.toString()
-        console.log("Editor content changed to:", currentText)
-      }
-    })
-  ]
-})
-
-// 3. Mount the editor view onto the DOM
-const view = new cm.EditorView({
-  state: startState,
-  parent: container
-})
-
-class ColorWidget extends cm.WidgetType {
-  constructor(color) {
-    super();
-    this.color = color;
-  }
-
-  toDOM() {
-    let input = document.createElement("input");
-    input.type = "color";
-    input.value = this.color;
-    
-    // Update CM editor text when color changes
-    input.addEventListener("change", (e) => {
-      // Find the widget's position to dispatch a document update here...
-    });
-    
-    return input;
-  }
-}
-
-// Create decorator for color hex codes
-const colorMatcher = /\#([0-9A-F]{3}){1,2}/gi;
-
-function colorPickerPlugin(view) {
-  let decorations = [];
-  // Loop document to find colors and build decoration map
-  // Return Decoration.widget({ widget: new ColorWidget(color) }).range(from, to)
-  return Decoration.set(decorations);
-}
-
-const colorPickerExtension = cm.ViewPlugin.fromClass({
-  update(update) {
-    if (update.docChanged || update.viewportChanged) {
-      this.decorations = colorPickerPlugin(update.view);
-    }
-  }
-}, {
-  decorations: v => v.decorations
-});
-
+  const { EditorView, basicSetup, javascript } = cm;
+  new EditorView({
+    extensions: [basicSetup, javascript()],
+    parent: document.getElementById("editor"),
+  });
 </script>
 ```
+
+
+# CodeMirror v6 的核心設計理念
+
+CodeMirror v6 的核心設計理念是「一切皆為擴展 (Everything is an extension)」。v6 的核心（@codemirror/state 與 @codemirror/view）只負責最基礎的數據和渲染，其餘所有功能（如行號、語法高亮、快捷鍵、主題）全部以擴展（Extensions）的形式注入。
+
+## 官方核心擴展介紹 (Core Extensions)
+
+官方將常用功能分散在不同的模組套件中，可以依需求自由組合：
+
+界面與外觀 (@codemirror/view)
+ - lineNumbers()：在編輯器左側添加行號邊欄。
+ - highlightActiveLine()：高亮當前游標所在行的背景色。
+ - EditorView.theme(spec)：定義自定義主題與 CSS 樣式。
+ 
+文本操作與歷史 (@codemirror/commands)
+ - history()：啟用復原 (Undo) 與 重做 (Redo) 的歷史記錄功能（通常搭配快捷鍵使用）。
+ - 快捷鍵綁定 (keymap.of(Array))：將鍵盤操作（如 Ctrl-Z）對應到特定的編輯器命令（Commands）。
+ 
+語言與語法高亮 (@codemirror/language 及各語言套件)
+ - foldGutter()：在邊欄顯示代碼摺疊按鈕（如摺疊函式、大括號）。
+ - syntaxHighlighting(highlighter)：啟用語法高亮引擎。
+ - 語言包（如 @codemirror/lang-javascript）：提供特定語言的語法解析器（基於 Lezer Tree-sitter 概念）和代碼結構識別。
+ 
+編輯輔助 (@codemirror/autocomplete & @codemirror/search)
+ - autocompletion()：啟用代碼自動補全彈出視窗與提示。
+ - search()：啟用內建的搜尋與取代功能面版（支援快捷鍵 Ctrl-F）。
+ - closeBrackets()：自動補全成對的括號或引號（如輸入 ( 自動產生 )）。
