@@ -195,6 +195,8 @@ npx rollup -c --bundleConfigAsCjs
 
 ## 安装 replit/codemirror-css-color-picker 额外插件
 
+ - 安装 CodeMirror 模块
+
 ```sh
 npm install @codemirror/lang-css
 npm install -save @replit/codemirror-css-color-picker
@@ -236,6 +238,95 @@ export function createEditor(idName) {
 ```sh
 npx rollup -c --bundleConfigAsCjs
 ```
+
+- 文件 **index.html**
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CodeMirror 6 IIFE Example</title>
+  </head>
+  <body>
+    <div id="editor-container"></div>
+    <script src="dist/codemirror-bundle.js"></script>
+    <script>
+      const editor = CodeMirrorBundle.createEditor("editor-container");
+    </script>
+  </body>
+</html>
+```
+
+## GFM 
+
+CodeMirror 的 GFM（GitHub Flavored Markdown）模式是其专门用于处理 GitHub 扩展 Markdown 语法的扩展包
+
+ - 扩展语法支持：全面支持删除线（~~text~~）、任务列表（[ ]）、Emoji 表情符号（如 :smile:）等 GitHub 特有语法。
+ - 代码高亮：支持带有语言标识的围栏代码块（Fenced Code Blocks），并可针对其中的代码进行语法高亮。
+ - 智能链接：支持 URL 自动识别链接以及 SHA 提交哈希引用（如 User/Project@SHA）。
+
+CodeMirror 6：作为 @codemirror/lang-markdown 包的一部分，在 CM6 中 GFM 模式已被集成并常被称为 markdownLanguage，可以通过设置基础语言来无缝支持这些扩展。
+
+ - 安装 CodeMirror 模块
+
+```js
+npm install @codemirror/lang-markdown 
+npm install @codemirror/language-data
+npm install @lezer/markdown
+```
+
+ - 更新文件 **main.js**
+
+```js
+import { basicSetup } from 'codemirror';
+import { EditorState } from "@codemirror/state";
+import { EditorView } from "@codemirror/view";
+import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
+import { languages } from "@codemirror/language-data";
+
+export function createEditor(idName) {
+
+  const startState = EditorState.create({
+    doc: "# GFM 測試\n\n- [x] 任務列表\n- ~~刪除線~~\n\n```javascript\nconst a = 1;\n```",
+    extensions: [
+      basicSetup,
+      // 啟用 Markdown 語言支援
+      markdown({
+        base: markdownLanguage,   // 基礎為 Markdown
+        codeLanguages: languages, // 允許圍欄程式碼塊自動匹配高亮語言（如 js, python 等）
+        addExtensions: []         // 如果需要進一步自訂，可在此處加入額外的 Markdown 語法擴充
+      })
+    ]
+  });
+
+  return new EditorView({
+    state: startState,
+    parent: document.getElementById("#" + idName) // DOM 節點
+  });
+}
+```
+
+- 文件 **rollup.config.js**
+
+```js
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+export default {
+  input: "main.js", // 编写打包入口文件
+  output: {
+    file: "dist/codemirror-bundle.js",
+    format: "iife", // 这会将代码转换为 IIFE
+    name: "cm",     // 全局变量名称为 cm
+    inlineDynamicImports: true, // 添加此行强制 Rollup 将所有内容打包到一个文件中
+  },
+  plugins: [
+    nodeResolve({
+      dedupe: ["@codemirror/state", "@codemirror/view"],
+    }),
+  ],
+};
+```
+
+如果严格要求使用 iife 格式，可以通过设置 **inlineDynamicImports: true** 来强制 Rollup 将所有内容打包到一个文件中。
 
 - 文件 **index.html**
 
@@ -331,3 +422,75 @@ CodeMirror v6 的核心設計理念是「一切皆為擴展 (Everything is an ex
  - autocompletion()：啟用代碼自動補全彈出視窗與提示。
  - search()：啟用內建的搜尋與取代功能面版（支援快捷鍵 Ctrl-F）。
  - closeBrackets()：自動補全成對的括號或引號（如輸入 ( 自動產生 )）。
+
+
+
+## Markdown 实时预览
+
+在 CodeMirror 中实现 Markdown 实时预览，核心逻辑是监听编辑器内容变化，然后将内容传递给 Markdown 解析器（如 marked 或 markdown-it）转化为 HTML，最后渲染到预览区域。
+
+ - 安装 CodeMirror 模块
+
+```js
+npm install @codemirror/view 
+npm install @codemirror/state @codemirror/lang-markdown 
+npm install @codemirror/theme-one-dark 
+npm install marked
+```
+
+- 更新文件 **main.js**
+
+```js
+import { EditorView, basicSetup } from "codemirror";
+import { EditorState } from "@codemirror/state";
+import { markdown } from "@codemirror/lang-markdown";
+import { oneDark } from "@codemirror/theme-one-dark";
+import { marked } from "marked";
+
+export {EditorState, EditorView, basicSetup};
+export {markdown, oneDark, marked};
+```
+
+- 文件 **index.html**
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>CodeMirror 6 IIFE Example</title>
+  </head>
+  <body>
+    <div id="editor"></div>
+    <div id="preview"></div>
+    <script src="dist/codemirror-bundle.js"></script>
+    <script>
+      const { EditorState, EditorView, basicSetup } = cm;
+      const { markdown, oneDark, marked } = cm;
+      const previewEl = document.getElementById("preview");
+      // 監聽器：當編輯器內容更新時觸發
+      const updateListener = EditorView.updateListener.of((update) => {
+        if (update.docChanged) {
+          const docText = update.state.doc.toString();
+          // 使用 marked 解析並渲染到預覽區
+          previewEl.innerHTML = marked.parse(docText);
+        }
+      });
+      // 初始化編輯器
+      const view = new EditorView({
+        state: EditorState.create({
+          doc: "# 歡迎使用 Markdown 編輯器\n\n在這裡輸入內容...",
+          extensions: [
+            basicSetup,
+            markdown(), // 啟用 Markdown 語法高亮
+            oneDark, // 選擇性加入主題
+            updateListener,
+          ],
+        }),
+        parent: document.getElementById("editor"),
+      });
+      // 初始渲染一次預覽
+      previewEl.innerHTML = marked.parse(view.state.doc.toString());
+    </script>
+  </body>
+</html>
+```
