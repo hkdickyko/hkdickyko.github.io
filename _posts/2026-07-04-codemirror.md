@@ -432,9 +432,9 @@ CodeMirror v6 的核心設計理念是「一切皆為擴展 (Everything is an ex
  - 安装 CodeMirror 模块
 
 ```js
-npm install @codemirror/view 
 npm install @codemirror/state @codemirror/lang-markdown 
-npm install @codemirror/theme-one-dark 
+npm install @codemirror/theme-one-dark
+npm install @codemirror/language-data 
 npm install marked
 ```
 
@@ -443,12 +443,13 @@ npm install marked
 ```js
 import { EditorView, basicSetup } from "codemirror";
 import { EditorState } from "@codemirror/state";
-import { markdown } from "@codemirror/lang-markdown";
+import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { languages } from "@codemirror/language-data";
 import { marked } from "marked";
 
-export {EditorState, EditorView, basicSetup};
-export {markdown, oneDark, marked};
+export { EditorState, EditorView, basicSetup };
+export { markdown, markdownLanguage, oneDark, marked, languages };
 ```
 
 - 文件 **index.html**
@@ -466,6 +467,7 @@ export {markdown, oneDark, marked};
     <script>
       const { EditorState, EditorView, basicSetup } = cm;
       const { markdown, oneDark, marked } = cm;
+      const { languages, markdownLanguage } = cm;
       const previewEl = document.getElementById("preview");
       // 監聽器：當編輯器內容更新時觸發
       const updateListener = EditorView.updateListener.of((update) => {
@@ -481,7 +483,7 @@ export {markdown, oneDark, marked};
           doc: "# 歡迎使用 Markdown 編輯器\n\n在這裡輸入內容...",
           extensions: [
             basicSetup,
-            markdown(), // 啟用 Markdown 語法高亮
+            markdown({ base: markdownLanguage, codeLanguages: languages }), // 啟用 Markdown 語法高亮
             oneDark, // 選擇性加入主題
             updateListener,
           ],
