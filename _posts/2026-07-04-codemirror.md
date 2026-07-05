@@ -424,7 +424,6 @@ CodeMirror v6 的核心設計理念是「一切皆為擴展 (Everything is an ex
  - closeBrackets()：自動補全成對的括號或引號（如輸入 ( 自動產生 )）。
 
 
-
 ## Markdown 实时预览
 
 在 CodeMirror 中实现 Markdown 实时预览，核心逻辑是监听编辑器内容变化，然后将内容传递给 Markdown 解析器（如 marked 或 markdown-it）转化为 HTML，最后渲染到预览区域。
@@ -492,6 +491,249 @@ export { markdown, markdownLanguage, oneDark, marked, languages };
       });
       // 初始渲染一次預覽
       previewEl.innerHTML = marked.parse(view.state.doc.toString());
+    </script>
+  </body>
+</html>
+```
+
+## 功能齐全的 Markdown 编辑器
+
+ - 安装 CodeMirror 模块
+
+```js
+npm install @fsegurai/codemirror-theme-basic-light
+npm install @codemirror/commands
+npm install @codemirror/lang-html
+npm install @codemirror/lang-javascript
+npm install @codemirror/lang-css
+npm install @codemirror/lang-cpp
+```
+
+- 更新文件 **main.js**
+
+```js
+import { EditorView, basicSetup } from "codemirror";
+import { EditorState } from "@codemirror/state";
+import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
+import { oneDark } from "@codemirror/theme-one-dark";
+import { basicLight } from '@fsegurai/codemirror-theme-basic-light'
+import { languages } from "@codemirror/language-data";
+import { marked } from "marked";
+import { search, searchKeymap } from "@codemirror/search";
+import { openSearchPanel, closeSearchPanel } from "@codemirror/search";
+import { keymap } from "@codemirror/view";
+import { toggleComment, indentSelection } from "@codemirror/commands";
+import { history, historyKeymap, undo, redo } from "@codemirror/commands";
+import { javascript } from "@codemirror/lang-javascript";
+import { css } from "@codemirror/lang-css"
+import { html } from "@codemirror/lang-html";
+import { cpp } from "@codemirror/lang-cpp";
+import { colorPicker, wrapperClassName } from '@replit/codemirror-css-color-picker';
+
+export { EditorState, EditorView, basicSetup };
+export { markdown, markdownLanguage, marked, languages };
+export { oneDark, basicLight };
+export { search, searchKeymap, keymap };
+export { toggleComment, indentSelection };
+export { history, historyKeymap, undo, redo };
+export { javascript, css, html, cpp };
+export { colorPicker, wrapperClassName };
+
+export function openSearch(view){
+  return openSearchPanel(view);
+}
+
+export function closeSearch(view){
+  return closeSearchPanel(view);
+}
+```
+
+- 文件 **index.html**
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>CodeMirror 6 IIFE Example</title>
+  </head>
+  <body>
+    <button id="itext" type="button">insert Text</button>
+    <button id="open-find" type="button">Open Search</button>
+    <button id="close-find" type="button">Close Search</button>
+    <div id="editor"></div>
+    <div id="preview"></div>
+    <script src="dist/codemirror-bundle.js"></script>
+    <script>
+      const { EditorState, EditorView, basicSetup } = cm;
+      const { markdown, marked } = cm;
+      const { languages, markdownLanguage } = cm;
+      const { oneDark, basicLight } = cm;
+      const { search, searchKeymap, keymap } = cm;
+      const { toggleComment, indentSelection } = cm;
+      const { history, historyKeymap, undo, redo } = cm;
+      const { javascript, css, html, cpp } = cm;
+      const { colorPicker, wrapperClassName } = cm;
+
+      const previewEl = document.getElementById("preview");
+      // 監聽器：當編輯器內容更新時觸發
+      const updateListener = EditorView.updateListener.of((update) => {
+        if (update.docChanged) {
+          const docText = update.state.doc.toString();
+          // 使用 marked 解析並渲染到預覽區
+          previewEl.innerHTML = marked.parse(docText);
+        }
+      });
+      // 初始化編輯器
+      const view = new EditorView({
+        state: EditorState.create({
+          doc: "# 歡迎使用 Markdown 編輯器\n\n在這裡輸入內容...",
+          extensions: [
+            basicSetup,
+            css(),
+            javascript(),
+            html(),
+            cpp(),
+            markdown({ base: markdownLanguage, codeLanguages: languages }), // 啟用 Markdown 語法高亮
+            search({ top: true }),
+            keymap.of(searchKeymap),
+            basicLight, // 選擇性加入主題
+            updateListener,
+            history(), // 必須啟用歷史紀錄追蹤
+            keymap.of(historyKeymap), // 綁定 Ctrl+Z (Cmd+Z) / Ctrl+Y (Cmd+Shift+Z) 快捷鍵
+            colorPicker,
+            EditorView.theme({
+              [`.${wrapperClassName}`]: {
+                outlineColor: "transparent",
+              },
+            }),
+          ],
+        }),
+        parent: document.getElementById("editor"),
+      });
+      // 初始渲染一次預覽
+      previewEl.innerHTML = marked.parse(view.state.doc.toString());
+      document.getElementById("open-find").addEventListener("click", () => {
+        cm.openSearch(view);
+      });
+      document.getElementById("close-find").addEventListener("click", () => {
+        cm.closeSearch(view);
+      });
+
+      document.getElementById("itext").addEventListener("click", () => {
+        autoIndent();
+      });
+
+      function insertTextAtCursor(textToInsert) {
+        // 获取当前光标位置（主选区域的头部）
+        const cursorPosition = view.state.selection.main.head;
+        // 发送事务以修改文档并将光标向前移动。
+        view.dispatch({
+          changes: {
+            from: cursorPosition,
+            insert: textToInsert,
+          },
+          // 自动将光标移动到新插入文本的后面
+          selection: { anchor: cursorPosition + textToInsert.length },
+          scrollIntoView: true,
+        });
+      }
+
+      function includeText(frontStr, endStr) {
+        const mainSelection = view.state.selection.main;
+        const selectedText = view.state.sliceDoc(
+          mainSelection.from,
+          mainSelection.to,
+        );
+        const textToInsert = frontStr + selectedText + endStr;
+        view.dispatch({
+          changes: {
+            from: mainSelection.from, // Start of selection range
+            to: mainSelection.to, // End of selection range
+            insert: textToInsert,
+          },
+          selection: { anchor: mainSelection.from + textToInsert.length },
+          scrollIntoView: true,
+        });
+      }
+
+      function comment() {
+        toggleComment(view);
+      }
+
+      function autoIndent() {
+        indentSelection({
+          state: view.state,
+          dispatch: (transaction) => view.update([transaction]),
+        });
+      }
+
+      function uCase() {
+        let changes = view.state.changeByRange((range) => {
+          let text = view.state.sliceDoc(range.from, range.to);
+          return {
+            changes: [
+              { from: range.from, to: range.to, insert: text.toUpperCase() },
+            ],
+            range: range, // maintain the same selection bounds
+          };
+        });
+        view.dispatch(changes);
+      }
+
+      function lCase() {
+        let changes = view.state.changeByRange((range) => {
+          let text = view.state.sliceDoc(range.from, range.to);
+          return {
+            changes: [
+              { from: range.from, to: range.to, insert: text.toLowerCase() },
+            ],
+            range: range, // maintain the same selection bounds
+          };
+        });
+        view.dispatch(changes);
+      }
+
+      function firstUpperCase() {
+        view.dispatch({
+          changes: view.state.selection.ranges
+            .map((range) => {
+              // 仅当有实际选择（非空）时才继续。
+              if (range.empty) return null;
+              // 从当前选区获取文本。
+              const selectedText = view.state.sliceDoc(range.from, range.to);
+              // 首字母大写
+              const capitalized =
+                selectedText.charAt(0).toUpperCase() + selectedText.slice(1);
+              return { from: range.from, to: range.to, insert: capitalized };
+            })
+            .filter((change) => change !== null), // 过滤掉所有空选项。
+        });
+      }
+
+      function triggerUndo() {
+        // 觸發撤銷 (Undo)
+        undo({ state: view.state, dispatch: view.dispatch });
+      }
+
+      function triggerRedo() {
+        // 觸發重做 (Redo)
+        redo({ state: view.state, dispatch: view.dispatch });
+      }
+
+      function insertDate() {
+        const currentDate = " " + new Date().toISOString().split("T")[0] + " ";
+        view.dispatch({
+          changes: {
+            from: view.state.selection.main.from,
+            to: view.state.selection.main.to,
+            insert: currentDate,
+          },
+          selection: {
+            anchor: view.state.selection.main.from + currentDate.length,
+          },
+          scrollIntoView: true,
+        });
+      }
     </script>
   </body>
 </html>
